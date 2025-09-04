@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Pseudo Classes</title>
+    <style>
+      body {
+        display: flex;
+      }
+
+      .pseudo-class {
+        width: 50vw;
+      }
+
+      .pseudo-elements {
+        width: 50vw;
+      }
+
+      /* -------------------------------
+       1. :hover example on a button
+    --------------------------------*/
+      button {
+        width: auto;
+        height: 50px;
+        background-color: aqua;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: blue;
+        color: white;
+      }
+
+      /* -------------------------------
+       2. :active example on a button
+    --------------------------------*/
+      button:active {
+        border: 5px solid black;
+      }
+
+      /* -------------------------------
+       3. :focus example on input
+    --------------------------------*/
+      input {
+        border: 2px solid gray;
+        padding: 5px;
+        margin: 10px;
+      }
+
+      input:focus {
+        border: 2px solid red;
+        outline: none;
+      }
+
+      /* -------------------------------
+       4. :first-child and :last-child
+    --------------------------------*/
+      .example1 li:first-child {
+        color: red;
+      }
+
+      .example1 li:last-child {
+        color: blue;
+      }
+
+      /* -------------------------------
+       5. :nth-child example
+    --------------------------------*/
+      .example2 li:nth-child(2) {
+        color: coral;
+      }
+
+      .example2 li:nth-child(odd) {
+        display: inline;
+        background-color: blueviolet;
+      }
+
+      /* -------------------------------
+       6. :visited example on links
+    --------------------------------*/
+      a:visited {
+        color: grey;
+      }
+
+      /* ------------------------------------------- */
+
+      /* -------------------------------
+       1. ::first-letter
+       Make first letter bigger & red
+    --------------------------------*/
+      p.example1::first-letter {
+        font-size: 32px;
+        color: red;
+      }
+
+      /* -------------------------------
+       2. ::first-line
+       Style only the first line
+    --------------------------------*/
+      p.example2::first-line {
+        color: blueviolet;
+      }
+
+      /* -------------------------------
+       3. ::before
+       Add content before element
+    --------------------------------*/
+
+      h1.example1::before {
+        content: "🌟 ";
+      }
+
+      /* -------------------------------
+       4. ::after
+       Add content after element
+    --------------------------------*/
+      h1.example2::after {
+        content: " 📗";
+      }
+
+      /* -------------------------------
+       5. ::selection
+       Style selected text
+    --------------------------------*/
+
+      p.example3::selection {
+        background-color: yellowgreen;
+      }
+
+          /* -------------------------------
+       6. ::marker
+       Style list bullets/numbers
+    --------------------------------*/
+    ul li::marker {
+      color: blue;
+    }
+
+        /* -------------------------------
+       7. ::placeholder
+       Style input placeholder
+    --------------------------------*/
+
+    input::placeholder {
+      font-weight: bold;
+      font-style: italic;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="pseudo-class">
+      <!-- :hover and :active -->
+      <h2>:hover and :active</h2>
+      <button>Hover & Click Me</button>
+
+      <!-- :focus -->
+      <h2>:focus</h2>
+      <input type="text" placeholder="Click or Tab here" />
+
+      <!-- :first-child and :last-child -->
+      <h2>:first-child and :last-child</h2>
+      <ul class="example1">
+        <li>First Item</li>
+        <li>Middle Item</li>
+        <li>Last Item</li>
+      </ul>
+
+      <!-- :nth-child -->
+      <h2>:nth-child</h2>
+      <ul class="example2">
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+        <li>Four</li>
+      </ul>
+
+      <!-- :visited -->
+      <h2>:visited</h2>
+      <a href="https://acciojob.com" target="_blank">Go to Acciojob</a>
+    </div>
+    <div class="pseudo-elements">
+      <!-- ::first-letter -->
+      <h2>::first-letter</h2>
+      <p class="example1">This is an example of first-letter pseudo-element</p>
+
+      <!-- ::first-line -->
+      <h2>::first-line</h2>
+      <p class="example2">
+        This is the first line of the paragraph. <br />
+        If this text goes to the second line, it will not be styled.
+      </p>
+
+      <!-- ::before -->
+      <h2>::before</h2>
+      <h1 class="example1">Important Heading</h1>
+
+      <!-- ::after -->
+      <h2>::after</h2>
+      <h1 class="example2">Task Completed</h1>
+
+      <!-- ::selection -->
+      <h2>::selection</h2>
+      <p class="example3">Select this text and see the effect!</p>
+
+      <!-- ::marker -->
+      <h2>::marker</h2>
+      <ul>
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Cherry</li>
+      </ul>
+
+      <!-- ::placeholder -->
+      <h2>::placeholder</h2>
+      <input type="text" placeholder="Enter your name" />
+    </div>
+  </body>
+</html>

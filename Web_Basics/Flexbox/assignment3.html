@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Assignment 1 - Pricing Flex</title>
+    <style>
+      /* --- Layout Wrapper --- */
+      .pricing {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 5px;
+        border: 2px solid #f2f2f2;
+        /* TODO: allow items to wrap */
+        /* TODO: add horizontal/vertical gaps between cards */
+        /* TODO: add outer padding */
+        /* TODO: subtle background + border for section */
+      }
+
+      /* --- Individual Card --- */
+      .card {
+        /* TODO: make this a column flexbox so the button can stick to bottom */
+        /* TODO: set a flexible base (e.g., 1 1 280px) for default behavior */
+        border: 1px solid #ddd;
+        background: #fff;
+        padding: 16px;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 280px;
+      }
+
+      .card h3 {
+        margin: 0 0 8px;
+        font-size: 20px;
+      }
+      .price {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .features {
+        /* TODO: stack features vertically with spacing */
+        list-style: none;
+        padding: 0;
+        margin: 0 0 16px;
+        display: flex; /* vertical stack with gap */
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      /* --- Spacer to push button to the bottom --- */
+      .fill {
+        /* TODO: make this grow to occupy remaining vertical space */
+        flex: 1;
+      }
+
+      .card button {
+        padding: 10px 12px;
+        border: none;
+        border-radius: 8px;
+        background: #0b74e5;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      /* --- Specific grow ratios (Starter=1, Pro=2, Enterprise=1) --- */
+      .starter {
+        /* TODO: flex: 1 1 280px */
+        flex: 1 1 280px;
+      }
+      .pro {
+        /* TODO: flex: 2 1 320px (wider) */
+        flex: 2 1 320px;
+      }
+      .enterprise {
+        /* TODO: flex: 1 1 280px */
+        flex: 1 1 280px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="pricing">
+      <article class="card starter">
+        <h3>Starter</h3>
+        <div class="price">₹499/mo</div>
+        <ul class="features">
+          <li>Basic Support</li>
+          <li>5 Projects</li>
+          <li>1 Team Member</li>
+        </ul>
+        <div class="fill"></div>
+        <button>Choose Starter</button>
+      </article>
+
+      <article class="card pro">
+        <h3>Pro</h3>
+        <div class="price">₹999/mo</div>
+        <ul class="features">
+          <li>Priority Support</li>
+          <li>20 Projects</li>
+          <li>5 Team Members</li>
+          <li>Advanced Analytics</li>
+        </ul>
+        <div class="fill"></div>
+        <button>Choose Pro</button>
+      </article>
+
+      <article class="card enterprise">
+        <h3>Enterprise</h3>
+        <div class="price">₹2499/mo</div>
+        <ul class="features">
+          <li>24×7 Dedicated Support</li>
+          <li>Unlimited Projects</li>
+          <li>Unlimited Team</li>
+          <li>Custom Integrations</li>
+          <li>SLA & Security</li>
+        </ul>
+        <div class="fill"></div>
+        <button>Contact Sales</button>
+      </article>
+    </section>
+  </body>
+</html>

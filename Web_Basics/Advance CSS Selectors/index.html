@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <title>Advance CSS Selectors</title>
+    <style>
+      /* all child selector */
+      div p {
+        color: red;
+      }
+
+      /* child selector */
+      div > p {
+        background-color: green;
+      }
+
+      /* adjacent sibling selector */
+      h2 + p {
+        font-weight: bold;
+      }
+
+      /* all sibling selector (general) */
+      h2 ~ p {
+        background-color: cadetblue;
+      }
+
+      /* attribute selector - select using class only */
+      [class="ethics"] {
+        border: 1px solid black;
+      }
+
+      /* attribute selector - select h3 then class */
+      h3[class="ethics"] {
+        background-color: chocolate;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1>Family Tree</h1>
+    <div class="parent">
+      <p>child</p>
+      <section><p>grandchild</p></section>
+      <p>another child</p>
+    </div>
+
+    <br/>
+
+    <p>up-side sibling</p>
+    <h2>Project Updates</h2>
+    <p>Kick-off meeting scheduled for monday at 10am</p>
+    <a href="#" >Refer this link</a>
+    <p>Design draft will be shared by Wednesday</p>
+    <p>Final presentation planned for next Friday</p>
+
+    <br/>
+
+    <h3 class="sop">SOP to be followed</h3>
+    <h3 class="ethics">EThics and work practices</h3>
+    <h4 class="ethics">Ethics: loren ipsum dolor</h4>
+  </body>
+</html>
