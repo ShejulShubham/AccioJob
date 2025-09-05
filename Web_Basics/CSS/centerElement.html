@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Element Centered</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0xp;
+        box-sizing: border-box;
+      }
+
+      .container {
+        height: 100vh;
+        width: 100vw;
+        background-color: aqua;
+        position: relative;
+      }
+
+      .item {
+        height: 100px;
+        width: 100px;
+        background-color: blueviolet;
+        position: absolute;
+        transition: transform 1s ease-in-out;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .lift {
+        /* height: 10%; */
+        width: 50px;
+        top: 50%;
+        left: 50%;
+        /* Basic styling for the element */
+        padding: 50px;
+        background-color: lightblue;
+        border: 1px solid steelblue;
+        text-align: center;
+        /* To give some space for the lift */
+        margin: 50px;
+
+        /* Enable smooth transition for the transform property */
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .lift:hover {
+        /* Apply a transform to move the element upwards */
+        transform: translateY(-10px); /* Moves the element up by 10 pixels */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for depth */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item">Yo!</div>
+    </div>
+    <div class="container">
+      <div class="lift"></div>
+    </div>
+  </body>
+</html>

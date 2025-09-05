@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Pseudo Classes Implementation</title>
+    <style>
+      :root {
+        background-color: rgb(135, 206, 235);
+        padding: 15px;
+      }
+
+      article p:first-child {
+        background-color: black;
+        color: white;
+      }
+
+      article p:nth-child(2) {
+        color: black;
+      }
+
+      article p:last-child {
+        color: red;
+      }
+
+      ul li {
+        background-color: gray;
+        width: 50%;
+        padding: 10px;
+      }
+
+      ul li:nth-child(odd) {
+        background-color: white;
+      }
+
+      ul li:first-child,
+      ul li:last-child {
+        font-size: 22px;
+      }
+
+      ul li:nth-last-child(3) {
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <article>
+      <p>First Paragraph...</p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <p>
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+        ut aliquip ex ea commodo consequat.
+      </p>
+      <p>
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+        dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+    </article>
+
+    <ul>
+      <li>First Item</li>
+      <li>Second Item</li>
+      <li>Third Item</li>
+      <li>Fourth Item</li>
+      <li>Fifth Item</li>
+    </ul>
+  </body>
+</html>

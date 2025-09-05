@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM element selection</title>
+</head>
+<body>
+    <h1 id="heading" class="head">Welcome to my webpage</h1>
+    <p class="para">paragraph 1</p>
+    <p class="para">paragraph 2</p>
+    <p class="para">paragraph 3</p>
+    <p class="para">paragraph 4</p>
+    <script>
+        document.write("hello from script");
+        console.log("Hello from script!");
+
+
+        let heading = document.getElementById("heading");
+        console.log(heading);
+        console.log(typeof heading);
+
+
+        let paras = document.getElementsByClassName("para");
+        console.log(paras);
+        console.log(typeof paras);
+
+        let head = document.querySelector("#heading");
+        console.log(head);
+        console.log(typeof head);
+
+        let parass = document.querySelectorAll(".para");
+        console.log(parass);
+        console.log(typeof parass);
+
+        // let para = document.get
+    </script>
+</body>
+</html>

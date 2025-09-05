@@ -1,42 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Foodie's Delight - Home</title>
-</head>
-<body>
-  <!-- TODO: Add the header content with title and tagline -->
-  <header>
-    <h1>Welcome to Foodie's Delight</h1>
-    <p>Your perfect destination for delicious meals and great ambience</p>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foodie's Delight - Home</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
 
-  <!-- TODO: Add the navigation menu with links to Menu, Reservations, and Contact pages -->
-  <nav>
-    <!-- Navigation links go here -->
-     <a href="menu.html">Menu</a> |
-     <a href="reservation.html">Reservations</a> |
-     <a href="contact.html">Contact</a>
-    </nav>
-    
-    <!-- TODO: Add the section with an "About Us" heading and description -->
-    <section>
+      body {
+        text-align: center;
+      }
+
+      .page {
+        height: 100vh;
+        width: 100vw;
+      }
+
+      header {
+        background-color: red;
+        color: white;
+        height: 15%;
+        padding: 20px;
+      }
+
+      nav {
+        color: white;
+        background-color: black;
+        padding: 10px;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 10px;
+      }
+
+      p {
+        margin: 5px;
+      }
+
+      section {
+        height: 70%;
+        /* margin: 20px; */
+      }
+
+      h2 {
+        padding: 20px;
+      }
+
+      footer {
+        /* height: 20%; */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <!-- TODO: Add the header content with title and tagline -->
+      <header>
+        <h1>Welcome to Foodie's Delight</h1>
+        <p>Your perfect destination for delicious meals and great ambience</p>
+      </header>
+
+      <!-- TODO: Add the navigation menu with links to Menu, Reservations, and Contact pages -->
+      <nav>
+        <!-- Navigation links go here -->
+        <a href="menu.html">Menu</a> |
+        <a href="reservation.html">Reservations</a> |
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <!-- TODO: Add the section with an "About Us" heading and description -->
+      <section>
         <!-- About Us content goes here -->
         <h2>About Us</h2>
-        <p>At Foodie's delight, we serve a variety of meals with a focus ingredients and flavorful recipes. Join us for an unforgettable dining experience!</p>
-    </section>
-    
-    <!-- TODO: Add the footer with copyright info and navigation links -->
-    <footer>
+        <p>
+          At Foodie's delight, we serve a variety of meals with a focus
+          ingredients and flavorful recipes. Join us for an unforgettable dining
+          experience!
+        </p>
+      </section>
+
+      <!-- TODO: Add the footer with copyright info and navigation links -->
+      <footer>
         <!-- Footer content goes here -->
         <p>&copy; 2025 Foodie's Delight. All right reserved.</p>
         <nav>
-            <a href="index.html">Home</a> | 
-            <a href="menu.html">Menu</a> |
-            <a href="reservation.html">Reservations</a> |
-            <a href="contact.html">Contact</a>
-        </nav> 
-  </footer>
-</body>
+          <a href="index.html">Home</a> | <a href="menu.html">Menu</a> |
+          <a href="reservation.html">Reservations</a> |
+          <a href="contact.html">Contact</a>
+        </nav>
+      </footer>
+    </div>
+  </body>
 </html>
