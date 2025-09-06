@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gap and Alignment</title>
+    <style>
+      .container {
+        height: 500px;
+        border: 2px solid black;
+        display: grid;
+        grid-template-columns: 100px 100px;
+        grid-template-rows: 1fr 1fr 1fr;
+
+        gap: 10px;
+        align-items: center;
+        justify-items: center;
+      }
+      .container2 {
+        height: 500px;
+        border: 2px solid black;
+        display: grid;
+        grid-template-columns: 100px 100px;
+        grid-template-rows: 1fr 1fr 1fr;
+
+        gap: 5px;
+        align-items: center;
+        justify-items: center;
+        align-content: center;
+        justify-content: center;
+      }
+      .container3 {
+        height: 500px;
+        border: 2px solid black;
+        display: grid;
+        grid-template-columns: 100px 100px;
+        grid-template-rows: 1fr 1fr 1fr;
+
+        column-gap: 5px;
+        row-gap: 15px;
+      }
+
+      .item {
+        border: 2px solid rgb(125, 125, 125);
+        background-color: aqua;
+        text-align: center;
+      }
+
+      strong {
+        color:brown;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Align items individually: align-item and justify-item</h2>
+    <div class="container">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+    </div>
+    <h2>Align items grouping: align-content and justify-content</h2>
+    <div class="container2">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+    </div>
+    <h2>
+      Gap rows and Gap column: column-gap=<strong>5px</strong> and
+      row-gap=<strong>15px</strong>
+    </h2>
+    <div class="container3">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+    </div>
+  </body>
+</html>

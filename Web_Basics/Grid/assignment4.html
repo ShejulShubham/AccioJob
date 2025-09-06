@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 4 — Pricing Table</title>
+    <style>
+      /* ---- Base ---- */
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        color: #111827;
+        background: #f8fafc;
+      }
+      .section {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 16px;
+      }
+      .section-header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .section-title {
+        margin: 0 0 6px;
+        font-size: 28px;
+        line-height: 1.2;
+      }
+      .section-subtitle {
+        margin: 0;
+        color: #6b7280;
+      }
+
+      /* ---- Pricing grid (make this a Grid) ---- */
+      .pricing-grid {
+        /* TODO: Enable grid */
+        /* e.g., display: grid; */
+        display: grid;
+
+        /* TODO: Create 3 equal columns on desktop */
+        /* e.g., grid-template-columns: repeat(3, 1fr); */
+        grid-template-columns: repeat(3, 1fr);
+
+        /* TODO: Add consistent spacing between plans */
+        /* e.g., gap: 16px; */
+        gap: 16px;
+
+        /* TODO: Align items neatly inside cells */
+        /* e.g., justify-items: stretch; align-items: start; */
+        align-items: start;
+        justify-items: stretch;
+      }
+
+      /* ---- Plan card (visuals) ---- */
+      .plan {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        padding: 18px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        position: relative;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        display: grid;
+        gap: 12px;
+      }
+      .plan:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      }
+
+      .plan--featured {
+        border-color: #3730a3;
+        box-shadow: 0 6px 24px rgba(55, 48, 163, 0.18);
+      }
+      .badge {
+        position: absolute;
+        top: -10px;
+        right: 14px;
+        background: #3730a3;
+        color: #fff;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .plan-head {
+        display: grid;
+        gap: 4px;
+      }
+      .plan-name {
+        margin: 0;
+        font-size: 20px;
+      }
+      .plan-tagline {
+        margin: 0;
+        color: #4b5563;
+      }
+
+      .plan-price {
+        font-weight: 800;
+        font-size: 28px;
+        display: flex;
+        align-items: baseline;
+        gap: 2px;
+      }
+      .currency {
+        font-size: 16px;
+        font-weight: 700;
+        color: #4b5563;
+      }
+      .amount {
+        font-size: 32px;
+      }
+      .cycle {
+        font-size: 14px;
+        color: #6b7280;
+      }
+
+      .plan-features {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 8px;
+      }
+      .plan-features li::before {
+        content: "✔ ";
+        color: #059669;
+        font-weight: 700;
+      }
+
+      .plan-cta {
+        display: inline-block;
+        text-decoration: none;
+        background: #111827;
+        color: #fff;
+        padding: 10px 14px;
+        border-radius: 10px;
+        text-align: center;
+      }
+      .plan--featured .plan-cta {
+        background: #3730a3;
+      }
+
+      /* ---- Responsiveness (without minmax/auto-fit) ---- */
+      @media (max-width: 980px) {
+        /* TODO: Switch to 2 columns on tablet */
+        /* e.g., .pricing-grid { grid-template-columns: repeat(2, 1fr); } */
+      }
+      @media (max-width: 640px) {
+        /* TODO: Single column on mobile */
+        /* e.g., .pricing-grid { grid-template-columns: 1fr; } */
+      }
+    </style>
+  </head>
+  <body>
+    <section class="section" id="pricing">
+      <header class="section-header">
+        <h2 class="section-title">Simple, Transparent Pricing</h2>
+        <p class="section-subtitle">
+          Choose the plan that fits your team today.
+        </p>
+      </header>
+
+      <div class="pricing-grid" id="pricing-grid">
+        <!-- Plan 1 -->
+        <article class="plan">
+          <header class="plan-head">
+            <h3 class="plan-name">Basic</h3>
+            <p class="plan-tagline">For individual projects</p>
+          </header>
+          <div class="plan-price">
+            <span class="currency">₹</span><span class="amount">0</span
+            ><span class="cycle">/mo</span>
+          </div>
+          <ul class="plan-features">
+            <li>1 project</li>
+            <li>Community support</li>
+            <li>Basic analytics</li>
+          </ul>
+          <a href="#" class="plan-cta" aria-label="Choose Basic plan"
+            >Get Started</a
+          >
+        </article>
+
+        <!-- Plan 2 (recommended) -->
+        <article class="plan plan--featured" aria-label="Recommended plan: Pro">
+          <div class="badge">Recommended</div>
+          <header class="plan-head">
+            <h3 class="plan-name">Pro</h3>
+            <p class="plan-tagline">For growing teams</p>
+          </header>
+          <div class="plan-price">
+            <span class="currency">₹</span><span class="amount">999</span
+            ><span class="cycle">/mo</span>
+          </div>
+          <ul class="plan-features">
+            <li>Unlimited projects</li>
+            <li>Email support</li>
+            <li>Advanced analytics</li>
+          </ul>
+          <a href="#" class="plan-cta" aria-label="Choose Pro plan"
+            >Start Pro</a
+          >
+        </article>
+
+        <!-- Plan 3 -->
+        <article class="plan">
+          <header class="plan-head">
+            <h3 class="plan-name">Business</h3>
+            <p class="plan-tagline">For org-wide rollouts</p>
+          </header>
+          <div class="plan-price">
+            <span class="currency">₹</span><span class="amount">2999</span
+            ><span class="cycle">/mo</span>
+          </div>
+          <ul class="plan-features">
+            <li>SSO & roles</li>
+            <li>Priority support</li>
+            <li>Custom reports</li>
+          </ul>
+          <a href="#" class="plan-cta" aria-label="Choose Business plan"
+            >Contact Sales</a
+          >
+        </article>
+      </div>
+    </section>
+  </body>
+</html>
