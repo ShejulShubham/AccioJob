@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment</title>
+    <style>
+        .btn{
+            height: 75px;
+            width: 100px;
+            border: none;
+            color: white;
+            background-color: rgb(2, 76, 144);
+            transition: all 1s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: lightblue;
+            transform: translateY(-5px);
+            border: 2px solid rgb(126, 126, 248);
+        }
+
+        .image-container {
+            width: 200px;
+            height: 100px;
+            overflow: hidden;
+        }
+        
+        img {
+            width: 100%;
+            transition: all 2s ease;
+        }
+
+        img:hover {
+            transform: scale(1.1);
+        }
+
+        .card {
+            height: 100px;
+            width: 200px;
+            border: 1px solid rgb(162, 161, 161);
+            font-weight: bold;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 1px 1px 2px gray;
+            transition: all 1s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 3px 3px 5px gray;
+            transform: translateY(-5px);
+        }
+
+        nav {
+            width: 300px;
+            display: flex;
+            gap: 30px;
+        }
+        
+        a {
+            transition: all 1s ease;
+            color: black;
+            text-decoration: none;
+            position: relative;
+            border: 1px solid black;
+        }
+
+        a::after {
+            content: "";
+            background-color: rgb(55, 0, 157);
+            width: 0px;
+            bottom: -5px;
+            left: 0px;
+            height: 2px;
+            position: absolute;
+            transition: width 0.3s ease;
+        }
+
+        a:hover::after {
+            /* text-decoration: underline; */
+            width: 100%;
+        }
+
+        .fade-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            height: 100px;
+            width: 100px;
+            background-color: brown;
+            transition: all 2s ease-in-out;
+        }
+
+        .fade-box:hover {
+            background-color: lightcoral;
+            color: black;
+            transform: translateY(-10px);
+        }
+    </style>
+  </head>
+  <body>
+    <!-- Smooth Button Hover Effect -->
+    <button class="btn">Hover Me</button>
+    <br /><br />
+
+    <!-- Image Zoom on Hover -->
+    <div class="image-container">
+      <img
+        src="https://images.unsplash.com/photo-1688600793944-4d45993e6583?q=80&w=1221&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        class="image"
+        alt="Sample"
+      />
+    </div>
+    <br /><br />
+
+    <!-- Card Shadow Expansion -->
+    <div class="card">Hover Card</div>
+    <br /><br />
+
+    <!-- Navbar Link Underline Animation -->
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+    <br /><br />
+
+    <!-- Fade In / Fade Out Effect -->
+    <div class="fade-box">Hover Me</div>
+  </body>
+</html>

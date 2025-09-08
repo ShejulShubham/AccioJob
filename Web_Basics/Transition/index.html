@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transform</title>
+    <style>
+      /* transition:
+            transition-property
+            transition-duration
+            transition-timing-function
+            
+            
+
+            `linear` -> constant speed
+            `ease` -> normal smooth effect(default)
+            `ease-in` -> slow start, fast end
+            `ease-in` -> fast start, slow end
+            `ease-in` -> slow start, fast middle, slow end
+        */
+
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: aqua;
+
+        /* smooth background change */
+        transition: background-color 2s ease;
+      }
+
+      .box:hover {
+        background-color: yellowgreen;
+      }
+
+      .box1 {
+        margin-top: 50px;
+        width: 100px;
+        height: 100px;
+        background-color: lightgoldenrodyellow;
+
+        /* smooth background change */
+        transition: background-color 2s ease, transform 1s ease-in;
+      }
+
+      .box1:hover {
+        transform: translateX(50px);
+        background-color: yellowgreen;
+      }
+
+      .box2 {
+        margin-top: 50px;
+        width: 100px;
+        height: 100px;
+        background-color: violet;
+
+        /* smooth background change */
+        transition: all 1s ease-in-out;
+      }
+
+      .box2:hover {
+        transform: rotate(30deg) translate(20px);
+        background-color: yellowgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <div class="box1"></div>
+    <div class="box2"></div>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Shadow</title>
+    <style>
+                /* box-shadow: offset-x, offset-y, blur, color */
+        h1 {
+            font-size: 50px;
+            color: navy;
+
+            box-shadow: 3px 3px 5px black;
+        }
+
+        h2 {
+            font-size: 50px;
+            color: lightcoral;
+
+            box-shadow: inset 3px 3px 5px black;
+        }
+
+        .card {
+            height: 100px;
+            width: 100px;
+            border: 4px solid aliceblue;
+        }
+
+        .shadow {
+            box-shadow: 10px -5px 3px black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello Box Shadow!</h1>
+    <h2>Inset Box Shadow!</h2>
+
+    <div class="card shadow">Box Shadow</div>
+</body>
+</html>

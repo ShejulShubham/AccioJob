@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transform</title>
+    <style>
+      .image-container {
+        height: auto;
+        width: 200px;
+        border: 2px solid black;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      img:hover {
+        transition: 1s;
+        transform: scale(1.4);
+      }
+
+      .btn {
+        height: 100px;
+        width: 150px;
+        background-color: brown;
+        border: 2px solid black;
+        color: azure;
+      }
+
+      .btn:hover {
+        transition: 1s;
+        transform: translate(0px, -10px);
+      }
+
+      .card {
+        margin-top: 20px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100px;
+        width: 150px;
+        background-color: lightseagreen;
+        border: none;
+        color: azure;
+      }
+
+      .card:hover {
+        transition: 1s;
+        transform: translateX(50px) skew(45deg);
+      }
+
+      .icon {
+        font-size: 50px;
+      }
+
+      .icon:hover{
+        transition: 1s;
+        transform: scale(1.1) skew(20deg) rotate(20deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="image-container">
+      <img
+        src="https://images.unsplash.com/vector-1756291334846-2472346a6c56?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDd8SWY2NUF1Tk9PeFF8fGVufDB8fHx8fA%3D%3D"
+        alt="image"
+      />
+    </div>
+    <br />
+    <button class="btn">click me</button>
+    <br />
+
+    <div class="card">Tilt me</div>
+    <br />
+
+    <div class="icon">🌟</div>
+  </body>
+</html>
