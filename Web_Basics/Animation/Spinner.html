@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spinner</title>
+    <style>
+      .spinner {
+        height: 30px;
+        width: 30px;
+        border: 5px solid rgb(182, 181, 181);
+        border-radius: 100%;
+        border-top: 5px solid lightskyblue;
+
+        animation-name: spin;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+
+      .spinner1 {
+        height: 30px;
+        width: 30px;
+        /* border: 5px solid rgb(182, 181, 181); */
+        border-radius: 100%;
+        border-top: 5px solid lightskyblue;
+
+        animation-name: spin;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease;
+      }
+
+      @keyframes spin {
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="spinner"></div>
+    <div class="spinner1"></div>
+  </body>
+</html>
