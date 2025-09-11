@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 3</title>
+</head>
+<body>
+    <button id="actionBtn" type="button" >Click Me</button>
+    <div id="output"></div>
+    <script>
+        let div = document.getElementById("output");
+        let btn = document.getElementById("actionBtn");
+
+
+        btn.addEventListener("click", ()=>{
+            btn.setAttribute("class", "btn-class");
+            div.innerText = "Class has been set to button!";    
+        });
+
+        btn.addEventListener("dblclick", ()=>{
+            let type = btn.getAttribute("type");
+            div.innerText = "Button has this 'type' attribute: " + type;
+
+        });
+        
+        btn.addEventListener("contextmenu", (event)=>{
+            event.preventDefault();
+
+            btn.removeAttribute("class");
+            output.textContent = "attribute 'class' removed";
+        });
+        
+    </script> 
+</body>
+</html>

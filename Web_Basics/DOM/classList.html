@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassList</title>
+</head>
+<body>
+    <div id="unique" class="box shadow gray">Container unique</div>
+    <div id="opaque" class="box shadow gray">Container opaque</div>
+    <script>
+        let unique = document.getElementById("unique");
+        let opaque = document.getElementById("opaque");
+
+        opaque.className = "c1 and c2";
+        console.log(opaque.className);
+
+        unique.classList.add("trouble");
+
+        unique.classList.remove("gray");
+
+        let hasShadow = unique.classList.contains("shadow");
+        console.log(hasShadow);
+
+        unique.classList.toggle("gray");
+
+        unique.classList.replace("box", "grid");
+    </script>
+</body>
+</html>

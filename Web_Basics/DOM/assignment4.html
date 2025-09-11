@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 4</title>
+  </head>
+  <body>
+    <div id="myBox" class="box blue shadow">I'm a Box</div>
+    <button id="add">add "highlight"</button>
+    <button id="remove">remove "blue"</button>
+    <button id="toggle">toggle "rounded"</button>
+    <button id="check">check "shadow"</button>
+
+    <script>
+      let div = document.getElementById("myBox");
+      let add = document.getElementById("add");
+      let remove = document.getElementById("remove");
+      let toggle = document.getElementById("toggle");
+      let check = document.getElementById("check");
+      let message = document.createElement("p");
+      document.body.appendChild(message);
+
+      add.addEventListener("click", () => {
+        div.classList.add("highlight");
+        message.innerHTML = "<strong>class 'highlight' added to div</strong>";
+      });
+
+      remove.addEventListener("click", () => {
+        div.classList.remove("blue");
+        message.innerHTML = "<strong>class 'blue' removed from div</strong>";
+      });
+
+      toggle.addEventListener("click", () => {
+        div.classList.toggle("rounded");
+        message.innerHTML =
+          "<strong>class 'rounded' is toggled in div</strong>";
+      });
+
+      check.addEventListener("click", () => {
+        let hasRounded = div.classList.contains("rounded");
+
+        if (hasRounded) {
+          message.innerHTML =
+            "<strong>class 'rounded' is present in div</strong>";
+        } else {
+          message.innerHTML =
+            "<strong>class 'rounded' is <i>not</i> present in div</strong>";
+        }
+      });
+    </script>
+  </body>
+</html>

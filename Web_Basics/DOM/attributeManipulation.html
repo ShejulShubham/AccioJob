@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attribute Manipulation</title>
+    <style>
+        #main {
+            height: 100px;
+            width: 200px;
+            background-color: lightgreen;
+            border: 5px solid burlywood;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-cls">Here we go!!!</div>
+    <script>
+        let div = document.querySelector(".main-cls");
+
+        div.setAttribute("id", "main");
+
+
+        let divId = div.getAttribute("id");
+        console.log(divId);
+
+        div.removeAttribute("id");
+    </script>
+</body>
+</html>

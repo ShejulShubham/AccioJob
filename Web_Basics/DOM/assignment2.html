@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 2</title>
+    <style>
+      button {
+        height: 100px;
+        width: 100px;
+        background-color: lightblue;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="add-text">Add Plain Text</button>
+    <button id="add-html">Add HTML Content</button>
+    <div id="output"></div>
+    <script>
+      let para = null;
+      let addTextBtn = document.getElementById("add-text");
+      let addHTMLBtn = document.getElementById("add-html");
+      let output = document.getElementById("output");
+
+      addTextBtn.addEventListener("click", () => {
+        para = document.createElement("p");
+        para.textContent = "Hello, <strong>do you enjoy running?</strong>";
+
+        output.appendChild(para);
+      });
+
+      addHTMLBtn.addEventListener("click", () => {
+        para = document.createElement("p");
+        para.innerHTML = "For freedoms sake it <strong>fights!<strong>";
+
+        output.appendChild(para);
+      });
+    </script>
+  </body>
+</html>

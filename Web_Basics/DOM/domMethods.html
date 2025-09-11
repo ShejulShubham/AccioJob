@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Methods</title>
+  </head>
+  <body>
+    <h1>Welcome to my App!</h1>
+    <h2 id="remove">this should get removed.</h2>
+    <button id="btn">clickable</button>
+
+    <script>
+      let para = document.createElement("p");
+      let para1 = document.createElement("p");
+      para.textContent = "THis is a paragraph.";
+      para1.innerHTML = "This is a <i>Paragraph</i>";
+
+      document.body.appendChild(para);
+      document.body.appendChild(para1);
+
+      let h2 = document.getElementById("remove");
+      document.body.removeChild(h2);
+
+      let btn = document.getElementById("btn");
+      btn.addEventListener("click", () => {
+        alert("Yeah you clicked on button!");
+      });
+    </script>
+  </body>
+</html>
