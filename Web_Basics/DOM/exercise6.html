@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ Section</title>
+    <style>
+      .answer {
+        display: none; /* Hide answers by default */
+        color: gray;
+        margin-left: 20px;
+      }
+      .question {
+        cursor: pointer; /* Indicate clickable element */
+        font-weight: bold;
+        font-size: 32px;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="faq">
+      <div>
+        <div class="question">What is JavaScript?</div>
+        <div class="answer">
+          JavaScript is a programming language for the web.
+        </div>
+      </div>
+      <div>
+        <div class="question">What is the DOM?</div>
+        <div class="answer">
+          The DOM is the Document Object Model of a webpage.
+        </div>
+      </div>
+      <div>
+        <div class="question">What is an event listener?</div>
+        <div class="answer">
+          An event listener listens for and reacts to user interactions.
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let questions = document.querySelectorAll(".question");
+
+      questions.forEach((element) => {
+        element.addEventListener("click", () => {
+          questions.forEach((e) => {
+            if (e != element) {
+              e.nextElementSibling.classList.add("answer");
+            }
+          });
+
+          element.nextElementSibling.classList.toggle("answer");
+          element.nextElementSibling.style.marginLeft = "20px";
+        });
+      });
+    </script>
+  </body>
+</html>

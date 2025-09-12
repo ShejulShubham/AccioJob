@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Newsletter popup</title>
+  </head>
+  <body>
+    <button id="show-btn">Show Newsletter</button>
+    <button id="close-btn">Close</button>
+    <script>
+        let show = document.getElementById("show-btn");
+        let hide = document.getElementById("close-btn");
+        let div = document.createElement("div");
+        div.id = "newsletter";
+        div.innerHTML = "<p><strong>Subscribe to out newsletter</strong><p>";
+
+        show.addEventListener("click", ()=>{
+            document.body.appendChild(div);    
+        });
+
+        hide.addEventListener("click", ()=>{
+            document.body.removeChild(div);
+        });
+    </script>
+  </body>
+</html>

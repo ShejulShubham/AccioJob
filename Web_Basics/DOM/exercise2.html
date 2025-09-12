@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add testimonial section dynamically</title>
+</head>
+<body>
+    <div id="testimonials">
+  <h2>What Our Users Say</h2>
+</div>
+<script>
+    let paragraph = document.createElement("p");
+    let div = document.getElementById("testimonials");
+
+    paragraph.textContent = "This product changed my life!";
+
+    div.appendChild(paragraph);
+</script>
+</body>
+</html>

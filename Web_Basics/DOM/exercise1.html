@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>highlight active navbar tab</title>
+    <style>
+      .active-tab {
+        font-weight: bold;
+        color: royalblue;
+        text-decoration: underline;
+      }
+
+      /* li {
+        display: inline;
+        justify-content: center;
+        padding: 0 10px;
+      } */
+
+      #navbar {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        list-style: none;
+      }
+
+    </style>
+  </head>
+  <body>
+    <ul id="navbar">
+      <li id="home-tab">Home</li>
+      <li>About</li>
+      <li>Projects</li>
+      <li>Contact</li>
+    </ul>
+
+    <script>
+        let path = window.location.pathname;
+        let home = document.getElementById("home-tab");
+
+
+        if(path === "/Web_Basics/DOM/exercise1.html"){
+            home.classList.add("active-tab");
+        } else {
+            home.classList.remove("active-tab");
+        }
+    </script>
+  </body>
+</html>

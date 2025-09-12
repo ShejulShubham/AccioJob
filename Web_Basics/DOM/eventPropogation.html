@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #parent {
+            height: 500px;
+            width: 500px;
+            border: 2px solid black;
+            background-color: lightseagreen;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #child {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 250px;
+            width: 250px;
+            border: 2px solid black;
+            background-color: lightcoral;
+        }
+
+        #innerChild {
+            height: 125px;
+            width: 125px;
+            border: 2px solid black;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent">
+        <div id="child">
+            <div id="innerChild">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let parent = document.getElementById("parent");
+        let child = document.getElementById("child");
+        let innerChild = document.getElementById("innerChild");
+
+        document.body.addEventListener('click', () => {
+            console.log('body clicked');
+        }, true);
+
+        parent.addEventListener('click', (event) => {
+            event.stopPropagation();
+            console.log("parent clicked");
+        });
+
+        child.addEventListener('click', (event) => {
+            event.stopPropagation();
+            console.log("child clicked");
+        });
+
+        innerChild.addEventListener('click', (event) => {
+            event.stopPropagation();
+            console.log("inner child clicked");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handling</title>
+    <style>
+        button {
+            display: block;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="alert('You Clicked Eren!')">Eren</button>
+    <button id="mikasa">Mikasa</button>
+    <button id="armin">Armin</button>
+    <script>
+        let mikasaBtn = document.getElementById("mikasa");
+        let arminBtn = document.getElementById("armin");
+
+        mikasaBtn.onclick = function (){
+            alert("You clicked on Mikasa!")
+        }
+
+        arminBtn.addEventListener("click", (event)=>{
+            console.log(event.type);
+            alert("You clikced on Armin");
+        })
+    </script>
+</body>
+</html>
