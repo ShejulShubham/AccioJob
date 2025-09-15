@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Traversal methods</title>
+    <!-- Property:
+        1. firstElementChild
+        2. lastElementChild
+        3. children
+        4. previousElementSibling
+        5. nextElementSibling
+    -->
+</head>
+<body>
+    <div id="container">
+        <h2>The Title</h2>
+        <p>First Paragraph</p>
+        <p>Second Paragraph</p>
+        <p>Third Paragraph</p>
+    </div>
+    
+    <script>
+        let container = document.getElementById("container");
+
+        console.log(container.firstElementChild);
+        console.log(container.lastElementChild);
+        console.log(container.children);
+
+        let allChild = container.children;
+        let secondPara = allChild[2];
+
+        console.log(secondPara.previousElementSibling);
+        console.log(secondPara);
+        console.log(secondPara.nextElementSibling);
+
+    </script>
+</body>
+</html>
