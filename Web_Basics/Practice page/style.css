@@ -1,0 +1,144 @@
+/* ========== BASE / THEME ========== */
+/* TODO: Adjust the color palette to match your vibe */
+:root { /* (No CSS variables used for values to keep it basic) */ }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: system-ui, Arial, sans-serif;
+  color: #111;
+  background: #f7f7fb;
+  line-height: 1.5;
+}
+
+/* Reusable */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease, color 200ms ease;
+}
+.primary-btn { background: #111; color: #fff; }
+.primary-btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+.outline-btn { border-color: #111; color: #111; background: transparent; }
+.outline-btn:hover { background: #111; color: #fff; transform: translateY(-2px); }
+
+/* ========== HEADER ========== */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  background: #ffffffcc; backdrop-filter: blur(6px); /* basic, still looks modern */
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; border-bottom: 1px solid #eee;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.logo-dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: #111;
+  animation: pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+.brand-title { font-size: 18px; margin: 0; }
+.nav { display: flex; gap: 12px; }
+.nav-link {
+  color: #111; text-decoration: none; padding: 8px 10px; border-radius: 6px;
+  transition: background 200ms ease, transform 200ms ease;
+}
+.nav-link:hover { background: #efefef; transform: translateY(-1px); }
+
+/* ========== HERO ========== */
+.hero {
+  position: relative; overflow: hidden;
+  min-height: 78vh; display: grid; place-items: center;
+  padding: 56px 16px; background: linear-gradient(180deg, #fff, #f2f5ff);
+}
+.hero-art { position: absolute; inset: 0; pointer-events: none; }
+.blob {
+  position: absolute; width: 160px; height: 160px; border-radius: 24px;
+  background: #111; opacity: 0.06; filter: blur(2px);
+  animation: float 9s ease-in-out infinite;
+}
+.b1 { top: 12%; left: 8%; transform: rotate(6deg); }
+.b2 { top: 40%; right: 10%; animation-duration: 11s; }
+.b3 { bottom: 8%; left: 30%; animation-duration: 13s; }
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(3deg); }
+}
+
+.hero-content { text-align: center; max-width: 720px; }
+.hero-title { font-size: 44px; line-height: 1.1; margin: 0 0 10px; }
+.hero-subtitle { margin: 0 0 18px; color: #444; }
+
+/* ========== FEATURES ========== */
+.features {
+  display: flex; flex-wrap: wrap; gap: 16px;
+  padding: 40px 16px; justify-content: center;
+  background: #fff;
+}
+.feature-card {
+  width: 260px; padding: 18px; border-radius: 14px; border: 1px solid #eee;
+  background: #fafafa; transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.feature-card:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(0,0,0,0.10); }
+.feature-icon { font-size: 22px; }
+.feature-title { margin: 8px 0 6px; font-size: 18px; }
+.feature-text { margin: 0; color: #555; }
+
+/* ========== GALLERY ========== */
+.gallery {
+  padding: 40px 16px; background: #f8f9ff;
+  display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+}
+.tile {
+  width: 260px; border-radius: 12px; overflow: hidden; background: #fff; border: 1px solid #eee;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.tile img { display: block; width: 100%; height: auto; }
+.tile figcaption { padding: 10px; font-size: 14px; color: #333; }
+.tile:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 16px 28px rgba(0,0,0,0.12); }
+
+/* ========== CTA ========== */
+.cta {
+  padding: 56px 16px; text-align: center; background: #fff;
+}
+.cta-title { font-size: 28px; margin: 0 0 10px; }
+.cta-text { margin: 0 0 18px; color: #444; }
+
+/* ========== FOOTER ========== */
+.site-footer {
+  padding: 20px 16px; text-align: center; color: #666; background: #f2f2f7;
+  border-top: 1px solid #eaeaea;
+}
+
+.link-container {
+    margin: 20px 0;
+    border-top: 2px thick black;
+    padding: 15px 0;
+    gap: 5px;
+}
+
+.btn-link{
+    text-decoration: none;
+    color: #111;
+    margin: 10px 15px;
+    font-size: 20px;
+}
+
+/* .btn-link:hover {
+    cursor: pointer;
+} */
+
+/* ========== (Optional) Tiny Responsive Tweak ========== */
+/* TODO: If allowed, uncomment this basic media query for smaller screens */
+/*
+@media (max-width: 520px) {
+  .hero-title { font-size: 34px; }
+  .feature-card, .tile { width: 100%; max-width: 360px; }
+}
+*/

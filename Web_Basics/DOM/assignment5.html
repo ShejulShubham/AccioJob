@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User input constrained</title>
+    <style>
+      .container {
+        margin: 50px;
+        width: 50vw;
+        display: flex;
+        /* align-items: center;
+            justify-content: center; */
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      #message {
+        display: "inline";
+        font-weight: bold;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="input" class="container">
+      <h1>Type your message for submission</h1>
+      <textarea name="user-input" id="user-input" rows="5"></textarea>
+      <p id="message">0/100</p>
+      <strong id="info" style="display: none; color: red"
+        >Character Limit reached!</strong
+      >
+    </div>
+    <script>
+      let input = document.getElementById("user-input");
+      let info = document.getElementById("message");
+      let stopMessage = document.getElementById("info");
+
+      const limit = 100;
+      input.maxLength = limit;
+
+      // input.addEventListener("input", () => {
+      //   let value = input.value;
+
+      //   if (value.length >= limit) {
+      //     input.value = input.value.slice(0, limit);
+      //   }
+
+      //   if(value.length >= limit){
+      //     stopMessage.style.display = "inline";
+      //   }else {
+      //     stopMessage.style.display = "none";
+      //   }
+
+      //   info.textContent = value.length + "/100";
+      // });
+
+      input.addEventListener("input", () => {
+        let length = input.value.length;
+
+        if (length > limit) {
+          stopMessage.style.display = "inline";
+        } else {
+          stopMessage.style.display = "none";
+        }
+
+        info.textContent = length + "/100";
+      });
+    </script>
+  </body>
+</html>
