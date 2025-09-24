@@ -1,0 +1,83 @@
+<!-- 
+Assignment 3: Shopping List Manager
+Scenario: Create a shopping list app where users can:
+
+Add an item to the list.
+Delete an item from the list.
+Clear the entire list. 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping List</title>
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        .delete-btn {
+            color: red;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Shopping List</h1>
+    <input type="text" id="itemInput" placeholder="Enter item" />
+    <button id="addItem">Add Item</button>
+    <button id="clearList">Clear List</button>
+    <ul id="shoppingList"></ul>
+
+    <script>
+        let itemInput = document.getElementById("itemInput");
+        let addItem = document.getElementById("addItem");
+        let clearList = document.getElementById("clearList");
+        let shoppingList = document.getElementById("shoppingList");
+
+        addItem.addEventListener("click", () => {
+            // add item to the list
+            let itemText = itemInput.value.trim();
+            if(itemText == "") return;
+
+            // create a new list item
+            let li = document.createElement("li");
+            li.textContent = itemText;
+
+            // add delete button to the list item
+            let deleteBtn = document.createElement("span");
+            deleteBtn.textContent = "❌"
+            deleteBtn.classList.add("delete-btn");
+            deleteBtn.addEventListener("click", () => {
+                li.remove();
+            })
+
+            li.appendChild(deleteBtn);
+            shoppingList.appendChild(li);
+
+            // clear the input field
+            itemInput.value = "";
+        });
+
+        clearList.addEventListener("click", () => {
+            shoppingList.innerHTML = "";
+        })
+
+
+    </script>
+
+
+</body>
+
+</html>

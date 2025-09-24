@@ -5,14 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User input constrained</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        color: lightcoral;
+        text-align: center;
+      }
+
+      h1:after {
+        content: " 💬 ";
+      }
+
       .container {
         margin: 50px;
-        width: 50vw;
+        width: 90vw;
         display: flex;
         /* align-items: center;
             justify-content: center; */
         flex-direction: column;
-        gap: 5px;
+        gap: 20px;
+      }
+
+      p {
+        display: inline-block;
+        width: 50px;
+      }
+
+      .message {
+        display: flex;
+        /* flex-direction: column; */
+        justify-content: space-between;
       }
 
       #message {
@@ -20,16 +46,28 @@
         font-weight: bold;
         font-size: 20px;
       }
+
+      strong {
+        display: none;
+        color: red;
+        font-size: larger;
+        font-weight: bold;
+      }
+
+      textarea:focus {
+        border: 3px solid lightgreen;
+        box-shadow: 2px 3px 5px lightblue;
+      }
     </style>
   </head>
   <body>
     <div id="input" class="container">
       <h1>Type your message for submission</h1>
       <textarea name="user-input" id="user-input" rows="5"></textarea>
-      <p id="message">0/100</p>
-      <strong id="info" style="display: none; color: red"
-        >Character Limit reached!</strong
-      >
+      <div class="message">
+        <p id="message">0/100</p>
+        <strong id="info">Character Limit reached!</strong>
+      </div>
     </div>
     <script>
       let input = document.getElementById("user-input");
@@ -58,7 +96,9 @@
       input.addEventListener("input", () => {
         let length = input.value.length;
 
-        if (length > limit) {
+        console.log(length);
+
+        if (length => limit) {
           stopMessage.style.display = "inline";
         } else {
           stopMessage.style.display = "none";

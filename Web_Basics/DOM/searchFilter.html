@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Filter</title>
+    <style>
+      .container {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        align-items: center;
+        gap: 10px;
+      }
+
+      h1 {
+        flex: 1;
+        margin: 0 auto;
+      }
+
+      input {
+        width: 80%;
+
+      }
+
+      li {
+        list-style-type: square;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Search Filter</h1>
+      <input type="text" id="searchBar" placeholder="Search Items" />
+      <ul id="itemList">
+        <li>Apple</li>
+        <li>Orange</li>
+        <li>Banana</li>
+        <li>Strawberry</li>
+        <li>Blueberry</li>
+      </ul>
+    </div>
+
+    <script>
+      let searchBar = document.getElementById("searchBar");
+      let list = document.getElementById("itemList");
+      let listElement = document.querySelectorAll("li");
+
+      searchBar.addEventListener("input", () => {
+        let query = searchBar.value.trim().toLowerCase();
+
+        listElement.forEach((element) => {
+          if (element.textContent.toLowerCase().includes(query)) {
+            element.style.display = "";
+          } else {
+            element.style.display = "none";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

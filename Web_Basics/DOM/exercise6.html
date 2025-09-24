@@ -5,22 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FAQ Section</title>
     <style>
+
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      #faq {
+        width: 90vw;
+        display: flex;
+        flex-direction: column;
+        margin: 30px;
+        border: 2px solid black;
+        padding: 5px 15px;
+      }
+
+
+      h1 {
+        display: block;
+        text-align: center;
+        /* align-self: center; */
+        margin-bottom: 10px;
+        border-bottom: 1px solid black;
+      }
+
       .answer {
         display: none; /* Hide answers by default */
+        font-size: 15px;
         color: gray;
-        margin-left: 20px;
+        left: 150px;
       }
+
       .question {
         cursor: pointer; /* Indicate clickable element */
         font-weight: bold;
-        font-size: 32px;
+        font-size: 25px;
         margin: 10px 0;
+      }
+
+      .question:before {
+        content: "Q. ";
+        color: lightskyblue;
+        
       }
     </style>
   </head>
   <body>
     <div id="faq">
-      <div>
+      <h1>Frequently Asked Questions</h1>
+      <div class="container">
         <div class="question">What is JavaScript?</div>
         <div class="answer">
           JavaScript is a programming language for the web.

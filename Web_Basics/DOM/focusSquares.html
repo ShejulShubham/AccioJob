@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Colorful Squares</title>
+    <style>
+      .square {
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        margin: 10px;
+        background-color: #e6e6fa; /*lavender */
+        cursor: pointer;
+      }
+
+      .coffee {
+        background-color: #6f4e37;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="square" id="square1"></div>
+    <div class="square" id="square2"></div>
+    <div class="square" id="square3"></div>
+
+    <script>
+      const squareList = document.querySelectorAll(".square");
+
+      function onHoverChange(index) {
+        for (let i = 0; i < squareList.length; i++) {
+          if (i !== index) {
+            squareList[i].classList.add("coffee");
+          }
+        }
+      }
+
+      function reset() {
+        for (let i = 0; i < squareList.length; i++) {
+          squareList[i].classList.remove("coffee");
+        }
+      }
+
+      for (let i = 0; i < squareList.length; i++) {
+        squareList[i].addEventListener("mouseover", () => {
+          onHoverChange(i);
+        });
+
+        squareList[i].addEventListener("mouseout", () => {
+          reset();
+        });
+      }
+    </script>
+  </body>
+</html>

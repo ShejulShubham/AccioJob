@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <style>
+      body {
+        background-color: #f8f8f8;
+        display: flex;
+        justify-content: center;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .book-library {
+        width: 400px;
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .book {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: lightgray;
+        line-height: 1px;
+        padding: 15px;
+      }
+
+      h2 {
+        align-self: start;
+        background-color: #2ecc71;
+        text-transform: capitalize;
+      }
+
+      .author {
+        align-self: start;
+        color: rgb(119, 119, 119);
+      }
+
+      .price {
+        color: white;
+        background-color: rgb(46, 204, 113);
+        width: 100%;
+        height: 30px;
+        border: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="book-library">
+      <h1>Book Library</h1>
+      <div class="book">
+        <img
+          src="https://www.bookgeeks.in/wp-content/uploads/2018/01/Spy-in-the-Amber-by-Manohar-Malgonkar.jpg"
+          alt="Spy in the Amber"
+        />
+        <h2>Spy in the Amber</h2>
+        <p class="author">By Manohar Malgonkar</p>
+        <button class="price">Rs. 299</button>
+      </div>
+      <div class="book">
+        <img
+          src="https://www.bookgeeks.in/wp-content/uploads/2018/01/Sacred-Games-by-Vikram-Chandra.jpg"
+          alt="Sacred Games"
+        />
+        <h2>Sacred Games</h2>
+        <p class="author">By Vikram Chandra</p>
+        <button class="price">Rs. 599</button>
+      </div>
+      <div class="book">
+        <img
+          src="https://www.bookgeeks.in/wp-content/uploads/2018/01/Byomkesh-Bakshi-by-Sharadindu-Bandyopadhyay.jpg"
+          alt="Byomkesh Bakshi"
+        />
+        <h2>Byomkesh Bakshi</h2>
+        <p class="author">By Sharadindu Bandyopadhyay</p>
+        <div class="price">Rs. 499</div>
+      </div>
+    </div>
+    <!-- the entire body must be written by student -->
+    <script type="text/javascript" src="./script.js"></script>
+  </body>
+</html>

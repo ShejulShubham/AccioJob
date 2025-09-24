@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SVG Transform, Transition, Animation</title>
+  <style>
+    svg {
+      width: 120px;
+      height: 120px;
+    }
+
+    polygon {
+      fill: gold;
+      stroke: black;
+      stroke-width: 2;
+      stroke-linejoin: round;
+
+      /* Transition setup */
+      transition: transform 0.3s ease;
+      transform-origin: 50% 50%;
+    }
+
+    /* Hover = transition smooth scale + rotate */
+    polygon:hover {
+      transform: scale(1.2) rotate(15deg);
+      cursor: pointer;
+    }
+
+    /* Continuous spinning animation */
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .spin {
+      animation: spin 3s linear infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Normal star with hover effect -->
+  <svg>
+    <polygon points="50,15 61,35 82,35 66,50 72,71 50,60 28,71 34,50 18,35 39,35" />
+  </svg>
+
+  <!-- Always spinning star -->
+  <svg>
+    <polygon class="spin" points="50,15 61,35 82,35 66,50 72,71 50,60 28,71 34,50 18,35 39,35"/>
+  </svg>
+
+</body>
+</html>
+

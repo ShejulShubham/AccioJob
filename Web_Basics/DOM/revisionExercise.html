@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DOM Practice</title>
+    <style>
+      .title {
+        font-weight: 700;
+      }
+      .box {
+        padding: 8px;
+        border: 1px solid #ddd;
+        margin: 6px 0;
+      }
+      .blue {
+        background: #e6f0ff;
+      }
+      .red {
+        background: #ffe6e6;
+      }
+      .hidden {
+        display: none;
+      }
+      .rounded {
+        border-radius: 8px;
+      }
+      .highlight {
+        outline: 2px dashed orange;
+      }
+
+      img {
+        height: 300px;
+        width: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main" class="box blue">
+      <h1 class="title">Welcome</h1>
+      <p id="info">This is a paragraph.</p>
+      <button id="action">Click me</button>
+    </div>
+
+    <img
+      id="hero"
+      src="https://images.unsplash.com/photo-1579783928621-7a13d66a62d1?q=80&w=990&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      alt="Image A"
+    />
+    <button id="swap">Swap Image</button>
+
+    <div id="playground" class="box">
+      <h2>Playground</h2>
+      <ul id="list">
+        <li class="item">Alpha</li>
+        <li class="item">Beta</li>
+      </ul>
+      <div id="output"></div>
+    </div>
+
+    <!-- Your scripts go here -->
+    <script>
+      // write code per task below
+
+      // first task
+      const main = document.getElementById("main");
+      //   console.log(main);
+      //   console.log(document.getElementsByClassName("title"));
+      //   console.log(document.getElementsByTagName("p"));
+      //   console.log(document.querySelector(".item"));
+      //   console.log(document.querySelectorAll(".item"));
+
+      // second task
+      // childNodes contains all the elements attribute and their text as well
+      // but in case of children only elements are considered
+
+      //   console.log(main.childNodes.length);
+      //   console.log(main.children);
+      //   console.log(main.firstChild);
+      //   console.log(main.firstElementChild);
+      //   console.log(main.lastChild);
+      //   console.log(main.lastElementChild);
+
+      // third task
+      //   const p = document.getElementById("info");
+      //   p.textContent = "<b>Safe?</b>";
+
+      //   p.innerHTML = "<b>Safe?</b>";
+
+      // fourth task
+      //   const text = document.createElement("p");
+      //   text.textContent = "Added by createElement + appendChild";
+      //   document.getElementById("playground").appendChild(text);
+
+      // seventh task
+      const img = document.getElementById("hero");
+      const btn = document.getElementById("swap");
+      const imageA =
+        "https://images.unsplash.com/photo-1579783928621-7a13d66a62d1?q=80&w=990&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+      const imageB =
+        "https://images.unsplash.com/photo-1578926375605-eaf7559b1458?q=80&w=1063&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
+      btn.addEventListener("click", () => {
+        if (img.getAttribute("alt") == "Image A") {
+          img.setAttribute("src", imageB);
+          img.setAttribute("alt", "Image B");
+        } else {
+          img.setAttribute("src", imageA);
+          img.setAttribute("alt", "Image A");
+        }
+      });
+
+      // eighth task
+      main.className = "box red";
+      main.classList.add("rounded");
+      document.getElementById("action").addEventListener("click", () => {
+        main.classList.toggle("highlight");
+      });
+    </script>
+  </body>
+</html>
