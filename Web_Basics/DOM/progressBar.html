@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <style>
+      /*  your css code here. If applicable */
+      .active {
+        color: lightyellow;
+        background-color: yellow;
+        animation-name: spin;
+        animation-iteration-count: infinite;
+        animation-duration: 1s;
+        animation-timing-function: linear;
+      }
+
+      .progressBar {
+        display: flex;
+        margin: 10px;
+        padding: 5px;
+        position: relative;
+      }
+
+      /* 6  16 26 36 46*/
+
+      .line {
+        width: 6%;
+        background-color: lightcoral;
+        position: absolute;
+        z-index: 1;
+        height: 3px;
+        bottom: 0;
+        left: 0;
+      }
+
+      .circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 999px;
+        border: 5px solid lightcyan;
+      }
+
+      button:active {
+        transform: scale(0.95);
+      }
+
+      button {
+        border: none;
+        background-color: lightpink;
+        padding: 10px;
+        border-radius: 10px;
+        margin: auto 5px;
+      }
+
+      @keyframes spin {
+        from {
+          border-bottom: 5px solid red;
+        }
+        to {
+          border-bottom: 5px solid red;
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="progressBar">
+      <div id="circle-1" class="circle active"></div>
+      <div id="circle-2" class="circle"></div>
+      <div id="circle-3" class="circle"></div>
+      <div id="circle-4" class="circle"></div>
+      <div id="circle-5" class="circle"></div>
+      <div class="line"></div>
+    </div>
+    <button id="prev" disabled>Previous</button>
+    <button id="next">Next</button>
+    <script>
+      //your JS code here. If required.
+      const nextBtn = document.getElementById("next");
+      const prevBtn = document.getElementById("prev");
+      const circleList = document.querySelectorAll(".circle");
+      const line = document.querySelector(".line");
+      let step = 0;
+      let initial = 1;
+      let limit = 4;
+
+      const circleArr = [];
+      const progress = ["6%", "16%", "26%", "36%", "46%"];
+
+      circleList.forEach((c) => {
+        circleArr.push(c);
+      });
+
+      function next() {
+        if (step >= limit) {
+          return;
+        }
+
+        step++;
+
+        if (step == 1) {
+          prevBtn.disabled = false;
+        }
+
+        if (step == 4) {
+          nextBtn.disabled = true;
+        }
+
+        circleArr[step].classList.add("active");
+
+        line.style.width = progress[step];
+      }
+      
+      function prev() {
+        if (step)
+        if (step == 4) {
+          nextBtn.disabled = false;
+        }
+        
+        if (step == 1) {
+          prevBtn.disabled = true;
+        }
+        
+        circleArr[step].classList.remove("active");
+        
+        step--;
+        line.style.width = progress[step];
+      }
+
+      nextBtn.addEventListener("click", () => {
+        next();
+      });
+
+      prevBtn.addEventListener("click", () => {
+        prev();
+      });
+    </script>
+  </body>
+</html>

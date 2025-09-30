@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User input storage</title>
+  </head>
+  <body>
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" placeholder="Enter name" />
+    <label for="age">Age</label>
+    <input type="text" name="age" id="age" placeholder="Enter age" />
+    <!-- <button id="submit">submit</button> -->
+
+    <script>
+      // NOT A GOOD PRACTICE !!!
+      // localStorage.myName = "Ajay";
+      // console.log(localStorage.myName);
+
+      
+      localStorage.setItem("myEmail", "test@testmail.com");
+      
+      console.log(localStorage.getItem("myEmail"));
+      
+      const inputName = document.getElementById("name");
+      const inputAge = document.getElementById("age");
+      // document.getElementById("submit").addEventListener("click", () => {
+
+      //   localStorage.setItem("name", inputName.value);
+      //   let p = document.createElement("p");
+      //   p.innerHTML = `User input is : <strong>${localStorage.getItem(
+      //     "name"
+      //   )}</strong>`;
+      //   document.body.appendChild(p);
+
+      //   inputName.value = "";
+      // });
+
+      const myData = {
+        name: "",
+        age: 0,
+      };
+
+      inputName.addEventListener("input", (e) => {
+        myData.name = e.target.value;
+
+        localStorage.setItem("data", JSON.stringify(myData));
+      });
+
+      inputAge.addEventListener("input", (e) => {
+        myData.age = e.target.value;
+
+        localStorage.setItem("data", JSON.stringify(myData));
+      });
+
+      // localStorage.removeItem("data");
+      localStorage.clear();
+    </script>
+  </body>
+</html>

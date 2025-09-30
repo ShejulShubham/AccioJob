@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid Color Change</title>
+    <style>
+      /*  your css code here. If applicable */
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 100px);
+        gap: 10px;
+        text-align: center;
+      }
+
+      .grid-container > div {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="grid-item" id="1">1</div>
+      <div class="grid-item" id="2">2</div>
+      <div class="grid-item" id="3">3</div>
+      <div class="grid-item" id="4">4</div>
+      <div class="grid-item" id="5">5</div>
+      <div class="grid-item" id="6">6</div>
+      <div class="grid-item" id="6">7</div>
+      <div class="grid-item" id="6">8</div>
+      <div class="grid-item" id="6">9</div>
+    </div>
+    <br/>
+    <label for="block_id">Input Id:</label>
+    <input id="block_id" />
+    <label for="color_id">Input Color:</label>
+    <input id="color_id" />
+    <button id="change_button">submit</button>
+    <button id="reset_button">reset</button>
+
+    <script>
+        const items = document.querySelectorAll(".grid-item");
+        const inputId = document.querySelector("#block_id");
+        const colorInput = document.querySelector("#color_id");
+        
+        const gridItems = [];
+
+        const colors = ["red", "green", "yellow", "black", "blue", "white"];
+
+        items.forEach((item)=>{
+            gridItems.push(item);
+        });
+
+        document.getElementById("reset_button").addEventListener("click", resetAll);
+
+        function resetAll(){
+            gridItems.forEach((item)=>{
+                item.style.backgroundColor = "transparent";
+                
+            });
+        }
+
+        function changeColor(id, color){
+            gridItems[id].style.backgroundColor = color;
+        }
+
+        document.getElementById("change_button").addEventListener("click", ()=>{
+            const id = inputId.value.trim()
+            const color = colorInput.value.trim();
+            resetAll();
+
+            if(id > 8){
+                alert("id should be in 1 to 9");
+                return;
+            }
+
+            if(!colors.includes(color)){
+                alert("invalid color");
+                return;
+            }
+
+            changeColor(id-1, color);
+        })
+
+    </script>
+  </body>
+</html>

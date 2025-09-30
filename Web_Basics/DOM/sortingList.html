@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <style></style>
+  </head>
+
+  <body>
+    <div class="container">
+      <ul id="bands"></ul>
+    </div>
+    <script>
+      //your JS code here. If required.
+      const bands = [
+        "The Plot in You",
+        "The Devil Wears Prada",
+        "Pierce the Veil",
+        "Norma Jean",
+        "The Bled",
+        "Say Anything",
+        "The Midway State",
+        "We Came as Romans",
+        "Counterparts",
+        "Oh, Sleeper",
+        "A Skylit Drive",
+        "Anywhere But Here",
+        "An Old Dog",
+      ];
+      const fragment = document.createDocumentFragment();
+      const ul = document.getElementById("bands");
+      const pattern = new RegExp(/^(a|an|the|)\b\s/, "i");
+      const mapBands = new Map();
+
+      const sortedBands = bands.sort();
+
+      bands.forEach((band) => {
+        mapBands[band.replace(pattern, "")] = band;
+      });
+
+      const sorted = bands
+        .map((a) => {
+          return a.replace(pattern, "");
+        })
+        .sort();
+
+      for (let i = 0; i < sorted.length; i++) {
+        const li = document.createElement("li");
+        li.textContent = mapBands[sorted[i]];
+
+        fragment.appendChild(li);
+      }
+
+      ul.appendChild(fragment);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reflow, repaint and fragment</title>
+    <!-- 
+    reflow - calculate position and size
+    repaint - draw (showing an elem)
+
+    This is paragraph 1
+    This is paragraph 2
+    This is paragraph 3
+
+
+
+-->
+</head>
+<body>
+    
+    <script>
+        let t1 = performance.now();
+        for(let i=1; i<=100; i++) {
+            let p = document.createElement("p");
+            p.textContent = "This is paragraph " + i;
+            document.body.appendChild(p);
+        }
+        let t2 = performance.now();
+        console.log(t2-t1);
+
+        let t3 = performance.now();
+        // let div = document.createElement("div");
+        let frag = document.createDocumentFragment();
+        for(let i=1; i<=100; i++) {
+            let para = document.createElement("p");
+            para.textContent = "This is paragraph " + i;
+            // div.appendChild(para);
+            frag.appendChild(para);
+        }
+        document.body.appendChild(frag);
+        let t4 = performance.now();
+        console.log(t4-t3);
+    </script>
+</body>
+</html>
