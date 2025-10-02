@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hero-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    gap: 10px;
+}
+
+.projects-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.project {
+    display: flex;
+    width: 200px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid lightcyan;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.project a {
+    text-decoration: none;
+    color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px;
+    background-color: lightgreen;
+    padding: 5px;
+}
