@@ -86,28 +86,77 @@
 
 //ASSIGNMENT 6
 
-const grand = {
-  g: "Aerys Targariyan",
-};
+// const grand = {
+//   g: "Aerys The Cruel",
+// };
 
-const parent = {
-  p: "Aegon DragonBorn",
-};
+// const parent = {
+//   p: "Rhaegar DragonBorn",
+// };
 
-const child = {
-  c: "Jon Snow",
-};
+// const child = {
+//   c: "Lord Jon Snow",
+// };
 
-child.__proto__ = parent;
-parent.__proto__ = grand;
+// child.__proto__ = parent;
+// parent.__proto__ = grand;
 
-console.log(child.g);
-console.log(child.p);
-console.log(child.c);
+// console.log(child.g);
+// console.log(child.p);
+// console.log(child.c);
 
 
-parent.color = "lightViolet"
-child.color = "darkGrey"
+// parent.color = "lightViolet"
+// child.color = "darkGrey"
 
-console.log("parent color: ", parent.color);
-console.log("child color: ", child.color);
+// console.log("parent color: ", parent.color);
+// console.log("child color: ", child.color);
+
+
+
+// ASSIGNMENT 7
+
+// class Greeting{
+//   constructor(name){
+//     this.name = name;
+//   }
+
+//   hello = function(){
+//     return `Hello, ${this.name}`;
+//   }
+// }
+
+// Greeting.prototype.bye = function(){
+//   return `Fare thee well, ${this.name}`;
+// }
+
+// const g = new Greeting("Tyrion Lannister");
+
+// console.log(g.hello());
+// console.log(g.bye());
+
+// ASSIGNMENT 8
+
+function Kindly(kind){
+  this.kind = kind;
+}
+
+Kindly.prototype.sound = function(){
+
+}
+
+function Setting(name){
+  this.name = name;
+}
+
+const kind = new Kindly("Rhoello");
+
+Setting.prototype = kind;
+
+Setting.prototype.sound = function(){
+  return "made in setting";
+}
+
+const setting = new Setting("Davos Seaworth");
+
+console.log(setting.sound());
