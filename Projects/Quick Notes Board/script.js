@@ -7,19 +7,19 @@
 // var notes = [];
 // var notes = [{ id: 0, title: "first note", text: "my way of doing things!" },{ id: 1, title: "second note", text: "my way of doing things!" }]; // Each note: { id: string, title: string, text: string }
 var notes = [
-{id: 0, title: 'Groceries', text: 'Milk'},
-{id: 1, title: 'todos', text: 'workout'},
-{id: 2, title: 'make sure to find', text: 'peace!'},
-{id: 3, title: 'Groceries', text: 'Milk'},
-{id: 4, title: 'todos', text: 'workout'},
-{id: 5, title: 'make sure to find', text: 'peace!'},
-{id: 6, title: 'Groceries', text: 'Milk'},
-{id: 7, title: 'todos', text: 'workout'},
-{id: 8, title: 'make sure to find', text: 'peace!'},
-{id: 9, title: 'Groceries', text: 'Milk'},
-{id: 10, title: 'todos', text: 'workout'},
-{id: 11, title: 'make sure to find', text: 'peace!'},
-]
+  { id: 0, title: "Groceries", text: "Milk" },
+  { id: 1, title: "todos", text: "workout" },
+  { id: 2, title: "make sure to find", text: "peace!" },
+  { id: 3, title: "Groceries", text: "Milk" },
+  { id: 4, title: "todos", text: "workout" },
+  { id: 5, title: "make sure to find", text: "peace!" },
+  { id: 6, title: "Groceries", text: "Milk" },
+  { id: 7, title: "todos", text: "workout" },
+  { id: 8, title: "make sure to find", text: "peace!" },
+  { id: 9, title: "Groceries", text: "Milk" },
+  { id: 10, title: "todos", text: "workout" },
+  { id: 11, title: "make sure to find", text: "peace!" },
+];
 var filterText = "";
 
 // ------------------------
@@ -107,27 +107,29 @@ function renderNotes(noteList = notes) {
 // Events
 // ------------------------
 
-resetBtn.onclick = ()=>{
+resetBtn.onclick = () => {
   notes = [];
   renderNotes();
-}
+};
 
-function reset(){
+function reset() {
   clearError();
   submitBtn.textContent = "Add Note";
   cancelEditBtn.classList.add("hidden");
   titleInput.value = "";
   text.value = "";
+  editingIdInput.value = "";
 }
 
-function push(){
-  state.unshift(notes);
+function push() {
+  state.push(notes);
+  console.log(state);
 }
 
-function pop(){
+function pop() {
   notes = state.pop();
+  console.log(state);
 }
-
 
 function addNote(title, text) {
   const newTodo = {
@@ -140,13 +142,12 @@ function addNote(title, text) {
 }
 
 function addEditedNote(id, title, text) {
-  notes.forEach((note)=>{
-        if(note.id == id){
-            note.title = title;
-            note.text = text;
-        }
-    });
-
+  notes.forEach((note) => {
+    if (note.id == id) {
+      note.title = title;
+      note.text = text;
+    }
+  });
 }
 
 // debugger;
@@ -184,34 +185,33 @@ function onSubmit(e) {
   renderNotes();
 }
 
-function removeNote(id){
-    const newList = [];
-    notes.forEach((note)=>{
-        if(note.id != id){
-            newList.push(note);
-        }
-    });
+function removeNote(id) {
+  const newList = [];
+  notes.forEach((note) => {
+    if (note.id != id) {
+      newList.push(note);
+    }
+  });
 
-    notes = [...newList];
+  notes = [...newList];
 }
 
+function openEdit(id) {
+  let note = null;
+  notes.forEach((n) => {
+    if (n.id == id) {
+      note = n;
+    }
+  });
 
-function openEdit(id){
-    let note = null;
-    notes.forEach((n)=>{
-        if(n.id == id){
-            note = n;
-        }
-    });
-
-    editingIdInput.value = id;
-    removeNote(id);
-    renderNotes();
-    submitBtn.textContent = "Submit Edit";
-    cancelEditBtn.classList.remove("hidden");
-    titleInput.value = note.title;
-    textInput.value = note.text;
-    cancelEditBtn.addEventListener("click", onCancelEdit);
+  editingIdInput.value = id;
+  removeNote(id);
+  renderNotes();
+  submitBtn.textContent = "Submit Edit";
+  cancelEditBtn.classList.remove("hidden");
+  titleInput.value = note.title;
+  textInput.value = note.text;
+  cancelEditBtn.addEventListener("click", onCancelEdit);
 }
 
 function onCancelEdit() {
@@ -226,14 +226,12 @@ function onCancelEdit() {
   renderNotes();
 }
 
-function findNotes(input){
-
-  const found = notes.filter((note)=>{
-
-    if(note.title.includes(input)){
+function findNotes(input) {
+  const found = notes.filter((note) => {
+    if (note.title.includes(input)) {
       return note;
     }
-  })
+  });
 
   return found;
 }
@@ -241,10 +239,10 @@ function findNotes(input){
 function onFilterChange(e) {
   // TODO(14): Update filterText from the input value and re-render notes.
   const input = e.target.value.trim();
-  if(!input){ 
+  if (!input) {
     renderNotes();
-    return 
-  };
+    return;
+  }
 
   const foundNotes = findNotes(input);
   renderNotes(foundNotes);
@@ -255,7 +253,13 @@ function onFilterChange(e) {
 function onNotesClick(e) {
   // - Determine if the click was on .edit-btn or .delete-btn
   const clickedBtn = e.target.className;
-  if(!clickedBtn) { return }
+  if (!clickedBtn) {
+    return;
+  }
+
+  if (editingIdInput.value) {
+    pop();
+  }
   // - Find the closest .note element and read its data-id
   // - For Edit:
   //   - Find the note by id
@@ -271,8 +275,8 @@ function onNotesClick(e) {
     openEdit(e.target.id);
   } else if (clickedBtn == "delete-btn") {
     removeNote(e.target.id);
-}
-    renderNotes();
+  }
+  renderNotes();
 }
 
 // ------------------------
