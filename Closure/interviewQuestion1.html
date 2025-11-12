@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="menu"></ul>
+
+    <script>
+      const items = ["Home", "About", "Help", "Contact Us"];
+      const ul = document.getElementById("menu");
+      const fragment = document.createDocumentFragment();
+
+      items.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = item;
+        li.id = index;
+
+        li.addEventListener("click", () => {
+          alert(`You clicked on ${item}, index: ${index}`);
+        });
+
+        fragment.appendChild(li);
+      });
+
+      ul.appendChild(fragment);
+    </script>
+  </body>
+</html>

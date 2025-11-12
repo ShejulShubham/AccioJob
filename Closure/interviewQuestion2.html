@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    div {
+        margin-top: 200px;
+        min-width: 500px;
+        min-height: 300px;
+        border: 2px solid white;
+    }
+</style>
+<body>
+
+    <div id="div">I will hunt you down wherever you are hiding and I will Eliminate you</div>
+    <script>
+        const colors = ["orange", "blue", "violet", "green"];
+        const div = document.getElementById("div");
+
+        colors.forEach((color, index)=>{
+            const button = document.createElement("button");
+            button.id = index;
+            button.textContent = color;
+            button.style.margin = "5px";
+
+            // makeEvent(button, color);
+            button.addEventListener("click", changeColor(color));
+
+            document.body.appendChild(button);
+        });
+
+
+        // function makeEvent(element, color){
+        //     element.addEventListener("click", ()=>{
+        //         div.style.backgroundColor = color;
+        //     })
+        // }
+
+
+        function changeColor(color){
+            return function (){
+                div.style.backgroundColor = color;
+            }
+        }
+    </script>
+</body>
+</html>
