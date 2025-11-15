@@ -84,7 +84,7 @@ function handleAddGoal() {
   const tagSpan = document.createElement("span"); // TODO
   tagSpan.classList.add("goal-tag");
   // TODO: Set textContent to priority (e.g. "High", "Medium", "Low")
-  tagSpan.textContent = priority;
+  tagSpan.textContent = priority.charAt(0).toUpperCase() + priority.slice(1);
 
   // 3.5 SET PRIORITY COLOR CLASS
   // For priority, we will use:
