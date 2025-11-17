@@ -1,8 +1,8 @@
 /* TODO: Universal reset (margin, padding) and box-sizing */
 * {
   /* your code */
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -11,10 +11,8 @@
    - Base font-size (e.g., 16px), line-height, text color, background color */
 body {
   /* your code */
-  font-family: merriweather inter sans-serif;
-  font-size: 13px;
-  line-height: 33px;
-  background-color: azure;
+  font-family: 'Merriweather', 'Inter', sans-serif;
+  font-size: 16px;
 }
 
 /* TODO: Layout container (.page)
@@ -22,9 +20,6 @@ body {
    - Center with margin, add comfortable padding */
 .page {
   /* your code */
-  max-width: 600px;
-  margin: 10px auto;
-  padding: 30px;
 }
 
 /* TODO: Header (#site-header) spacing and title (.site-title)
@@ -33,12 +28,9 @@ body {
    - Adjust font-size and letter-spacing for .site-title */
 #site-header {
   /* your code */
-  margin: 20px 0px;
-  font-family: "Times New Roman", Times, serif;
 }
 .site-title {
   /* your code */
-  font-size: 32px;
 }
 
 /* TODO: Tagline (.tagline)
@@ -47,17 +39,12 @@ body {
    - Top margin */
 .tagline {
   /* your code */
-  color: gray;
-  margin-top: 5px;
 }
 
 /* TODO: Article basics (.article)
    - Ensure readable line-height and paragraph spacing rhythm */
 .article {
   /* your code */
-  font-family: "Inter", sans-serif;
-  line-height: 25px;
-  font-size: 12px;
 }
 
 /* TODO: Article title (.article-title) and byline (.byline)
@@ -65,21 +52,15 @@ body {
    - Muted/secondary color for byline */
 .article-title {
   /* your code */
-  font-size: 20px;
-  font-weight: bold;
-  margin: 10px 0px;
 }
 .byline {
   /* your code */
-  font-size: 10px;
-  color: rgb(107, 107, 107);
 }
 
 /* TODO: Paragraphs (.para) spacing
    - Bottom margin to separate blocks */
 .para {
   /* your code */
-    margin-bottom: 15px;
 }
 
 /* TODO: Lead paragraph (.lead)
@@ -88,8 +69,6 @@ body {
    - Maybe a softer color */
 .lead {
   /* your code */
-  font-size: 15px;
-  line-height: 20px;
 }
 
 /* TODO: Section headings (.section-heading)
@@ -97,7 +76,6 @@ body {
    - Top/bottom margins to create hierarchy */
 .section-heading {
   /* your code */
-  margin: 5px 0px;
 }
 
 /* TODO: Lists (.list & .list-item)
@@ -105,12 +83,9 @@ body {
    - Bottom margin for items */
 .list {
   /* your code */
-  padding-left: 15px;
-  margin-bottom: 15px;
 }
 .list-item {
   /* your code */
-  list-style: georgian;
 }
 
 /* TODO: Blockquote (.quote)
@@ -120,10 +95,6 @@ body {
    - Slightly larger or distinct color */
 .quote {
   /* your code */
-  color: rgb(156, 155, 155);
-  font-style: italic;
-  padding: 5px;
-  border-left: 5px solid gray;
 }
 
 /* TODO: Inline code (.code-inline)
@@ -131,10 +102,6 @@ body {
    - Background, padding, and border-radius */
 .code-inline {
   /* your code */
-  background-color: rgb(203, 201, 201);
-  border-radius: 15px;
-  line-height: 1.6;
-  letter-spacing: 2px;
 }
 
 /* TODO: Links inside article (.text-link)
@@ -142,11 +109,9 @@ body {
    - Underline on hover */
 .text-link {
   /* your code */
-  text-decoration: none;
 }
 .text-link:hover {
   /* your code */
-  text-decoration: underline;
 }
 
 /* TODO: Utilities: .muted, .caps, .small, .mono
@@ -156,36 +121,25 @@ body {
    - .mono: monospace font */
 .muted {
   /* your code */
-  color: rgb(166, 165, 165);
-  letter-spacing: 1px;
 }
 .caps {
-    /* your code */
-    text-transform: capitalize;
+  /* your code */
 }
 .small {
   /* your code */
-  font-size: 15px;
 }
 .mono {
   /* your code */
-  font-family: monospace;
 }
 
 /* TODO: Footer (#site-footer)
    - Top margin, subdued background, centered text, padding */
 #site-footer {
   /* your code */
-  margin-top: 5px;
-  background-color: rgb(195, 193, 191);
-  text-align: center;
-  padding: 5px;
 }
 .footer-text {
   /* your code */
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .footer-link {
   /* your code */
-    text-decoration: none;
 }
