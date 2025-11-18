@@ -3,6 +3,8 @@ const baseURL = "https://opentdb.com/api.php";
 let quizQuestions = [];
 const scoreElement = document.getElementById("score");
 const restart = document.getElementById("restart");
+const quizContainer = document.getElementById("quiz-container");
+const welcomeContainer = document.getElementById("welcome-container");
 let score = 0;
 let current = 0;
 let totalQuestion = 0;
@@ -11,8 +13,6 @@ document.getElementById("quiz-form").addEventListener("submit", startQuiz);
 
 async function startQuiz(e) {
   e.preventDefault();
-  const quizContainer = document.getElementById("quiz-container");
-  const welcomeContainer = document.getElementById("welcome-container");
   const amount = document.getElementById("trivia_amount").value;
   const category = document.querySelector(
     "select[name='trivia_category']"
@@ -31,6 +31,9 @@ async function startQuiz(e) {
     return;
   }
 
+  console.log("amount: ", amount);
+  console.log("category: ", category);
+  console.log("difficulty: ", difficulty);
   await fetchData(amount, category, difficulty);
   welcomeContainer.classList.add("hidden");
   quizContainer.classList.remove("hidden");
@@ -39,7 +42,10 @@ async function startQuiz(e) {
 }
 
 function restartQuiz() {
-  console.log("quiz restart");
+
+
+  quizContainer.classList.add("hidden");
+  welcomeContainer.classList.remove("hidden");
 }
 
 async function fetchData(amount, category, difficulty) {
