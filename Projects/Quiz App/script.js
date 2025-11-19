@@ -5,6 +5,7 @@ const scoreElement = document.getElementById("score");
 const restart = document.getElementById("restart");
 const quizContainer = document.getElementById("quiz-container");
 const welcomeContainer = document.getElementById("welcome-container");
+const loading = document.getElementById("loading-screen");
 let score = 0;
 let current = 0;
 let totalQuestion = 0;
@@ -30,20 +31,27 @@ async function startQuiz(e) {
     alert("please select difficulty!");
     return;
   }
+  welcomeContainer.classList.add("hidden");
+  loading.classList.remove("hidden");
 
   console.log("amount: ", amount);
   console.log("category: ", category);
   console.log("difficulty: ", difficulty);
-  await fetchData(amount, category, difficulty);
-  welcomeContainer.classList.add("hidden");
-  quizContainer.classList.remove("hidden");
 
-  loadQuestion();
+  try {
+    await fetchData(amount, category, difficulty);
+
+    setTimeout(() => {
+      loading.classList.add("hidden");
+      quizContainer.classList.remove("hidden");
+      loadQuestion();
+    }, 3000);
+  } catch (error) {
+    throw new Error("Error", error.message);
+  }
 }
 
 function restartQuiz() {
-
-
   quizContainer.classList.add("hidden");
   welcomeContainer.classList.remove("hidden");
 }
@@ -114,7 +122,7 @@ function provideOptions(question) {
   return options;
 }
 
-async function loadQuestion() {
+function loadQuestion() {
   const question = document.getElementById("question");
   const options = document.getElementById("options");
   const currentQuestion = document.getElementById("current");
