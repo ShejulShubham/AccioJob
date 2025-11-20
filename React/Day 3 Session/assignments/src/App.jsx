@@ -7,6 +7,7 @@ import ToggleText from './components/ToggleText'
 import FruitList from './components/FruitList'
 import MiniForm from './components/MiniForm'
 import ThemeToggle from './components/ThemeToggle'
+import ExpenseTracker from "./components/ExpenseTracker"
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <FruitList />
         <MiniForm />
         <ThemeToggle />
+        <ExpenseTracker />
       </div>
     </div>
   )
