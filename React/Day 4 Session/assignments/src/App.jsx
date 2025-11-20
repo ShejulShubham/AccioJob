@@ -1,5 +1,6 @@
 import "./App.css";
 import FontSizeSlider from "./components/FontSizeSlider"
+import PostReactionSystem from "./components/PostReactionSystem";
 import RandomNumber from "./components/RandomNumber"
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
         <div className="assignment-card">
           <FontSizeSlider />
           <RandomNumber />
+          <PostReactionSystem />
         </div>
       </div>
     </>

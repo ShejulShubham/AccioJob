@@ -6,7 +6,7 @@ export default function FontSizeSlider(){
 
     return (
         <>
-        <h2>Assignment 13</h2>
+        <h2>Assignment 12</h2>
         <p style={{fontSize:size}}>Live Preview Text (size: {size}px)</p>
         <input type="range" min={10} max={48} value={size} onChange={(e)=>setSize(Number(e.target.value))}/>
         </>

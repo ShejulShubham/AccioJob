@@ -3,14 +3,12 @@ import { useState } from "react";
 export default function ExpenseTracker() {
   let [expenses, setExpenses] = useState([]);
   let [title, setTitle] = useState("");
-  let [amount, setAmount] = useState(0);
-
-  //TODO: expense tracker completion
+  let [amount, setAmount] = useState(0)
 
   function addExpense(e) {
     e.preventDefault();
 
-    const trimmedTitle = title;
+    const trimmedTitle = title.trim();
     const newAmount = Number(amount);
 
     if (!trimmedTitle || trimmedTitle.length == 0) {
@@ -33,8 +31,6 @@ export default function ExpenseTracker() {
       return [...prev, newExpense];
     });
 
-    console.log(expenses);
-
     setTitle("");
     setAmount("");
   }
@@ -55,7 +51,7 @@ export default function ExpenseTracker() {
             placeholder="Expense title"
             value={title}
             onChange={(e) => {
-              setTitle(e.target.value.trim());
+              setTitle(e.target.value);
             }}
           />
         </label>
@@ -67,7 +63,7 @@ export default function ExpenseTracker() {
             placeholder="Expense Amount"
             value={amount}
             onChange={(e) => {
-              setAmount(Number(e.target.value));
+              setAmount(e.target.value);
             }}
           />
         </label>
@@ -86,10 +82,10 @@ export default function ExpenseTracker() {
         </thead>
         <tbody>
           {expenses.map((expense) => {
-            <tr key={expense.id}>
+            return (<tr key={expense.id}>
               <td>{expense.title}</td>
               <td>{expense.amount}</td>
-            </tr>;
+            </tr>)
           })}
         </tbody>
       </table>
