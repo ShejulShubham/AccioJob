@@ -34,8 +34,11 @@ h1 {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 30px;
-  text-align: center;
   transition: all 1s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 1;
 }
 
 .project h2 {
@@ -51,6 +54,7 @@ h1 {
   color: white;
   text-decoration: none;
   border-radius: 5px;
+  text-align: center;
 }
 
 .project a:hover {
