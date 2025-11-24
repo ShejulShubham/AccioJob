@@ -6,6 +6,7 @@ const restart = document.getElementById("restart");
 const quizContainer = document.getElementById("quiz-container");
 const welcomeContainer = document.getElementById("welcome-container");
 const loading = document.getElementById("loading-screen");
+const progressBar = document.getElementById("progress");
 let score = 0;
 let current = 0;
 let totalQuestion = 0;
@@ -77,29 +78,6 @@ async function fetchData(amount, category, difficulty) {
   }
 }
 
-const questions = [
-  {
-    q: "What is the capital of France?",
-    options: ["Paris", "London", "Berlin", "Madrid"],
-    answer: "Paris",
-  },
-  {
-    q: "Which language runs in a web browser?",
-    options: ["Python", "JavaScript", "C++", "Java"],
-    answer: "JavaScript",
-  },
-  {
-    q: "HTML stands for?",
-    options: [
-      "HyperText Markup Language",
-      "HighText Machine Language",
-      "HyperLoop Machine Language",
-      "None of these",
-    ],
-    answer: "HyperText Markup Language",
-  },
-];
-
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     // Pick a random index before the current element
@@ -141,10 +119,17 @@ function loadQuestion() {
         `<label><input type="radio" name="opt" value="${opt}"> ${opt}</label>`
     )
     .join("<br>");
+
+    updateScore();
 }
 
 function updateScore() {
-  scoreElement.textContent = score;
+  scoreElement.textContent = `${score}/${totalQuestion}`;
+}
+
+function updateProgressBar(){
+  const progress = current/totalQuestion;
+  progressBar.style.width = `${progress*100}%`;
 }
 
 function checkAnswer() {
@@ -157,6 +142,7 @@ function checkAnswer() {
       updateScore();
     }
     current++;
+    updateProgressBar();
     if (current < totalQuestion) {
       loadQuestion();
     } else {
