@@ -3,11 +3,13 @@ import Props from "./components/Props";
 import Button from "./components/Button";
 import Product from "./components/Product";
 import DifferentData from "./components/DifferentData";
-import ClickCounter from "./components/ClickCounter"
+import ClickCounter from "./components/ClickCounter";
 import NewCounter from "./components/NewCounter";
 import StepCounter from "./components/StepCounter";
 import BoundedCount from "./components/BoundedCount";
-import ScoreBoard from "./components/ScoreBoard"
+import ScoreBoard from "./components/ScoreBoard";
+import Parent from "./components/Parent";
+import Children from "./components/Children"
 
 function App() {
   let isActive = false;
@@ -18,9 +20,8 @@ function App() {
     name: "Aarav",
     age: 21,
     email: "aarav@gmail.com",
-    skills: ["HTML", "CSS", "REACT"]
+    skills: ["HTML", "CSS", "REACT"],
   };
-
 
   // if(isActive){
   //   return <p>You are Active!</p>
@@ -49,19 +50,27 @@ function App() {
           <DifferentData user={user} />
 
           <h2 style={{ marginTop: "100px" }}>TASK 4</h2>
-            <ClickCounter />
+          <ClickCounter />
 
           <h2 style={{ marginTop: "100px" }}>TASK 4</h2>
           <NewCounter />
 
           <h2 style={{ marginTop: "100px" }}>TASK 4</h2>
-            <StepCounter />
+          <StepCounter />
 
           <h2 style={{ marginTop: "100px" }}>TASK 5</h2>
-            <BoundedCount />
+          <BoundedCount />
 
           <h2 style={{ marginTop: "100px" }}>TASK 6</h2>
-            <ScoreBoard />
+          <ScoreBoard />
+
+          <h2 style={{ marginTop: "100px" }}>Prop Drilling</h2>
+          <Parent />
+
+          <h2 style={{ marginTop: "100px" }}>Prop Drilling</h2>
+          <Children >{"This is children passed!"}</Children>
+          <br />
+          <Children >{"Comrade your sacrifices where not in vain!"}</Children>
         </div>
       </div>
     </>
