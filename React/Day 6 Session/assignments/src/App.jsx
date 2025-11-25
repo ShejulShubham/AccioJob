@@ -12,6 +12,11 @@ import FunctionProp from "./components/FunctionProp";
 import PropDrilling from "./components/PropDrilling";
 import Card from "./components/Card";
 import UserRole from "./components/UserRole"
+import Card2 from "./components/Card2";
+import Status from "./components/Status";
+import List from "./components/List";
+import Wrapper from "./components/Wrapper";
+import Icon from "./components/Icon";
 
 function App() {
 
@@ -63,9 +68,19 @@ function App() {
           <UserRole name="Tywin Lannister" role="user"/>
 
           <h2 style={{ marginTop: "100px" }}>Assignment 14</h2>
-          
+          <Card2 title={"Your heart and soul to the cause!"}>{"Make sure to work on time!"}</Card2>
 
+          <h2 style={{ marginTop: "100px" }}>Assignment 15</h2>
+          <Status isOnline={true}/>
 
+          <h2 style={{ marginTop: "100px" }}>Assignment 16</h2>
+          <List items={[1, 2, 3, 4, 5]}>{"Numbers list"}</List>
+
+          <h2 style={{ marginTop: "100px" }}>Assignment 17</h2>
+          <Wrapper onClick={()=>alert("Box clicked!")} ><h2>Content inside wrapper</h2></Wrapper>
+
+          <h2 style={{ marginTop: "100px" }}>Assignment 18</h2>
+          <Icon title={"School bell"} icon={<span>🔔</span>} />
         </div>
       </div>
     </>
