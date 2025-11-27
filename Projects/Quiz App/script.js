@@ -6,10 +6,12 @@ const restart = document.getElementById("restart");
 const quizContainer = document.getElementById("quiz-container");
 const welcomeContainer = document.getElementById("welcome-container");
 const loading = document.getElementById("loading-screen");
-const progressBar = document.getElementById("progress");
+const progressBar = document.getElementById("range");
+const progress = document.getElementById("progress");
 let score = 0;
 let current = 0;
 let totalQuestion = 0;
+progressBar.value = 0;
 
 document.getElementById("quiz-form").addEventListener("submit", startQuiz);
 
@@ -35,10 +37,6 @@ async function startQuiz(e) {
   welcomeContainer.classList.add("hidden");
   loading.classList.remove("hidden");
 
-  console.log("amount: ", amount);
-  console.log("category: ", category);
-  console.log("difficulty: ", difficulty);
-
   try {
     await fetchData(amount, category, difficulty);
 
@@ -46,6 +44,7 @@ async function startQuiz(e) {
       loading.classList.add("hidden");
       quizContainer.classList.remove("hidden");
       loadQuestion();
+      setupProgress();
     }, 3000);
   } catch (error) {
     throw new Error("Error", error.message);
@@ -68,8 +67,6 @@ async function fetchData(amount, category, difficulty) {
     }
 
     const data = await response.json();
-
-    console.log(data.results);
 
     quizQuestions.push(...data.results);
     totalQuestion = quizQuestions.length;
@@ -105,8 +102,6 @@ function loadQuestion() {
   const options = document.getElementById("options");
   const currentQuestion = document.getElementById("current");
 
-  console.log(quizQuestions[current]);
-
   currentQuestion.textContent = `Q${current + 1}.`;
 
   question.textContent = quizQuestions[current].question;
@@ -127,9 +122,16 @@ function updateScore() {
   scoreElement.textContent = `${score}/${totalQuestion}`;
 }
 
-function updateProgressBar(){
-  const progress = current/totalQuestion;
-  progressBar.style.width = `${progress*100}%`;
+function setupProgress(){
+  progressBar.min = current;
+  progressBar.max = totalQuestion;
+  progress.value = 0;
+  updateProgress();
+}
+
+function updateProgress(){
+  progress.textContent = `${current}/${totalQuestion}`;
+  progressBar.value = current;
 }
 
 function checkAnswer() {
@@ -142,7 +144,7 @@ function checkAnswer() {
       updateScore();
     }
     current++;
-    updateProgressBar();
+    updateProgress();
     if (current < totalQuestion) {
       loadQuestion();
     } else {

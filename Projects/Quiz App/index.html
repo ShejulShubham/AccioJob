@@ -7,18 +7,31 @@
   <body>
     <header class="header-container">
       <h1>Quiz Application</h1>
-      <nav class="nav-container">
+      <nav class="hidden nav-container">
+        <div class="progress-container">
+          <p>Progress: <strong id="progress">N/A</strong></p>
+        </div>
         <div class="score-container">
-          <p>Score:<strong id="score">0</strong></p>
+          <p>Score: <strong id="score">N/A</strong></p>
         </div>
       </nav>
     </header>
 
     <main class="main-container">
-      
+      <div class="rangeWrapper">
+        <input
+          id="range"
+          value="7"
+          max="20"
+          min="1"
+          class="kawaii"
+          type="range"
+        />
+        0/10
+      </div>
+
       <div class="welcome-container" id="welcome-container">
         <form id="quiz-form" action="submit" class="form-container">
-
           <label for="trivia_amount">Number of Questions (1-50):</label>
           <input
             type="number"
@@ -80,12 +93,11 @@
 
       <div class="hidden loading-screen" id="loading-screen">
         <h3>Loading Quiz...</h3>
-        <div class="loader">
-        </div>
+        <div class="loader"></div>
       </div>
 
       <div class="hidden quiz-container" id="quiz-container">
-        <div id="progress" class="progress-bar"></div>
+        <div id="progressBar" class="progress-bar"></div>
         <div class="question-container">
           <div id="current">Q1</div>
           <div id="question"></div>
@@ -95,11 +107,9 @@
         <div id="score"></div>
       </div>
     </main>
-      <div class="quiz-restart-container">
-        <button class="reset-button" onclick="restartQuiz()">
-          Restart Quiz
-        </button>
-      </div>
+    <div class="quiz-restart-container">
+      <button class="reset-button" onclick="restartQuiz()">Restart Quiz</button>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
