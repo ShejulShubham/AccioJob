@@ -1,5 +1,4 @@
 export default function DifferentData({ user }) {
-  //TODO: pass user as a prop
 
   return (
       <>

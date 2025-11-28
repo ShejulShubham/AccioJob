@@ -12,6 +12,10 @@ import PreventUseEffect from "./Components/PreventUseEffect";
 import ColorChange from "./Components/ColorChange";
 import LongText from "./Components/LongText";
 import Selected from "./Components/Selected";
+import TwoStates from "./Components/TwoStates";
+import SearchResult from "./Components/SearchResult"
+import AutoCounter from "./Components/AutoCounter";
+import PropEffect from "./Components/PropEffect";
 
 function App() {
   //style={{ marginTop: "100px" }}
@@ -63,6 +67,17 @@ function App() {
           <LongText />
           <br />
           <Selected />
+          <br />
+          <TwoStates />
+          <br />
+          <SearchResult />
+          <br />
+          <AutoCounter />
+            <br />
+          <PropEffect />
+          <br />
+          
+
         </div>
       </div>
     </>
