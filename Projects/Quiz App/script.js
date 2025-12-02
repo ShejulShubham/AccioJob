@@ -1,17 +1,18 @@
 const jsonFileName = "response.json";
 const baseURL = "https://opentdb.com/api.php";
 let quizQuestions = [];
-const scoreElement = document.getElementById("score");
-const restart = document.getElementById("restart");
-const quizContainer = document.getElementById("quiz-container");
 const welcomeContainer = document.getElementById("welcome-container");
+const quizContainer = document.getElementById("quiz-container");
 const loading = document.getElementById("loading-screen");
 const progressBar = document.getElementById("range");
+const scoreElement = document.getElementById("score");
 const progress = document.getElementById("progress");
+const restart = document.getElementById("restart");
 let score = 0;
 let current = 0;
 let totalQuestion = 0;
 progressBar.value = 0;
+
 
 document.getElementById("quiz-form").addEventListener("submit", startQuiz);
 
@@ -45,13 +46,14 @@ async function startQuiz(e) {
       quizContainer.classList.remove("hidden");
       loadQuestion();
       setupProgress();
-    }, 3000);
+    }, 1000);
   } catch (error) {
     throw new Error("Error", error.message);
   }
 }
 
 function restartQuiz() {
+  document.querySelector(".nav-container").classList.add("hidden");
   quizContainer.classList.add("hidden");
   welcomeContainer.classList.remove("hidden");
 }
@@ -115,23 +117,21 @@ function loadQuestion() {
     )
     .join("<br>");
 
-    updateScore();
+  setupProgress();
 }
 
-function updateScore() {
-  scoreElement.textContent = `${score}/${totalQuestion}`;
-}
-
-function setupProgress(){
+function setupProgress() {
+  document.querySelector(".nav-container").classList.remove("hidden");
   progressBar.min = current;
   progressBar.max = totalQuestion;
-  progress.value = 0;
-  updateProgress();
+
+  updateBoard();
 }
 
-function updateProgress(){
+function updateBoard() {
   progress.textContent = `${current}/${totalQuestion}`;
   progressBar.value = current;
+  scoreElement.textContent = `${score}/${totalQuestion}`;
 }
 
 function checkAnswer() {
@@ -141,10 +141,9 @@ function checkAnswer() {
   if (selected) {
     if (selected.value === quizQuestions[current].correct_answer) {
       score++;
-      updateScore();
     }
     current++;
-    updateProgress();
+    updateBoard();
     if (current < totalQuestion) {
       loadQuestion();
     } else {

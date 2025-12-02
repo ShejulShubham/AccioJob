@@ -15,8 +15,6 @@ body {
 
 .nav-container {
   position: absolute;
-  /* right: 10px;
-  top: 20px; */
   width: 90%;
   margin: 10px;
   display: flex;
@@ -52,6 +50,7 @@ body {
   justify-content: space-evenly;
   align-items: center;
   height: 100%;
+  pointer-events: none;
 }
 
 [type="range"].kawaii {
@@ -316,4 +315,8 @@ button:hover {
 
 .reset-button:hover {
   background-color: rgb(239, 50, 50);
+}
+
+.final-message-container {
+  text-align: center;
 }

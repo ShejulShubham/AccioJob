@@ -11,6 +11,17 @@
         <div class="progress-container">
           <p>Progress: <strong id="progress">N/A</strong></p>
         </div>
+        <div class="hidden rangeWrapper">
+          <input
+            id="range"
+            value="5"
+            max="5"
+            min="1"
+            class="kawaii"
+            type="range"
+          />
+          
+        </div>
         <div class="score-container">
           <p>Score: <strong id="score">N/A</strong></p>
         </div>
@@ -18,17 +29,6 @@
     </header>
 
     <main class="main-container">
-      <div class="rangeWrapper">
-        <input
-          id="range"
-          value="7"
-          max="20"
-          min="1"
-          class="kawaii"
-          type="range"
-        />
-        0/10
-      </div>
 
       <div class="welcome-container" id="welcome-container">
         <form id="quiz-form" action="submit" class="form-container">
@@ -97,9 +97,9 @@
       </div>
 
       <div class="hidden quiz-container" id="quiz-container">
-        <div id="progressBar" class="progress-bar"></div>
+        <!-- <div id="progressBar" class="progress-bar"></div> -->
         <div class="question-container">
-          <div id="current">Q1</div>
+          <div id="current">Q1 </div>
           <div id="question"></div>
         </div>
         <div id="options"></div>
