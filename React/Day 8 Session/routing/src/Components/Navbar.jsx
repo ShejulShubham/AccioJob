@@ -33,6 +33,14 @@ export default function Navbar() {
       >
         Contact Us
       </NavLink>
+      <NavLink
+        to={"/unknown"}
+        style={({ isActive }) => ({
+          color: isActive ? "red" : "white",
+        })}
+      >
+        404
+      </NavLink>
     </nav>
   );
 }
