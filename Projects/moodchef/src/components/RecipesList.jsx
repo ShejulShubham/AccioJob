@@ -57,7 +57,6 @@ export default function RecipesList({ activeMood }) {
   return (
     <div className="glass-card">
       <h2>Recommended Recipes</h2>
-      <p>Active Mood: {activeMood}</p>
 
       {loading && <p className="loader">Loading recipes...</p>}
 

@@ -1,5 +1,4 @@
 export default function RecipeCard({ recipe }) {
-  // TODO: Fix the styling
   return (
     <div className="recipe-card">
       {/* TODO: Add dynamic image */}
@@ -10,7 +9,7 @@ export default function RecipeCard({ recipe }) {
 
         {/* TODO: Add description */}
         {/* TODO: Add view more button */}
-        <button className="" >View More</button>
+        <button className="recipe-btn">View More</button>
       </div>
     </div>
   );

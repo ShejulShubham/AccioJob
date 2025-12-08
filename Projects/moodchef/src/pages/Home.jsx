@@ -14,7 +14,6 @@ export default function Home() {
   return (
     <div className="container">
       <Header />
-      <h2>Active Mood: {activeMood}</h2>
 
       {/* Mood Selection Component */}
       <MoodSelector activeMood={activeMood} handleActiveMood={changeMood} />

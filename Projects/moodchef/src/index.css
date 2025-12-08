@@ -48,7 +48,7 @@ body {
   margin: 20px 0;
 }
 
-.mood-btn {
+.mood-btn, .recipe-btn {
   padding: 10px 20px;
   border-radius: 10px;
   background: white;
@@ -58,11 +58,11 @@ body {
   transition: 0.2s;
 }
 
-.mood-btn:hover {
+.mood-btn:hover, .recipe-btn:hover {
   transform: translateY(-3px);
 }
 
-.active-mood {
+.active-mood, .recipe-btn {
   background: #8e44ad;
   color: white;
 }
