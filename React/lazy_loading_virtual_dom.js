@@ -1,13 +1,21 @@
 import { useState } from "react";
 
 export default function Home() {
-  
-  // Lazy Initialization - pass a function so it will only be called at first time meaning while rending and not on re-render
-  
-    const [value, setValue] = useState(() => {
-    console.log("Heavy calculation...");
-    return expensiveFunction();
-  });
+  // Lazy Initialization - pass a function so it will only be called rending and not on re-render.
+
+  const [value, setValue] = useState(() => {
+                                              console.log("Heavy calculation...");
+                                              return expensiveFunction();
+                                            });
+
+  function expensiveFunction(){
+    let number = 0;
+    for(let i = 0; i < 10000; i++){
+      number += i;
+    }
+
+    return number;
+  }
 
   return (
     <>
