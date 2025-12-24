@@ -14,10 +14,9 @@ const products = [
 export default function ProductSearch() {
   const [showPreview, setShowPreview] = useState(false);
   const [search, setSearch] = useState("");
-  // const searchRef = useRef("");
 
   const filteredProduct = useMemo(() => {
-    console.log("filter ran!")
+    console.log("filter ran!");
     return products.filter((p) =>
       p.toLowerCase().includes(search.toLowerCase())
     );
@@ -25,7 +24,6 @@ export default function ProductSearch() {
 
   function handleSearch(e) {
     setSearch(e.target.value);
-    // searchRef.current = e.target.value;
   }
 
   return (

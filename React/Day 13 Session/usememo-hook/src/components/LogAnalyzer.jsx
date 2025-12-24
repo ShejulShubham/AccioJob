@@ -15,7 +15,6 @@ export default function LogAnalyzer() {
   const [showTips, setShowTips] = useState(false);
   const count = useMemo(countWarns, []);
 
-  // TODO: Complete this component
   function countWarns() {
     let warns = 0;
     let errors = 0;
