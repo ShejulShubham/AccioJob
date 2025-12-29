@@ -15,8 +15,6 @@ export default function Tollbar() {
     console.log("Printing...");
   }, []);
 
-  // TODO: Finish this trigger message
-
   function trigger() {
     setShowText(true);
     setTimeout(() => {
