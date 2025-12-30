@@ -1,0 +1,32 @@
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: shubham
+      MYSQL_PASSWORD: shejul
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+
+
+# First come to docker-compose file directory
+
+# # Start command
+# docker compose up -d
+
+
+# # Stop command
+# docker compose down
+
+# # access container on terminal
+# docker compose exec mysql mysql -u shubham -p
+# docker compose exec mysql mysql -u root -p
