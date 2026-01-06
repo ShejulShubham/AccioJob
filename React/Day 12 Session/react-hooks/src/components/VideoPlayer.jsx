@@ -3,22 +3,11 @@ import { useEffect, useRef } from "react";
 export default function VideoPlayer() {
   const playerRef = useRef(null);
 
-//   TODO: Try to implement auto video play
-
-  useEffect(() => {
-    const playPromise = playerRef.current.play();
-    if (playPromise !== undefined) {
-      console.log("Auto play started...");
-      playPromise
-        .then(() => {
-          // Autoplay started!
-        })
-        .catch((error) => {
-          // Autoplay was prevented.
-          // Show a "Play" button so the user can start playback.
-        });
-    }
-  }, []);
+  useEffect(()=>{
+    // Unless muted the video will not auto play
+    playerRef.current.muted = true;
+    playerRef.current.play();
+  }, [])
 
   return (
     <>
