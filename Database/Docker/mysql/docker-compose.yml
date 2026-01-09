@@ -16,6 +16,8 @@ services:
 
 volumes:
   mysql_data:
+    external: true
+    name: docker_mysql_data
 
 
 # First come to docker-compose file directory
