@@ -7,3 +7,5 @@ temporary.js
 */test.*
 practice.html
 DSA Practice
+*node_modules*
+*.env*
