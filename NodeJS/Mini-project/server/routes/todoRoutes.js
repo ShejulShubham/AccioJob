@@ -58,4 +58,25 @@ router.patch("/:id", async (request, response) => {
   }
 });
 
+router.delete("/:id", async (request, response)=>{
+
+  try {
+    const {id} = request.params;
+
+    const deleted = await Todo.findByIdAndDelete(id);
+
+    if(!deleted){
+      response.status(404).json({message: "todo does not exist!"});
+    }
+
+    response.status(200).json({message: "deleted todo", todo: deleted})
+
+  }catch(error){
+    console.log("Error occurred while deleting todo", error);
+    response.status(500).json({message: "SERVER ERROR"})
+  }
+
+
+})
+
 export default router;
