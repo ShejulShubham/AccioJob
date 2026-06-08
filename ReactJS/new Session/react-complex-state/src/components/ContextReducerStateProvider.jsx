@@ -13,6 +13,8 @@ function reducer(state, action) {
       return { ...state, counter: state.counter + 1 };
     case "decrement":
       return { ...state, counter: state.counter - 1 };
+    case "reset":
+      return initialState;
     default:
       return state;
   }

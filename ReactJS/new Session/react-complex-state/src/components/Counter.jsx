@@ -21,6 +21,13 @@ export default function Counter() {
       >
         Decrement
       </button>
+      <button
+        onClick={() => {
+          dispatch({ type: "reset" });
+        }}
+      >
+        Reset
+      </button>
     </>
   );
 }
