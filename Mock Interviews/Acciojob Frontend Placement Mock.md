@@ -2,7 +2,7 @@
 
 ## Coding questions
 1. sort array based on frequency.
-https://www.geeksforgeeks.org/problems/sorting-elements-of-an-array-by-frequency
+https://www.geeksforgeeks.org/problems/sorting-elements-of-an-array-by-frequency/1
 
 https://leetcode.com/problems/sort-array-by-increasing-frequency/description
 

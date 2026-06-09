@@ -4,6 +4,8 @@ import { deposit, withdraw } from "./store";
 import "./App.css";
 import CartList from "./components/CartList";
 import CartSummary from "./components/CartSummary";
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
 
 function App() {
   // const [amount, setAmount] = useState("");
@@ -75,6 +77,14 @@ function App() {
 
       <CartList />
       <CartSummary />
+
+        // Need to check this
+      <div style={{ padding: "20px" }}>
+        <h1 style={{ textAlign: "center" }}>React Redux Practice</h1>
+        <TodoList />
+        <br />
+        <TodoForm />
+      </div>
     </>
   );
 }
