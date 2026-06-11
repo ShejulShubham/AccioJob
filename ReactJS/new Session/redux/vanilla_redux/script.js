@@ -30,9 +30,12 @@ function todoReducers(state, action) {
       return newState;
     }
     case UPDATETODO: {
-        const todo = state.find((todo)=>todo.id === action.payload.id);
-        todo.task = action.payload.task;
-        return state;
+        // const todo = state.find((todo)=>todo.id === action.payload.id);
+        // todo.task = action.payload.task;
+        const filtered = state.filter((todo)=>todo.id !== action.payload.id);
+        const newTodo = {id: action.payload.id, task: action.payload.task}
+        const newState = [...filtered, newTodo];
+        return newState;
     }
     default:
       return state;
@@ -47,5 +50,5 @@ dispatch(createTodo("meet friends"));
 console.log(getState());
 dispatch(deleteTodo(2));
 console.log(getState());
-dispatch(updateTodo({id: 1, task: "find girlfiend"}));
+dispatch(updateTodo({id: 1, task: "find girlfriend"}));
 console.log(getState());
