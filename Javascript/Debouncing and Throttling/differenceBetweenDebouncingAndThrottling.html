@@ -37,13 +37,13 @@
         let tC = 0;
         let dC = 0;
 
-        let isScrolling = true;
-
+        
         const normalCount = () => {
             nC++;
             normalDiv.textContent = `Normal Count: ${nC}`;
         };
-
+        
+        let isScrolling = true;
         function throttleCount() {
             if (isScrolling) {
                 tC++;
@@ -55,8 +55,8 @@
             }
         }
 
-        let interval;
-
+        
+        let interval = null;
         function debounceCount() {
             clearTimeout(interval);
 
