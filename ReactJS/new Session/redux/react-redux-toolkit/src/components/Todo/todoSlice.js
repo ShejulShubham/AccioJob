@@ -13,8 +13,8 @@ const todoSlice = createSlice({
         state.splice(index, 1);
     },
     updateGivenTodo(state, action){
-        const todo = state.find((todo)=> todo.id == action.payload.id);
-        todo.task = action.payload.task.trim();
+        const updatedTodo = {id: action.payload.id, task: action.payload.task}
+        state.push(updatedTodo);
     }
   },
 });

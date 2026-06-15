@@ -9,18 +9,14 @@ function App() {
 
   const [updateTodo, setUpdateTodo] = useState(null);
 
-  function handleUpdateTodo(todo) {
-    setUpdateTodo(todo);
-  }
-
   return (
     <>
       <h1>React Redux day 3</h1>
       <Counter />
       <br />
       <br />
-      {updateTodo ? <TodoForm updateTodo={updateTodo} /> : <TodoForm />}
-      <TodoList handleUpdate={handleUpdateTodo} />
+      {updateTodo ? <TodoForm updateTodo={updateTodo} setUpdateTodo={setUpdateTodo}/> : <TodoForm />}
+      <TodoList setUpdateTodo={setUpdateTodo} />
     </>
   )
 }

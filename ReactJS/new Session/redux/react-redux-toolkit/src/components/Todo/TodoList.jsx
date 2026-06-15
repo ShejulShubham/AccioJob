@@ -1,10 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { addTodo, removeTodo } from "./todoSlice";
 
-export default function TodoList({ handleUpdate }) {
+export default function TodoList({ setUpdateTodo }) {
 
     const todos = useSelector(state => state.todo);
-
 
 
     return (
@@ -13,7 +12,7 @@ export default function TodoList({ handleUpdate }) {
             {todos.length == 0 && <p>Nothing to show for!</p>}
             <ul >
                 {todos.map((todo) => (
-                    <Todo key={todo.id} todo={todo} handleUpdate={handleUpdate} />
+                    <Todo key={todo.id} todo={todo} setUpdateTodo={setUpdateTodo} />
                 ))}
 
             </ul>
@@ -21,20 +20,20 @@ export default function TodoList({ handleUpdate }) {
     )
 }
 
-function Todo({ todo, handleUpdate }) {
+function Todo({ todo, setUpdateTodo }) {
 
     const dispatch = useDispatch();
 
     function handler() {
-        removeTodo(todo.id);
-        handleUpdate(todo);
+        dispatch(removeTodo(todo.id));
+        setUpdateTodo(todo);
     }
 
-return (
-    <li className="flex gap-2">
-        <p>{todo.task}</p>
-        <button className="bg-lightyellow" onClick={handler}>Update</button>
-        <button className="bg-lightcoral" onClick={() => dispatch(removeTodo(todo.id))} >Remove</button>
-    </li>
-)
+    return (
+        <li>
+            <p className="inline mr-1">{todo.task}</p>
+            <button className="bg-lightyellow mr-1" onClick={handler}>Update</button>
+            <button className="bg-lightcoral mr-1" onClick={() => dispatch(removeTodo(todo.id))} >Remove</button>
+        </li>
+    )
 }
