@@ -1,0 +1,120 @@
+body {
+  background-color: black;
+  color: whitesmoke;
+}
+
+div {
+  padding: 20px;
+}
+
+button {
+  /* color: white; */
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 0px solid black;
+  transition: transform 0.3s ease;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+}
+
+input:focus {
+  border: 1px solid lightsteelblue;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: translateY(2px);
+}
+
+.color-cadetblue {
+  color: cadetblue;
+}
+
+.bg-white {
+  background-color: white;
+  color: black;
+}
+
+.bg-grey {
+  background-color: darkgrey;
+}
+
+.bg-lightslategray {
+  background-color: lightslategray;
+}
+
+.bg-cadetblue {
+  background-color: cadetblue;
+}
+
+.bg-lightblue {
+  background-color: lightblue;
+}
+
+.bg-lightcoral {
+  background-color: lightcoral;
+}
+
+.bg-lightyellow {
+  background-color: lightyellow;
+}
+
+.flex {
+  display: flex;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.gap-1 {
+  gap: 8px;
+}
+.gap-2 {
+  gap: 16px;
+}
+.gap-3 {
+  gap: 24px;
+}
+.gap-4 {
+  gap: 32px;
+}
+.gap-5 {
+  gap: 48px;
+}
+
+.p-1 {
+  padding: 8px;
+}
+.p-2 {
+  padding: 16px;
+}
+.p-3 {
+  padding: 24px;
+}
+.p-4 {
+  padding: 32px;
+}
+.p-5 {
+  padding: 48px;
+}
+
+.mr-1 {
+  margin-right: 8px;
+}
