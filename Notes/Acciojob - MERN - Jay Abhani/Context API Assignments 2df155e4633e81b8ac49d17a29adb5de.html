@@ -1,0 +1,959 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Context API Assignments</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-81b8-ac49-d17a29adb5de" class="page sans"><header><h1 class="page-title" dir="auto">Context API Assignments</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8107-8965-ca9878153cc3" class="">✅ ASSIGNMENT 1 — Global Language Selector</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e8-b285-fc43fe725a89" class="">🎯 Concepts Tested</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8121-8c68-cf817f1b9206" class="bulleted-list"><li style="list-style-type:disc"><code>createContext</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c4-a3c9-e179f76dc71e" class="bulleted-list"><li style="list-style-type:disc"><code>Context.Provider</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8192-86e1-eaf12e12a4a3" class="bulleted-list"><li style="list-style-type:disc"><code>useContext</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811e-8c5e-db98b75ec12d" class="bulleted-list"><li style="list-style-type:disc">Avoiding prop drilling</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817a-9212-fa8c9877e201" class="bulleted-list"><li style="list-style-type:disc">Single global state</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f6-aeb2-daa761b95e4d"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81bd-a4db-c5651da57e1d" class="">🧠 Problem Statement</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cf-be17-d98aa5c6984b" class="">You need to build a <strong>Global Language Selector</strong> using <strong>React Context API</strong>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81de-8150-fc5535e305be" class="">The application supports two languages:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8181-adff-df8e3d52bcac" class="bulleted-list"><li style="list-style-type:disc"><strong>English</strong> (<code>&quot;en&quot;</code>)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819c-b83a-dc243656b408" class="bulleted-list"><li style="list-style-type:disc"><strong>Spanish</strong> (<code>&quot;es&quot;</code>)</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8163-867c-f215c494e23d" class="">Once the language is changed:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8175-b99c-f19bc7bad774" class="bulleted-list"><li style="list-style-type:disc">Any component in the app should be able to access the selected language</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81be-ad12-f6f15a7ebcd1" class="bulleted-list"><li style="list-style-type:disc">No props should be passed manually between components</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816d-b6c1-ff94247af98f"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a1-974a-d76bab8f25cd" class="">📂 Expected Folder Structure</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8171-90a3-c09a22d73397" class="">Students must create the following structure:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2df155e4-633e-81a8-85ce-faf8de5d058b" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">src/
+├── context/
+│   ├── LanguageContext.js
+│   └── LanguageProvider.js
+│
+├── components/
+│   └── Greeting.jsx
+│
+└── App.jsx
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8130-b8c6-e5f5c8120395"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-814f-9a05-c27d11c2cb8e" class="">📝 Detailed Instructions</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81fe-90ff-cf8cf7e4da20" class="numbered-list" start="1"><li>Create a <code>LanguageContext</code> using <code>createContext</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8180-9d59-f34815c4a7c6" class="numbered-list" start="2"><li>Create a <code>LanguageProvider</code> component:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e2-bbeb-c87ebe04fa78" class="bulleted-list"><li style="list-style-type:disc">Maintain a state called <code>language</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8107-838c-f987b647a8a8" class="bulleted-list"><li style="list-style-type:disc">Default value should be <code>&quot;en&quot;</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8107-98c2-e8d4799e6be0" class="bulleted-list"><li style="list-style-type:disc">Create a function <code>toggleLanguage</code> that switches between <code>&quot;en&quot;</code> and <code>&quot;es&quot;</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818c-b52c-c67296929ea4" class="bulleted-list"><li style="list-style-type:disc">Pass both <code>language</code> and <code>toggleLanguage</code> through the <code>Provider</code> value.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81d5-a030-f5ddceb9cba1" class="numbered-list" start="3"><li>Wrap the entire application (<code>App</code>) with <code>LanguageProvider</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-812d-b70b-c807b5c1c66e" class="numbered-list" start="4"><li>Inside <code>Greeting</code> component:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8171-8b76-c01353d9e62e" class="bulleted-list"><li style="list-style-type:disc">Use <code>useContext</code> to access the current language.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8155-917c-cc2ccb7ede78" class="bulleted-list"><li style="list-style-type:disc">Display:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8175-8ebd-f5723a1b49d6" class="bulleted-list"><li style="list-style-type:circle"><strong>&quot;Hello&quot;</strong> when language is <code>&quot;en&quot;</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8191-89df-f578657351b7" class="bulleted-list"><li style="list-style-type:circle"><strong>&quot;Hola&quot;</strong> when language is <code>&quot;es&quot;</code></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ef-a678-f0b31687e6c9" class="bulleted-list"><li style="list-style-type:disc">Add a button to change the language using <code>toggleLanguage</code>.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8128-8530-d595be99277d" class="numbered-list" start="5"><li>Do <strong>not</strong> pass any props between components.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8107-ab34-d397ff2ad6fd" class="numbered-list" start="6"><li>The language state must be <strong>global</strong> and controlled only via context.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818f-bc10-d926a1e07266"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8118-907a-c654dc18a77b" class="">✅ Expected Output (Functional Behavior)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8189-aed7-e26e6345e97c" class="bulleted-list"><li style="list-style-type:disc">App loads with text: <strong>Hello</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f3-957e-ea26ff7739fc" class="bulleted-list"><li style="list-style-type:disc">Clicking the button switches text to: <strong>Hola</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b3-8778-d949f0f52042" class="bulleted-list"><li style="list-style-type:disc">Clicking again switches back to: <strong>Hello</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8151-866c-c1c69995c490" class="bulleted-list"><li style="list-style-type:disc">No props are used anywhere in the app</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816f-b9c8-dabdabd3ead5"/></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810a-89d0-e8d827b6ef56" class=""><a href="https://codesandbox.io/p/sandbox/proud-platform-vtxn88">https://codesandbox.io/p/sandbox/proud-platform-vtxn88</a></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818a-8ed5-f3ad174097f6" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817e-a381-eeeeaa8abfc4" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8138-a568-de368e98569b" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8107-ae9d-ee7e827b2094" class="">✅ ASSIGNMENT 2 — Global Notification System</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-817e-8490-cb264571d4f3" class="">🎯 Concepts Tested</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e6-90aa-fc8eab75d6e8" class="bulleted-list"><li style="list-style-type:disc"><strong>Part 2</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8103-80a0-f570b359fd25" class="bulleted-list"><li style="list-style-type:disc">Global state using Context</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815c-8c4e-c48e0c8df6f6" class="bulleted-list"><li style="list-style-type:disc">One context → multiple components</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817b-90f0-f9fce29e108f" class="bulleted-list"><li style="list-style-type:disc">Conditional rendering based on global state</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81dc-b785-d9f626572858" class="bulleted-list"><li style="list-style-type:disc">No prop drilling</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812d-a2f3-e9ed14438da3"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81e7-b8fc-c248943058c0" class="">🧠 Problem Statement</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8142-a140-dfe3dc7d3478" class="">You need to build a <strong>Global Notification System</strong> using React Context API.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8122-b3ef-d4dfe62bfe14" class="">The application should have:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8184-aa0e-f49e7699aa02" class="bulleted-list"><li style="list-style-type:disc">One component that can <strong>trigger</strong> a notification</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81bd-994b-ea1eedcb0057" class="bulleted-list"><li style="list-style-type:disc">Another component that can <strong>display and clear</strong> the notification</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8130-bc87-d580c16083be" class="bulleted-list"><li style="list-style-type:disc">The notification state should be <strong>global</strong></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c4-98c8-dc07d0b50755"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a3-8acc-fd8bbee5a9e9" class="">📂 Expected Folder Structure</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8169-a32b-cb5c4fd4197b" class="">Students must create the following structure:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8121-987b-db2fb7ec7425" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">src/
+├── context/
+│   ├── NotificationContext.js
+│   └── NotificationProvider.js
+│
+├── components/
+│   ├── NotificationControls.jsx
+│   └── NotificationBar.jsx
+│
+└── App.jsx
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816b-aa1b-f721f3e52749"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8115-9a0e-dfe66b1d9ddf" class="">📝 Detailed Instructions</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81f8-b55c-e74d8a0dfc30" class="numbered-list" start="1"><li>Create a <code>NotificationContext</code> using <code>createContext</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8121-bb97-d13a95f2c20d" class="numbered-list" start="2"><li>Create a <code>NotificationProvider</code> component:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8196-b8b7-d7c6833c6c0b" class="bulleted-list"><li style="list-style-type:disc">Maintain a state called <code>message</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81db-ac41-f7f15352396e" class="bulleted-list"><li style="list-style-type:disc">Initial value should be <code>null</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817c-9927-fbf645c8f1e0" class="bulleted-list"><li style="list-style-type:disc">Create two functions:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8150-a4da-dd18d094d2d0" class="bulleted-list"><li style="list-style-type:circle"><code>showMessage(text)</code> → sets the notification message</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fa-94f3-dace6a0908a5" class="bulleted-list"><li style="list-style-type:circle"><code>clearMessage()</code> → clears the notification</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8124-b3ee-e179ba714012" class="bulleted-list"><li style="list-style-type:disc">Pass <code>message</code>, <code>showMessage</code>, and <code>clearMessage</code> through the Provider.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81b0-ab45-f6b3794d35ff" class="numbered-list" start="3"><li>Wrap the entire application (<code>App</code>) with <code>NotificationProvider</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8146-9bbd-d677983ef22f" class="numbered-list" start="4"><li>In <code>NotificationControls</code> component:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8115-967d-f2cc0580caac" class="bulleted-list"><li style="list-style-type:disc">Add a button that triggers a notification message using <code>showMessage</code>.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8150-bf5c-c50915e22852" class="numbered-list" start="5"><li>In <code>NotificationBar</code> component:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-814b-b76c-d4c689f4c0f5" class="bulleted-list"><li style="list-style-type:disc">Read the <code>message</code> from context.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d9-acb3-f00b12bb6d22" class="bulleted-list"><li style="list-style-type:disc">If <code>message</code> is <code>null</code>, render nothing.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818a-987f-f76065af2251" class="bulleted-list"><li style="list-style-type:disc">If a message exists, display it along with a button to clear it.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8169-879f-ec6b5bb76dd5" class="numbered-list" start="6"><li>Do <strong>not</strong> pass props between <code>NotificationControls</code> and <code>NotificationBar</code>.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818a-9174-fe3a80c959b8"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8149-a9c4-ebabfc9119a2" class="">✅ Expected Output (Functional Behavior)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8146-9959-ec42a160ad4f" class="bulleted-list"><li style="list-style-type:disc">App loads with <strong>no notification visible</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819a-af33-f5fb5847a1c2" class="bulleted-list"><li style="list-style-type:disc">Clicking the button shows a notification message</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8175-bb94-ccc83d43c250" class="bulleted-list"><li style="list-style-type:disc">Clicking the close button removes the notification</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8175-9dc9-ce5c21571c9c" class="bulleted-list"><li style="list-style-type:disc">Notification state is shared globally</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a5-b7a5-da5729dc0652"/></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8104-a6d6-c96c1d89f42c" class=""><a href="https://codesandbox.io/p/sandbox/global-notification-system-f9t74s">https://codesandbox.io/p/sandbox/global-notification-system-f9t74s</a></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811e-9725-d4e9c3639468" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ed-9d8c-c1c3309a8b8b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c2-aa31-f5bf267c49ff" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-9e67-fe98fcf167e6" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81a8-b139-cee26236bf1b" class="">✅ ASSIGNMENT 4 — Global Counter Across Multiple Components</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d2-89ac-dc7364d93fbf" class="">🎯 Concepts Tested</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d9-b236-d2da46d9064d" class="bulleted-list"><li style="list-style-type:disc"><strong>Part 1</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810c-a8e8-f67726e82129" class="bulleted-list"><li style="list-style-type:disc">Single Context creation</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f3-8786-f4459ce07ebd" class="bulleted-list"><li style="list-style-type:disc">Global state sharing</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ae-97cf-f81830f20829" class="bulleted-list"><li style="list-style-type:disc">Multiple components consuming the <strong>same context</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8165-9071-c6c04564b83e" class="bulleted-list"><li style="list-style-type:disc">No prop drilling</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8133-b3b6-f79ab8d44e14"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8162-94dd-df6523bfa9ed" class="">🧠 Problem Statement</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a7-b8a9-e33e282874c3" class="">You need to build a <strong>Global Counter System</strong> using <strong>React Context API</strong>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8138-a513-fb53db2a544c" class="">The application should have:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d2-9c77-d0370716c9b8" class="bulleted-list"><li style="list-style-type:disc">One global counter value</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81eb-afb3-e7329b52557a" class="bulleted-list"><li style="list-style-type:disc">One component to <strong>display</strong> the counter</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814f-aa95-c9b731de943a" class="bulleted-list"><li style="list-style-type:disc">Another component to <strong>update</strong> the counter</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8177-88bb-e44ce8304cea" class="">Both components must always stay in sync using <strong>context</strong>, not props.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8107-91ab-d88f10a3b4b7"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8135-8c9f-f93b6cf3678a" class="">📂 Expected Folder Structure</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d5-81cd-e1a4d7aa8a58" class="">Students must create the following structure:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8159-ad69-ea80541e515a" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">src/
+├── context/
+│   ├── CounterContext.js
+│   └── CounterProvider.js
+│
+├── components/
+│   ├── CounterDisplay.jsx
+│   └── CounterControls.jsx
+│
+└── App.jsx
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8184-af4a-ce7240b76638"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8161-b68c-d2923a88cf5e" class="">📝 Detailed Instructions (For Students)</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-814a-a2c3-c7b94ccf3c1b" class="numbered-list" start="1"><li>Create a <code>CounterContext</code> using <code>createContext</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8148-89fe-d30ea242f5e0" class="numbered-list" start="2"><li>Create a <code>CounterProvider</code> component:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-815d-bc70-eba2813d843b" class="bulleted-list"><li style="list-style-type:disc">Maintain a state called <code>count</code> (number).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c1-b680-f2d06c2e453a" class="bulleted-list"><li style="list-style-type:disc">Initial value should be <code>0</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813f-b47c-e266dc7ba1c7" class="bulleted-list"><li style="list-style-type:disc">Create two functions:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-813f-a015-f21ccf57ca6c" class="bulleted-list"><li style="list-style-type:circle"><code>increment()</code> → increases count by 1</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818c-95e2-cdfba3cb1b81" class="bulleted-list"><li style="list-style-type:circle"><code>decrement()</code> → decreases count by 1</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815b-a756-c6723ff69beb" class="bulleted-list"><li style="list-style-type:disc">Pass <code>count</code>, <code>increment</code>, and <code>decrement</code> via the Provider value.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8101-b636-c5a0c1e4731a" class="numbered-list" start="3"><li>Wrap the entire application (<code>App</code>) with <code>CounterProvider</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8116-b699-d83256d1c17e" class="numbered-list" start="4"><li>In <code>CounterDisplay</code> component:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8159-ad06-e5bf7308775d" class="bulleted-list"><li style="list-style-type:disc">Use <code>useContext</code> to read and display the counter value.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-818a-9381-debfb572ca90" class="numbered-list" start="5"><li>In <code>CounterControls</code> component:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8113-9144-da203c78b648" class="bulleted-list"><li style="list-style-type:disc">Use <code>useContext</code> to access <code>increment</code> and <code>decrement</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b3-9e11-ed761a8a6c3f" class="bulleted-list"><li style="list-style-type:disc">Add buttons to increase and decrease the counter.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-819e-b8c4-effefd5ed4d5" class="numbered-list" start="6"><li>Do <strong>not</strong> pass props between <code>CounterDisplay</code> and <code>CounterControls</code>.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8100-99ff-f12ad00ae7c2"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8167-bf6e-dc3082be5bda" class="">✅ Expected Output (Functional Behavior)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814c-9e25-cb57e51b4ff4" class="bulleted-list"><li style="list-style-type:disc">App loads showing counter value <code>0</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8100-aee0-d47e0d545add" class="bulleted-list"><li style="list-style-type:disc">Clicking <strong>Increase</strong> increments the counter</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f7-aa45-f9ce4f5e8734" class="bulleted-list"><li style="list-style-type:disc">Clicking <strong>Decrease</strong> decrements the counter</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812a-802d-f4347d8c14a2" class="bulleted-list"><li style="list-style-type:disc">Both components always show the same updated value</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c9-9d8d-eeba3195143a" class="bulleted-list"><li style="list-style-type:disc">No props are used anywhere</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d2-a628-fbee04bd918e"/></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8141-8425-f7b5974b6913" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8142-a3ec-c1d7ea6b55d8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-ba38-e6b4f7e01d74" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d1-826f-c6231e922e0e" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81f8-985d-fbdc64bc98d3" class="">✅ ASSIGNMENT 3 — Application Settings Panel</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b9-a6b4-fa306f4bb804" class="">🎯 Concepts Tested</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c0-8bbb-e934839fdf8e" class="bulleted-list"><li style="list-style-type:disc"><strong>Part 3</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8182-9c61-e4ac54813692" class="bulleted-list"><li style="list-style-type:disc">Multiple contexts in one app</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814c-9cf3-c9c3bae5464d" class="bulleted-list"><li style="list-style-type:disc">Separation of concerns</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d1-823d-c7925571bb3b" class="bulleted-list"><li style="list-style-type:disc">One component consuming <strong>more than one context</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b0-ab26-c8850e74e8b3" class="bulleted-list"><li style="list-style-type:disc">No prop drilling</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8181-b5fb-e7a5604c5031"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-816d-8ccf-c89b4e1e9429" class="">🧠 Problem Statement</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815e-b507-fe43911acd65" class="">You need to build an <strong>Application Settings Panel</strong> using <strong>two independent global contexts</strong>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8123-9769-f2cd9e8f449e" class="">The app has two global settings:</p></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8167-9ff6-c1ea43ab3083" class="numbered-list" start="1"><li><strong>Font Size</strong><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8115-b0c0-ecd769c78223" class="bulleted-list"><li style="list-style-type:disc">Stored as a number (e.g. <code>14</code>, <code>16</code>, <code>18</code>)</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81ce-aae7-f50ba53f635a" class="numbered-list" start="2"><li><strong>Layout Mode</strong><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81bc-ad7e-fde32ee580ff" class="bulleted-list"><li style="list-style-type:disc"><code>&quot;grid&quot;</code> or <code>&quot;list&quot;</code></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-af17-d303c095ab58" class="">Both settings must:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8195-b25e-d73aba54ae8b" class="bulleted-list"><li style="list-style-type:disc">Be managed in <strong>separate contexts</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815f-b8cf-ef3a6a525943" class="bulleted-list"><li style="list-style-type:disc">Be available globally</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8106-bfd2-df6a99eb7acd" class="bulleted-list"><li style="list-style-type:disc">Be used together inside the same component</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815c-aaf4-d4e4bc503358"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ac-ad75-d00218246608" class="">📂 Expected Folder Structure</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a3-8ab2-ead95c5cbf03" class="">Students must create the following structure:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8111-9fb4-de9411b4c5fe" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">src/
+├── context/
+│   ├── FontContext.js
+│   ├── FontProvider.js
+│   ├── LayoutContext.js
+│   └── LayoutProvider.js
+│
+├── components/
+│   └── SettingsPanel.jsx
+│
+└── App.jsx
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8184-be77-f38273f28317"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8153-aca7-de503509aa35" class="">📝 Detailed Instructions (For Students)</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81ff-90b1-fbf65ad46d51" class="numbered-list" start="1"><li>Create <strong>FontContext</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a9-a119-c2c566230eee" class="bulleted-list"><li style="list-style-type:disc">Use <code>createContext</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8161-9d3a-f135832afcfb" class="bulleted-list"><li style="list-style-type:disc">Maintain a <code>fontSize</code> state (number).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818b-9022-e0ccbb82deba" class="bulleted-list"><li style="list-style-type:disc">Create a function <code>increaseFont</code> to increase font size.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81ce-8bbe-d64e175c9a58" class="numbered-list" start="2"><li>Create <strong>LayoutContext</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8140-8feb-d776f3d4b26e" class="bulleted-list"><li style="list-style-type:disc">Use <code>createContext</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8183-86aa-d77b96350477" class="bulleted-list"><li style="list-style-type:disc">Maintain a <code>layout</code> state (<code>&quot;grid&quot;</code> or <code>&quot;list&quot;</code>).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8180-bb0f-cd94bd7b8e1e" class="bulleted-list"><li style="list-style-type:disc">Create a function <code>toggleLayout</code> to switch layout.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-816c-870e-ca3c2bbabcd4" class="numbered-list" start="3"><li>Wrap the application with <strong>both providers</strong>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8150-8168-f66328500347" class="numbered-list" start="4"><li>Inside <code>SettingsPanel</code> component:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a3-87bc-fdbd965a0d85" class="bulleted-list"><li style="list-style-type:disc">Use <code>useContext</code> to consume <strong>FontContext</strong>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813c-8a41-c1435c0945f4" class="bulleted-list"><li style="list-style-type:disc">Use <code>useContext</code> to consume <strong>LayoutContext</strong>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8156-8217-dbae0afc4ddd" class="bulleted-list"><li style="list-style-type:disc">Display:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d3-ad1a-e7b61577e433" class="bulleted-list"><li style="list-style-type:circle">Current font size</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fb-a17c-e4ca42f496d4" class="bulleted-list"><li style="list-style-type:circle">Current layout mode</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819e-a6e6-ef0f3062ffaf" class="bulleted-list"><li style="list-style-type:disc">Add buttons to update each setting independently.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8114-8825-f243fbd36c93" class="numbered-list" start="5"><li>Do <strong>not</strong> combine both states into a single context.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8197-87dc-e93d215c1bfa" class="numbered-list" start="6"><li>Do <strong>not</strong> pass any props between components.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8137-a787-e155213932a2"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-812e-b889-c9de50d6ae05" class="">✅ Expected Output (Functional Behavior)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fa-9d2d-ff6416155519" class="bulleted-list"><li style="list-style-type:disc">App shows current font size and layout mode</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e2-90ff-e6dd64aba4ac" class="bulleted-list"><li style="list-style-type:disc">Clicking <strong>Increase Font</strong> increases font size globally</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8130-acb2-e20dc33b8fc2" class="bulleted-list"><li style="list-style-type:disc">Clicking <strong>Toggle Layout</strong> switches between <code>grid</code> and <code>list</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8163-a56c-e0174b828a2c" class="bulleted-list"><li style="list-style-type:disc">Both settings work independently</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f9-98e9-cdc175eb8019" class="bulleted-list"><li style="list-style-type:disc">One component (<code>SettingsPanel</code>) consumes two contexts cleanly</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e1-99c5-da196539a1af"/></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a7-9975-edafc9b8eea8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-90fd-cbc34c1d1bf7" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8106-89eb-d1c49f6757d9" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d3-a33c-c2737f329637" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f6-8667-f6aeed340d3b" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81e8-bbd8-ed4bb750bb00" class="">✅ ASSIGNMENT 5 — Global Feature Toggle System</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8144-8a8a-e12bfb8b2fdb" class="">🎯 Concepts Tested</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815b-9990-fe7386cac78b" class="bulleted-list"><li style="list-style-type:disc">Global state using Context</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8152-b879-c96c13f6b3fa" class="bulleted-list"><li style="list-style-type:disc">Conditional rendering based on global state</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8103-8e03-ef6f80402dbc" class="bulleted-list"><li style="list-style-type:disc">One context → multiple consumers</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81cb-815d-dc9008e98f7b" class="bulleted-list"><li style="list-style-type:disc">No prop drilling</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fe-bcbe-dbbf1d84a2da"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8159-ad67-d5bcbbef2bb3" class="">🧠 Problem Statement</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d0-a3c9-d240374a8934" class="">You need to build a <strong>Global Feature Toggle System</strong> using <strong>React Context API</strong>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8182-86d1-cf9fce214f85" class="">The application has a global feature flag:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a1-ac6c-c227e9a47644" class="bulleted-list"><li style="list-style-type:disc"><strong>Advanced Mode</strong> (<code>true / false</code>)</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-84b3-e165961c5217" class="">This flag should:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818e-80c9-f5c4c02ac411" class="bulleted-list"><li style="list-style-type:disc">Be toggled from one component</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b2-87bf-ff042903cea6" class="bulleted-list"><li style="list-style-type:disc">Be read from another component</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8149-ae29-e4afbaa81d7d" class="bulleted-list"><li style="list-style-type:disc">Control what content is shown in the UI</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d4-97f3-ef67ceb70591"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8143-a4f7-fe869f8335b6" class="">📂 Expected Folder Structure</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-bd95-ed1cc5e5cdf7" class="">Students must create the following structure:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8147-83d4-c74ef851ccba" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">src/
+├── context/
+│   ├── FeatureContext.js
+│   └── FeatureProvider.js
+│
+├── components/
+│   ├── FeatureToggle.jsx
+│   └── FeatureStatus.jsx
+│
+└── App.jsx
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b0-89e6-dc7a1e7f89af"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-815a-928a-d242939092ef" class="">📝 Detailed Instructions (For Students)</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-812f-9486-d924be5fe8ab" class="numbered-list" start="1"><li>Create a <code>FeatureContext</code> using <code>createContext</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81c1-8293-ead480abac71" class="numbered-list" start="2"><li>Create a <code>FeatureProvider</code> component:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-812d-a7ff-f28b41c4d507" class="bulleted-list"><li style="list-style-type:disc">Maintain a boolean state called <code>isAdvanced</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813b-a045-ea146e20d44d" class="bulleted-list"><li style="list-style-type:disc">Initial value should be <code>false</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f6-b5ba-c59b68d0ee11" class="bulleted-list"><li style="list-style-type:disc">Create a function <code>toggleFeature()</code> to switch the value.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f3-af0b-fb404c9bee7d" class="bulleted-list"><li style="list-style-type:disc">Pass <code>isAdvanced</code> and <code>toggleFeature</code> via the Provider value.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8103-b0fe-dd9679811815" class="numbered-list" start="3"><li>Wrap the entire application (<code>App</code>) with <code>FeatureProvider</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8110-a43e-e6958e6ac80b" class="numbered-list" start="4"><li>In <code>FeatureToggle</code> component:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f3-90b3-d7da718cc00e" class="bulleted-list"><li style="list-style-type:disc">Use <code>useContext</code> to access <code>toggleFeature</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8180-aa14-d7a6373f6260" class="bulleted-list"><li style="list-style-type:disc">Add a button to turn Advanced Mode ON / OFF.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8129-92fb-c1b6cbd59de1" class="numbered-list" start="5"><li>In <code>FeatureStatus</code> component:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-814c-8bb1-d55e0287f588" class="bulleted-list"><li style="list-style-type:disc">Use <code>useContext</code> to read <code>isAdvanced</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8134-b914-cce80d9dd420" class="bulleted-list"><li style="list-style-type:disc">Conditionally render:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b8-b277-fed963bae936" class="bulleted-list"><li style="list-style-type:circle"><strong>&quot;Advanced Mode Enabled&quot;</strong> when <code>true</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8151-bdfe-f6afcf74954c" class="bulleted-list"><li style="list-style-type:circle"><strong>&quot;Basic Mode Enabled&quot;</strong> when <code>false</code></li></ul></div></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81b1-a328-e94ace1fca34" class="numbered-list" start="6"><li>Do <strong>not</strong> pass any props between components.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a0-831f-e309f365557d"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81cc-9d1f-c28102f1b3bb" class="">✅ Expected Output (Functional Behavior)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fe-b9ea-c1ab38b6d44f" class="bulleted-list"><li style="list-style-type:disc">App loads with <strong>Basic Mode Enabled</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8146-ac5a-fd1a361f8f86" class="bulleted-list"><li style="list-style-type:disc">Clicking the toggle button switches to <strong>Advanced Mode Enabled</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818a-8aae-d3202455d6f8" class="bulleted-list"><li style="list-style-type:disc">Clicking again switches back to <strong>Basic Mode Enabled</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815e-a9cd-c52ed92b2c35" class="bulleted-list"><li style="list-style-type:disc">Feature state is shared globally</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8165-b5c2-cc9a5c0e4192" class="bulleted-list"><li style="list-style-type:disc">UI updates automatically based on context state</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812e-b442-d9f5260003ac"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ee-a673-d03af2469b20" class="">✅ Solution — Assignment 5</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8119-812b-e3730a67ff3c" class="">📁 <code>context/FeatureContext.js</code></h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-812c-a1ad-c662eb90d17e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { createContext } from &quot;react&quot;;
+
+export const FeatureContext = createContext();
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8195-a962-e20f69f3aaad"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fe-8f12-eea7f4ade96f" class="">📁 <code>context/FeatureProvider.js</code></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f6-ae53-f6cc81f9bee2" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useState } from &quot;react&quot;;
+import { FeatureContext } from &quot;./FeatureContext&quot;;
+
+export default function FeatureProvider({ children }) {
+  const [isAdvanced, setIsAdvanced] = useState(false);
+
+  const toggleFeature = () =&gt; {
+    setIsAdvanced((prev) =&gt; !prev);
+  };
+
+  return (
+    &lt;FeatureContext.Provider value={{ isAdvanced, toggleFeature }}&gt;
+      {children}
+    &lt;/FeatureContext.Provider&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81bd-9fc0-dbbb1404aaba"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8114-ae17-e12600253835" class="">📁 <code>components/FeatureToggle.jsx</code></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b9-ab62-e377432d53da" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useContext } from &quot;react&quot;;
+import { FeatureContext } from &quot;../context/FeatureContext&quot;;
+
+export default function FeatureToggle() {
+  const { toggleFeature } = useContext(FeatureContext);
+
+  return (
+    &lt;button onClick={toggleFeature}&gt;
+      Toggle Advanced Mode
+    &lt;/button&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d6-aa88-c02e0a21238d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d0-90d3-e33d61d41968" class="">📁 <code>components/FeatureStatus.jsx</code></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-819a-a4b5-cf50d3e03d26" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useContext } from &quot;react&quot;;
+import { FeatureContext } from &quot;../context/FeatureContext&quot;;
+
+export default function FeatureStatus() {
+  const { isAdvanced } = useContext(FeatureContext);
+
+  return (
+    &lt;p&gt;
+      {isAdvanced
+        ? &quot;Advanced Mode Enabled&quot;
+        : &quot;Basic Mode Enabled&quot;}
+    &lt;/p&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a7-9829-edd28302a3c3"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814f-b6a7-e60f481ee080" class="">📁 <code>App.jsx</code></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-813c-88e7-dc428c3aa192" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import FeatureProvider from &quot;./context/FeatureProvider&quot;;
+import FeatureToggle from &quot;./components/FeatureToggle&quot;;
+import FeatureStatus from &quot;./components/FeatureStatus&quot;;
+
+export default function App() {
+  return (
+    &lt;FeatureProvider&gt;
+      &lt;FeatureToggle /&gt;
+      &lt;FeatureStatus /&gt;
+    &lt;/FeatureProvider&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8177-95a3-c453252ffeeb" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8197-8576-ff356854eab7" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8123-8ab2-e72bb9e70d7c" class="">✅ ASSIGNMENT 6 — Dashboard Filters using Multiple Contexts</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8138-adee-d77bf88720ce" class="">🎯 Concepts Tested</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814f-b761-e112a7fcfc2f" class="bulleted-list"><li style="list-style-type:disc">Multiple independent contexts</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811e-bb57-d681772537c5" class="bulleted-list"><li style="list-style-type:disc">Separation of concerns</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814e-9f6c-e4a2d9bf087e" class="bulleted-list"><li style="list-style-type:disc">One component consuming <strong>more than one context</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8128-9daf-d79491a6a852" class="bulleted-list"><li style="list-style-type:disc">Clean global state design</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813d-868d-f241db68383f" class="bulleted-list"><li style="list-style-type:disc">No prop drilling</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8110-9a1b-df45ae704106"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-810d-84fd-dc3502e8728e" class="">🧠 Problem Statement</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d2-8c16-cda0f0a6fa24" class="">You need to build a <strong>Dashboard Filter Panel</strong> using <strong>two separate global contexts</strong>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8126-9b09-e95a0ea6e2bb" class="">The dashboard has two independent filters:</p></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-810a-aeb6-e5b1d2c5655a" class="numbered-list" start="1"><li><strong>Sort Order</strong><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8117-9f25-e7195976648a" class="bulleted-list"><li style="list-style-type:disc"><code>&quot;ascending&quot;</code> or <code>&quot;descending&quot;</code></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-812f-9f1f-e9a10413da44" class="numbered-list" start="2"><li><strong>View Mode</strong><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f5-a169-d00c0e810a23" class="bulleted-list"><li style="list-style-type:disc"><code>&quot;compact&quot;</code> or <code>&quot;expanded&quot;</code></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-8420-ed66b8b4b9c5" class="">Both filters must:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fd-b0bd-cdc0fac752d3" class="bulleted-list"><li style="list-style-type:disc">Be stored in <strong>separate contexts</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8192-bf0a-dab6cc7ca93f" class="bulleted-list"><li style="list-style-type:disc">Be available globally</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8167-8781-ecc62e4dce9f" class="bulleted-list"><li style="list-style-type:disc">Be used together inside the same component</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f4-8d80-f35284ecef60"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c2-876b-c9917328db06" class="">📂 Expected Folder Structure</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f9-b183-fd2204c72143" class="">Students must create the following structure:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8125-bf69-e2b443dc5c19" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">src/
+├── context/
+│   ├── SortContext.js
+│   ├── SortProvider.js
+│   ├── ViewContext.js
+│   └── ViewProvider.js
+│
+├── components/
+│   └── FilterPanel.jsx
+│
+└── App.jsx
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815d-b772-ee1027e82aba"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81bd-9111-f4d9a0f36eab" class="">📝 Detailed Instructions (For Students)</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8103-9ae7-cc7e375e5f14" class="numbered-list" start="1"><li>Create <strong>SortContext</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8180-8e65-f95a199c14fc" class="bulleted-list"><li style="list-style-type:disc">Use <code>createContext</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8149-903d-df9447bc5f63" class="bulleted-list"><li style="list-style-type:disc">Maintain a state called <code>sortOrder</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e2-a271-f6ed964dd6ef" class="bulleted-list"><li style="list-style-type:disc">Initial value should be <code>&quot;ascending&quot;</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81af-b58c-d553cee3963a" class="bulleted-list"><li style="list-style-type:disc">Create a function <code>toggleSort()</code> that switches between:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-814c-8eaf-cd443fec393e" class="bulleted-list"><li style="list-style-type:circle"><code>&quot;ascending&quot;</code> ↔ <code>&quot;descending&quot;</code>.</li></ul></div></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81c0-ab35-ef4f7538fb6a" class="numbered-list" start="2"><li>Create <strong>ViewContext</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8117-bf1e-c0be76d0115d" class="bulleted-list"><li style="list-style-type:disc">Use <code>createContext</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8140-a4d5-e4ad60f5b6e9" class="bulleted-list"><li style="list-style-type:disc">Maintain a state called <code>viewMode</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b4-b6c3-cbe02c561420" class="bulleted-list"><li style="list-style-type:disc">Initial value should be <code>&quot;compact&quot;</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81cf-a3a4-ef2b89a80607" class="bulleted-list"><li style="list-style-type:disc">Create a function <code>toggleView()</code> that switches between:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-813e-a57d-f25616d9eb7e" class="bulleted-list"><li style="list-style-type:circle"><code>&quot;compact&quot;</code> ↔ <code>&quot;expanded&quot;</code>.</li></ul></div></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8137-baa9-e23b9231ddf9" class="numbered-list" start="3"><li>Wrap the application with <strong>both providers</strong>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-812f-b628-c73fdcd78801" class="numbered-list" start="4"><li>Inside <code>FilterPanel</code> component:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a4-a1a5-f282534017c2" class="bulleted-list"><li style="list-style-type:disc">Use <code>useContext</code> to consume <strong>SortContext</strong>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81bb-aa2b-ea2f6bd6d44f" class="bulleted-list"><li style="list-style-type:disc">Use <code>useContext</code> to consume <strong>ViewContext</strong>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8107-bb2c-d011ea037587" class="bulleted-list"><li style="list-style-type:disc">Display the current <code>sortOrder</code> and <code>viewMode</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8145-b834-f81c1b12f157" class="bulleted-list"><li style="list-style-type:disc">Add buttons to toggle each filter independently.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8150-b00e-d02c15747841" class="numbered-list" start="5"><li>Do <strong>not</strong> merge both states into a single context.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81ef-9aab-f459ecccdb70" class="numbered-list" start="6"><li>Do <strong>not</strong> pass any props between components.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8130-9e87-f77bdf964880"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8137-8777-edb3502985a8" class="">✅ Expected Output (Functional Behavior)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c8-97a8-d9b992ce1496" class="bulleted-list"><li style="list-style-type:disc">App displays:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8121-9a53-d79ba71dac10" class="bulleted-list"><li style="list-style-type:circle">Current sort order</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d7-95e3-f3bb222e106d" class="bulleted-list"><li style="list-style-type:circle">Current view mode</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b1-8ef0-c83e035ab9d2" class="bulleted-list"><li style="list-style-type:disc">Clicking <strong>Toggle Sort</strong> switches:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a2-937a-c904224972f7" class="bulleted-list"><li style="list-style-type:circle">ascending → descending → ascending</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c0-bb68-fd1c0fb938ac" class="bulleted-list"><li style="list-style-type:disc">Clicking <strong>Toggle View</strong> switches:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8188-89d0-ed278c7f3705" class="bulleted-list"><li style="list-style-type:circle">compact → expanded → compact</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8170-9e74-e597d46e546d" class="bulleted-list"><li style="list-style-type:disc">Both filters work independently</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8180-8dfc-c2c7f54caa59" class="bulleted-list"><li style="list-style-type:disc">One component consumes two contexts cleanly</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b1-a45e-ff4b0424eb23" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a5-b126-d9bb1da97999" class="">✅ Solution — Assignment 6</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8184-92aa-e2e6fa0b9911" class="">📁 <code>context/SortContext.js</code></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8108-bfe2-e3d0e84ec12d" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { createContext } from &quot;react&quot;;
+
+export const SortContext = createContext();
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8120-bed1-cf594719b60b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811a-b399-d70ca58f909e" class="">📁 <code>context/SortProvider.js</code></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8124-8950-c8bb43071514" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useState } from &quot;react&quot;;
+import { SortContext } from &quot;./SortContext&quot;;
+
+export default function SortProvider({ children }) {
+  const [sortOrder, setSortOrder] = useState(&quot;ascending&quot;);
+
+  const toggleSort = () =&gt; {
+    setSortOrder((prev) =&gt;
+      prev === &quot;ascending&quot; ? &quot;descending&quot; : &quot;ascending&quot;
+    );
+  };
+
+  return (
+    &lt;SortContext.Provider value={{ sortOrder, toggleSort }}&gt;
+      {children}
+    &lt;/SortContext.Provider&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f2-990c-d27dfa3f6b1f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d7-b65e-cffebafd72e8" class="">📁 <code>context/ViewContext.js</code></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818a-b444-f56166b06d94" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { createContext } from &quot;react&quot;;
+
+export const ViewContext = createContext();
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8143-b558-e22ef32306e7"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81cf-bb9e-e6d577e02319" class="">📁 <code>context/ViewProvider.js</code></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81bc-8827-dc77bff49d01" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useState } from &quot;react&quot;;
+import { ViewContext } from &quot;./ViewContext&quot;;
+
+export default function ViewProvider({ children }) {
+  const [viewMode, setViewMode] = useState(&quot;compact&quot;);
+
+  const toggleView = () =&gt; {
+    setViewMode((prev) =&gt;
+      prev === &quot;compact&quot; ? &quot;expanded&quot; : &quot;compact&quot;
+    );
+  };
+
+  return (
+    &lt;ViewContext.Provider value={{ viewMode, toggleView }}&gt;
+      {children}
+    &lt;/ViewContext.Provider&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813d-8c02-c9c8870bcf01"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8140-938b-c908ef348277" class="">📁 <code>components/FilterPanel.jsx</code></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8197-bbad-f4c618021692" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useContext } from &quot;react&quot;;
+import { SortContext } from &quot;../context/SortContext&quot;;
+import { ViewContext } from &quot;../context/ViewContext&quot;;
+
+export default function FilterPanel() {
+  const { sortOrder, toggleSort } = useContext(SortContext);
+  const { viewMode, toggleView } = useContext(ViewContext);
+
+  return (
+    &lt;&gt;
+      &lt;p&gt;Sort Order: {sortOrder}&lt;/p&gt;
+      &lt;button onClick={toggleSort}&gt;Toggle Sort&lt;/button&gt;
+
+      &lt;p&gt;View Mode: {viewMode}&lt;/p&gt;
+      &lt;button onClick={toggleView}&gt;Toggle View&lt;/button&gt;
+    &lt;/&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817d-8918-c0b6270b088a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8126-9c3b-ec02bccd833c" class="">📁 <code>App.jsx</code></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8149-902d-e9e278906c92" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import SortProvider from &quot;./context/SortProvider&quot;;
+import ViewProvider from &quot;./context/ViewProvider&quot;;
+import FilterPanel from &quot;./components/FilterPanel&quot;;
+
+export default function App() {
+  return (
+    &lt;SortProvider&gt;
+      &lt;ViewProvider&gt;
+        &lt;FilterPanel /&gt;
+      &lt;/ViewProvider&gt;
+    &lt;/SortProvider&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dd-a4b6-e616b62c2b32" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8178-8402-ef0d644fecd6" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-810f-91ec-c69ab33a293d" class="">📘 React Context API — MCQs</h1></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ec-9e83-d0b5507d19f7"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8163-8634-fc3575a25c69" class=""><strong>1. What problem does React Context API mainly solve?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816a-9ff7-dee5b0f74d20" class="">A. Handling API calls</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-8688-ffb0adaf5d86" class="">B. Managing component lifecycle</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8171-b397-f87812eae3aa" class="">C. Prop drilling</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-83fa-c48cd9cac326" class="">D. Routing between pages</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8127-a095-fdafe5ac5c2d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8150-aae7-dfe3719b13ae" class=""><strong>2. Which function is used to create a context in React?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cf-88e4-c3447662cd0f" class="">A. createState()</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-8484-f15c1f796fff" class="">B. useContext()</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8128-a9c9-ef91a2ca7ffc" class="">C. createContext()</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811b-8ccc-eaf01faf9b27" class="">D. useProvider()</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d5-b738-d6475bc7952f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810f-840c-ec6765c53582" class=""><strong>3. Context API is mainly used for which type of data?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d2-b95e-d8fc802f5cfe" class="">A. Local component data</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813b-8a16-ea2a823bda49" class="">B. Temporary form data</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-9d2a-cc93b42ed1aa" class="">C. Global application data</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815c-9777-c78e30a1c8e9" class="">D. Static HTML data</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813b-bba4-d27463cd8a58"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813b-b748-dbcd5c9d0f1d" class=""><strong>4. Which component makes context data available to other components?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-a04c-fb10b91484cb" class="">A. Consumer</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a9-80ec-f17d7d256328" class="">B. Provider</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8129-85d3-f11edeaa2507" class="">C. Wrapper</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8118-b380-e7bbae3d7708" class="">D. Controller</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e3-8c9a-d94e395cf4a9"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816c-9037-d8a4bdbfdaa8" class=""><strong>5. What prop must always be passed to </strong><code><strong>&lt;Context.Provider&gt;</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e9-8f0e-c93e27d74722" class="">A. data</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81eb-9e78-c35e9ecdf4ca" class="">B. children</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8191-995d-f09f24bfccb8" class="">C. value</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81be-a5c4-cc16fd1d61b4" class="">D. state</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811b-90c3-c4be3e81fc73"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fd-881c-e7a9d3c34ef9" class=""><strong>6. Which hook is used to read data from a context?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8139-9218-c647b0b197b7" class="">A. useState</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-bc5b-e98d07023804" class="">B. useEffect</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8186-9856-fd3ca80162fc" class="">C. useReducer</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811e-8f1f-ebfcf7c242c0" class="">D. useContext</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8134-949f-c5338b6d8b0e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813b-8de8-ea53ff57b07e" class=""><strong>7. If a component is not wrapped inside a Provider, what happens?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b2-a5c9-c39474ea9ab3" class="">A. App crashes always</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8189-b701-d3567240b23d" class="">B. Context value becomes <code>undefined</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b3-a689-cee3ebaa42fa" class="">C. Context works normally</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8119-be42-f7af8f7c480e" class="">D. Component does not render</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812f-a8d6-e05ed262ca64"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8168-8ccb-f367d76b633d" class=""><strong>8. What is prop drilling?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811b-a5f2-f4b05a3d17f4" class="">A. Passing props using hooks</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a6-8860-ec92ec32f671" class="">B. Passing props deeply through multiple components</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814d-9b41-d6f75760cad2" class="">C. Using props inside Provider</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8168-8969-e27bf97952cc" class="">D. Passing props only once</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fa-8c92-d554774c460b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8162-aded-d5a6cf027e5f" class=""><strong>9. Where should a Context Provider usually be placed?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817a-a0c0-cf9a09eced7d" class="">A. Inside every component</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b0-9121-cc241ea653cd" class="">B. At the top level of the app</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fc-b8ab-f14d6f9b95f7" class="">C. Only inside child components</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8116-904a-cd9c394051a6" class="">D. Inside CSS files</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8183-b467-c597a7865b6b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8197-beae-c34ecbe1d61a" class=""><strong>10. Can multiple components use the same context?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-b36e-c102c7dfced3" class="">A. No</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-a04c-fda02c9ab93f" class="">B. Yes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bb-8668-e177ad3b3169" class="">C. Only parent components</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8122-8b07-daec607200c2" class="">D. Only child components</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8196-b4de-e44a7374336f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814c-b186-ee1b2142687c" class=""><strong>11. Which of the following is a valid use case for Context API?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8175-8215-dd2d21c2c749" class="">A. Fetching data on every render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8131-805d-f0510bd79471" class="">B. Managing global app settings</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8166-bb64-edbb469fb2a7" class="">C. Styling components</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81de-8553-c15802014134" class="">D. Creating routes</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8119-a7ab-ece39c85b962"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8199-8435-f1ab07af5a2d" class=""><strong>12. What does the </strong><code><strong>value</strong></code><strong> prop in Provider contain?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d9-96a3-e395ed193172" class="">A. Only state</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e0-96ef-d43bce10afdf" class="">B. Only functions</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-abcf-d2e687ea4ec9" class="">C. State and/or functions</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811e-8cc7-dd7e1fbdfafe" class="">D. JSX elements only</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b0-a853-db145bb48ffa"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a1-aefb-e75140c80103" class=""><strong>13. How many contexts can a React app have?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b1-a09d-e78b62e5af57" class="">A. Only one</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-bc62-c156f83fb4b6" class="">B. Only two</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8107-a4ff-d86a1cf30cf7" class="">C. Maximum five</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8195-8bbb-d26dc7729cc2" class="">D. As many as needed</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8135-89c6-fe2d935db72b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810b-987d-fe01139ee6eb" class=""><strong>14. Why do we create multiple contexts instead of one large context?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8112-82bf-fa4c9754236d" class="">A. To reduce code</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b2-bf12-e634ead4c76e" class="">B. To improve separation of concerns</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-9083-c4f21fe1d755" class="">C. To avoid JSX</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811a-9138-e4900b1632d2" class="">D. To avoid hooks</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812d-a7a1-c3080af13d73"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8167-ac76-f1e7a20beffd" class=""><strong>15. Can one component consume multiple contexts?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f8-a0dd-d3e1baec126d" class="">A. No</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c2-b188-e66eb462edb9" class="">B. Yes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f9-a06b-e8d3df9113df" class="">C. Only one at a time</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8168-91dc-dc4a6d79b232" class="">D. Only class components can</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8102-bce0-e112d82da326"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8175-9007-e91bcf3ac051" class=""><strong>16. Which hook helps avoid passing props between components?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8131-a517-f95074bc3465" class="">A. useState</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81af-ba16-ef2556910d6f" class="">B. useEffect</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819d-a1bb-d3123cd39e3b" class="">C. useContext</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8125-b2ce-f16931474bc8" class="">D. useRef</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f1-8406-e49086f28c42"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ce-9b2f-d139c259c67d" class=""><strong>17. What happens when context value changes?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a5-a4ca-e12079eeeea1" class="">A. Only Provider re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819c-b6e2-d0a8e71f7fcd" class="">B. Entire app reloads</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8112-8a21-e3f67dadf90b" class="">C. All consuming components re-render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-b5ed-eefe99ae8724" class="">D. Nothing happens</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810d-bc55-ebe6d34d7c0a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8127-8361-cff81863d4a4" class=""><strong>18. Context API is best suited for which type of applications?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8197-80a0-e713278161cf" class="">A. Very large enterprise apps only</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8142-85f6-d71b484bd18d" class="">B. Small to medium applications</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b0-9ae7-c87a827438b7" class="">C. Only static websites</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ac-9ce6-db08da382333" class="">D. Backend applications</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813b-922a-c19be7db7a90"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e6-a587-cf520f4ea29a" class=""><strong>19. What is the correct order of using Context API?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8137-91b2-f523078e1526" class="">A. useContext → Provider → createContext</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8173-b6e3-d2b56fb939d0" class="">B. Provider → useContext → createContext</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8119-9212-fb7a5f1a2964" class="">C. createContext → Provider → useContext</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816c-853e-f77a235533ff" class="">D. Provider → createContext → useContext</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8163-95f5-fab3381dd7bc"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8153-be0b-cf11f49f980b" class=""><strong>20. Which statement is TRUE about Context API?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e6-a12c-e74114ea2042" class="">A. It replaces Redux in all cases</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8163-844b-f80dcb94197a" class="">B. It is used only for styling</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d8-b189-c571c7737f55" class="">C. It helps share global data without props</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ce-9e80-cdb032ca1cd7" class="">D. It works only with class components</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a9-ac25-cf5780e8e6ef" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-a776-dd8cd8b7375c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8137-b090-d49adba83764" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d2-a468-c252de0df2ce" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8185-b7b5-f66ecf038f9d" class="">📘 React Context API</h1></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814f-82be-f9bc1c84b171"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8174-93d9-dc58c6519f73" class=""><strong>1. Why is Context API preferred over prop drilling in deep component trees?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8181-9461-cd41b7dddd28" class="">A. It improves CSS performance</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8191-9d3d-dafabda80492" class="">B. It avoids passing unused props through multiple levels</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8162-8a4c-e7bc7371e3ac" class="">C. It reduces JSX syntax</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-8556-e15ffb5cce30" class="">D. It replaces state completely</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81db-b995-fb20a5671577"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8105-a3c1-c93a17319eaa" class=""><strong>2. What happens if the </strong><code><strong>value</strong></code><strong> prop of a Provider changes?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813e-b60f-d44838d6c5bb" class="">A. Only the Provider re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816d-9880-ede8c918b21a" class="">B. Only the parent component re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8106-bb5c-fe841af59657" class="">C. All components using that context re-render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8176-be70-d63471d14fc6" class="">D. Nothing happens</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814e-8483-fc2313545407"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811e-ae3a-e13312bee78b" class=""><strong>3. Which of the following is NOT recommended to store in Context?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-93b3-df959615f02e" class="">A. User preferences</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8105-823d-ec3b502cfd76" class="">B. Theme configuration</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-ac8d-e1a9b64a9c43" class="">C. Frequently changing local input value</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8184-9c00-ea0394fabc6a" class="">D. Application settings</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a5-b7c9-e4e2b64154c2"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810d-b86d-c10c3bbf1d1a" class=""><strong>4. If two components use the same context, how do they get updated?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8139-a83b-e26487c26912" class="">A. Independently</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814b-86d8-fc78adfcbe24" class="">B. Only the parent component updates them</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b8-8bfc-d6777afab705" class="">C. Both update when context value changes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ea-9690-c9923ee2ab6c" class="">D. Only the component that triggered the change updates</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ad-adce-fd49da68fe68"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8124-8737-dba8ae499a68" class=""><strong>5. Why is it better to create multiple contexts instead of one large context?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81eb-98fe-fe8949d858d2" class="">A. Context supports only small data</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8106-bc1c-f685cce78945" class="">B. To avoid unnecessary re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-a17c-e1da99243867" class="">C. To remove the need for hooks</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-8410-ed6e285511b2" class="">D. To simplify JSX</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8197-9be7-cea456963149"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b3-b3fb-c4fad4fe3bd5" class=""><strong>6. What will </strong><code><strong>useContext(MyContext)</strong></code><strong> return if no Provider is found above?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810d-9021-c27fa5e99f8e" class="">A. Throws an error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fc-a1df-ddd50dc67160" class="">B. <code>undefined</code> or default value</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d5-9865-dcf076a2b267" class="">C. An empty object</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812c-b861-ea1eabdce762" class="">D. <code>null</code> always</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811e-812e-cfc31dbc4740"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8158-a4c2-c76283872278" class=""><strong>7. Which pattern helps avoid “Provider Hell” when using multiple contexts?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-9e53-c660794bd62a" class="">A. Higher Order Components</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-9ea1-fb141ed61356" class="">B. Combined Providers Pattern</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8182-9c8b-c240c1292e6c" class="">C. Redux Pattern</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813c-acc0-c464a5162a35" class="">D. Lazy Loading Pattern</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8174-95ea-deda98506c5e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8136-b5f3-d0ba69372059" class=""><strong>8. What is the main responsibility of a Context Provider?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8112-9062-cb98ed47ed6a" class="">A. Creating JSX</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-a21b-eacbae38c725" class="">B. Managing routing</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8184-a0cc-dce306d60497" class="">C. Supplying data to consuming components</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-b483-e7126f347627" class="">D. Handling API calls</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8143-b393-d732af87258e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818d-b804-c06591784028" class=""><strong>9. Which of the following best describes separation of concerns in Context API?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81de-8e56-c1fc5dde637b" class="">A. Using one context for everything</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8110-9353-f7e9c1b24dcd" class="">B. Keeping UI and logic in the same file</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8199-a005-dbaf7c39d47e" class="">C. Creating different contexts for different responsibilities</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8139-b09e-c87005f4e013" class="">D. Avoiding hooks completely</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8146-8687-da9b6c5754ac"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d6-ab36-fe3775d6befe" class=""><strong>10. Why should context state be kept minimal?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c4-8d5a-c8cb679701e5" class="">A. To reduce file size</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-85de-f993c9b4d51e" class="">B. To reduce number of components</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a2-89a9-db0586b28a7d" class="">C. To prevent unnecessary re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8165-8e73-f97b8a515cf3" class="">D. To avoid JSX errors</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d1-9607-e5cdcd9c3c56"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8114-abb4-cc0579b3f710" class=""><strong>11. Can context be used without hooks?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cd-b1a3-f1821382213c" class="">A. No, hooks are mandatory</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810f-ad4d-d62ef6bc1855" class="">B. Yes, using class-based Consumers</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f2-b4cd-ce3e54fd0d44" class="">C. Only in functional components</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8116-8459-dbaf253da378" class="">D. Only with Redux</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8174-8c87-de5101bc2de6"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813c-bfb9-f6743ccbdc46" class=""><strong>12. Which of the following will cause all consumers to re-render?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814b-bf4c-c83c394f7fdf" class="">A. Updating local component state</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b3-957c-cb23e49efdb2" class="">B. Updating context value</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-838a-f0d7f66f3a16" class="">C. Updating CSS</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-9680-d05c7217632c" class="">D. Updating props in unrelated components</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8189-8295-ebd6c5ebde97"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8166-a944-efef99149f88" class=""><strong>13. What is the main difference between props and context?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-8d03-e07874ed3505" class="">A. Props are global, context is local</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b8-9a7e-ec7dd69d4f0e" class="">B. Props are for styling, context is for logic</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8175-b50b-f3b7e634b4cd" class="">C. Context avoids passing data through intermediate components</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ab-8fd7-f0693044dddf" class="">D. Props cannot change</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811f-ad12-f1fcc54258eb"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815a-8cc6-e6826a49aa10" class=""><strong>14. In a real project, where is the best place to define context files?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810e-b905-cc9792f29534" class="">A. Inside component files</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8160-affa-f61d49c1800d" class="">B. Inside CSS folder</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ba-ae28-d22a0934e3ab" class="">C. Inside a separate <code>context/</code> folder</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-9669-ff881ca850ed" class="">D. Inside <code>node_modules</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e9-ae52-dee3f372450c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-817b-a6ca-ecce891e8d67" class=""><strong>15. What type of data is best suited for Context API?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8152-bf6c-f9fd0fb286a1" class="">A. Highly dynamic per-component state</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-ab7c-c453752d50d8" class="">B. Static HTML data</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e5-abb8-f43fd3114c5a" class="">C. Global data needed by many components</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817e-9c3f-c6b3dffdadf6" class="">D. Temporary form input values</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817e-88da-eabb43318893"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818f-bf91-defea99ced97" class=""><strong>16. If one context changes, what happens to components using a different context?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-8641-c448f5abb974" class="">A. They also re-render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814d-a5ca-c2188fe7a6f1" class="">B. They unmount</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8142-8abc-f314a02b4f51" class="">C. They do not re-render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ed-b85f-f1745172415c" class="">D. They crash</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8112-8825-dabf15236bfb"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-819c-a2a6-d8d80cf71a39" class=""><strong>17. Why should business logic not be mixed inside UI components when using context?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-a90b-f026fe270596" class="">A. It breaks React</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8177-a98b-eca8f7e5c490" class="">B. It reduces performance</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810f-8d5a-f93255185513" class="">C. It makes code harder to scale and maintain</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8148-b5f1-f3fe588069b0" class="">D. It prevents re-rendering</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8102-bba1-c83c6250120f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811e-9436-ead485bd677c" class=""><strong>18. What is the main drawback of Context API if misused?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817e-bbbf-d6edca32868d" class="">A. Too much CSS</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-8365-ec1012b3e55c" class="">B. Unnecessary global state and re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8152-825c-dd16e762ed3e" class="">C. Too many hooks</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-a21a-ddf2347f1bde" class="">D. Larger bundle size only</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e7-9e92-df27dacfa4d9"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ca-b528-f47b86427b22" class=""><strong>19. Which approach is better for scalability?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b4-9285-d5f88f86a801" class="">A. One huge context</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bd-813a-e56f911232db" class="">B. Multiple small contexts</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811c-ab19-cabd305bc83b" class="">C. No context at all</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c3-a64a-fd98b73d2e4f" class="">D. Context inside every component</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812d-909d-e4f6de60b715"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814c-bfb9-d1daf3387a28" class=""><strong>20. Context API is best described as:</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fa-99dc-c1d8e4fa40f9" class="">A. A replacement for all state management tools</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c7-b7da-e5bf5956058b" class="">B. A tool for sharing data without props</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-8014-ed3c4d34c4e6" class="">C. A routing solution</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8157-96f9-e927887caee7" class="">D. A styling system</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,1339 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>HTML CSS Contest</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-8187-9a74-df9da2477820" class="page sans"><header><h1 class="page-title" dir="auto">HTML CSS Contest</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-815b-a865-fde3de0e100a" class="">HTML &amp; CSS Contest (90 minutes) — Starter Pack</h1></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-812f-af6a-da67e17b60df" class="">Rules (brief)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fd-b7c8-c75346617d60" class="bulleted-list"><li style="list-style-type:disc">Use only the provided <code>index.html</code> and <code>style.css</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ff-82f1-ca7900b944ce" class="bulleted-list"><li style="list-style-type:disc">Do not add JS or external CSS frameworks.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8135-80e4-f7fa06e071b8" class="bulleted-list"><li style="list-style-type:disc">Complete all <code>// TODO:</code> (CSS) and <code>&lt;!-- TODO: --&gt;</code> (HTML) items.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e0-9e89-f7c21e3a8b05" class="bulleted-list"><li style="list-style-type:disc">Keep edits inside the marked sections.</li></ul></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-811b-95e0-cae15491bd23" class="">File Tree</h2></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2df155e4-633e-8183-bb5e-e15ca185312e" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">/contest
+  ├─ index.html
+  └─ style.css
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814d-b1bd-d2f17f720ceb"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8157-a5ae-e2d905c7e4ef" class="">index.html (starter with comments)</h2></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-81ab-b366-cc167cd76b00" class="">Paste this entire file as index.html.</blockquote></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c5-b1db-c2ec90d64a33" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; id=&quot;top&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
+  &lt;title&gt;HTML &amp; CSS Contest — Starter&lt;/title&gt;
+
+  &lt;!-- Q4 uses a Google Font; students don&#x27;t need to edit this --&gt;
+  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot; /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;a class=&quot;skip-link&quot; href=&quot;#main&quot;&gt;Skip to content&lt;/a&gt;
+
+  &lt;header class=&quot;site-header&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;h1&gt;HTML &amp; CSS Contest&lt;/h1&gt;
+      &lt;p class=&quot;tagline&quot;&gt;Finish all TODOs in 90 minutes&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;main id=&quot;main&quot; class=&quot;container&quot;&gt;
+
+    &lt;!-- =========================
+         Q1 — TABLE (HTML: tables)
+         ========================= --&gt;
+    &lt;section aria-labelledby=&quot;q1&quot;&gt;
+      &lt;!-- aria-labelledby: ties the &lt;section&gt; to the heading with matching id for accessibility (screen readers). --&gt;
+      &lt;h2 id=&quot;q1&quot;&gt;Q1 — Product Pricing Table&lt;/h2&gt;
+
+      &lt;div class=&quot;card&quot;&gt;
+        &lt;table class=&quot;pricing-table&quot;&gt;
+          &lt;!-- caption: a table title; announced by screen readers and shows above/below the table (position controlled in CSS). --&gt;
+          &lt;caption&gt;Cloud Storage Plans — Comparison&lt;/caption&gt;
+
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;!-- scope=&quot;col&quot;: identifies this &lt;th&gt; as a column header for accessibility. --&gt;
+              &lt;th scope=&quot;col&quot;&gt;Plan&lt;/th&gt;
+              &lt;th scope=&quot;col&quot;&gt;Storage&lt;/th&gt;
+              &lt;th scope=&quot;col&quot;&gt;Bandwidth&lt;/th&gt;
+              &lt;th scope=&quot;col&quot;&gt;Support&lt;/th&gt;
+              &lt;th scope=&quot;col&quot;&gt;Price&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+
+          &lt;tbody&gt;
+            &lt;!-- TODO(Q1): Add 3 plan rows (Starter, Pro, Business) using &lt;th scope=&quot;row&quot;&gt; for the plan name + &lt;td&gt; for the rest. --&gt;
+            &lt;!-- TODO(Q1): Add one extra row to show a note (e.g., “Annual billing saves 20%”). --&gt;
+          &lt;/tbody&gt;
+
+          &lt;tfoot&gt;
+            &lt;tr&gt;
+              &lt;td colspan=&quot;5&quot;&gt;All prices in USD&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tfoot&gt;
+        &lt;/table&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- =========================
+         Q2 — FORM (HTML: forms)
+         ========================= --&gt;
+    &lt;section aria-labelledby=&quot;q2&quot;&gt;
+      &lt;h2 id=&quot;q2&quot;&gt;Q2 — Course Registration Form&lt;/h2&gt;
+      &lt;div class=&quot;card&quot;&gt;
+        &lt;!-- novalidate: disables browser’s default UI for validation bubbles; we’ll rely on attributes to show intent. --&gt;
+        &lt;form class=&quot;reg-form&quot; action=&quot;#&quot; method=&quot;post&quot; novalidate&gt;
+          &lt;div class=&quot;grid-2&quot;&gt;
+            &lt;!-- TODO(Q2): Add &quot;Full Name&quot; --&gt;
+            &lt;!-- TODO(Q2): Add &quot;Email&quot; --&gt;
+            &lt;!-- TODO(Q2): Add &quot;Phone&quot;--&gt;
+            &lt;!-- TODO(Q2): Add &quot;Course&quot; &lt;select&gt; with 3+ options --&gt;
+          &lt;/div&gt;
+
+          &lt;!-- fieldset/legend: groups related controls (radios) with an accessible label. --&gt;
+          &lt;fieldset class=&quot;field&quot;&gt;
+            &lt;legend&gt;Mode&lt;/legend&gt;
+            &lt;!-- TODO(Q2): Create 2 radios (Online, Offline) --&gt;
+          &lt;/fieldset&gt;
+
+          &lt;!-- TODO(Q2): Add a &lt;textarea&gt; --&gt;
+          &lt;!-- TODO(Q2): Add a &quot;Terms&quot; checkbox --&gt;
+          &lt;!-- TODO(Q2): Add a Submit button --&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- =======================================
+         Q3 — HERO (CSS: background properties)
+         ======================================= --&gt;
+    &lt;section aria-labelledby=&quot;q3&quot;&gt;
+      &lt;h2 id=&quot;q3&quot;&gt;Q3 — Hero Banner&lt;/h2&gt;
+
+      &lt;!-- The visual is mostly CSS. Students just add text content below. --&gt;
+      &lt;div class=&quot;hero&quot;&gt;
+        &lt;div class=&quot;hero__content&quot;&gt;
+          &lt;!-- TODO(Q3): Write a short headline and a subheading inside this hero --&gt;
+          &lt;h3&gt;&lt;!-- e.g., Build Beautiful UIs --&gt;&lt;/h3&gt;
+          &lt;p&gt;&lt;!-- e.g., Master HTML &amp; CSS with visual challenges. --&gt;&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- =======================================
+         Q4 — TYPOGRAPHY (font &amp; text properties)
+         ======================================= --&gt;
+    &lt;section aria-labelledby=&quot;q4&quot;&gt;
+      &lt;h2 id=&quot;q4&quot;&gt;Q4 — Typography Card&lt;/h2&gt;
+      &lt;article class=&quot;typo-card card&quot;&gt;
+        &lt;h3 class=&quot;typo-title&quot;&gt;Good Typography = Good UX&lt;/h3&gt;
+
+        &lt;p class=&quot;typo-body&quot;&gt;
+          &lt;!-- TODO(Q4): Adjust CSS in style.css as required. --&gt;
+          Thoughtful fonts, comfortable spacing, and consistent contrast make content easy to read. &lt;a href=&quot;#q4&quot;&gt;Learn more&lt;/a&gt;.
+        &lt;/p&gt;
+
+        &lt;!-- blockquote: for quoted content; cite attribute: the source URL or reference of the quote --&gt;
+        &lt;blockquote cite=&quot;https://www.w3.org/TR/WCAG21/&quot;&gt;
+          “Content must be perceivable, operable, understandable, and robust.”
+        &lt;/blockquote&gt;
+        &lt;p class=&quot;typo-cite&quot;&gt;— &lt;span class=&quot;caps&quot;&gt;W3C&lt;/span&gt;, &lt;a href=&quot;https://www.w3.org/TR/WCAG21/&quot; target=&quot;_blank&quot; rel=&quot;noreferrer&quot;&gt;WCAG&lt;/a&gt;&lt;/p&gt;
+      &lt;/article&gt;
+    &lt;/section&gt;
+
+    &lt;!-- ==================================
+         Q5 — NAV (CSS: display)
+         ================================== --&gt;
+    &lt;section aria-labelledby=&quot;q5&quot;&gt;
+      &lt;h2 id=&quot;q5&quot;&gt;Q5 — Horizontal Nav (no flex/grid)&lt;/h2&gt;
+      &lt;nav class=&quot;nav-demo card&quot; aria-label=&quot;Demo navigation&quot;&gt;
+        &lt;ul class=&quot;nav-list&quot;&gt;
+          &lt;!-- TODO(Q5): Keep markup; make these list items horizontal without flexbox or grid --&gt;
+          &lt;li&gt;&lt;a href=&quot;#q1&quot;&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#q2&quot;&gt;Register&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#q3&quot;&gt;Hero&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#q6&quot;&gt;Card&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#q7&quot;&gt;Gallery&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#q8&quot;&gt;Animation&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/nav&gt;
+    &lt;/section&gt;
+
+    &lt;!-- ===============================================
+         Q6 — POSITION (relative, absolute, fixed)
+         =============================================== --&gt;
+    &lt;section aria-labelledby=&quot;q6&quot;&gt;
+      &lt;h2 id=&quot;q6&quot;&gt;Q6 — Badge &amp; Back-to-Top&lt;/h2&gt;
+
+      &lt;div class=&quot;product-card card&quot;&gt;
+        &lt;!-- figure/figcaption: semantic wrapper for media + caption text --&gt;
+        &lt;figure class=&quot;product-figure&quot;&gt;
+          &lt;img
+            src=&quot;https://images.unsplash.com/photo-1533379007656-3a10925da2e2?q=80&amp;w=1120&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&quot;
+            alt=&quot;Wireless headphones on a desk&quot;
+            class=&quot;product-img&quot;
+          /&gt;
+          &lt;figcaption&gt;Studio Headphones&lt;/figcaption&gt;
+        &lt;/figure&gt;
+
+        &lt;!-- TODO(Q6): Absolutely position this badge at the top-left of the card.
+             Remember: the containing block (product-card) must be position: relative. --&gt;
+        &lt;span class=&quot;badge&quot;&gt;NEW&lt;/span&gt;
+
+        &lt;div class=&quot;product-body&quot;&gt;
+          &lt;h3&gt;Studio Headphones&lt;/h3&gt;
+          &lt;p&gt;Crisp highs, deep bass, and comfort for all-day focus.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Fixed back-to-top button; students don’t need to alter href --&gt;
+      &lt;a href=&quot;#top&quot; class=&quot;back-to-top&quot; aria-label=&quot;Back to top&quot;&gt;↑&lt;/a&gt;
+    &lt;/section&gt;
+
+    &lt;!-- ============================================================
+         Q7 — GALLERY (transform + transition; no flex/grid layout)
+         ============================================================ --&gt;
+    &lt;section aria-labelledby=&quot;q7&quot;&gt;
+      &lt;h2 id=&quot;q7&quot;&gt;Q7 — Gallery Hover Effects&lt;/h2&gt;
+
+      &lt;div class=&quot;gallery&quot;&gt;
+        &lt;!-- Each tile is a figure with an img and a caption overlay --&gt;
+        &lt;figure class=&quot;tile&quot;&gt;
+          &lt;img src=&quot;https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&amp;w=1200&amp;auto=format&amp;fit=crop&quot; alt=&quot;Laptop on a wooden table&quot; /&gt;
+          &lt;figcaption&gt;Work Minimal&lt;/figcaption&gt;
+        &lt;/figure&gt;
+
+        &lt;figure class=&quot;tile&quot;&gt;
+          &lt;img src=&quot;https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&amp;w=1200&amp;auto=format&amp;fit=crop&quot; alt=&quot;Mountain range at sunset&quot; /&gt;
+          &lt;figcaption&gt;Golden Peaks&lt;/figcaption&gt;
+        &lt;/figure&gt;
+
+        &lt;figure class=&quot;tile&quot;&gt;
+          &lt;img src=&quot;https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&amp;w=1200&amp;auto=format&amp;fit=crop&quot; alt=&quot;City skyline&quot; /&gt;
+          &lt;figcaption&gt;Skyline&lt;/figcaption&gt;
+        &lt;/figure&gt;
+      &lt;/div&gt;
+
+      &lt;!-- TODO(Q7): In CSS, on .tile:hover
+           - zoom in the image
+           - fade in the caption --&gt;
+    &lt;/section&gt;
+
+    &lt;!-- =======================================
+         Q8 — ANIMATION (@keyframes)
+         ======================================= --&gt;
+    &lt;section aria-labelledby=&quot;q8&quot;&gt;
+      &lt;h2 id=&quot;q8&quot;&gt;Q8 — CSS Animation&lt;/h2&gt;
+
+      &lt;div class=&quot;anim-row&quot;&gt;
+        &lt;!-- Loader: students add @keyframes in CSS (already scaffolded) --&gt;
+        &lt;div class=&quot;loader&quot; aria-label=&quot;Loading animation&quot;&gt;&lt;/div&gt;
+
+        &lt;!-- Bouncing ball: students refine keyframes (already scaffolded) --&gt;
+        &lt;div class=&quot;bounce-wrap&quot; aria-label=&quot;Bouncing ball animation&quot;&gt;
+          &lt;div class=&quot;ball&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;shadow&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer class=&quot;site-footer&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;p&gt;Submit your folder with all TODOs completed.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810a-8e71-ecf5b5154518"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8164-9fce-de8bbe489db1" class="">style.css (starter with comments)</h2></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-811c-9e62-d7c030dfe9f6" class="">Paste this entire file as style.css.</blockquote></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8106-8bea-d2c546c46c96" class="code code-wrap"><code class="language-css" style="white-space:pre-wrap;word-break:break-all">/* =========================
+   Base &amp; Layout
+   ========================= */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.6;
+  color: #222;
+  background: #fafafa;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+.site-header, .site-footer {
+  background: #0f172a;
+  color: #fff;
+}
+.site-header .tagline { opacity: 0.85; margin-top: 4px; }
+.site-header .container, .site-footer .container { padding-block: 20px; }
+
+/* Accessibility */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: #111;
+  color: #fff;
+  padding: 8px 12px;
+  z-index: 1000; /* z-index: stacking order when elements overlap (e.g., keep skip-link above) */
+}
+.skip-link:focus { left: 12px; top: 12px; }
+
+/* Sections */
+section { margin-block: 40px; }
+h2 { margin-bottom: 12px; font-size: 1.6rem; }
+
+/* Reusable card */
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+}
+
+/* =========================
+   Q1 — TABLE
+   ========================= */
+.pricing-table {
+  width: 100%;
+
+  /* border-collapse: separate keeps cell spacing; collapse merges borders into single lines. */
+  border-collapse: separate;
+
+  /* border-spacing: controls the space between table cells when not collapsed. */
+  border-spacing: 0;
+
+  text-align: left;
+}
+
+/* caption-side: where to place the &lt;caption&gt; (top or bottom). */
+.pricing-table caption {
+  caption-side: top;
+  font-weight: 700;
+  padding: 8px 0 12px;
+}
+
+.pricing-table thead th {
+  background: #f1f5f9;
+  border-bottom: 2px solid #e2e8f0;
+  padding: 12px;
+}
+.pricing-table tbody td,
+.pricing-table tbody th,
+.pricing-table tfoot td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.pricing-table tfoot td {
+  background: #f1f5f9;
+  font-weight: 600;
+}
+
+/* =========================
+   Q2 — FORM
+   ========================= */
+.reg-form { display: block; }
+
+/* NOTE: The &#x27;grid-2&#x27; name is just a class name (not CSS Grid). */
+.grid-2 &gt; .field { display: inline-block; width: 48%; vertical-align: top; }
+/* vertical-align: aligns inline/inline-block boxes baseline/middle/top; here it prevents uneven baselines. */
+@media (max-width: 700px) {
+  .grid-2 &gt; .field { width: 100%; }
+}
+
+.field { margin-bottom: 14px; }
+.field label, .field legend {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.field input[type=&quot;text&quot;],
+.field input[type=&quot;email&quot;],
+.field input[type=&quot;tel&quot;],
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+
+  /* outline: a line drawn outside the border (doesn’t affect layout). Helpful for focus styles. */
+  outline: none;
+
+  border-radius: 8px;
+  background: #fff;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: 3px solid rgba(59,130,246,0.4);
+  border-color: #3b82f6;
+}
+
+.choice { display: inline-block; margin-right: 16px; }
+.field.checkbox { display: inline-block; }
+
+.btn {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: #111827;
+  color: #fff;
+  cursor: pointer;
+}
+.btn:focus { outline: 3px solid rgba(59,130,246,0.5); }
+
+/* =========================
+   Q3 — HERO (background)
+   ========================= */
+.hero {
+  min-height: 50vh;
+  border-radius: 14px;
+  overflow: hidden;
+  text-align: center;
+  padding: 24px;
+
+  /* gradient: smooth color transition; used here as a dark overlay */
+  /* Multiple backgrounds: gradient first, then image */
+  background:
+    linear-gradient( to bottom right, rgba(15, 23, 42, 0.65), rgba(2, 6, 23, 0.65) ),
+    url(&quot;https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&amp;w=1800&amp;auto=format&amp;fit=crop&quot;) center/cover no-repeat;
+  /* center/cover: center aligns the image; cover scales to fill while preserving aspect ratio. */
+
+  /* place-items: centers content in a grid container (shortcut for align-items + justify-items). We’re not using CSS Grid here,
+     so we won’t use place-items—just keeping the comment to explain the term for later. */
+}
+
+.hero__content h3 {
+  color: #fff;
+  font-size: 2.2rem;
+  margin: 0 0 8px;
+}
+.hero__content p {
+  color: #e5e7eb;
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* =========================
+   Q4 — TYPOGRAPHY
+   ========================= */
+.typo-card { font-family: &quot;Poppins&quot;, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+.typo-title { font-weight: 700; letter-spacing: 0.2px; margin: 0 0 8px; }
+.typo-body {
+  max-width: 70ch; /* ~65–75ch is a comfortable line-length for reading. */
+  /* TODO(Q4): tweak line-height to ~1.7 */
+  /* TODO(Q4): add letter-spacing if needed */
+  /* TODO(Q4): add text-transform (e.g., none / capitalize) and a link style (text-decoration) */
+  margin: 0 0 12px;
+}
+.typo-card a { text-decoration: underline; text-underline-offset: 3px; }
+blockquote {
+  margin: 0;
+  padding: 12px 16px;
+  border-left: 4px solid #111827;
+  background: #f8fafc;
+  font-style: italic;
+}
+.typo-cite { margin-top: 8px; }
+.caps { text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* =========================
+   Q5 — NAV (display)
+   ========================= */
+.nav-demo { overflow-x: auto; }
+/* white-space: nowrap keeps inline items on a single line (prevents wrapping). */
+.nav-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap; /* explained above */
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+.nav-list &gt; li {
+  /* TODO(Q5): Make items horizontal using display property*/
+  
+}
+.nav-list &gt; li a {
+  display: inline-block;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: #111827;
+}
+.nav-list &gt; li a:hover { text-decoration: underline; }
+.nav-list &gt; li + li a { border-left: 1px solid #e5e7eb; }
+
+/* =========================
+   Q6 — POSITION
+   ========================= */
+.product-card {
+  /* TODO(Q6): Make this the containing block for absolute children with position*/
+  overflow: hidden;
+}
+.product-figure { margin: 0 0 8px; }
+.product-img {
+  width: 100%;
+  height: 240px;
+
+  /* object-fit: cover makes the image fill the box while cropping edges (keeps aspect ratio). */
+  object-fit: cover;
+  /* object-position: decides image position */
+  object-position: center;
+
+  border-radius: 10px;
+  display: block;
+}
+.badge {
+  /* TODO(Q6): Absolutely position at top:12px; left:12px; */
+  background: #ef4444;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+.back-to-top {
+  /* Fixed button anchored to viewport corner */
+  position: fixed;  /* stays put when you scroll */
+  right: 18px;
+  bottom: 18px;
+  width: 46px;
+  height: 46px;
+  display: inline-block;
+  line-height: 46px;
+  text-align: center;
+  background: #0f172a;
+  color: #fff;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  z-index: 50; /* keep above content */
+}
+.back-to-top:focus {
+  /* outline: focus indicator that doesn’t shift layout (unlike border) */
+  outline: 3px solid rgba(59,130,246,0.6);
+  outline-offset: 3px;
+}
+
+/* =========================
+   Q7 — GALLERY (transform + transition)
+   ========================= */
+.gallery { font-size: 0; } /* kills inline-block gaps */
+.tile {
+  position: relative;
+  width: 32.33%;
+  margin: 0 1% 1.2% 0;
+  display: inline-block; /* horizontal tiles without flex/grid */
+  vertical-align: top;   /* avoid baseline gap; see note on vertical-align above */
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+}
+.tile:nth-child(3n) { margin-right: 0; }
+.tile img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;   /* explained above */
+  transform: scale(1);
+  transition: transform 300ms ease; /* smooth change over time (transition) */
+}
+.tile figcaption {
+  position: absolute;
+  top: 50%;              /* vertical center */
+  left: 50%;             /* horizontal center */
+  transform: translate(-50%, -50%); /* perfect centering */
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: opacity 300ms ease;
+  text-align: center;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent bg for clarity */
+  border-radius: 6px;
+}
+/* TODO(Q7): On .tile:hover image should scale */
+/* TODO(Q7): On .tile:hover figcaption should be opaque */
+
+@media (max-width: 720px) { .tile { width: 48.5%; } }
+@media (max-width: 480px) { .tile { width: 100%; } }
+
+/* =========================
+   Q8 — ANIMATIONS
+   ========================= */
+
+/* Loader ring — students add keyframes below */
+.loader {
+  width: 58px;
+  height: 58px;
+  border: 6px solid #e5e7eb;
+  border-top-color: #111827;
+  border-radius: 50%;
+
+  /* TODO(Q8-A): Animate rotation */
+}
+
+@keyframes spin {
+  /* TODO(Q8-A): rotate from 0deg to 360deg using*/
+}
+
+/* Bouncing ball — scaffold */
+.anim-row { margin-top: 14px; }
+.bounce-wrap {
+  width: 80px; height: 120px; position: relative; display: inline-block;
+}
+.ball {
+  width: 36px; height: 36px; background: #111827; border-radius: 50%;
+  position: absolute; left: 50%; transform: translateX(-50%);
+  /* TODO(Q8-B): animation */
+}
+.shadow {
+  position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%);
+  width: 44px; height: 10px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.25), rgba(0,0,0,0));
+  /* TODO(Q8-B): animation */
+}
+
+@keyframes bounce {
+  /* TODO(Q8-B): move .ball top position 6px -&gt; 74px -&gt; 6px */
+}
+
+@keyframes squish {
+  /* TODO(Q8-B): widen/narrow shadow &amp; change opacity to simulate squash */
+}
+</code></pre></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8199-940e-c85433eef35b" class="">Starter Code Output</h2></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81b9-acc4-fc2572d52c12" class="image"><a href="HTML%20CSS%20Contest/127.0.0.1_5500_index.html_(4).jpg"><img style="width:3292px" src="HTML%20CSS%20Contest/127.0.0.1_5500_index.html_(4).jpg"/></a></figure></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d2-9e62-cdf2f211407f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-9f19-e1f97cfdede4" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8180-97c2-d08ac8d244ea" class="">Expected Final Output</h2></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8187-bd60-f78c2c6d0c2c" class="image"><a href="HTML%20CSS%20Contest/127.0.0.1_5500_index.html_(5).jpg"><img style="width:3292px" src="HTML%20CSS%20Contest/127.0.0.1_5500_index.html_(5).jpg"/></a></figure></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8164-a6b9-d2162f164279" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

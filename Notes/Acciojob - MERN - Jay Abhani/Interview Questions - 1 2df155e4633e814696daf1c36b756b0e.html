@@ -1,0 +1,785 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Interview Questions - 1</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-8146-96da-f1c36b756b0e" class="page sans"><header><h1 class="page-title" dir="auto">Interview Questions - 1</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c7-aaf9-db596c809979" class=""><strong>1. What are the differences between </strong><code><strong>var</strong></code><strong>, </strong><code><strong>let</strong></code><strong>, and </strong><code><strong>const</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8198-9f05-da6d290a0601" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8183-94ab-dd16a3962e94" class="bulleted-list"><li style="list-style-type:disc"><code>var</code> is <strong>function-scoped</strong> and can be re-declared and re-assigned. It is hoisted and initialized with <code>undefined</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818b-a60e-f4a87ebe2bc0" class="bulleted-list"><li style="list-style-type:disc"><code>let</code> is <strong>block-scoped</strong>, cannot be re-declared in the same scope, and is also hoisted but not initialized (leads to a &quot;temporal dead zone&quot;).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c9-842f-e6ddd2587cd3" class="bulleted-list"><li style="list-style-type:disc"><code>const</code> is also <strong>block-scoped</strong>, but it must be <strong>initialized during declaration</strong> and cannot be re-assigned. However, if it points to an object or array, that object or array can still be modified.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ec-8cf0-e4e35ed88011"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813c-98c2-d1d2d2496bff" class=""><strong>2. What are JavaScript’s primitive data types and how are they different from reference types?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-b27c-dce162c807ff" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8152-bf4d-e98b85bcbf06" class="">JavaScript has the following <strong>primitive types</strong>:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811a-b818-f3726a349a89" class="bulleted-list"><li style="list-style-type:disc"><code>string</code>, <code>number</code>, <code>bigint</code>, <code>boolean</code>, <code>undefined</code>, <code>symbol</code>, and <code>null</code>.<div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-8445-d0cea6835bf2" class="">These are <strong>immutable</strong> and stored directly in the variable. When assigned or passed, they create <strong>copies</strong>.</p></div></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c9-9d69-f86bbda4b197" class=""><strong>Reference types</strong> (like arrays, objects, functions) store a <strong>reference to memory</strong>. When passed or assigned, the <strong>reference</strong> is copied, so changes affect all references to the same object.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8140-a9d7-d2f72198eabe"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8135-b050-d88d6d551414" class=""><strong>3. How does </strong><code><strong>==</strong></code><strong> differ from </strong><code><strong>===</strong></code><strong> in JavaScript?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8136-8913-e724efd550d8" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e9-8ae7-fba5d00e25fe" class="bulleted-list"><li style="list-style-type:disc"><code>==</code> is the <strong>loose equality operator</strong>. It allows <strong>type coercion</strong> before comparing values.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8127-8a57-e438f7102ba5" class="bulleted-list"><li style="list-style-type:disc"><code>===</code> is the <strong>strict equality operator</strong>. It checks both <strong>type and value</strong> without converting data types.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-aa73-c07bbc2e70ed" class=""><strong>Example:</strong></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-8144-ad53-d4ecbd0558df" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">0 == &#x27;0&#x27;    // true (string is converted to number)
+0 === &#x27;0&#x27;   // false (number vs string)
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814a-bbb0-c9242750f28d" class="">Using <code>===</code> is recommended to avoid unexpected type conversions.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d3-bfd8-e411b2ad0425"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8104-90b8-f2baeb71b4a4" class=""><strong>4. What are the spread (</strong><code><strong>...</strong></code><strong>) and rest (</strong><code><strong>...</strong></code><strong>) operators in JavaScript?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bf-8b59-f281d5a5bfd9" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816e-aebe-f45b09ad2d74" class="">Both use the same <code>...</code> syntax but serve different purposes:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8113-978b-ea22246c4e5b" class="bulleted-list"><li style="list-style-type:disc"><strong>Spread Operator:</strong> Expands elements from an array or object.<div style="display:contents" dir="auto"><pre id="2df155e4-633e-8174-9522-cddaa35fe22e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">const nums = [1, 2, 3];
+const newNums = [...nums, 4];  // [1, 2, 3, 4]
+</code></pre></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815c-ae74-f2257ac6b149" class="bulleted-list"><li style="list-style-type:disc"><strong>Rest Operator:</strong> Collects multiple values into a single array parameter.<div style="display:contents" dir="auto"><pre id="2df155e4-633e-8127-8405-c0ee4e098c93" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function sum(...args) {
+  return args.reduce((a, b) =&gt; a + b, 0);
+}
+sum(1, 2, 3); // 6
+</code></pre></div></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a2-86ad-dfdc5ec6f108" class="">Spread unpacks, rest packs.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8153-8e28-d0906bc5c625"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81da-8cf6-c39653cc135b" class=""><strong>5. What does </strong><code><strong>Array.prototype.map()</strong></code><strong> do, and how is it different from </strong><code><strong>forEach()</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8187-bc90-e7e07490a41d" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8101-91c8-dbad6f043a0a" class="bulleted-list"><li style="list-style-type:disc"><code>map()</code> creates a <strong>new array</strong> by applying a function to each element. It returns the transformed array.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81db-a639-ce7ef558c072" class="bulleted-list"><li style="list-style-type:disc"><code>forEach()</code> simply <strong>executes a function</strong> for each element but <strong>does not return</strong> anything useful (it returns <code>undefined</code>).</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-af39-c7dc0dba0872" class=""><strong>Example:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b8-bee3-fddb5ded2d19" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">const nums = [1, 2, 3];
+
+const doubled = nums.map(n =&gt; n * 2);   // [2, 4, 6]
+
+nums.forEach(n =&gt; console.log(n));     // Logs 1, 2, 3 to console
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816b-a8cf-fe3061a93e8f" class="">Use <code>map()</code> when you want to transform data and create a new array. Use <code>forEach()</code> for side effects like logging or updating external values.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-a945-d7f40f0c6fa1" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8121-b2e4-e450ec74722d" class=""><strong>6. What is the difference between </strong><code><strong>null</strong></code><strong> and </strong><code><strong>undefined</strong></code><strong> in JavaScript?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c1-9d23-f2799411e4ab" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81bd-a68f-c48ad59501f2" class="bulleted-list"><li style="list-style-type:disc"><code>undefined</code> means a variable has been declared but <strong>has not been assigned a value</strong> yet.<div style="display:contents" dir="auto"><p id="2df155e4-633e-8110-ab90-f8df69d912b6" class="">Example:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ca-95bf-e92c3482040c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let x;
+console.log(x); // undefined
+</code></pre></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8191-970b-c9440854658c" class="bulleted-list"><li style="list-style-type:disc"><code>null</code> is an <strong>explicit assignment</strong> indicating the variable is empty or has &quot;no value&quot;.<div style="display:contents" dir="auto"><p id="2df155e4-633e-8192-a06f-d9646aee71f9" class="">Example:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8107-b600-f9fbf9b80b92" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let y = null;
+console.log(y); // null
+</code></pre></div></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8183-a7a3-cc42f28f911a" class="">In short, <code>undefined</code> is JavaScript’s default; <code>null</code> is the developer’s intent.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a9-8dfd-d1ef99e9779d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814b-9603-c5e441077eb4" class=""><strong>7. What is the use of the </strong><code><strong>typeof</strong></code><strong> operator in JavaScript?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814f-ba74-e00eb5fa555c" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8120-8b7f-c06431d0c836" class=""><code>typeof</code> is used to determine the <strong>data type</strong> of a value or variable.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-9bbf-ff46f5d151b5" class=""><strong>Examples:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f0-817b-f81d6ae9a8b8" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">typeof 123         // &quot;number&quot;
+typeof &quot;hello&quot;     // &quot;string&quot;
+typeof true        // &quot;boolean&quot;
+typeof undefined   // &quot;undefined&quot;
+typeof null        // &quot;object&quot; (a known quirk in JavaScript)
+typeof {}          // &quot;object&quot;
+typeof []          // &quot;object&quot;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-b8a5-ce92f641ab30" class="">It’s useful for basic type checking.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811e-a412-cfa4ed9f0666"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f4-8631-d1ff0638ef70" class=""><strong>8. What is the purpose of </strong><code><strong>isNaN()</strong></code><strong> in JavaScript?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f8-a8fb-f1b83bb17e24" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e4-895b-f79dd6b265b2" class=""><code>isNaN()</code> checks whether a value is <strong>NaN (Not a Number)</strong> after trying to convert it to a number.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-86d4-c3bd3f80eb23" class=""><strong>Examples:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e5-b820-da25938d3856" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">isNaN(123)        // false
+isNaN(&quot;123&quot;)      // false
+isNaN(&quot;hello&quot;)    // true (can&#x27;t convert to number)
+isNaN(NaN)        // true
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8168-80be-f45026e0f1af" class="">Note: <code>isNaN()</code> performs type coercion. To avoid that, use <code>Number.isNaN()</code> for stricter checking.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a2-b5c1-fa69dd0af706"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811d-8e6e-d63739a9a833" class=""><strong>9. How do you check if a value is an array in JavaScript?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ff-99bd-fbf53e1501ad" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8138-84a2-dd68001b00d9" class="">The most reliable way is using <code>Array.isArray()</code>:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8173-9b67-c2fa3800743f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">Array.isArray([1, 2, 3]); // true
+Array.isArray(&quot;hello&quot;);   // false
+Array.isArray({});        // false
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81af-9660-ea3ffe314168" class="">Avoid using <code>typeof</code> for this because arrays return <code>&quot;object&quot;</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817f-915b-c18c56f688e7"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8184-9a64-f472933e8b3d" class=""><strong>10. What does the </strong><code><strong>slice()</strong></code><strong> method do in arrays?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b8-89cb-ffb30915ca03" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819a-8fc1-d19e294b2165" class="">The <code>slice()</code> method <strong>returns a shallow copy</strong> of a portion of an array into a new array, <strong>without modifying</strong> the original array.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8172-be1a-ff6697601420" class=""><strong>Syntax:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8140-baf2-dc0250e44d36" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">array.slice(start, end)
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a0-ad5a-f8b3b6d6681e" class=""><strong>Example:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81bb-8489-eaf8f9482058" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">const fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;, &quot;mango&quot;];
+const result = fruits.slice(1, 3); // [&quot;banana&quot;, &quot;cherry&quot;]
+</code></pre></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816e-87f7-ebb24928e0b8" class="bulleted-list"><li style="list-style-type:disc">The original array remains unchanged.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8141-9b9d-c1f8d62ff98f" class="bulleted-list"><li style="list-style-type:disc">The <code>end</code> index is <strong>not included</strong>.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818c-b697-f13083d4d983" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8188-8c13-cfc6ad9d8581" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8127-b7b7-d59a2c019889" class=""><strong>11. What is the difference between </strong><code><strong>push()</strong></code><strong> and </strong><code><strong>pop()</strong></code><strong> methods in JavaScript arrays?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813f-a4dc-efc3c026b91f" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ed-bb14-c9e07e824bfb" class="bulleted-list"><li style="list-style-type:disc"><code>push()</code> adds one or more elements <strong>to the end</strong> of an array.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c9-ada8-ced0f901b687" class="bulleted-list"><li style="list-style-type:disc"><code>pop()</code> removes the <strong>last element</strong> from an array and returns it.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-b5a2-edb857688c47" class=""><strong>Example:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8168-80b7-f66fd11eb12a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2, 3];
+arr.push(4);      // [1, 2, 3, 4]
+arr.pop();        // returns 4, array becomes [1, 2, 3]
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b6-99fa-f931ab1e8808"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8187-b7c4-dcfa8fd5ca73" class=""><strong>12. What does the </strong><code><strong>join()</strong></code><strong> method do in an array?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f0-a675-d572005d339c" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ba-88d2-cab4d5a5c7bd" class="">The <code>join()</code> method joins all elements of an array into a <strong>single string</strong>, separated by a specified delimiter.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a9-b59e-f6c34f9781df" class=""><strong>Example:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81dc-8346-e572dfb933cd" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let words = [&#x27;hello&#x27;, &#x27;world&#x27;];
+let result = words.join(&#x27; &#x27;);  // &quot;hello world&quot;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811b-8339-ed8858442efe" class="">If no separator is provided, the default is a comma.</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

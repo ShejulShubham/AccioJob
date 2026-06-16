@@ -1,0 +1,1267 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Day 2 - Assignments</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-81e7-b988-f6a6891f03bd" class="page sans"><header><h1 class="page-title" dir="auto">Day 2 - Assignments</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="2df155e4-633e-8178-9cb2-dd946ad59289" class="">App.css</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2df155e4-633e-8180-98dd-edd7d3ddf55f" class="code code-wrap"><code class="language-css" style="white-space:pre-wrap;word-break:break-all">/* ==== RESET &amp; BASE ==== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
+    color-scheme: light dark;
+    --bg: #0f172a;
+    --card-bg: #0b1120;
+    --border: #1f2937;
+    --accent: #38bdf8;
+    --accent-soft: rgba(56, 189, 248, 0.15);
+    --text-main: #e5e7eb;
+    --text-muted: #9ca3af;
+}
+
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #1f2937, var(--bg));
+    color: var(--text-main);
+}
+
+/* ==== ROOT LAYOUT ==== */
+#root {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+/* Wrap your whole app in this class (in App.jsx) */
+.app-shell {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* ==== ASSIGNMENT CARD ==== */
+.assignment-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 1.75rem 2rem;
+    box-shadow:
+        0 20px 40px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(148, 163, 184, 0.1);
+    backdrop-filter: blur(12px);
+}
+
+/* Heading inside card (like Assignment 1, 2, etc.) */
+.assignment-card h2,
+.assignment-card h3 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.assignment-card h2 {
+    font-size: 1.4rem;
+}
+
+.assignment-card h3 {
+    font-size: 1.1rem;
+}
+
+/* ==== CONTENT LAYOUT ==== */
+.assignment-card p {
+    margin: 0.5rem 0 1rem;
+    color: var(--text-muted);
+}
+
+/* Spacing between controls */
+.assignment-card&gt;*+* {
+    margin-top: 0.75rem;
+}
+
+/* ==== INPUTS &amp; TEXTAREAS ==== */
+.assignment-card input,
+.assignment-card textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.6rem 0.75rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(15, 23, 42, 0.9);
+    color: var(--text-main);
+    outline: none;
+    font-size: 0.95rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.assignment-card input::placeholder,
+.assignment-card textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.assignment-card input:focus,
+.assignment-card textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent-soft);
+    background: #020617;
+}
+
+/* ==== BUTTONS ==== */
+.assignment-card button {
+    display: inline-block;
+    padding: 0.5rem 0.9rem;
+    margin-right: 0.5rem;
+    margin-top: 0.25rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    background: linear-gradient(to right, #0f172a, #020617);
+    color: var(--text-main);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.assignment-card button:hover {
+    transform: translateY(-1px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.8);
+    background: radial-gradient(circle at top left, var(--accent-soft), #020617);
+}
+
+.assignment-card button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.assignment-card button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ==== LISTS &amp; TABLES ==== */
+.assignment-card ul {
+    margin-top: 0.75rem;
+    list-style: disc;
+    padding-left: 1.2rem;
+}
+
+.assignment-card li {
+    margin: 0.25rem 0;
+}
+
+.assignment-card table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.assignment-card th,
+.assignment-card td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.6rem;
+    text-align: left;
+}
+
+.assignment-card th {
+    background: rgba(15, 23, 42, 0.9);
+    font-weight: 500;
+}
+
+.assignment-card tr:nth-child(even) td {
+    background: rgba(15, 23, 42, 0.6);
+}
+
+/* Small helper for spacing sections inside card */
+.assignment-section+.assignment-section {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px dashed rgba(148, 163, 184, 0.3);
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8193-8760-dba523d56db8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f9-8c8a-e70c2d09db05" class="">App.js</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-818e-a514-dce57100b51c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import DoubleTriple from &quot;./components/DoubleTriple&quot;
+import &quot;./App.css&quot;;
+
+function App() {
+
+  return (
+    &lt;div className=&quot;app-shell&quot;&gt;
+      &lt;div className=&quot;assignment-card&quot;&gt;
+        &lt;DoubleTriple /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default App
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c4-9a88-d5ffab9b955a" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8188-9a61-e4925b01fecd" class=""><strong>Assignment 1 — Click Counter (With Step Value)</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817a-930e-e69fa33b8501" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e1-ac50-dca0725f3dd7" class="">Make a counter where the user enters a <strong>step value</strong> (like +5, +10), and the counter increases by that step.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-9052-cb27ae71aea0" class=""><strong>Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814f-8b34-d2d437951027" class="">Step = 5</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818f-9fda-e431d140f3de" class="">Click → count: 0 → 5 → 10 → 15 → …</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-9a92-dcf55c4c50fe" class=""><strong>Hints:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b1-8a68-c9274091759b" class="bulleted-list"><li style="list-style-type:disc">Use two states: <code>step</code>, <code>count</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812f-908c-f700f7f1aa4f" class="bulleted-list"><li style="list-style-type:disc">Input controls the step</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8124-aae0-c37390b047c6" class="bulleted-list"><li style="list-style-type:disc">Button increases count</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8165-8caa-fef93878e4e5" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useState } from &quot;react&quot;;
+
+function CountStep() {
+    let [count, setCount] = useState(0);
+    let [step, setStep] = useState(1);
+
+    function handleIncrease() {
+        setCount(count + Number(step));
+    }
+
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;Assignment 1: Step Counter&lt;/h2&gt;
+
+            &lt;input type=&quot;number&quot; placeholder=&quot;Enter step value&quot; value={step} onChange={(e) =&gt; setStep(e.target.value)} /&gt;
+
+            &lt;p&gt;Count: {count}&lt;/p&gt;
+
+            &lt;button onClick={handleIncrease}&gt;Increase by step&lt;/button&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default CountStep;</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a2-92bc-de96ab2761c0" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ca-8626-c5dce035ea08" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-8a76-d6d2d5340586" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8160-914d-f8c8eb143699" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8135-a796-eeeeecda2193" class=""><strong>Assignment 2 — Double/Triple Number</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-a006-e18df453e889" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8190-b452-f491e4f41ce6" class="">Show a number on screen.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a3-9b93-ed62ddc70bdf" class="">Below it, two buttons:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8169-b1ca-f844e5b7106d" class="bulleted-list"><li style="list-style-type:disc">Double</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81eb-a533-f7dd0c4f249b" class="bulleted-list"><li style="list-style-type:disc">Triple</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e9-a807-eab20efd9ec7" class="">Clicking them should update state accordingly.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-b8dd-cf4a78a12cad" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f8-bbf3-ef8c9486dc7a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useState } from &quot;react&quot;
+
+export default function DoubleTriple() {
+    let [num, setNum] = useState(1);
+
+    function handleDouble() {
+        setNum(prev =&gt; prev*2);
+    }
+
+    function handleTriple() {
+        setNum(prev =&gt; prev*3);
+    }
+
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;Assignment 2: Double/Triple Number&lt;/h1&gt;
+            &lt;p&gt;Number: {num}&lt;/p&gt;
+            &lt;button onClick={handleDouble}&gt;Double&lt;/button&gt;
+            &lt;button onClick={handleTriple}&gt;Triple&lt;/button&gt;
+        &lt;/div&gt;
+    )
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-bf18-eb231a60fa1f" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8106-b980-e591a3a80f48" class=""><strong>Assignment 3 — Simple Toggle Text</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-900d-e3259e733133" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c0-b29d-f0e4f6deb0a8" class="">Show a text: <code>&quot;Hello Student!&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8180-bb2a-d2f736fa3127" class="">Add a button: <strong>Toggle Message</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cd-90ff-e1a388caa7cf" class="">Toggle between:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811b-a5da-c981df914c97" class="bulleted-list"><li style="list-style-type:disc">&quot;Hello Student!&quot;</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d4-a42d-d7672eefa85f" class="bulleted-list"><li style="list-style-type:disc">&quot;Welcome to React!&quot;</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8105-8120-e9dcb9915fdf" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81a8-8aa6-d9e198fe4435" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useState } from &quot;react&quot;;
+
+export default function ToggleText() {
+    let [showFirst, setShowFirst] = useState(true);
+
+    function handleToggle() {
+        setShowFirst(!showFirst);
+    }
+
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;Assignment 3: Simple Toggle Text&lt;/h2&gt;
+            &lt;p&gt;{showFirst ? &quot;Hello Students!&quot; : &quot;Welcome to React&quot;}&lt;/p&gt;
+            &lt;button onClick={handleToggle}&gt;Toggle Message&lt;/button&gt;
+        &lt;/div&gt;
+    )
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cd-a15d-dc4aa128f57f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b0-b0c4-e6c21fbefdcb" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-815d-b61b-d6aab3a54674" class=""><strong>Assignment 4 — Live Preview Input</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8122-b866-f6ff00560d97" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8175-9a6d-c66d2fef6572" class="">Add an input box.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-92a2-f0466a8af27c" class="">Whatever the user types, show it live below it.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-90fd-fb544a36cc95" class=""><strong>Output:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8196-9f06-ea10005ce2be" class="">Typing: <code>Hello React</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a9-9cda-fc29b97cb51d" class="">Preview: <code>Hello React</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b8-a28d-f3119298180f" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81a9-9772-da3584cdbfff" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useState } from &quot;react&quot;;
+
+export default function LivePreviewInput() {
+    let [text, setText] = useState(&quot;&quot;);
+
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;Assignment 4: Live Preview Input&lt;/h2&gt;
+            &lt;input type=&quot;text&quot; value={text} onChange={(e) =&gt; setText(e.target.value)} /&gt;
+            &lt;p&gt;You are typing: {text}&lt;/p&gt;
+        &lt;/div&gt;
+    )
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-8548-dc1603819e13" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8126-af85-e21657b8f374" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816c-bba0-e231871ca914" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-810e-920d-cb06459e779d" class=""><strong>Assignment 5 — Color Changer (Based on Buttons)</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-90bc-df70af4a8ed4" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8182-9cf1-e5810a5d77e6" class="">Show a square (150x150).</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8120-90ba-e3f4d518a824" class="">Below it, buttons:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818c-b2d5-d771b984d26c" class="bulleted-list"><li style="list-style-type:disc">Red</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812b-b90d-f822dab29ade" class="bulleted-list"><li style="list-style-type:disc">Green</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8108-af3e-d8bec91e396c" class="bulleted-list"><li style="list-style-type:disc">Blue</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cd-b56a-fb1bec6227f7" class="">Clicking any button should change the square color.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8129-85bd-cee021303894" class=""><strong>Hints:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d0-b66e-e77d88bd8d1d" class="bulleted-list"><li style="list-style-type:disc">State: <code>color</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d2-a6e5-dff1ac2797b9" class="bulleted-list"><li style="list-style-type:disc">Inline style: <code>backgroundColor: color</code></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8105-b4c8-fbe0d8bf76dd" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d6-9f52-c59aea290068" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useState } from &quot;react&quot;;
+
+export default function ColorChanger() {
+  const [color, setColor] = useState(&quot;gray&quot;);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Assignment 5: Color Changer&lt;/h2&gt;
+
+      &lt;div
+        style={{
+          width: 150,
+          height: 150,
+          backgroundColor: color,
+          border: &quot;1px solid #000&quot;,
+          marginBottom: 12,
+        }}
+      /&gt;
+
+      &lt;button onClick={() =&gt; setColor(&quot;red&quot;)}&gt;Red&lt;/button&gt;
+      &lt;button onClick={() =&gt; setColor(&quot;green&quot;)}&gt;Green&lt;/button&gt;
+      &lt;button onClick={() =&gt; setColor(&quot;blue&quot;)}&gt;Blue&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-81b6-e352a0be33c2" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-bbc7-cfa34bf65ba8" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8114-b50c-cdadc973a13c" class=""><strong>Assignment 6 — Increment &amp; Decrement by 2 (Functional Update Required)</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8106-8462-f20e75bf2a58" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f6-8f35-c06ed3d01a8f" class="">Make a counter that:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a1-9977-da47945f7da8" class="bulleted-list"><li style="list-style-type:disc">Increases by 2 using functional update</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811e-870a-c7d52afdec92" class="bulleted-list"><li style="list-style-type:disc">Decreases by 2 using functional update</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8181-857b-dec60530ab91" class="bulleted-list"><li style="list-style-type:disc">Has a Reset button</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810f-b525-cc266222106c" class=""><strong>Why?</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d2-a051-c6c001f7bb7a" class="">To ensure they use:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8178-bcda-f8edb2be0770" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">setCount(prev =&gt; prev + 2);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8124-9300-d5fb526134f6" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-817b-9fe2-c9f7ee7d4a56" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useState } from &quot;react&quot;;
+
+export default function IncreDecreByTwo() {
+    const [count, setCount] = useState(0);
+
+    function increase() {
+        setCount(prev =&gt; prev + 2);
+    }
+
+    function decrease() {
+        setCount(prev =&gt; prev - 2);
+    }
+
+    function reset() {
+        setCount(0);
+    }
+
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;Assignment 6: ±2 Counter&lt;/h2&gt;
+            &lt;p&gt;Count: {count}&lt;/p&gt;
+
+            &lt;button onClick={increase}&gt;+2&lt;/button&gt;
+            &lt;button onClick={decrease}&gt;-2&lt;/button&gt;
+            &lt;button onClick={reset}&gt;Reset&lt;/button&gt;
+        &lt;/div&gt;
+    );
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a1-b7ce-ed2efbf5ab2d" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81d5-8171-fa5d7d6d8bbd" class=""><strong>Assignment 7 — Fruits List (Add + Remove)</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-9ffe-fefbfd387ed2" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811d-97fe-e8d3c6cd1518" class="">Start with an empty array.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-9e5b-ccc8236906b6" class="">Have an input to enter fruit name.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-95a6-e540da5287d2" class="">Buttons: <strong>Add Fruit</strong>, <strong>Remove Last Fruit</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813a-acf4-fac3bc4557ee" class=""><strong>Display all fruits in a list.</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818d-8d98-ce29de8c7e5b" class="">This reinforces array updates using:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-814e-9157-d6248c8f0920" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">[...prev]
+// prev.filter()
+prev.slice()
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-aac8-f07812350de1" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81dc-9242-ed905dc49759" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useState } from &quot;react&quot;;
+
+export default function FruitsList() {
+    let [input, setInput] = useState(&quot;&quot;);
+    let [fruits, setFruits] = useState([]);
+
+    function handleAddFruit() {
+        let trimmed = input.trim();
+        setFruits(prev =&gt; [...prev, trimmed]);
+        setInput(&quot;&quot;);
+    }
+
+    function handleRemoveLastFruit() {
+        setFruits(prev =&gt; fruits.slice(0, -1));
+    }
+
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;Assignment 7: Fruits List&lt;/h2&gt;
+
+            &lt;input 
+                type=&quot;text&quot;
+                value={input}
+                placeholder=&quot;Enter fruit name&quot;
+                onChange={(e) =&gt; setInput(e.target.value)}
+            /&gt;
+
+            &lt;button onClick={handleAddFruit}&gt;Add fruit&lt;/button&gt;
+            &lt;button onClick={handleRemoveLastFruit} disabled={fruits.length === 0}&gt;Remove last fruit&lt;/button&gt;
+
+            &lt;ul&gt;
+                {fruits.map((fruit) =&gt; {
+                    return &lt;li&gt;{fruit}&lt;/li&gt;
+                })}
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    )
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819d-8c4b-d82dd4cf7306" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bd-8051-db84fc8312af" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81d1-a5da-f813787254e2" class=""><strong>Assignment 8 — Mini Form (Object State)</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815c-8d54-e57582677952" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b1-8256-e499534b8ac1" class="">Create a form with:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8143-a3ac-e143e0ce3dca" class="bulleted-list"><li style="list-style-type:disc">Name</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8175-baf3-d5b8eb01d335" class="bulleted-list"><li style="list-style-type:disc">City</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816e-ad79-cc107d5846e1" class="bulleted-list"><li style="list-style-type:disc">Age</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815c-8ef4-e359a9fe8065" class="">Display all submitted info below the form.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811e-88a7-f6acff5e6c1a" class=""><strong>Hint:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8175-be51-ee0a57d63e20" class="">Use object state.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-ace0-cf59bc1fd07f" class="">Use <code>[e.target.name]</code> pattern.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-b36e-d5732e129e6a" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ca-842e-cab256e2ca7f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useState } from &quot;react&quot;;
+
+export default function MiniForm() {
+  const [form, setForm] = useState({
+    name: &quot;&quot;,
+    city: &quot;&quot;,
+    age: &quot;&quot;,
+  });
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setForm(prev =&gt; ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert(`Name: ${form.name}, City: ${form.city}, Age: ${form.age}`);
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Assignment 8: Mini Form&lt;/h2&gt;
+
+      &lt;form onSubmit={handleSubmit}&gt;
+        &lt;input
+          name=&quot;name&quot;
+          placeholder=&quot;Name&quot;
+          value={form.name}
+          onChange={handleChange}
+        /&gt;
+        &lt;br /&gt;
+
+        &lt;input
+          name=&quot;city&quot;
+          placeholder=&quot;City&quot;
+          value={form.city}
+          onChange={handleChange}
+        /&gt;
+        &lt;br /&gt;
+
+        &lt;input
+          name=&quot;age&quot;
+          placeholder=&quot;Age&quot;
+          value={form.age}
+          onChange={handleChange}
+        /&gt;
+        &lt;br /&gt;
+
+        &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+      &lt;/form&gt;
+
+      &lt;h4&gt;Live Preview&lt;/h4&gt;
+      &lt;p&gt;Name: {form.name || &quot;-&quot;}&lt;/p&gt;
+      &lt;p&gt;City: {form.city || &quot;-&quot;}&lt;/p&gt;
+      &lt;p&gt;Age: {form.age || &quot;-&quot;}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d9-953e-ccf34ccc54c8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819b-924b-ff2ed38210d3" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a0-ace2-c0ce72c90538" class=""><strong>Assignment 9 — Light/Dark Theme</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fa-b493-d36814a1fb8c" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-b7d3-fe7972c6d43e" class="">Build a theme toggle:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8192-902a-f27077948af4" class="bulleted-list"><li style="list-style-type:disc">Light Mode</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c6-bbf0-c525f5315cac" class="bulleted-list"><li style="list-style-type:disc">Dark Mode</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810b-9db9-e87c27736e6d" class="bulleted-list"><li style="list-style-type:disc">Text updates</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f5-9704-fc2ed9e45d04" class="bulleted-list"><li style="list-style-type:disc">Page background changes</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8149-80d5-deddca4901f2" class=""><strong>Extra challenge:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8193-843d-daf5df58404f" class="">Keep a text:</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-9367-cd130227cd9a" class=""><code>Current Mode: Light</code> or <code>Dark</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814f-871a-f9fd5c3c6023" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8184-8970-f3495f480232" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-814a-a198-cce41dd4c3c5" class=""><strong>Assignment 10 — Expense Tracker (Basic Version)</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814b-aa35-ee23dc726022" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a8-b88f-f07e51b75911" class="">Build a small app:</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81db-a960-cf9d9bbd254b" class="">UI:</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81da-9373-e620e67aacc9" class="bulleted-list"><li style="list-style-type:disc">Input 1: Expense title</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814d-9450-c4b27eca4d29" class="bulleted-list"><li style="list-style-type:disc">Input 2: Expense amount</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8181-b72e-ecfbf43bdfcf" class="bulleted-list"><li style="list-style-type:disc">Button: Add Expense</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8141-b9ad-e425b3bd2488" class="bulleted-list"><li style="list-style-type:disc">Show a list of expenses</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c6-a0ba-e71934172f75" class="bulleted-list"><li style="list-style-type:disc">Show <strong>Total amount</strong></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ac-af76-caa62956c2a6" class=""><strong>Example Output:</strong></p></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-81cf-9277-e3df2d9f554a" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8117-b723-e5d762b9ea89"><th id="S}d?" class="simple-table-header-color simple-table-header">Title</th><th id="IzYQ" class="simple-table-header-color simple-table-header">Amount</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-811e-b1f2-ed235a0cddc8"><td id="S}d?" class="">Tea</td><td id="IzYQ" class="">20</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81c5-b225-e84ae4c6fb66"><td id="S}d?" class="">Breakfast</td><td id="IzYQ" class="">30</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817a-a1e8-fdfba4946d33" class=""><strong>Total = 50</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81dd-8892-c0b4ca39578f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useState } from &quot;react&quot;;
+
+export default function ExpenseTracker() {
+  const [title, setTitle] = useState(&quot;&quot;);
+  const [amount, setAmount] = useState(&quot;&quot;);
+  const [expenses, setExpenses] = useState([]);
+
+  function addExpense(e) {
+    e.preventDefault();
+
+    const trimmedTitle = title.trim();
+    const numAmount = Number(amount);
+
+    if (!trimmedTitle || !numAmount || numAmount &lt;= 0) return;
+
+    const newExpense = {
+      id: Date.now(),
+      title: trimmedTitle,
+      amount: numAmount,
+    };
+
+    setExpenses(prev =&gt; [...prev, newExpense]);
+    setTitle(&quot;&quot;);
+    setAmount(&quot;&quot;);
+  }
+
+  const total = expenses.reduce((sum, exp) =&gt; sum + exp.amount, 0);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Assignment 10: Expense Tracker&lt;/h2&gt;
+
+      &lt;form onSubmit={addExpense}&gt;
+        &lt;input
+          placeholder=&quot;Expense title&quot;
+          value={title}
+          onChange={(e) =&gt; setTitle(e.target.value)}
+        /&gt;
+
+        &lt;input
+          type=&quot;number&quot;
+          placeholder=&quot;Amount&quot;
+          value={amount}
+          onChange={(e) =&gt; setAmount(e.target.value)}
+        /&gt;
+
+        &lt;button type=&quot;submit&quot;&gt;Add Expense&lt;/button&gt;
+      &lt;/form&gt;
+
+      &lt;h3&gt;Expenses&lt;/h3&gt;
+      {expenses.length === 0 &amp;&amp; &lt;p&gt;No expenses added yet.&lt;/p&gt;}
+
+      &lt;table border=&quot;1&quot;&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;
+            &lt;th&gt;Title&lt;/th&gt;
+            &lt;th&gt;Amount (₹)&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          {expenses.map(exp =&gt; (
+            &lt;tr key={exp.id}&gt;
+              &lt;td&gt;{exp.title}&lt;/td&gt;
+              &lt;td&gt;{exp.amount}&lt;/td&gt;
+            &lt;/tr&gt;
+          ))}
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+
+      &lt;h3&gt;Total: ₹{total}&lt;/h3&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813e-8d5e-f0a95a02ce84" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8145-bd2b-f5e644194995" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8186-a783-d14912df98a7" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,753 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Acciojob - MERN - Jay Abhani</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-8189-94bc-c0ece54a5801" class="page sans"><header><h1 class="page-title" dir="auto">Acciojob - MERN - Jay Abhani</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d5-8b9a-ca0f2d3e4473" class="">Basic Problems</p></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81d9-9d9d-d94fe4468490" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Basic%20Problems%202df155e4633e81d99d9dd94fe4468490.html">Basic Problems</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8130-8db9-f0b53af6039c" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Variables%20and%20Data%20Types%20-%20Practice%202df155e4633e81308db9f0b53af6039c.html">Variables and Data Types - Practice</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81de-a416-c8808d402e18" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Operators%202df155e4633e81dea416c8808d402e18.html">Operators</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-811a-9d32-ec614549c847" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Operators%20-%20Practice%202df155e4633e811a9d32ec614549c847.html">Operators - Practice</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8101-abbc-db8ad409258f" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Conditions%202df155e4633e8101abbcdb8ad409258f.html">Conditions</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8104-a914-ce9d2e0fa0de" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Week%201%20Contest%202df155e4633e8104a914ce9d2e0fa0de.html">Week 1 Contest</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81c8-a95d-db2dd2dc859f" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Loops%202df155e4633e81c8a95ddb2dd2dc859f.html">Loops</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81a2-829a-f61e8b64b538" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Loops%20Practice%202df155e4633e81a2829af61e8b64b538.html">Loops Practice</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81a3-b784-defdb6e76bda" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Patterns%20-%20Practice%202df155e4633e81a3b784defdb6e76bda.html">Patterns - Practice</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8179-8f07-c0f15f0f8f28" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Arrays%20Practice%202df155e4633e81798f07c0f15f0f8f28.html">Arrays Practice</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81c5-a9b7-fc480a78a916" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Conditions%20-%20Practice%202df155e4633e81c5a9b7fc480a78a916.html">Conditions - Practice</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81b0-8f12-c37555afa6b0" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Nested%20Arrays%20Practice%202df155e4633e81b08f12c37555afa6b0.html">Nested Arrays Practice</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81fb-b560-cc873e8ba8a1" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Nested%20Arrays%202df155e4633e81fbb560cc873e8ba8a1.html">Nested Arrays</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-814b-bcf2-dc0bfb800a04" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/MCQs%20Practice%201%20-%20Output%20based,%20conditions,%20Loops%20%202df155e4633e814bbcf2dc0bfb800a04.html">MCQs Practice 1 - Output based, conditions, Loops and Arrays</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81f1-bb27-e8e963644331" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Objects%202df155e4633e81f1bb27e8e963644331.html">Objects</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8169-a4be-e71ce8c1b98c" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Searching%20Algos%202df155e4633e8169a4bee71ce8c1b98c.html">Searching Algos</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-815e-a4b8-d1a9e263a240" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Map%202df155e4633e815ea4b8d1a9e263a240.html">Map</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8143-ad1f-cc40ac2b0a6f" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Destructuring%202df155e4633e8143ad1fcc40ac2b0a6f.html">Destructuring</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81c9-a474-e7f2b013b584" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Spread%20and%20Rest%20Operators%202df155e4633e81c9a474e7f2b013b584.html">Spread and Rest Operators</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8133-aea3-d2a953f9d2cb" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Loop%20Day%202%20-%202%20Problems%202df155e4633e8133aea3d2a953f9d2cb.html">Loop Day 2 - 2 Problems</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-812b-a5a4-c68e8ecc3626" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Find%20Path%20in%20Object%202df155e4633e812ba5a4c68e8ecc3626.html">Find Path in Object</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-817a-a68a-fc6c756e604c" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Nested%20Array%20-%201%202df155e4633e817aa68afc6c756e604c.html">Nested Array - 1</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8153-87ee-d7965158f7ba" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Strings%202df155e4633e815387eed7965158f7ba.html">Strings</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8103-b45c-dc0d63c471f1" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Strings%20-%20Practice%202df155e4633e8103b45cdc0d63c471f1.html">Strings - Practice</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-816a-a70f-e645359d9647" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Set%202df155e4633e816aa70fe645359d9647.html">Set</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81aa-9c36-c09ff22c1cb2" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Regex%20-%20Practice%202df155e4633e81aa9c36c09ff22c1cb2.html">Regex - Practice</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8146-96da-f1c36b756b0e" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Interview%20Questions%20-%201%202df155e4633e814696daf1c36b756b0e.html">Interview Questions - 1</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81b6-a84a-df718b444753" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Hoisting,%20Lexical%20Scoping%20and%20Closure%202df155e4633e81b6a84adf718b444753.html">Hoisting, Lexical Scoping and Closure</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-816f-b7a7-e3ac3007021b" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Sorting%20Day%203%202df155e4633e816fb7a7e3ac3007021b.html">Sorting Day 3</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8179-9135-f1d057e5131d" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Lexical%20Scoping%20and%20Closure%202df155e4633e81799135f1d057e5131d.html">Lexical Scoping and Closure</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8196-bcf8-fe80f9043e62" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Error%20Handling%20and%20Reduce%202df155e4633e8196bcf8fe80f9043e62.html">Error Handling and Reduce</a></figure></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816e-9b92-e8bb348eb30f" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81c6-91ea-e84e00865695" class="">F1</h1></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-819a-80a6-d6cef4176836" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/HTML%20Exercises%202df155e4633e819a80a6d6cef4176836.html">HTML Exercises</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8101-a3a2-dde5cc485b5b" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Foodies%20Delight%202df155e4633e8101a3a2dde5cc485b5b.html">Foodies Delight</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81d8-9fe1-eb77b1c8e85d" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/HTML%20Interview%20Questions%202df155e4633e81d89fe1eb77b1c8e85d.html">HTML Interview Questions</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-816a-ab2e-ca34638607f0" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/CSS%202df155e4633e816aab2eca34638607f0.html">CSS</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81d7-9a94-c8ed220b5158" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/CSS%20Activities%202df155e4633e81d79a94c8ed220b5158.html">CSS Activities</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81a6-95d6-ffc66972114b" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Flexbox%202df155e4633e81a695d6ffc66972114b.html">Flexbox</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8186-9317-ce81ff913ed0" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/CSS%20Revision%20Exercises%202df155e4633e81869317ce81ff913ed0.html">CSS Revision Exercises</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8168-adbf-c022593d90a3" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/CSS%20Grid%202df155e4633e8168adbfc022593d90a3.html">CSS Grid</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-814b-98ee-e38611a59a70" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/CSS%20Grid%20Exercises%202df155e4633e814b98eee38611a59a70.html">CSS Grid Exercises</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-817e-8a12-e76b0e65e2be" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/CSS%20Adv%20Selectors%202df155e4633e817e8a12e76b0e65e2be.html">CSS Adv Selectors</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8114-a9a2-f1c48d474d83" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Pseudo%20Classes%20and%20Elements%202df155e4633e8114a9a2f1c48d474d83.html">Pseudo Classes and Elements</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81ba-beba-fce2d7aba280" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/HTML%20CSS%20Interview%20Questions%202df155e4633e81babebafce2d7aba280.html">HTML CSS Interview Questions</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81a4-9fe3-f1395ec5ab8d" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Transition%202df155e4633e81a49fe3f1395ec5ab8d.html">Transition</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-819f-9846-ebd17302bb39" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Media%20Queries%202df155e4633e819f9846ebd17302bb39.html">Media Queries</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81a6-b99f-f60a0cee42bf" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Animation%202df155e4633e81a6b99ff60a0cee42bf.html">Animation</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8141-9b92-c76760a4d6ef" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Accessing%20DOM%202df155e4633e81419b92c76760a4d6ef.html">Accessing DOM</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81f5-bb71-e0695e5a33e6" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Practice%20Page%20I%202df155e4633e81f5bb71e0695e5a33e6.html">Practice Page I</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81de-97b4-c452b221e3ab" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/DOM%20Basics%20Exercises%202df155e4633e81de97b4c452b221e3ab.html">DOM Basics Exercises</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8165-a538-ea8a84ee2710" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Event%20Propogation%202df155e4633e8165a538ea8a84ee2710.html">Event Propogation</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-812b-b874-f7a32e624baf" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/DOM%20Exercises%202df155e4633e812bb874f7a32e624baf.html">DOM Exercises</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81b2-acc3-fd6f3678b837" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Form%20Handling%202df155e4633e81b2acc3fd6f3678b837.html">Form Handling</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81b4-8565-f81788ffd51b" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/SVG%202df155e4633e81b48565f81788ffd51b.html">SVG</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8138-aec5-ecb66e84c770" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Bootstrap%20Exercises%202df155e4633e8138aec5ecb66e84c770.html">Bootstrap Exercises</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8195-9df3-cdf76f1cb285" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/DOM%20Basics%20Revision%20Exercises%202df155e4633e81959df3cdf76f1cb285.html">DOM Basics Revision Exercises</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81f6-a302-eab383f5d171" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/DOM%20Basics%20Notes%202df155e4633e81f6a302eab383f5d171.html">DOM Basics Notes</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8163-917e-c3c2c24c5a99" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Reflow%20Repaint%20and%20Fragment%202df155e4633e8163917ec3c2c24c5a99.html">Reflow Repaint and Fragment</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8172-8cff-f48b11d9fe55" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/JS%20Output%20Based%20Questions%202df155e4633e81728cfff48b11d9fe55.html">JS Output Based Questions</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-811c-8943-c92859cb278e" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/OOP%20in%20JS%202df155e4633e811c8943c92859cb278e.html">OOP in JS</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81b6-b477-ea3766b33f20" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/OOP%20Assignments%202df155e4633e81b6b477ea3766b33f20.html">OOP Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8110-85ae-f11cd47a862d" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Quick%20Notes%20Board%202df155e4633e811085aef11cd47a862d.html">Quick Notes Board</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81e7-b434-eade8dbd5063" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Lexical%20Scoping%20and%20Closure%202df155e4633e81e7b434eade8dbd5063.html">Lexical Scoping and Closure</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8193-85f6-cd5ca215c5f5" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Form%20Validation%202df155e4633e819385f6cd5ca215c5f5.html">Form Validation</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81d1-9b77-df0f9bf23c59" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Localstorage%202df155e4633e81d19b77df0f9bf23c59.html">Localstorage</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-814a-b0f9-d9f28e65d3cb" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Infinite%20Scrolling%202df155e4633e814ab0f9d9f28e65d3cb.html">Infinite Scrolling</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81ad-9750-e6161e774ff1" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/this,%20call,%20apply%20and%20bind%202df155e4633e81ad9750e6161e774ff1.html">this, call, apply and bind</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8104-a71f-e27070b725f4" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/OOP%20Pillars%202df155e4633e8104a71fe27070b725f4.html">OOP Pillars</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-812c-8aa8-f1c342db8a20" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/OOP%20Practice%202df155e4633e812c8aa8f1c342db8a20.html">OOP Practice</a></figure></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81fa-8545-cdf77ec6bd9f" class="">Async JS</h1></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81f2-8353-debc52092745" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Callbacks,%20Promises%20and%20Fetch%202df155e4633e81f28353debc52092745.html">Callbacks, Promises and Fetch</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8128-a6e1-e217d4246c03" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Async%20Basics%20Assignments%202df155e4633e8128a6e1e217d4246c03.html">Async Basics Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8145-95bf-e3a089fc734a" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/setTomeout%20and%20setInterval%202df155e4633e814595bfe3a089fc734a.html">setTomeout and setInterval</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8130-90d3-f78c362adfae" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/setTimeout%20and%20setInterval%20Practice%202df155e4633e813090d3f78c362adfae.html">setTimeout and setInterval Practice</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-816c-a5bc-f07e53fcbfee" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Callbacks%20and%20Callback%20Hell%202df155e4633e816ca5bcf07e53fcbfee.html">Callbacks and Callback Hell</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-818b-a2fa-eedfdb3a8cea" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Promises%20-%20The%20Solution%202df155e4633e818ba2faeedfdb3a8cea.html">Promises - The Solution</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8113-9be5-e743356b80cb" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Promises%20-%20The%20Solution%20Assignments%202df155e4633e81139be5e743356b80cb.html">Promises - The Solution Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-812d-942e-e053a69bbccb" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Fetch%20API%20&amp;%20Real%20APIs%202df155e4633e812d942ee053a69bbccb.html">Fetch API &amp; Real APIs</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81a8-a8fe-e145dc8553d8" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Fetch%20API%20&amp;%20Real%20APIs%20Assignments%202df155e4633e81a8a8fee145dc8553d8.html">Fetch API &amp; Real APIs Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8110-b46a-f8bbad20292d" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Promise%20APIs%202df155e4633e8110b46af8bbad20292d.html">Promise APIs</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8132-bf21-dfc8e9c8be97" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Promise%20APIs%20Assignments%202df155e4633e8132bf21dfc8e9c8be97.html">Promise APIs Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81eb-9b76-e24931b13c61" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Promise%20APIs%20Assignment%20II%202df155e4633e81eb9b76e24931b13c61.html">Promise APIs Assignment II</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81e7-be77-ee5daf30ef11" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Async%20Await%20Assignments%202df155e4633e81e7be77ee5daf30ef11.html">Async Await Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-814c-8934-f76d59eecdd7" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Debouncing%20and%20Throttling%202df155e4633e814c8934f76d59eecdd7.html">Debouncing and Throttling</a></figure></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-b8e5-d30b10af468f" class="">
+</p></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-816e-9aaf-c3496a70e9f1" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Daily%20Goals%20Tracker%202df155e4633e816e9aafc3496a70e9f1.html">Daily Goals Tracker</a></figure></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8172-94d3-f3313bf21004" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8192-9eae-de70f5fb23a4" class="">TailwindCSS</h1></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81f5-affe-f30065f23637" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Notes%202df155e4633e81f5affef30065f23637.html">Notes</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-810d-8758-db6ac279ce00" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Reusable%20Components%202df155e4633e810d8758db6ac279ce00.html">Reusable Components</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-819b-8a7d-cfc8dc68fbaf" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Project%202df155e4633e819b8a7dcfc8dc68fbaf.html">Project</a></figure></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81af-80bb-cac0b20cccef" class="">ReactJS</h1></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8152-831d-c0131dcc96be" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Day%201%20-%20ReactJS%20Introduction%20and%20Components%202df155e4633e8152831dc0131dcc96be.html">Day 1 - ReactJS Introduction and Components</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81e4-a57b-f35523a8bd32" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Day%20-%201%20Assignments%202df155e4633e81e4a57bf35523a8bd32.html">Day - 1 Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81e7-b988-f6a6891f03bd" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Day%202%20-%20Assignments%202df155e4633e81e7b988f6a6891f03bd.html">Day 2 - Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-818f-851d-ea3a70741a85" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Day%203%20-%20Assignments%202df155e4633e818f851dea3a70741a85.html">Day 3 - Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8195-9f8f-f8efcbeef664" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Day%204%202df155e4633e81959f8ff8efcbeef664.html">Day 4</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8148-b5d5-fa694707b34c" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Day%205%202df155e4633e8148b5d5fa694707b34c.html">Day 5</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-819c-b09b-ca0e4bf2a628" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Day%205%20Assignments%202df155e4633e819cb09bca0e4bf2a628.html">Day 5 Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8167-af9c-e1618bf3b44c" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Day%207%202df155e4633e8167af9ce1618bf3b44c.html">Day 7</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81b2-a4c9-ef3d3ac4e127" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Day%207%20Assignments%202df155e4633e81b2a4c9ef3d3ac4e127.html">Day 7 Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81a9-9c91-fb3e6b29aec0" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Day%208%20Assignments%202df155e4633e81a99c91fb3e6b29aec0.html">Day 8 Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8109-bea7-cc9d67e3ac9e" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Routing%20Assignments%202df155e4633e8109bea7cc9d67e3ac9e.html">Routing Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-818b-a467-ea77caf6c2e2" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Reuting%202df155e4633e818ba467ea77caf6c2e2.html">Reuting</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8177-8ef0-dc421ff47d9d" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Portal%20Assignments%202df155e4633e81778ef0dc421ff47d9d.html">Portal Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8152-b310-d0f2df7c8080" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/MoodChef%202df155e4633e8152b310d0f2df7c8080.html">MoodChef</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81c9-b4db-fc27e3225d90" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Virtual%20DOM%202df155e4633e81c9b4dbfc27e3225d90.html">Virtual DOM</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8193-81c4-c84a6ef317fa" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Context%20APi%202df155e4633e819381c4c84a6ef317fa.html">Context APi</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81b8-ac49-d17a29adb5de" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Context%20API%20Assignments%202df155e4633e81b8ac49d17a29adb5de.html">Context API Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81ab-a0d3-cba196a5f487" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Interview%20Approach%202df155e4633e81aba0d3cba196a5f487.html">Interview Approach</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81f8-b4bc-d22767982614" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/ReactJS%20Cheatsheet%202df155e4633e81f8b4bcd22767982614.html">ReactJS Cheatsheet</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81dc-8d49-ccf041294c79" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/ReactJS%20Interview%20Questions%202df155e4633e81dc8d49ccf041294c79.html">ReactJS Interview Questions</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81ae-a36f-cc3a29862ce8" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/useRef%20Assignments%202df155e4633e81aea36fcc3a29862ce8.html">useRef Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8175-914f-f36c8bb3fadd" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/useMemo%20and%20useCallback%20Assignments%202df155e4633e8175914ff36c8bb3fadd.html">useMemo and useCallback Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-815a-ac6e-e041227c26a5" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/useMemo%20and%20useCallback%202df155e4633e815aac6ee041227c26a5.html">useMemo and useCallback</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-816f-bf8f-f9ccc10e189f" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Lazy%20Loading%20Assignments%202df155e4633e816fbf8ff9ccc10e189f.html">Lazy Loading Assignments</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8145-acbc-e211e2065ac1" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Lazy%20Loading%202df155e4633e8145acbce211e2065ac1.html">Lazy Loading</a></figure></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e6-aef5-fd3a63516e23" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81f5-9d9f-e4b0ada0d444" class="">SQL</h1></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-815c-a53d-d875278533fd" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/SQL%20Basics%202df155e4633e815ca53dd875278533fd.html">SQL Basics</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8192-9891-c255d28e2090" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/SQL%20Basics%20Assignments%202df155e4633e81929891c255d28e2090.html">SQL Basics Assignments</a></figure></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8176-a246-c077f097108d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81eb-bad0-dd4e500f206b" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81e0-86a7-d39a48296af3" class="">Contests</h1></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8187-9a74-df9da2477820" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/HTML%20CSS%20Contest%202df155e4633e81879a74df9da2477820.html">HTML CSS Contest</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8189-9c87-e207ae34a91d" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/Promise%20APIs%20Contest%202df155e4633e81899c87e207ae34a91d.html">Promise APIs Contest</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81b7-b292-e571ab48fdd2" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/QuickQuotes%20-%20ReactJS%202df155e4633e81b7b292e571ab48fdd2.html">QuickQuotes - ReactJS</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8157-991b-e6afbb9b5f71" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/ReactJS%20Contest%20(After%20Context%20API)%202df155e4633e8157991be6afbb9b5f71.html">ReactJS Contest (After Context API)</a></figure></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8172-8d94-f29bd25706d0" class="">
+</p></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8121-bc12-c5f3154352ab" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/ReactJS%20Imp%20Intv%20Questions%202df155e4633e8121bc12c5f3154352ab.html">ReactJS Imp Intv Questions</a></figure></div><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-81b6-822f-fd5d5160cce6" class="link-to-page"><a href="Acciojob%20-%20MERN%20-%20Jay%20Abhani/JavaScript%20Interview%20Questions%202df155e4633e81b6822ffd5d5160cce6.html">JavaScript Interview Questions</a></figure></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81de-abe1-f9da1aaef9c9" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8111-8ac6-fd8a5e8b4680" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-ba3c-e05efe6f9ad3" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,843 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Objects</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-81f1-bb27-e8e963644331" class="page sans"><header><h1 class="page-title" dir="auto">Objects</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8122-8895-dcdc0f741ec2" class="">Objects in JavaScript</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f7-83a8-fee757fdd8bd" class="">In JavaScript, <strong>objects</strong> are one of the most fundamental and versatile data types. They allow you to store collections of data and more complex entities in a structured way.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811a-9a14-c86b13915e5e"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81eb-9f86-efc7237aa5f7" class="">🔹 What is an Object in JavaScript?</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8178-9e9e-c7462ab141a0" class="">An <strong>object</strong> is a collection of <strong>key-value pairs</strong>, where each key (also called a <strong>property name</strong>) is a string (or symbol), and each value can be any data type — number, string, boolean, array, function, or even another object.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e9-b2a6-dbab34c07640" class="">🔸 Syntax:</h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-81b3-9a1b-ca01c740b72e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let person = {
+  name: &quot;Alice&quot;,
+  age: 25,
+  isStudent: true
+};
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815a-95a2-f68b9225af35"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8179-9f35-fafaa6335ac5" class="">🔹 Creating Objects</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819f-9aac-e7167a7c2c66" class="">There are several ways to create objects in JavaScript:</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8152-88e4-e82b85155b82" class="">1. <strong>Object Literal Syntax</strong> (Most common)</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-811d-91b1-c54a347bebde" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let car = {
+  brand: &quot;Toyota&quot;,
+  model: &quot;Camry&quot;,
+  year: 2022
+};
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8165-a55c-f1ad6854ad82" class="">2. <strong>Using the </strong><code><strong>new Object()</strong></code><strong> syntax</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81be-8f7a-eff459154266" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let car = new Object();
+car.brand = &quot;Toyota&quot;;
+car.model = &quot;Camry&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818d-8029-f598c0ecbce0" class="">3. <strong>Using Constructor Functions</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8177-aa8f-e1b71922e765" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+let person1 = new Person(&quot;John&quot;, 30);
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a4-a86d-e06252ff5fa4" class="">4. <strong>Using Classes (ES6+)</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-817a-9dc2-ed75e216c86c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+let person1 = new Person(&quot;Jane&quot;, 28);
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b8-bd78-f2a7f86d7600"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ab-9c8e-faffefdc69a4" class="">🔹 Accessing Object Properties</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813e-a017-d369439bf076" class="">You can access properties using <strong>dot notation</strong> or <strong>bracket notation</strong>.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8182-abd9-caee60f512f5" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(car.brand);       // Dot notation
+console.log(car[&quot;model&quot;]);    // Bracket notation
+</code></pre></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-8158-ab19-cd7f3018fe54" class="">✅ Bracket notation is useful when the property name is dynamic or not a valid identifier.</blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e0-85c1-cfb80b6814c0"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8112-a2ed-e7b4e06d280f" class="">🔹 Modifying Object Properties</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8173-8f4b-d2c177ac14e8" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">car.year = 2023;
+car[&quot;model&quot;] = &quot;Corolla&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8113-ba21-ee491f51d61e"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81b0-8934-fbea3f8fcb46" class="">🔹 Adding New Properties</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8195-9194-d08df0fd2f29" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">car.color = &quot;Red&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815b-aa06-ef816e239049"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-815b-8262-e9c6861ae1e7" class="">🔹 Deleting Properties</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8136-8245-cf9bd9e9f3c9" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">delete car.model;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811f-bb06-f4ccefa35406"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81bc-82a4-e4ce0fb2bc05" class="">🔹 Nested Objects</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a6-b2bf-e3e51bccfed4" class="">Objects can contain other objects:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812f-a1dc-d6b82d62f5a2" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let user = {
+  name: &quot;Alice&quot;,
+  address: {
+    city: &quot;New York&quot;,
+    zip: &quot;10001&quot;
+  }
+};
+
+console.log(user.address.city);  // Output: New York
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b0-8869-f54461974422"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ea-99ee-f700394e0ef5" class="">🔹 Object Methods</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f6-ad1e-ef775996bbab" class="">You can store functions inside objects — these are called <strong>methods</strong>.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8163-9dae-d4c70db0ce61" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let person = {
+  name: &quot;Bob&quot;,
+  greet: function () {
+    return `Hello, I&#x27;m ${this.name}`;
+  }
+};
+
+console.log(person.greet());  // Output: Hello, I&#x27;m Bob
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818d-9ae5-db97d936da0b"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8125-8785-fd43091ddde4" class="">🔹 The <code>this</code> Keyword</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8160-84c2-db8ad506f918" class="">Within an object method, <code>this</code> refers to the object itself.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d5-8b99-c83cf4458125" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let person = {
+  name: &quot;Lisa&quot;,
+  greet() {
+    console.log(this.name);  // Refers to &#x27;person.name&#x27;
+  }
+};
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f1-a13e-e62a43721940"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c5-aefd-cb170ad77d1d" class="">🔹 Object Built-in Methods</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8156-8f75-cf58084e53fa" class=""><code>Object.keys(obj)</code></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-9830-f9e9b1ec9ef9" class="">Returns an array of keys.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-814d-9596-c2b77e914c9a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">Object.keys(person);  // [&quot;name&quot;, &quot;greet&quot;]
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810d-b4ac-ecad975c2921" class=""><code>Object.values(obj)</code></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-8dc5-c467d16b66eb" class="">Returns an array of values.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f6-92d0-dc75c5521c01" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">Object.values(person);
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8156-a353-f1deeca0ee3e" class=""><code>Object.entries(obj)</code></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818b-bf1c-d2205023c7fb" class="">Returns an array of <code>[key, value]</code> pairs.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-817b-8a89-fe03d64da23a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">Object.entries(person);
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8199-a45b-da11ea23a5c2" class=""><code>Object.assign(target, ...sources)</code></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ff-b469-df3cca301d7a" class="">Copies properties from source to target object.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81cc-b420-c23ebb2afbc3" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let obj1 = { a: 1 };
+let obj2 = { b: 2 };
+let combined = Object.assign({}, obj1, obj2);
+// combined = { a: 1, b: 2 }
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81af-a436-e44c047abe1b" class=""><code>Object.freeze(obj)</code></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8157-984d-d4c0a06e7dba" class="">Makes an object immutable (cannot add, remove, or change properties).</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ab-92ff-d8c93f0cf968" class=""><code>Object.seal(obj)</code></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-af20-fdf904c450a9" class="">Allows property modification but prevents adding/removing properties.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b7-be2f-e32698f8cb16"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81f8-aac0-dbb3cd4cea8e" class="">🔹 Iterating Over Objects</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a8-a254-f5006bab0241" class="">Using <code>for...in</code> loop:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8144-a7d5-edc06570b796" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">for (let key in person) {
+  console.log(`${key}: ${person[key]}`);
+}
+</code></pre></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-8117-a156-c438b0f0ddef" class="">for...in iterates over enumerable properties (including inherited).</blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fb-bfa5-e07537aa3c2f"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8106-9ab2-efdf51b95a51" class="">🔹 Object Destructuring (ES6+)</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f2-9314-e4fbf4e779e2" class="">Allows extracting properties into variables:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e7-bc0e-cfbf81e3e722" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let { name, age } = person;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-a08b-ded6dd8baf26" class="">You can also rename:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8182-8c14-e94f1bce676e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let { name: personName } = person;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8179-b2ee-f8d3fb9539b0"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8193-ad24-d9c819019b3f" class="">🔹 Comparing Objects</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c8-bd6b-c30b0c8105d6" class="">In JavaScript, <strong>objects are reference types</strong>, so:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c8-80e1-c51a631f3585" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let obj1 = { a: 1 };
+let obj2 = { a: 1 };
+console.log(obj1 === obj2);  // false (different memory reference)
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8115-aab8-cdc751a6b001" class="">But:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818b-bcfb-ed9bc3c63a4a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let obj3 = obj1;
+console.log(obj1 === obj3);  // true (same reference)
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8198-a592-c0cea97c72ce"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a9-85ae-e79f149db9d5" class="">🔹 JSON and Objects</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-a0fd-c812fd1ff114" class="">Objects can be converted to JSON using <code>JSON.stringify()</code> and back to objects using <code>JSON.parse()</code>.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8120-b363-d27d9e1c463b" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let jsonString = JSON.stringify(person);
+let jsonObject = JSON.parse(jsonString);
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8113-8765-d6e8c95422a6"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-813c-8bcc-c81489d44afb" class="">🔹 Use Cases of Objects</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813c-8094-ebc02e202201" class="bulleted-list"><li style="list-style-type:disc">Storing user information</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d2-b14a-ccf4e7808c2e" class="bulleted-list"><li style="list-style-type:disc">Representing real-world entities (like books, users, products)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b2-9b44-e61a555bdcb0" class="bulleted-list"><li style="list-style-type:disc">Creating configurations and settings</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8158-a9b9-c05e22b23654" class="bulleted-list"><li style="list-style-type:disc">Building classes and modules</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8185-a719-ed716f957826" class="bulleted-list"><li style="list-style-type:disc">APIs and data manipulation</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8122-bbd1-eb6c80cf4317" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ba-ab4d-f12f54f376af" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ea-9c76-d37e5bb933b2" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c7-b564-df4fcb8c3ef0" class="">🔹 1. <strong>Shallow Cloning</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ed-b7fb-f26b921d7d55" class="">Copies only the top-level properties. If a property is an object, it <strong>copies the reference</strong>, not the actual nested object.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815c-9547-d5fe94c55fa3" class="">✅ Methods for Shallow Clone:</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81dc-b156-d96b9b9dabb3" class="">a. <strong>Using Object.assign()</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812f-bd44-e0c29d8bf717" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let original = { name: &quot;Alice&quot;, age: 25 };
+let clone = Object.assign({}, original);
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8133-8295-e8ba3fa15641" class="">b. <strong>Using Spread Operator (</strong><code><strong>...</strong></code><strong>)</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d6-be39-faa6ad32a689" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let original = { name: &quot;Alice&quot;, age: 25 };
+let clone = { ...original };
+</code></pre></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-81a8-ac07-db893f9ba3f8" class="">⚠️ Limitation: Nested objects are not deeply copied.</blockquote></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f3-a564-fb2fa257487e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let obj = { user: { name: &quot;Bob&quot; } };
+let copy = { ...obj };
+copy.user.name = &quot;John&quot;;
+console.log(obj.user.name); // John (affects original)
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818a-a14c-f713274dbeaf"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81e9-9936-e5c3df552113" class="">🔹 2. <strong>Deep Cloning</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b9-a4b6-ec442bbc210c" class="">Creates an <strong>entirely independent copy</strong>, including all nested objects.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81cd-ab6a-cbf7de09ea8c" class="">✅ Methods for Deep Clone:</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8149-922c-cd9c076fc2fc" class="">a. <strong>Using JSON</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8174-a092-e5cf95fec874" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let original = { name: &quot;Alice&quot;, details: { age: 25 } };
+let clone = JSON.parse(JSON.stringify(original));
+</code></pre></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-81d3-8042-fe41c52a8695" class="">⚠️ Limitations:</blockquote></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8135-9f56-e77e7c8dc768" class="bulleted-list"><li style="list-style-type:disc">Cannot clone functions, <code>undefined</code>, <code>Date</code>, <code>Map</code>, <code>Set</code>, etc.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816a-afc3-c369cb052cf5" class="bulleted-list"><li style="list-style-type:disc">Loses prototype chain.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ff-bd81-fd1d290df4ef" class="">b. <strong>Using Structured Clone API (Modern)</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81be-b6d0-e28aaedded55" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let deepClone = structuredClone(originalObject);
+</code></pre></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-8153-991c-e26232883b9f" class="">✅ Supports most data types like Date, Map, Set, etc.</blockquote></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811e-b967-c3a45d1da27f" class="">c. <strong>Manual Recursion (Custom Deep Clone Function)</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c7-a862-d9246ca60c88" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function deepClone(obj) {
+  if (obj === null || typeof obj !== &quot;object&quot;) return obj;
+
+  let clone = Array.isArray(obj) ? [] : {};
+
+  for (let key in obj) {
+    clone[key] = deepClone(obj[key]);
+  }
+
+  return clone;
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8164-be39-e5871ea904ac"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c6-8bfa-eec75ff8d5cb" class="">🔹 Summary Table</h2></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-81f8-8842-d611c7031479" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8150-b5dd-f460692e4e74"><td id=";DA&gt;" class="">Method</td><td id="MIHy" class="">Type</td><td id="~mN`" class="">Supports Nested?</td><td id="H[Hz" class="">Copies Functions?</td><td id="Cjv|" class="">Notes</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8103-bcb1-ea9ba678a625"><td id=";DA&gt;" class=""><code>Object.assign()</code></td><td id="MIHy" class="">Shallow</td><td id="~mN`" class="">❌</td><td id="H[Hz" class="">✅</td><td id="Cjv|" class="">Fast, top-level only</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81f9-b214-ce0cdcecafff"><td id=";DA&gt;" class="">Spread <code>{...obj}</code></td><td id="MIHy" class="">Shallow</td><td id="~mN`" class="">❌</td><td id="H[Hz" class="">✅</td><td id="Cjv|" class="">Clean syntax</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81b1-91f6-c3b26e21fc94"><td id=";DA&gt;" class=""><code>JSON.parse(JSON.stringify())</code></td><td id="MIHy" class="">Deep</td><td id="~mN`" class="">✅</td><td id="H[Hz" class="">❌</td><td id="Cjv|" class="">Can&#x27;t handle special types</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8144-ac5b-d6b1d13ed690"><td id=";DA&gt;" class=""><code>structuredClone()</code></td><td id="MIHy" class="">Deep</td><td id="~mN`" class="">✅</td><td id="H[Hz" class="">❌</td><td id="Cjv|" class="">Best modern option (2021+)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8141-a911-ef1bb7428c28"><td id=";DA&gt;" class="">Recursive Function</td><td id="MIHy" class="">Deep</td><td id="~mN`" class="">✅</td><td id="H[Hz" class="">✅ (with extra code)</td><td id="Cjv|" class="">Fully customizable</td></tr></div></tbody></table></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

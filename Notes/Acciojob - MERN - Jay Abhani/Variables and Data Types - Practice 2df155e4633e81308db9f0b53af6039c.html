@@ -1,0 +1,936 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Variables and Data Types - Practice</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-8130-8db9-f0b53af6039c" class="page sans"><header><h1 class="page-title" dir="auto">Variables and Data Types - Practice</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-818d-b29a-fbebd326149d" class="">🔹 <strong>1. Declare and Print Variables</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8192-9276-e79266bd09da" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8143-b812-eca77c24190f" class="">Declare a variable <code>name</code> with value <code>&quot;John&quot;</code> and print it using <code>console.log()</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8172-aef0-e0432d7db090" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-81df-a2bb-ca8c5cfb27cf" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let name = &quot;John&quot;;
+console.log(name);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d8-af17-ecdc667d861e" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814d-af80-df954a951d33" class="">We use <code>let</code> to declare a variable that can be reassigned. Strings are enclosed in double quotes.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ab-b31a-f6c1ef7b6535"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8170-8760-c3d95556c9db" class="">🔹 <strong>2. Reassigning Variables</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8130-8a27-f2be1ed19b58" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8122-bd77-e1a22bc8fac5" class="">Declare a variable <code>age</code> with value <code>25</code>. Later, change the value to <code>30</code> and print the updated value.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8163-9547-c7b69fc89fc8" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b7-9823-f53ea4e928f0" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let age = 25;
+age = 30;
+console.log(age);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8169-9bc4-ea336ab52da9" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e0-abc8-cb2ef73d3f7b" class="">Variables declared with <code>let</code> can be reassigned new values.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a7-a5b3-d736a357411c"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a3-81de-fd68cb94bba5" class="">🔹 <strong>3. Using </strong><code><strong>const</strong></code></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812e-82c3-d4bd90081cc9" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a8-9d33-e1904b677bd4" class="">Declare a constant <code>PI</code> with value <code>3.14</code>. Try changing its value to <code>3.1415</code> and observe what happens.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-bb1b-f215f6c701ae" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d4-bec5-fdd84a1d4a85" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">const PI = 3.14;
+PI = 3.1415; // ❌ This will throw an error
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8164-9d8a-fe4cd4d0aa0a" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81aa-a15a-e3af81b94c92" class="">Constants declared with <code>const</code> cannot be reassigned. Trying to do so will throw a <code>TypeError</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8198-9fef-df4d594b121b"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81cc-8447-eb75814882ae" class="">🔹 <strong>4. Type Checking with </strong><code><strong>typeof</strong></code></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a5-a245-c5b42bf62885" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813b-9eee-f42f0cf3153a" class="">Check the type of variables:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-817a-b88f-e549942a286e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let x = 42;
+let y = &quot;Hello&quot;;
+let z = true;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f9-845a-ed24933a6cdf" class="">Print their types using <code>typeof</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8190-8310-d908b2c1c34d" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b5-87da-f298e0a5a5b3" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let x = 42;
+let y = &quot;Hello&quot;;
+let z = true;
+
+console.log(typeof x); // number
+console.log(typeof y); // string
+console.log(typeof z); // boolean
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8121-b478-eb6723b357b1"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-813b-8133-da19a4711213" class="">🔹 <strong>5. Declare All Primitive Data Types</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810e-af55-f3dbd3f329fb" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-8988-cac6e32c6e25" class="">Create one variable for each JavaScript primitive data type:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8119-822c-f231b74444b6" class="bulleted-list"><li style="list-style-type:disc">String</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f8-b6c1-fb94c25dfe85" class="bulleted-list"><li style="list-style-type:disc">Number</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8159-a25c-e5989817bb39" class="bulleted-list"><li style="list-style-type:disc">Boolean</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817c-8aa3-dda794ce9ff8" class="bulleted-list"><li style="list-style-type:disc">Null</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8119-ace1-c777524a33fc" class="bulleted-list"><li style="list-style-type:disc">Undefined</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8147-90cb-ca9614053911" class="bulleted-list"><li style="list-style-type:disc">Symbol</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e3-8848-e13b5806be7c" class="bulleted-list"><li style="list-style-type:disc">BigInt</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8183-9c69-f3f586efa9c2" class="">Print their types.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819b-bbe3-d49243967fa6" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8155-848c-e147f02d6e03" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let str = &quot;Hi&quot;;
+let num = 123;
+let bool = false;
+let empty = null;
+let notDefined;
+let sym = Symbol(&quot;id&quot;);
+let bigNum = 1234567890123456789012345678901234567890n;
+
+console.log(typeof str);     // string
+console.log(typeof num);     // number
+console.log(typeof bool);    // boolean
+console.log(typeof empty);   // object (quirk in JavaScript)
+console.log(typeof notDefined); // undefined
+console.log(typeof sym);     // symbol
+console.log(typeof bigNum);  // bigint
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e5-8af2-e2590c17caed"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8182-8f98-e699a5b0d471" class="">🔹 <strong>6. Variable Hoisting with </strong><code><strong>var</strong></code></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-a89e-ea6d322b56ab" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8128-acd6-dc07b351f914" class="">What will be the output of the following code?</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815b-9587-c0b73902ba38" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(a);
+var a = 10;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819b-880c-da8fb899821a" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e4-90cc-ece69b5512db" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">undefined
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8119-8a17-ffb79e147282" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-947b-f7fbeeb34bcc" class=""><code>var</code> declarations are hoisted to the top and initialized with <code>undefined</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8147-883f-cded7139ed88"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8179-bd5a-e6202c6acb81" class="">🔹 <strong>7. Arithmetic with Different Data Types</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8195-a163-ffe322f479ab" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8159-a592-de7974ecb82d" class="">Predict the output of:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8174-86d8-d0ce5e649764" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let result = &quot;5&quot; + 3;
+console.log(result);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819c-9597-ea577081f87d" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8170-be62-da1b86140dde" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">53
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cd-8471-d0ae6abe3e64" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e5-afba-d792ec7666c3" class="">The number <code>3</code> is converted to a string and concatenated with <code>&quot;5&quot;</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8124-a78f-f44df02ee658"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8120-8f9c-fd422550d6fd" class="">🔹 <strong>8. Boolean Conversion</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-a9b9-f79ba7e1b976" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fa-9d92-cdc4ead78d9a" class="">What will be the output?</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818a-ba92-c16b044c9b33" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(Boolean(0));
+console.log(Boolean(&quot;Hello&quot;));
+console.log(Boolean(&quot;&quot;));
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8113-8078-fe736b261a7a" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-814c-be38-ef573cd355e4" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">false
+true
+false
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8182-96c1-ee43f67fd88a" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c6-ab5d-e19df8962207" class="bulleted-list"><li style="list-style-type:disc"><code>0</code> and <code>&quot;&quot;</code> are falsy values.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8118-a90a-e2178322be1f" class="bulleted-list"><li style="list-style-type:disc">Non-empty strings like <code>&quot;Hello&quot;</code> are truthy.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8101-98f4-f7e8e88cc5ba"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8164-aafa-f4d2641d4b80" class="">🔹 <strong>9. Implicit Type Conversion</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-a7c0-c9da2759b13f" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-a0cf-e474038429a2" class="">What will be the output?</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81dc-9a36-f1a86fb2ed2f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;10&quot; - 2);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81af-95b3-dd6bc69b0bc5" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c1-b160-f56d735455f0" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">8
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8190-a67e-d372c9b1179e" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-9852-dd900d5e7bfd" class="">In subtraction, <code>&quot;10&quot;</code> is converted to a number automatically.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817b-9e80-f67a575635a5"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8187-b09d-fbbfa4ea4d29" class="">🔹 <strong>10. Undefined vs Null</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ca-a11b-e4cfdc5bfca4" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-86cf-c403c6e5c1b4" class="">What is the output?</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81dc-9141-de0e8806447a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let x;
+let y = null;
+
+console.log(typeof x); // ?
+console.log(typeof y); // ?
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8140-aecd-c1ff56a570c5" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b0-ad32-f360034b2704" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">undefined
+object
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81aa-9309-d0a4c688fa9c" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c5-b240-cfeed6ac5ef7" class="bulleted-list"><li style="list-style-type:disc"><code>typeof undefined</code> is <code>&quot;undefined&quot;</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f7-856f-c75bc8a20423" class="bulleted-list"><li style="list-style-type:disc"><code>typeof null</code> is <code>&quot;object&quot;</code> (a known JavaScript bug)</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-9033-f450eba677e4" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814b-b8d5-d30f561f843b" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ff-83a3-efa475c6e619" class="">🔹 <strong>11. Declare Multiple Variables in One Line</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8156-a97b-e94f4cf826eb" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c0-b417-e3430e571c87" class="">Declare three variables <code>firstName</code>, <code>lastName</code>, and <code>age</code> in a single line with values <code>&quot;Jane&quot;</code>, <code>&quot;Doe&quot;</code>, and <code>28</code> respectively.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8175-a6ed-e995de5b307b" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ad-973a-d86d46055f13" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let firstName = &quot;Jane&quot;, lastName = &quot;Doe&quot;, age = 28;
+console.log(firstName, lastName, age);
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ec-af22-f6f666f61ba7"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-812d-9770-c691f1999374" class="">🔹 <strong>12. Check Equality of Two Different Data Types</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813b-b716-fa19985b4516" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8161-bb2a-cd69a39c3dba" class="">What will the following code print?</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8186-8a4d-c0bad735a82f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let a = 5;
+let b = &quot;5&quot;;
+console.log(a == b);
+console.log(a === b);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b8-b064-cbb9bd60c9b5" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b5-a4a1-c6461c3e4e2e" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">true
+false
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8144-8a7c-ded0a7240e5c" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8167-b739-f2d42681f16f" class="bulleted-list"><li style="list-style-type:disc"><code>==</code> compares values after type conversion (loose equality)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8150-bfb1-ce3224f62765" class="bulleted-list"><li style="list-style-type:disc"><code>===</code> compares values and types (strict equality)</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8153-baa7-ec2b93d9a71a"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-814f-b5ca-d7885cf81b37" class="">🔹 <strong>13. Use Template Literals</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a0-bde5-cebb584c05c7" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-b273-e8622e481822" class="">Use a template literal to print:</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-8a98-fbdc428f900a" class=""><code>My name is Sam and I am 20 years old.</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cf-bf01-ebee2eb1473f" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81de-b51c-cb1df41646ff" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let name = &quot;Sam&quot;;
+let age = 20;
+console.log(`My name is ${name} and I am ${age} years old.`);
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b4-9d59-cc117656516f"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8190-9bba-fd9fe9a686c2" class="">🔹 <strong>14. Swap Two Variable Values</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-a263-ec0284f929b6" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c7-b948-ecc749f0450e" class="">Swap values of <code>a = 10</code> and <code>b = 20</code> using a third variable.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a0-83b3-f557ee75a297" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81aa-9673-fb24bfc12d68" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let a = 10, b = 20;
+let temp = a;
+a = b;
+b = temp;
+console.log(a, b); // 20 10
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817e-a739-e5968a99711d"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8194-93e8-cfe1cfd4c079" class="">🔹 <strong>15. Add Two Numbers Entered by User (Prompt)</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8169-ad93-ca0bc1836a37" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8164-b574-eef669c4b57f" class="">Use <code>prompt()</code> to get two numbers from the user, add them, and print the sum.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-beb3-dec53e952c72" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c2-a9fb-cb56aef8bca5" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let num1 = Number(prompt(&quot;Enter first number:&quot;));
+let num2 = Number(prompt(&quot;Enter second number:&quot;));
+console.log(&quot;Sum:&quot;, num1 + num2);
+</code></pre></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-814e-b0a7-c05270d22071" class="">Note: prompt() works in browser environments only.</blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8170-b26d-f881a1bd8d69"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ea-8c16-c91c0808019a" class="">🔹 <strong>16. What’s the Output (String + Boolean)?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810a-be1c-c88cd8885a60" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8142-9a45-e0c3ce39862d" class="">What will this code print?</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8157-9c09-c2eb21e1a4ed" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let result = &quot;Value is &quot; + true;
+console.log(result);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8155-b6b6-ed7f5326caac" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815a-87ef-d2c070460441" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">Value is true
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b1-9287-fdba4046d3f0" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ad-b676-c1e0b84c2ca7" class="">Boolean <code>true</code> is converted to a string and concatenated.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8165-89f9-ef05a0b35661"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81bb-a4d6-dd053cf0c4f3" class="">🔹 <strong>17. Check if a Variable is </strong><code><strong>undefined</strong></code></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ef-9e11-debef35f69e2" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8129-b9d7-ee2fa9c5a297" class="">Write code to check if variable <code>score</code> is <code>undefined</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b3-9aac-fdf700d5a14b" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e5-8d91-d590841c6b4e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let score;
+if (typeof score === &quot;undefined&quot;) {
+  console.log(&quot;score is undefined&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817f-80ee-e1354443a07c"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8193-a41d-ff2425aadd20" class="">🔹 <strong>18. Difference Between </strong><code><strong>null</strong></code><strong> and </strong><code><strong>undefined</strong></code></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c0-ad3c-eb09a465b7b0" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8185-98ea-c9cbde22455a" class="">Explain the difference between <code>null</code> and <code>undefined</code> using code.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814d-9374-c5662a84e078" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ef-b959-d996970169d1" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let a;           // undefined (not assigned any value)
+let b = null;    // null (explicitly assigned as &quot;empty&quot;)
+
+console.log(typeof a); // undefined
+console.log(typeof b); // object
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f4-bd39-cb276f0f48a9" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817d-bbd5-d2a54c931c61" class="bulleted-list"><li style="list-style-type:disc"><code>undefined</code>: variable declared but not assigned</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8126-b556-cf7f0ee0d1a3" class="bulleted-list"><li style="list-style-type:disc"><code>null</code>: intentional absence of value</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8156-9957-ed14230c5a6f"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8153-b099-e9af9db849d5" class="">🔹 <strong>19. Use BigInt for Large Number</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813d-85f2-d310c63f3483" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8136-b6d6-f01c9dff7508" class="">Declare a very large number using <code>BigInt</code> and print its type.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819a-9af6-dc823e071293" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b8-8a08-d42f99ff30c1" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let big = 123456789123456789123456789n;
+console.log(typeof big); // bigint
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814a-85cd-e7ce05b23335"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c4-a787-df576d8a9e8d" class="">🔹 <strong>20. Check if Value is a Number</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-a755-fc65986794c6" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8156-809c-fb2306d815a9" class="">Use <code>isNaN()</code> to check if a variable contains a valid number.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8196-9f21-e5c60e71107b" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c1-8d86-c36ed34911bb" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let value = &quot;123a&quot;;
+console.log(isNaN(value)); // true
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-bc86-f5d9a881e799" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-83c4-ed5c5bb0615b" class=""><code>isNaN()</code> returns <code>true</code> if the value is <em>not</em> a number.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819f-ae2b-f6f66c8a9f8b" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8134-b0bc-cad4caf22879" class="">🔹 <strong>21. Declare a String and Check Its Type</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813c-a24c-d2b5be5fa1a1" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-9f91-ea28662cc19b" class="">Declare a variable <code>city</code> with the value <code>&quot;Mumbai&quot;</code> and print its type.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8164-94be-f0e0a221f9f0" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f9-8829-eb1919b01384" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let city = &quot;Mumbai&quot;;
+console.log(typeof city); // string
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813e-9d60-d7db1fcb1753"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8176-b276-f10207e69d34" class="">🔹 <strong>22. Declare a Boolean Variable</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81de-9719-f2df57947e0d" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dd-89f8-f45cadf3dde7" class="">Create a variable <code>isStudent</code> and assign it the value <code>true</code>. Print it and its data type.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e6-9726-cb10418ca2c1" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8145-8111-e73cde439b48" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let isStudent = true;
+console.log(isStudent);        // true
+console.log(typeof isStudent); // boolean
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a5-8744-f4286e3e7b1d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ca-a276-e142bd218cba" class="">🔹 <strong>23. Declare an Undefined Variable</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e0-bffc-f28aca02b563" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8156-81b0-f1637e57d033" class="">Declare a variable <code>marks</code> without assigning any value. Print its value and type.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8128-8644-d5f3c3037332" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b4-8795-f723a9306b31" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let marks;
+console.log(marks);        // undefined
+console.log(typeof marks); // undefined
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c9-abd5-ed4c1743ed10"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8108-90ed-f8d6336d33c1" class="">🔹 <strong>24. Declare a Null Variable</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-a846-ed34b8dfb783" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c2-bddf-df54d592b41d" class="">Create a variable <code>response</code> and assign it <code>null</code>. Print its type.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b4-a267-e0abbbabcb99" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810d-8757-f6b386ebcd15" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let response = null;
+console.log(typeof response); // object (JavaScript bug)
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8101-b3f0-e5f0bfce5f36"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8146-9a85-c13dc8487a1a" class="">🔹 <strong>25. Use </strong><code><strong>const</strong></code><strong> for a Fixed Value</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cd-a8d7-f2f1f67418bd" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816b-b171-ddea7ff4592f" class="">Declare a constant variable <code>country</code> with the value <code>&quot;India&quot;</code>. Try printing it.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8177-b8f5-cd77179aa13a" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f1-8084-c2621d3cf544" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">const country = &quot;India&quot;;
+console.log(country); // India
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811e-8d78-fe48cfe845de"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810d-945d-cb82f75903b2" class="">🔹 <strong>26. Check Type of a BigInt</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816b-aef8-fb6e452d79eb" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f2-9ff6-c8f3928a027e" class="">Create a variable <code>bigNumber</code> with a large number using <code>n</code> at the end. Print its type.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f5-bb40-eab0cc4d74b7" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d1-92e1-f500005aeaa8" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let bigNumber = 987654321987654321n;
+console.log(typeof bigNumber); // bigint
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81db-9485-c6a444baf46b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812a-a85f-cf3497112295" class="">🔹 <strong>27. Create a Symbol and Check Type</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ab-a9d5-ebcfedc12f3a" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8100-b717-f70b56db5b80" class="">Declare a symbol variable <code>id</code> with description <code>&quot;userID&quot;</code> and print its type.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814f-8a65-e3276cd5aba8" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81a5-acba-f3bc8fe9c036" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let id = Symbol(&quot;userID&quot;);
+console.log(typeof id); // symbol
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8156-aade-f176b5e9480c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8146-bc6a-d21bde4bb0a9" class="">🔹 <strong>28. Declare Multiple Data Types Together</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-826f-fccb4846aa35" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8186-975a-ccb7d51259c5" class="">Declare the following variables:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8167-9840-e570daf5c914" class="bulleted-list"><li style="list-style-type:disc"><code>title</code> as <code>&quot;Engineer&quot;</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8122-b394-eda475ee439a" class="bulleted-list"><li style="list-style-type:disc"><code>experience</code> as <code>5</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d1-9758-cc03b9ff4dff" class="bulleted-list"><li style="list-style-type:disc"><code>available</code> as <code>false</code></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-9164-e5bcc5de07f9" class="">Print all three values and their types.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8124-9544-ffc5d7b69e52" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8195-9fd8-e570d416c539" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let title = &quot;Engineer&quot;;
+let experience = 5;
+let available = false;
+
+console.log(title, typeof title);           // Engineer string
+console.log(experience, typeof experience); // 5 number
+console.log(available, typeof available);   // false boolean
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8177-b31f-f905cb49eb4c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8117-bfd6-cd49f340badd" class="">🔹 <strong>29. Implicit Type from Assigned Value</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8118-9972-ef357d0f8687" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8176-9151-fa48dd19ab02" class="">Assign <code>&quot;500&quot;</code> to variable <code>price</code> without mentioning the type. What type will JavaScript assume?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8197-b62d-e2cd761911ed" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8138-93e7-d979fb8ba88f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let price = &quot;500&quot;;
+console.log(typeof price); // string
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8128-ab30-e99e28a3b468"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812f-af65-e2c036da670c" class="">🔹 <strong>30. Use </strong><code><strong>var</strong></code><strong> to Declare a Variable</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81af-866f-d0757e6ae7b9" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ad-869e-e068f6770349" class="">Declare a variable <code>language</code> using <code>var</code> with the value <code>&quot;JavaScript&quot;</code> and print it.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c9-a9f0-f7fc6b6e5383" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e2-bc93-dcb36582ef2b" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">var language = &quot;JavaScript&quot;;
+console.log(language); // JavaScript
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cc-a28b-fef7e39b508f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8136-baff-f60d7f22b300" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8163-821d-d595423c4d0a" class="">🔹 <strong>JavaScript Operator Precedence Table</strong></h3></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-8149-b7f2-cd73f73b772a" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8164-a87e-f77d1c5229f0"><td id="OGHW" class=""><strong>Precedence</strong></td><td id="hKXq" class=""><strong>Operator</strong></td><td id="XNd=" class=""><strong>Type</strong></td><td id="jbfM" class=""><strong>Associativity</strong></td><td id=";ac}" class=""><strong>Example</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-814b-ae45-df851cc7b0a9"><td id="OGHW" class="">1 (Highest)</td><td id="hKXq" class=""><code>()</code></td><td id="XNd=" class="">Grouping</td><td id="jbfM" class="">Left to Right</td><td id=";ac}" class=""><code>(a + b)</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8190-9001-f3635aff53d0"><td id="OGHW" class="">2</td><td id="hKXq" class=""><code>.</code> <code>[]</code> <code>()</code></td><td id="XNd=" class="">Member / Call / Access</td><td id="jbfM" class="">Left to Right</td><td id=";ac}" class=""><code>obj.prop</code>, <code>arr[0]</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-811a-a26e-e94f704f309d"><td id="OGHW" class="">3</td><td id="hKXq" class=""><code>new</code> (with argument list)</td><td id="XNd=" class="">Object creation</td><td id="jbfM" class="">Right to Left</td><td id=";ac}" class=""><code>new Person()</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8148-a2d7-ff956128cfa5"><td id="OGHW" class="">4</td><td id="hKXq" class=""><code>++</code> <code>--</code></td><td id="XNd=" class="">Postfix Increment/Decrement</td><td id="jbfM" class="">Left to Right</td><td id=";ac}" class=""><code>a++</code>, <code>b--</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8191-a265-d4272d431c98"><td id="OGHW" class="">5</td><td id="hKXq" class=""><code>++</code> <code>--</code> <code>+</code> <code>-</code> <code>~</code> <code>!</code></td><td id="XNd=" class="">Unary</td><td id="jbfM" class="">Right to Left</td><td id=";ac}" class=""><code>++a</code>, <code>-a</code>, <code>!a</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8195-a1fa-d82ab0acc075"><td id="OGHW" class="">6</td><td id="hKXq" class=""><code>**</code></td><td id="XNd=" class="">Exponentiation</td><td id="jbfM" class="">Right to Left</td><td id=";ac}" class=""><code>2 ** 3</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-818a-b37e-fe34390bcc8a"><td id="OGHW" class="">7</td><td id="hKXq" class=""><code>*</code> <code>/</code> <code>%</code></td><td id="XNd=" class="">Multiplication, Division, Modulus</td><td id="jbfM" class="">Left to Right</td><td id=";ac}" class=""><code>a * b</code>, <code>a % b</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8104-9368-e4adf2417635"><td id="OGHW" class="">8</td><td id="hKXq" class=""><code>+</code> <code>-</code></td><td id="XNd=" class="">Addition, Subtraction</td><td id="jbfM" class="">Left to Right</td><td id=";ac}" class=""><code>a + b</code>, <code>a - b</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-811e-8831-eb510b3797e6"><td id="OGHW" class="">9</td><td id="hKXq" class=""><code>&lt;&lt;</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code></td><td id="XNd=" class="">Bitwise Shifts</td><td id="jbfM" class="">Left to Right</td><td id=";ac}" class=""><code>a &lt;&lt; 2</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-814d-b17d-eec729aa82b6"><td id="OGHW" class="">10</td><td id="hKXq" class=""><code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code></td><td id="XNd=" class="">Comparison</td><td id="jbfM" class="">Left to Right</td><td id=";ac}" class=""><code>a &lt; b</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8198-8b17-e84bd185cb5b"><td id="OGHW" class="">11</td><td id="hKXq" class=""><code>==</code> <code>!=</code> <code>===</code> <code>!==</code></td><td id="XNd=" class="">Equality</td><td id="jbfM" class="">Left to Right</td><td id=";ac}" class=""><code>a == b</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81d9-b3cd-d9b93c6265d0"><td id="OGHW" class="">12</td><td id="hKXq" class=""><code>&amp;</code></td><td id="XNd=" class="">Bitwise AND</td><td id="jbfM" class="">Left to Right</td><td id=";ac}" class=""><code>a &amp; b</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8172-a1d5-ca15e798d088"><td id="OGHW" class="">13</td><td id="hKXq" class=""><code>^</code></td><td id="XNd=" class="">Bitwise XOR</td><td id="jbfM" class="">Left to Right</td><td id=";ac}" class=""><code>a ^ b</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-812c-b023-e4fb8fbf1e5f"><td id="OGHW" class="">14</td><td id="hKXq" class="">`</td><td id="XNd=" class="">`</td><td id="jbfM" class="">Bitwise OR</td><td id=";ac}" class="">Left to Right</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-810a-873e-f8235de0ed5b"><td id="OGHW" class="">15</td><td id="hKXq" class=""><code>&amp;&amp;</code></td><td id="XNd=" class="">Logical AND</td><td id="jbfM" class="">Left to Right</td><td id=";ac}" class=""><code>a &amp;&amp; b</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81bd-8f7c-f1dc561fbf1a"><td id="OGHW" class="">16</td><td id="hKXq" class="">`</td><td id="XNd=" class=""></td><td id="jbfM" class="">`</td><td id=";ac}" class="">Logical OR</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8173-8e82-cb99770e1bf8"><td id="OGHW" class="">17</td><td id="hKXq" class=""><code>??</code></td><td id="XNd=" class="">Nullish Coalescing</td><td id="jbfM" class="">Left to Right</td><td id=";ac}" class=""><code>a ?? b</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81cf-bbbf-ec22196e9c14"><td id="OGHW" class="">18</td><td id="hKXq" class=""><code>?:</code></td><td id="XNd=" class="">Ternary Conditional</td><td id="jbfM" class="">Right to Left</td><td id=";ac}" class=""><code>a ? b : c</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81d7-b525-dfecb514bed8"><td id="OGHW" class="">19</td><td id="hKXq" class=""><code>=</code> <code>+=</code> <code>-=</code> etc.</td><td id="XNd=" class="">Assignment</td><td id="jbfM" class="">Right to Left</td><td id=";ac}" class=""><code>a = b</code>, <code>a += 5</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8119-afe2-cea38c9f443b"><td id="OGHW" class="">20</td><td id="hKXq" class=""><code>yield</code>, <code>await</code></td><td id="XNd=" class="">Control Flow</td><td id="jbfM" class="">Right to Left</td><td id=";ac}" class=""><code>await fetch()</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81c0-8819-ff9edeb0bdeb"><td id="OGHW" class="">21</td><td id="hKXq" class=""><code>,</code></td><td id="XNd=" class="">Comma</td><td id="jbfM" class="">Left to Right</td><td id=";ac}" class=""><code>a = 1, b = 2</code></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a7-badd-f5eab6094881"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8151-966d-de4dbef95efd" class="">🧠 <strong>Notes:</strong></h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81aa-a0fb-f1462a47ae99" class="bulleted-list"><li style="list-style-type:disc"><strong>Higher precedence operators are evaluated first.</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8180-89ea-e89808dd51c5" class="bulleted-list"><li style="list-style-type:disc"><strong>Parentheses </strong><code><strong>()</strong></code> can always override default precedence.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816d-a63b-cca4957e9dc3" class="bulleted-list"><li style="list-style-type:disc"><strong>Right-to-left associativity</strong> means the operator on the right is evaluated first (e.g., <code>a = b = 5</code>).</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-b70c-fde13cceee86" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d9-8473-ff27ff6a87cb" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8115-803c-de3d409db767" class="">🔹 <strong>31. Add Two Numbers</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-a33e-d6be8590f4cc" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811e-913d-c18f6ce161f3" class="">Declare <code>a = 10</code> and <code>b = 15</code>. Print their sum.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-85f5-eb99a288a55f" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e8-bdbf-eea3c4ca2133" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let a = 10;
+let b = 15;
+console.log(a + b); // 25
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817c-8f0b-f66b471af02c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812d-8509-e27927331451" class="">🔹 <strong>32. Subtract Two Numbers</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-9712-dfa4ee9170dd" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8131-aa04-e18fbe0f6b7e" class="">Declare <code>x = 50</code> and <code>y = 20</code>. Print the result of <code>x - y</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d2-b7c9-c9390ed63a1b" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8107-b231-ddb553dee1be" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let x = 50;
+let y = 20;
+console.log(x - y); // 30
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813b-a103-ca318ed9f9b0"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813d-a8e2-f97706f3932a" class="">🔹 <strong>33. Multiply Two Numbers</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fa-950a-c71d2b7f8682" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817a-82b4-e9070da8161d" class="">Multiply <code>num1 = 7</code> and <code>num2 = 6</code>. Print the result.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e9-ba7a-df5f3ad3480d" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8175-ad1b-c8d17a34f984" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let num1 = 7;
+let num2 = 6;
+console.log(num1 * num2); // 42
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f3-9f87-d5c2a693512a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e1-9726-c2be31f0c867" class="">🔹 <strong>34. Divide Two Numbers</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8107-9d78-f592842b8fa0" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815e-9e76-e937a6e6c216" class="">Divide <code>total = 100</code> by <code>parts = 4</code> and print the result.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818a-a7b4-dfb3c8d47cf5" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81fb-832e-d7842f06314a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let total = 100;
+let parts = 4;
+console.log(total / parts); // 25
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8101-980a-d2f2845683ca"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8195-b5f0-e9fce4df4d7e" class="">🔹 <strong>35. Find Remainder using Modulus Operator</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812f-96d8-c7c0a4b21fac" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811b-a9fd-d6cc1d5f8868" class="">Declare <code>a = 13</code> and <code>b = 5</code>. Print the remainder when <code>a</code> is divided by <code>b</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-be13-c15fdd9531ad" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ba-bb21-ec243c7a0044" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let a = 13;
+let b = 5;
+console.log(a % b); // 3
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8150-8ce4-d218047a1a2c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ae-befe-e7ce466f60f3" class="">🔹 <strong>36. Exponentiation Operator</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8109-b551-f27ec136a756" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f0-886c-d16cf6172460" class="">Calculate <code>base = 3</code> raised to the power <code>exp = 4</code> using the <code>**</code> operator.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811a-97b1-dbbd24bae672" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f0-8896-f51bb246014a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let base = 3;
+let exp = 4;
+console.log(base ** exp); // 81
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810e-9d70-d4feac95679d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813b-af6f-fd62e4885fcb" class="">🔹 <strong>37. Use All Operators Together</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8101-8b05-d4bbe453f4da" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815c-986b-f22fe3c589e5" class="">Let <code>a = 5</code> and <code>b = 2</code>. Print the result of:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8132-a256-f2ccdf04bf61" class="bulleted-list"><li style="list-style-type:disc"><code>a + b</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ae-acdd-c6403dcc1b95" class="bulleted-list"><li style="list-style-type:disc"><code>a - b</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8189-b261-e229a6387ae2" class="bulleted-list"><li style="list-style-type:disc"><code>a * b</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8142-bad1-cbdea3e4d28e" class="bulleted-list"><li style="list-style-type:disc"><code>a / b</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8189-ac56-e2e9ba942e83" class="bulleted-list"><li style="list-style-type:disc"><code>a % b</code></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-b20e-d2a53ce22c13" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815c-bcc9-fd96662ad58c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let a = 5;
+let b = 2;
+
+console.log(a + b); // 7
+console.log(a - b); // 3
+console.log(a * b); // 10
+console.log(a / b); // 2.5
+console.log(a % b); // 1
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8130-9a2e-f6a5723daf20"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813a-a637-d1280db24f0d" class="">🔹 <strong>38. Order of Operations</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816b-afcb-e014d4b77555" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ba-8798-c6d8a5c8b94f" class="">Evaluate <code>10 + 2 * 5</code> and print the result.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815e-9989-c61e465f30ec" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-814f-b37f-c0dcbf19e1de" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(10 + 2 * 5); // 20
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-bc14-db7293e71f04" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b3-af8f-e8ff7c0c6b34" class="">Multiplication happens before addition.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8180-8680-f2ce33d09b3d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8108-8482-c2d92e51efcf" class="">🔹 <strong>39. Parentheses to Change Order</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e7-b60f-fb1d90643998" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-be4c-e752317ca844" class="">What will <code>(10 + 2) * 5</code> return?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b2-99a9-e8c8193815a1" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81a4-9ea9-ceae60a93ada" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log((10 + 2) * 5); // 60
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8187-8e09-e0b21c88b2ab" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-aa52-c7a2f9e5ff4a" class="">Parentheses change the evaluation order.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8149-a55c-c32982600e15"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8133-9a83-da4c981a721e" class="">🔹 <strong>40. Negative Numbers and Arithmetic</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810c-8283-cda608582eb3" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8122-abd6-cc9e870c3309" class="">Evaluate <code>result = -5 + 3 * 2</code> and print it.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ed-be48-ee3a53de5189" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8102-8e87-d1dd5ef382dc" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let result = -5 + 3 * 2;
+console.log(result); // 1
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8163-afb5-c267e43234eb" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818f-89b1-c67bb4667bd9" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f2-8394-c91e3090ee5d" class="">🔹 <strong>41. Multiply and Add in One Line</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817e-93f8-ed0076ff9b3f" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8157-993f-e90e4010a904" class="">If <code>a = 3</code>, <code>b = 4</code>, and <code>c = 5</code>, print the result of <code>a * b + c</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8126-a67c-ef068427294f" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-816e-b7af-dc01e52a9156" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let a = 3, b = 4, c = 5;
+console.log(a * b + c); // 12 + 5 = 17
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8151-baf8-d4e2d4c49e3a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d2-b0ff-e6ea87c9647a" class="">🔹 <strong>42. Divide and Subtract in One Line</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816e-b561-c1afa80cbd0f" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ea-a702-ca779383bf09" class="">Declare <code>x = 20</code>, <code>y = 4</code>, <code>z = 2</code>. Evaluate <code>x / y - z</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-9e2b-f7725ce4fb22" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8147-aca5-f9834e0f8872" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let x = 20, y = 4, z = 2;
+console.log(x / y - z); // 5 - 2 = 3
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e7-a62d-d8bf5799ce31"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8164-9cb7-df0c63f3d252" class="">🔹 <strong>43. Use Modulus on Even Number</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8148-986b-fa3a46fbf6c2" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813f-bd69-cc69e143bc8c" class="">If <code>num = 10</code>, what will <code>num % 2</code> return?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c7-9e7e-cf1ac3f41cc9" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8125-ac89-ef180ef1cb05" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let num = 10;
+console.log(num % 2); // 0
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8186-8124-f5fe3eb29d54"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810b-ab38-ea8b82c9ba31" class="">🔹 <strong>44. Use Modulus on Odd Number</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8109-b491-fa89e200afd6" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8168-8694-de3136e57659" class="">If <code>num = 17</code>, what will <code>num % 2</code> return?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-b1a6-f68b444f487a" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e9-a9a4-d03deed505c1" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let num = 17;
+console.log(num % 2); // 1
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8128-83fe-f968c4918e45"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818c-a9f5-f924f34ac1cd" class="">🔹 <strong>45. Evaluate Expression with All Operators</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8104-9f44-cd4f0b95f9ef" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818d-a971-de75dffa5464" class="">Evaluate: <code>5 + 3 * 2 - 4 / 2</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d4-bcf5-e0f33a4a358e" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d1-82f0-fa571f0ad272" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(5 + 3 * 2 - 4 / 2); // 5 + 6 - 2 = 9
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819b-b989-e35bac7acd51"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8199-a381-cb8b114816e5" class="">🔹 <strong>46. Cube a Number</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811b-a631-cd06022e702f" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e1-9f8d-fd48a9a40e20" class="">Declare <code>n = 4</code>. Print the cube of <code>n</code> using the exponentiation operator.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bb-82ac-f0e365c8d39b" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81dc-be7e-f4c20f9845ab" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let n = 4;
+console.log(n ** 3); // 64
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81bc-9e95-c1fee2e663e1"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81db-9ef2-fb86e9be9abd" class="">🔹 <strong>47. Divide Floating Point Numbers</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c3-85eb-fc9c0f357a25" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8133-a598-faa4a2f3d36c" class="">If <code>x = 7.5</code> and <code>y = 2.5</code>, what is <code>x / y</code>?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81eb-94f8-eab934e36122" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d6-ba0c-ce1660744efd" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let x = 7.5, y = 2.5;
+console.log(x / y); // 3
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c7-bbe5-ee076afe179c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8139-89b2-ee645103e025" class="">🔹 <strong>48. Chained Operations Without Parentheses</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81be-bc5f-d4045e86d810" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8122-8f5e-ea2e5d25d637" class="">Evaluate <code>8 + 6 / 2 * 3</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-9b7f-e7745e0d6bfa" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b9-9dda-ea3bc898bcd7" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(8 + 6 / 2 * 3); // 8 + 3 * 3 = 8 + 9 = 17
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8133-8114-d6d255adad4d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8174-8cd6-cd0e84440bde" class="">🔹 <strong>49. Use Negative Values</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8181-95fa-d7530e5afdfe" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cf-9fbc-faf0cf54c26d" class="">If <code>a = -4</code> and <code>b = 2</code>, print <code>a * b</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8129-9d2e-c77e3efdc829" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b6-8e14-c9583375a86c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let a = -4, b = 2;
+console.log(a * b); // -8
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fb-b003-e361d489a0ed"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8115-b9c7-f56db6163d45" class="">🔹 <strong>50. Expression Using All Operators with Parentheses</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814a-abe0-e0b87aad53d1" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818c-8af1-e14f5466c9dc" class="">Evaluate <code>((2 + 3) * (4 - 1)) ** 2</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d0-89d7-e5e2d2435aef" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-819d-a456-fcd03f549058" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(((2 + 3) * (4 - 1)) ** 2); // (5 * 3)^2 = 15^2 = 225
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8138-a4e2-cbc36224b22d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8191-bfa8-ec4db28a1980" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814f-ab9a-f195fbfb96c0" class="">🔹 <strong>51. String + Number</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817a-a50b-d62313c3a8d1" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819e-9780-d494ca0c376b" class="">What is the result of <code>&quot;10&quot; + 5</code>?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b2-91c8-e2c66b6a8452" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c0-b26b-c3469051c2ac" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;10&quot; + 5); // &quot;105&quot;</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c6-b3ae-c515731584bc" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-990c-dcff216c6ed8" class=""><code>+</code> with a string causes string concatenation. Number <code>5</code> is converted to <code>&quot;5&quot;</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813a-8eed-d0fb3c373bf9"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e8-afb2-c8ad048e0468" class="">🔹 <strong>52. String - Number</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-84c5-c5dea6c334b4" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8108-81a3-f1ed2527cb36" class="">What will <code>&quot;10&quot; - 3</code> return?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-a8d8-e6de620910e6" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8185-ab69-c02b4b670a84" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;10&quot; - 3); // 7</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8120-b917-f79a9dc0672c" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d5-958f-d40bcea8591c" class="bulleted-list"><li style="list-style-type:disc"> forces <code>&quot;10&quot;</code> to be converted to a number.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f1-9036-d4fac79be00c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-817a-9da9-d525a343e2cc" class="">🔹 <strong>53. Number + Boolean</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d5-a373-e0c4b54b6e83" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-a025-d86b81dc87be" class="">What is <code>true + 2</code>?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bb-94c8-df8e8a12fda5" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818d-be22-ebff84dc1653" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(true + 2); // 3
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814f-97a0-dc125a46d080" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811d-b3cb-d859a76c2dab" class=""><code>true</code> is converted to <code>1</code>. So, <code>1 + 2 = 3</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8181-afb0-e04b4c16c07b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8104-b639-d4642d432b4b" class="">🔹 <strong>54. Number - Boolean</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8148-b319-d35af1769ab4" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8189-8bbb-eda82906fe2f" class="">Evaluate <code>5 - false</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816e-a2c8-d1d7f8415780" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81bc-ba27-dc8336ab39f8" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(5 - false); // 5
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811a-9020-e3998013a008" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-919c-fc8855740823" class=""><code>false</code> becomes <code>0</code>. So, <code>5 - 0 = 5</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8195-98c2-fd5795ce1177"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a3-b6fb-d7de28243f36" class="">🔹 <strong>55. Number + null</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f8-bce6-c89329a76437" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8113-865b-fb6009498ae7" class="">What is <code>10 + null</code>?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818a-84a2-f26b41b361b1" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8180-add5-c82ab677f42e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(10 + null); // 10
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-a668-f9e3352c40f8" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8125-9f89-f0e7a709b439" class=""><code>null</code> is converted to <code>0</code> in arithmetic operations.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b6-8a0a-ee1dc7ac8b2f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b0-abf5-d6f2eea7368b" class="">🔹 <strong>56. Number + undefined</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816d-8754-d6999cf4c5b8" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811a-b167-e4ab00169c5a" class="">What is the result of <code>10 + undefined</code>?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8177-8c6a-f98628d7c5bc" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f1-b8f1-c7d0905f75a6" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(10 + undefined); // NaN
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d0-a222-dc0a5719c19f" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8137-a5b4-d6c4d38a4797" class=""><code>undefined</code> can&#x27;t be converted to a number → result is <code>NaN</code> (Not a Number).</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8197-928a-c0f6b54b5bbb"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8104-9708-fd1b4e919497" class="">🔹 <strong>57. String * Number</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-b4ed-debded067dba" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-bc97-c636bc661e6d" class="">Evaluate <code>&quot;4&quot; * 2</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fc-81fb-c99bec86eeaa" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-816f-83d5-f13637151475" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;4&quot; * 2); // 8
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813a-9450-d083b5ba2d62" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810a-82a5-c0b44b702d5f" class="bulleted-list"><li style="list-style-type:disc"> triggers string-to-number conversion.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8108-a0d8-f358ae6f1a9c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810d-ab19-f9c2e7d0a658" class="">🔹 <strong>58. String / Number</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813d-9c5e-e2e21f570b59" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8163-b604-d131367412c3" class="">What is <code>&quot;100&quot; / 4</code>?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8119-893c-cd3aa62ad51c" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f6-963b-ffb63ec140ce" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;100&quot; / 4); // 25
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a6-85d0-e9093a126dbc" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8197-814f-c9bc03f4d043" class=""><code>&quot;100&quot;</code> becomes <code>100</code> for division.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a2-a29b-d0a6e3abc6c5"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810c-b970-e570c67efd0e" class="">🔹 <strong>59. null + true</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8143-b4a1-ece2d24870ef" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8179-8416-e71a1f94db32" class="">What is the result of <code>null + true</code>?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-83dd-e356e6ab4e07" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8165-89a1-e78f58653a54" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(null + true); // 1
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8199-b0e7-cf8e72abe983" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-af06-f3f7f4a177bb" class=""><code>null → 0</code>, <code>true → 1</code>, so <code>0 + 1 = 1</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8153-8d38-fe47b1789f9b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8122-a3d7-c978d5e2aec2" class="">🔹 <strong>60. Boolean * String</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a6-9771-ca3bc8c9c291" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8193-8f55-dbd513339e1f" class="">What is <code>true * &quot;3&quot;</code>?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8174-8a54-f0b46f7c7301" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81fa-8fb5-e02fd67dd460" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(true * &quot;3&quot;); // 3
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810c-bbc8-e55814a8d149" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f9-a561-cc52196286ee" class=""><code>true → 1</code>, <code>&quot;3&quot; → 3</code>, so <code>1 * 3 = 3</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814e-a4db-fc2723616f30" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c8-9199-f41cb8063a49" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bb-9312-dd55a5563fc2" class="">🔹 <strong>61. undefined - undefined</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e1-9fef-c8c58f54c420" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f7-8bd6-f82147461514" class="">What will <code>undefined - undefined</code> return?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-9ed0-c5adf68d8f72" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-813c-bb86-c477599f7f25" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(undefined - undefined); // NaN
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-8687-d3cde0e73d8c" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f2-8504-d44583497511" class="">Arithmetic with <code>undefined</code> always gives <code>NaN</code> because it cannot be converted to a number.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ad-a607-f19273d42d43"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8117-8742-e2408b821d72" class="">🔹 <strong>62. NaN + 5</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8119-a16a-e9f27dc93500" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8197-bedd-fbee7b8be717" class="">What will <code>NaN + 5</code> return?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8141-891a-cec9e3203917" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-817b-8d0f-f6e87eea51e9" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(NaN + 5); // NaN
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8172-904a-e940970deb19" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c0-97d1-ed18847b5a61" class="">Any arithmetic operation with <code>NaN</code> results in <code>NaN</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816c-a652-cf8da6c1cd84"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812c-98d0-de699fee3f94" class="">🔹 <strong>63. &quot;abc&quot; - 2</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-9545-e87532feb324" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812f-81cd-e6fa00fded15" class="">What is <code>&quot;abc&quot; - 2</code>?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8119-af6f-d2c42cef9baf" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8197-b504-dc1f2dfe7df5" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;abc&quot; - 2); // NaN
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8169-b253-f99d177c0480" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8146-ae1a-f061b0187fdf" class=""><code>&quot;abc&quot;</code> can’t be converted to a number, so the result is <code>NaN</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81bb-a36e-e40fee563ab1"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f5-9799-c988bdf20edf" class="">🔹 <strong>64. null / 2</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d1-a7ae-d8909f74d18b" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-9746-e3f43e9f4328" class="">What is <code>null / 2</code>?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812d-a1de-f3e42eddf431" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ec-80c8-d7a8d88cd95e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(null / 2); // 0
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810a-b7c9-c4705eb4ab2b" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-a9f8-f8c47005da7c" class=""><code>null</code> becomes <code>0</code>, so <code>0 / 2 = 0</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811a-8bf7-c5455cab24b0"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81da-a0e2-fb6518611321" class="">🔹 <strong>65. true - false</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816d-be17-e46edceda335" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b6-8109-d80416c2b495" class="">What is <code>true - false</code>?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-b4f2-cd70d00d403d" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81eb-a460-c39d56a29df3" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(true - false); // 1
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8162-aa94-e470edd5b448" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-8389-c60e0a585bbf" class=""><code>true → 1</code>, <code>false → 0</code>, so <code>1 - 0 = 1</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815d-a34f-fe154a78a172"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81be-aea3-d9da3e5611d6" class="">🔹 <strong>66. &quot;20&quot; + true</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-8a7b-ec9d0eac3faf" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bb-985a-e8017cbdb7cb" class="">What will <code>&quot;20&quot; + true</code> return?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818f-a810-feb82f21acbf" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ff-9602-f17271b87c2d" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;20&quot; + true); // &quot;20true&quot;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-9ccb-fa1170c2c4cb" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ed-8602-d9a7749fa776" class=""><code>+</code> with a string results in string concatenation.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8101-89a3-c1aef1f27029"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8179-a328-e7a4fa39df2b" class="">🔹 <strong>67. false + &quot;10&quot;</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8105-b89f-e9a307ceffb7" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a7-8298-f8939cbce26c" class="">Evaluate <code>false + &quot;10&quot;</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8146-a9ec-c3cd2a2602bf" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c0-a569-f8bb84c08182" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(false + &quot;10&quot;); // &quot;false10&quot;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8142-842a-dd4d68703096" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8133-aa2f-ec4a533ba93d" class="">String concatenation again. <code>false</code> becomes <code>&quot;false&quot;</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ad-b8e7-c7be72f60bbe"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8168-a0de-c6d2e40501d1" class="">🔹 <strong>68. true + null</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-9a92-e99d47821ff8" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-b1d1-f97a02a30d2a" class="">What is <code>true + null</code>?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d0-9d2d-c9d9d5a2ad29" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8188-b6c6-d50733b962d0" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(true + null); // 1
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-91f2-cb558bc318b1" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8112-be52-e0ddb1a004d3" class=""><code>true → 1</code>, <code>null → 0</code>, so <code>1 + 0 = 1</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ae-962a-e9262e4bff3e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bd-b91c-ead4c2a8f391" class="">🔹 <strong>69. &quot;5&quot; % 2</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816d-9e80-d0c69280cbf5" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812f-8063-e90b6765d7ad" class="">What is the result of <code>&quot;5&quot; % 2</code>?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8165-b192-c96bdb16f2af" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8173-8295-ec438a100ce4" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;5&quot; % 2); // 1
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d2-be47-e8ed3675071c" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-90e2-c70ff75b4d39" class=""><code>&quot;5&quot;</code> is converted to <code>5</code>, so <code>5 % 2 = 1</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a1-b5e4-ced322cecb85"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c7-9be9-f1cb2ef5c458" class="">🔹 <strong>70. &quot;8&quot; * null</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819e-a3e2-c56150555e43" class=""><strong>Question:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814a-94e0-ed7293fbd544" class="">What is <code>&quot;8&quot; * null</code>?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-89c6-de416ad5240f" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8144-8075-c148695b48f7" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;8&quot; * null); // 0
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-b1d7-c8010f0e51d3" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8105-a05e-ffb6c90aecec" class=""><code>&quot;8&quot;</code> becomes <code>8</code>, <code>null</code> becomes <code>0</code>, so <code>8 * 0 = 0</code>.</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

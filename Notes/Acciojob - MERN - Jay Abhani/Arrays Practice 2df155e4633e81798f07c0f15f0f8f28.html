@@ -1,0 +1,891 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Arrays Practice</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-8179-8f07-c0f15f0f8f28" class="page sans"><header><h1 class="page-title" dir="auto">Arrays Practice</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81db-a13c-e7943921e13f" class="">✅ <strong>Problem 1: Sum of All Elements</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c8-8e4a-f66f9b41e446" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8159-97ef-dc4f35997d61" class="">Given an array of numbers, return the sum of all elements.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815e-86f4-f27350f6a1ba" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8145-b70b-cd4487969abf" class="">Input: <code>[1, 2, 3, 4]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b9-a239-c97f86c92a24" class="">Output: <code>10</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8165-b53a-fbd6b3c1022f" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-8133-afcf-ca733c40eccc" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function sumArray(arr) {
+  let sum = 0;
+  for (let num of arr) {
+    sum += num;
+  }
+  return sum;
+}
+
+console.log(sumArray([1, 2, 3, 4])); // Output: 10</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8105-879f-e017c9f99a33"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81cf-85c1-e2b34d3327c4" class="">✅ <strong>Problem 2: Find Maximum Element</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818a-88b6-d1e3a24a360b" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-9fc2-d0bb15acb9f2" class="">Return the largest number in the array.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-9db7-d75031dcc9d0" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813e-a92b-c08b1ce2129a" class="">Input: <code>[10, 22, 5, 7]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8143-bbdf-cc4ec10da24e" class="">Output: <code>22</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-a4b5-fa9a67c32cfe" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8169-b2be-e0f14e83d238" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function findMax(arr) {
+  let max = arr[0];
+  for (let num of arr) {
+    if (num &gt; max) {
+      max = num;
+    }
+  }
+  return max;
+}
+
+console.log(findMax([10, 22, 5, 7])); // Output: 22
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e6-85e2-ff3fb720f97e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f9-a1df-d87186ab5587" class="">✅ <strong>Problem 3: Count Even Numbers</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818b-b5c7-dc31028dc24f" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8169-83db-f8ed30968b14" class="">Count how many even numbers are present in the array.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812e-b4c4-c8f354ffdc28" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8128-abe8-e6a23b478822" class="">Input: <code>[1, 4, 6, 7, 8]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c6-8532-c89ff1b56ba4" class="">Output: <code>3</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811b-91b2-d8ee661e6412" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8188-a361-c49c88142bfe" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function countEvens(arr) {
+  let count = 0;
+  for (let num of arr) {
+    if (num % 2 === 0) {
+      count++;
+    }
+  }
+  return count;
+}
+
+console.log(countEvens([1, 4, 6, 7, 8])); // Output: 3
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ab-83ae-ec576a4539e2"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81cb-9538-f4204ceb5491" class="">✅ <strong>Problem 4: Reverse an Array</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-a967-dbc2b5300970" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bd-abfa-c7f280a8c14c" class="">Return a new array with the elements in reverse order.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811c-a14b-ee22fc22b4b9" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c5-ad5a-f9abebb6b0e3" class="">Input: <code>[1, 2, 3]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819a-b1d0-df1c92a0d978" class="">Output: <code>[3, 2, 1]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ba-a803-ec44161252d4" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81bf-87c7-ca01288c1b03" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function reverseArray(arr) {
+  let reversed = [];
+  for (let i = arr.length - 1; i &gt;= 0; i--) {
+    reversed.push(arr[i]);
+  }
+  return reversed;
+}
+
+console.log(reverseArray([1, 2, 3])); // Output: [3, 2, 1]
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a2-bcae-d784c796ed25"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811c-a620-c00487a8f067" class="">✅ <strong>Problem 5: Check if Array Contains Element</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e5-b8e4-cb19c30c1a51" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e8-adaa-d0b1b6bf9548" class="">Write a function to check if a given element exists in an array.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8147-acc0-fff9ae646158" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8147-8492-c12c0d6d8b45" class="">Input: <code>[5, 10, 15], 10</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8197-9042-c73dfa0df684" class="">Output: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-bebf-e3eeef884d3e" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8138-98e9-f146d571d26f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function containsElement(arr, element) {
+  for (let item of arr) {
+    if (item === element) {
+      return true;
+    }
+  }
+  return false;
+}
+
+console.log(containsElement([5, 10, 15], 10)); // Output: true
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815a-868e-dfe085048fcc" class="">✅ <strong>Problem 6: Find the Length of an Array</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81af-b968-d844b1e9fb26" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d8-820f-fb73ff22308e" class="">Return the number of elements in the given array.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812d-aec0-ee7aab3a839a" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8146-8d6d-eee6ff954ca6" class="">Input: <code>[4, 5, 6]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-b89c-dde2816e8985" class="">Output: <code>3</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ed-81bd-eca310aadb69" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8111-a552-e9092cb8610a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function getLength(arr) {
+  return arr.length;
+}
+
+console.log(getLength([4, 5, 6])); // Output: 3
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816c-a61c-dec2bd88ee4e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8170-90cc-f8aad4403998" class="">✅ <strong>Problem 7: Get the First Element of an Array</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-a5a9-d78b8a77a7fa" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e4-a4d2-d1863d2f9d80" class="">Return the first element of the array.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e1-ab75-fa409c93a780" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d4-8f5a-fbb52d41c577" class="">Input: <code>[10, 20, 30]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fa-b974-f794a4f6fcd9" class="">Output: <code>10</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-bac3-d489d91cd14a" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81a1-aba1-c15755fd473a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function getFirstElement(arr) {
+  return arr[0];
+}
+
+console.log(getFirstElement([10, 20, 30])); // Output: 10
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8132-9bca-e092e80d9d13"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8178-914f-dbf0c007565f" class="">✅ <strong>Problem 8: Get the Last Element of an Array</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8171-8c40-f5c6f498dd11" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814a-9793-d0859ddf3a74" class="">Return the last element of the array.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8160-8307-c952ad880420" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813f-b5a7-e501cbed4367" class="">Input: <code>[1, 2, 3, 4]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811f-abd4-f1f3be284f72" class="">Output: <code>4</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8167-bfe7-d03557c1e84c" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812b-aa8c-fb43f05b0800" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function getLastElement(arr) {
+  return arr[arr.length - 1];
+}
+
+console.log(getLastElement([1, 2, 3, 4])); // Output: 4
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810a-99a3-f462761aeea5"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d5-bbd7-f86216bbb88b" class="">✅ <strong>Problem 9: Filter Numbers Greater Than 5</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8160-b901-cc6dad119329" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8146-ae7c-ce5152ebfed7" class="">Return a new array containing only numbers greater than 5.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8137-98fe-fe158b88718a" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-a44b-c906d623adc1" class="">Input: <code>[2, 6, 8, 3]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-8a79-f1099161efde" class="">Output: <code>[6, 8]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ba-a698-cc9ba0aa2015" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c7-966a-e90070a5564a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function filterGreaterThanFive(arr) {
+  let result = [];
+  for (let num of arr) {
+    if (num &gt; 5) {
+      result.push(num);
+    }
+  }
+  return result;
+}
+
+console.log(filterGreaterThanFive([2, 6, 8, 3])); // Output: [6, 8]
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813a-8699-fdf2abdeb21e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f3-b740-ebd5bd3790cc" class="">✅ <strong>Problem 10: Double Each Element in Array</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816c-99a4-f42f44adb263" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-a2a3-f5d40daeaeab" class="">Return a new array where each element is doubled.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8126-8a35-c63fb8e09cdb" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b6-8483-e5e66350d8b4" class="">Input: <code>[1, 2, 3]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8114-aa9c-ff19216938b5" class="">Output: <code>[2, 4, 6]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-aed2-f9edc1d30033" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8173-9a68-fec78ba2de30" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function doubleElements(arr) {
+  let result = [];
+  for (let num of arr) {
+    result.push(num * 2);
+  }
+  return result;
+}
+
+console.log(doubleElements([1, 2, 3])); // Output: [2, 4, 6]
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-9a0f-c5200c87d5c8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8152-81d6-d13b467a576c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8173-9e9d-fd683b97be0b" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8139-9da4-c34e0d74ac68" class="">✅ <strong>Problem 1: Print All Elements Using </strong><code><strong>forEach</strong></code></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d3-b151-e304b4d48c6b" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-8fe5-d95b4d5e7846" class="">Use <code>forEach</code> to print each element in the array.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8183-8ca3-ebefe187d828" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cf-b4f1-d4e2a12c64dd" class="">Input: <code>[10, 20, 30]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-9d82-c15340c9dc63" class="">Output:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c7-8c6c-f8428ea184ef" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">10
+20
+30
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8191-92bb-d3516d3167f6" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81a8-86f1-d5f9b7a650fb" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function printElements(arr) {
+  arr.forEach((num) =&gt; {
+    console.log(num);
+  });
+}
+
+printElements([10, 20, 30]);
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8177-abcb-deb2d678fd4c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d0-aad5-e31969f90fec" class="">✅ <strong>Problem 2: Double Each Element Using </strong><code><strong>map</strong></code></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-912c-fca41efb8864" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8128-a092-ebc4d91854c9" class="">Use <code>map</code> to return a new array with each number doubled.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e0-8701-cdd32b1a9dfc" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c6-91e5-fcba7879949d" class="">Input: <code>[2, 3, 4]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8178-9244-faf9d5842d6f" class="">Output: <code>[4, 6, 8]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-b6ca-d910c4e1092b" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8194-8ef4-c9b5d921fc22" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function doubleArray(arr) {
+  return arr.map(num =&gt; num * 2);
+}
+
+console.log(doubleArray([2, 3, 4])); // Output: [4, 6, 8]
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818d-ae12-cf51649a3a12"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8170-a2cd-e6406103121a" class="">✅ <strong>Problem 3: Get Only Even Numbers Using </strong><code><strong>filter</strong></code></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814a-ad6e-d4fa0f80dcc5" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b4-922e-e4159a976311" class="">Use <code>filter</code> to return only the even numbers from the array.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8168-bbbd-db1c04b7a8c3" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812d-8b16-c5e61a6e54b2" class="">Input: <code>[1, 2, 3, 4, 5, 6]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-8082-c720e73affe2" class="">Output: <code>[2, 4, 6]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-8756-fa164209b5fa" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8134-bf13-c5eaff58bdc8" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function getEvens(arr) {
+  return arr.filter(num =&gt; num % 2 === 0);
+}
+
+console.log(getEvens([1, 2, 3, 4, 5, 6])); // Output: [2, 4, 6]
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ed-ad15-f0cf12bb4970"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816e-a3d7-c21b329e216c" class="">✅ <strong>Problem 4: Add &quot;Hi&quot; Before Each Name Using </strong><code><strong>map</strong></code></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811b-ab58-fbb2ac8f4905" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-9ac6-d95da7880dac" class="">Given an array of names, return a new array with &quot;Hi&quot; prefixed to each name.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816e-ba31-c54694935704" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8116-83b8-c9e43a687b4d" class="">Input: <code>[&quot;Alice&quot;, &quot;Bob&quot;]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812d-8d07-c72b671d8c53" class="">Output: <code>[&quot;Hi Alice&quot;, &quot;Hi Bob&quot;]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-902a-faacacbae00a" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8118-b330-df27851dc23c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function greetNames(arr) {
+  return arr.map(name =&gt; `Hi ${name}`);
+}
+
+console.log(greetNames([&quot;Alice&quot;, &quot;Bob&quot;])); // Output: [&quot;Hi Alice&quot;, &quot;Hi Bob&quot;]
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816b-a17a-e0ee0dea860b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818c-8c78-fa2ecb932217" class="">✅ <strong>Problem 5: Count Positive Numbers Using </strong><code><strong>forEach</strong></code></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c4-a6fb-c777d78c2012" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-acec-cc65c0d887c9" class="">Use <code>forEach</code> to count how many numbers are positive in the array.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8160-bb63-e478a7f26c6e" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813a-abf9-d928b803ec80" class="">Input: <code>[-2, 5, 3, -1, 0]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c4-bd2d-cb81b5f67c65" class="">Output: <code>2</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b2-b952-d9a5e3d38fba" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-819e-b280-db402de1569e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function countPositive(arr) {
+  let count = 0;
+  arr.forEach(num =&gt; {
+    if (num &gt; 0) count++;
+  });
+  return count;
+}
+
+console.log(countPositive([-2, 5, 3, -1, 0])); // Output: 2
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8147-b61b-cb8f8f44dda2"/></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cf-a48a-fc502b6f076f" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8170-855c-c68fbb05b79a" class="">✅ <strong>Problem 6: Convert All Strings to Uppercase Using </strong><code><strong>map</strong></code></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-9ca2-d3fdc07f366f" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8111-85e3-cf0acc3c6db8" class="">Given an array of lowercase strings, return a new array with all strings in uppercase.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813d-9b77-ec0e2355c94f" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c7-a89f-dfe1084053c6" class="">Input: <code>[&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8176-a7aa-eb33bb457d17" class="">Output: <code>[&quot;APPLE&quot;, &quot;BANANA&quot;, &quot;CHERRY&quot;]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818f-8f7e-ce820d34ef76" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ee-a4a2-eeecae228f61" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function toUpperCaseArray(arr) {
+  return arr.map(str =&gt; str.toUpperCase());
+}
+
+console.log(toUpperCaseArray([&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]));
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81aa-9b03-e4208db155ad"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b9-8564-c986bbeb29ba" class="">✅ <strong>Problem 7: Find All Numbers Greater Than 50 Using </strong><code><strong>filter</strong></code></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8109-9072-d0303e37bce2" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8136-a4da-cfb72769a26a" class="">Use <code>filter</code> to return a new array of numbers greater than 50.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ea-b853-d64dbd6dac08" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a1-9aad-d9d5412b7d2d" class="">Input: <code>[10, 60, 45, 80, 30]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f0-9799-d9f005951670" class="">Output: <code>[60, 80]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8175-9d51-fb98f294aaba" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-811c-939b-de8735763a8b" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function filterGreaterThan50(arr) {
+  return arr.filter(num =&gt; num &gt; 50);
+}
+
+console.log(filterGreaterThan50([10, 60, 45, 80, 30]));
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811f-821d-cdcc9af20f5a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811b-9280-f4671b291930" class="">✅ <strong>Problem 8: Print Each Element with Its Index Using </strong><code><strong>forEach</strong></code></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d5-8346-cdb4c6fb58cf" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811c-a8ec-e5faf8502fd4" class="">Print every element along with its index using <code>forEach</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-8f0f-f9d82835f275" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c9-af2c-d2d66b16e1cd" class="">Input: <code>[&quot;x&quot;, &quot;y&quot;, &quot;z&quot;]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-8d1b-cb2c03330781" class="">Output:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8144-9e4c-f2591ea9f093" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">Index 0: x
+Index 1: y
+Index 2: z
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8159-ac27-f1db964e4949" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8153-8f85-cccbbeeb88cd" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function printWithIndex(arr) {
+  arr.forEach((element, index) =&gt; {
+    console.log(`Index ${index}: ${element}`);
+  });
+}
+
+printWithIndex([&quot;x&quot;, &quot;y&quot;, &quot;z&quot;]);
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8194-95c4-f84fda3b5aad"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812d-8b0b-d8057a720ec7" class="">✅ <strong>Problem 9: Add 10 to Each Number Using </strong><code><strong>map</strong></code></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f9-84e3-e697ec8b235c" class=""><strong>📝 Problem:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816c-b49f-df966f1db27a" class="">Return a new array with 10 added to each number using <code>map</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81aa-824d-f66c63b55d7c" class=""><strong>💡 Example:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ca-ac09-c8c8249172c6" class="">Input: <code>[5, 10, 15]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8124-8fee-ca585d0a8ca4" class="">Output: <code>[15, 20, 25]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818c-ab9b-eb4a62cbbbfb" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8148-af5f-edf4011605e9" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function addTen(arr) {
+  return arr.map(num =&gt; num + 10);
+}
+
+console.log(addTen([5, 10, 15]));
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ce-a956-efe632ec913e" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,1010 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Conditions - Practice</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-81c5-a9b7-fc480a78a916" class="page sans"><header><h1 class="page-title" dir="auto">Conditions - Practice</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-817f-ab48-d1ec895802a2" class="">🧪 Question 1: Voting Booth Check</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8124-ab81-c4a3b500380e" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-bfd6-f37972809d36" class="">You are building a simple program for a government voting booth system. When a user inputs their age, the system should check whether they are legally allowed to vote (minimum age: 18 years).</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-baca-ff83c569ab5b" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-8189-bdff-f7b5e4c67045" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let age = 20;
+
+if (age &gt;= 18) {
+  console.log(&quot;Eligible to vote&quot;);
+} else {
+  console.log(&quot;Not eligible to vote&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817b-b4fb-c76c2a786bc3"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81fa-aff2-e3829ef55fc5" class="">🧪 Question 2: Electricity Meter Reading</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816e-9e3f-fb92a94a0c15" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815d-a347-c6db51307dbf" class="">An electricity billing system needs to determine whether the number of units consumed in a month is even or odd. This helps in assigning different billing methods.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8152-9233-f414a2308566" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b3-b570-e24bf5c24e03" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let num = 7;
+
+if (num % 2 === 0) {
+  console.log(&quot;Even&quot;);
+} else {
+  console.log(&quot;Odd&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8121-b611-deb4caaa34ba"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81f6-a67d-c4cd9ad33ac7" class="">🧪 Question 3: Student Report Card</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cd-88a9-ee8bb732cfcd" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813e-bc7f-dfc6687f6978" class="">You are building a feature in a student portal that assigns grades based on marks obtained by a student in an exam. The grading scale is:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814a-a429-f784366a668e" class="bulleted-list"><li style="list-style-type:disc">A → 90 and above</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8172-a0ad-ecf9c6752806" class="bulleted-list"><li style="list-style-type:disc">B → 70 to 89</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810a-850c-f4c63123ac3b" class="bulleted-list"><li style="list-style-type:disc">C → 50 to 69</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81cd-bd77-c6d2394fcd94" class="bulleted-list"><li style="list-style-type:disc">F → Below 50</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ba-bc29-e509f9b7f97d" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815f-9542-eb6b72620377" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let marks = 85;
+
+if (marks &gt;= 90) {
+  console.log(&quot;Grade A&quot;);
+} else if (marks &gt;= 70) {
+  console.log(&quot;Grade B&quot;);
+} else if (marks &gt;= 50) {
+  console.log(&quot;Grade C&quot;);
+} else {
+  console.log(&quot;Grade F&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c4-b184-e709de9ca8dd"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ca-ba82-d51fa4b7ce95" class="">🧪 Question 4: ATM Deposit Feedback</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8124-b245-ed61fdc146bc" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8146-a700-f4bb20fdd34c" class="">An ATM machine asks users to enter an amount to deposit. It should then check whether the amount entered is a <strong>positive</strong>, <strong>negative</strong>, or <strong>zero</strong> value and respond accordingly.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816a-bb82-cc7e194bbdc6" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8129-ae23-c444812c43f0" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let number = -5;
+
+if (number &gt; 0) {
+  console.log(&quot;Positive&quot;);
+} else if (number &lt; 0) {
+  console.log(&quot;Negative&quot;);
+} else {
+  console.log(&quot;Zero&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f5-a0db-ec70e44bf79c"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-818f-a6da-d0fc6fb62837" class="">🧪 Question 5: Admin Panel Access</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819a-9e78-fe8859ab1684" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813e-8555-cd41fe736ff7" class="">You&#x27;re developing a basic admin panel login system. Access is granted only if the username is <code>&quot;admin&quot;</code> and the password is <code>&quot;1234&quot;</code>. Any other credentials should be rejected.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8149-b3b7-d3968d3a8b81" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d1-9cd7-f52ad1352db7" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let username = &quot;admin&quot;;
+let password = &quot;1234&quot;;
+
+if (username === &quot;admin&quot; &amp;&amp; password === &quot;1234&quot;) {
+  console.log(&quot;Login successful&quot;);
+} else {
+  console.log(&quot;Invalid credentials&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8145-b93a-e0a08784d4ed"/></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8169-9506-ef840d255256"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-818c-aa90-d3f7994a991a" class="">🧪 Question 6: Calendar App – Leap Year Checker</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81eb-beef-f78c84ca9d0a" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a2-85bd-d13c913eef59" class="">You&#x27;re creating a feature in a calendar app where users can check whether a particular year is a <strong>leap year</strong> or not to plan events and holidays accordingly.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8133-9a0a-df4b54ce5017" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815d-8a7b-d350efeafcf6" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let year = 2024;
+
+if ((year % 4 === 0 &amp;&amp; year % 100 !== 0) || (year % 400 === 0)) {
+  console.log(&quot;Leap year&quot;);
+} else {
+  console.log(&quot;Not a leap year&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8196-bba1-f39718ef221e"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8188-ae70-cff3405c1dcf" class="">🧪 Question 7: Age Gate for Movie Website</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815e-875d-fc7e974682e1" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d8-b1be-d50ce9aa436e" class="">You’re developing an age verification system for a movie streaming website. If the user&#x27;s age is 18 or above, show “Adult”; otherwise, show “Minor” using a ternary operator.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f5-91a4-c00989fa6299" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8197-96a7-cb05e7c0b11d" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let age = 16;
+
+let result = age &gt;= 18 ? &quot;Adult&quot; : &quot;Minor&quot;;
+console.log(result);
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8183-8e69-d47f0a7ca3e8"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a7-af1a-dc35f7ef3461" class="">🧪 Question 8: Game Scoreboard – Highest Score Finder</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8182-837b-e8a555d5f288" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8196-8ec9-cfb0f2c098f4" class="">You’re building a multiplayer game scoreboard. At the end of a round, the game should display which of the three players scored the highest.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8142-af7a-d72413a3a3c3" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8140-8b83-e87ade276b5e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let a = 5, b = 8, c = 3;
+
+if (a &gt;= b &amp;&amp; a &gt;= c) {
+  console.log(&quot;Max:&quot;, a);
+} else if (b &gt;= a &amp;&amp; b &gt;= c) {
+  console.log(&quot;Max:&quot;, b);
+} else {
+  console.log(&quot;Max:&quot;, c);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8143-9a45-e828b4257338"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8103-98e4-db8792d3347b" class="">🧪 Question 9: Office Management System – Day Scheduler</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bf-a6e8-e6c1fbecd004" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-8287-da399be2d4d3" class="">In your office scheduling system, employees enter a number from 1 to 7, and the system should return the name of the day. Use a switch statement for better readability.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812d-af1b-e71e95b57e77" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8159-bae5-d9cef19d424a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let day = 3;
+
+switch (day) {
+  case 1: console.log(&quot;Monday&quot;); break;
+  case 2: console.log(&quot;Tuesday&quot;); break;
+  case 3: console.log(&quot;Wednesday&quot;); break;
+  case 4: console.log(&quot;Thursday&quot;); break;
+  case 5: console.log(&quot;Friday&quot;); break;
+  case 6: console.log(&quot;Saturday&quot;); break;
+  case 7: console.log(&quot;Sunday&quot;); break;
+  default: console.log(&quot;Invalid day&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d3-93c5-e5b0f4117686"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8115-a7ce-f537281b789c" class="">🧪 Question 10: Smart Traffic Control System</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-9524-c4e60d2556f3" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ec-876b-cc35bfd38f80" class="">You&#x27;re designing a smart traffic signal system. Based on the signal color entered (red, yellow, or green), the system should display the correct action for drivers.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f9-bb77-e526fcb1cafd" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f5-b6ed-e1caf8c0111d" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let signal = &quot;yellow&quot;;
+
+if (signal === &quot;red&quot;) {
+  console.log(&quot;Stop&quot;);
+} else if (signal === &quot;yellow&quot;) {
+  console.log(&quot;Wait&quot;);
+} else if (signal === &quot;green&quot;) {
+  console.log(&quot;Go&quot;);
+} else {
+  console.log(&quot;Invalid color&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c4-970f-e3ca8fff90f3"/></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8106-95a9-e3817c851085"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d1-a6ca-db4688778194" class="">🧪 <strong>Q11: Payment System – Valid Amount Check</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8115-8db3-c543ed7ebb33" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-a17c-d0e3c766d06a" class="">In a digital payment app, users can recharge only in multiples of ₹5. Write a program to validate if the entered amount is a valid multiple.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818c-bba9-f313c73dcbc6" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-814f-ad74-ee86cca202e3" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let number = 25;
+
+if (number % 5 === 0) {
+  console.log(&quot;Multiple of 5&quot;);
+} else {
+  console.log(&quot;Not a multiple of 5&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fe-ad43-f51e7c7ee224"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bc-bee9-ddeeb9a74492" class="">🧪 <strong>Q12: Signup Form – Password Strength Indicator</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-a628-fdd8e101a4ea" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8195-8b83-ca29f7a52984" class="">While creating a new account, users must enter a password. If the password is longer than 8 characters, label it “Strong password”, otherwise “Weak password”.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ff-aa61-cffdd303f4ed" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-819f-a43c-e5eb405f37e0" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let password = &quot;js@12345&quot;;
+
+if (password.length &gt; 8) {
+  console.log(&quot;Strong password&quot;);
+} else {
+  console.log(&quot;Weak password&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8127-80b5-da94b6c77e11"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8128-b702-fb1eaa33b94a" class="">🧪 <strong>Q13: Classroom Game – FizzBuzz Activity</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8180-8b93-dc0d94a26013" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8149-bbdd-feedf8e0b334" class="">During a classroom math game, if a number is divisible by 3, say &quot;Fizz&quot;; if divisible by 5, say &quot;Buzz&quot;; if divisible by both, say &quot;FizzBuzz&quot;. Otherwise, say the number.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8189-90d9-d76f4caca03a" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8112-907f-e1092a3aab08" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let num = 15;
+
+if (num % 3 === 0 &amp;&amp; num % 5 === 0) {
+  console.log(&quot;FizzBuzz&quot;);
+} else if (num % 3 === 0) {
+  console.log(&quot;Fizz&quot;);
+} else if (num % 5 === 0) {
+  console.log(&quot;Buzz&quot;);
+} else {
+  console.log(num);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815e-a788-d01541fc6fdb"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ff-89e3-f72c4c70862c" class="">🧪 <strong>Q14: Weather App – Temperature Labeling</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814b-a937-f459a5b41ac4" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d8-922a-efb2f7a36027" class="">You&#x27;re building a weather app that shows a label based on the current temperature to help users dress accordingly.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819b-99e8-f56cd3d8fbb0" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81db-a98c-d3db3824f112" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let temp = 35;
+
+if (temp &gt; 40) {
+  console.log(&quot;Too Hot&quot;);
+} else if (temp &gt;= 30) {
+  console.log(&quot;Hot&quot;);
+} else if (temp &gt;= 20) {
+  console.log(&quot;Warm&quot;);
+} else {
+  console.log(&quot;Cold&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e0-8bcd-f507eec3e22d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8100-8ccc-ddf8cbf8985a" class="">🧪 <strong>Q15: Text Editor – Case Detection</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8143-8f24-d62b69e430f3" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8167-951e-e2442654b0cb" class="">In a text editing app, highlight if the character entered by the user is in uppercase or lowercase for accessibility features.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819f-854a-d4c643e1a308" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8148-9ee5-f5e38bd510ec" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let char = &#x27;A&#x27;;
+
+if (char === char.toUpperCase()) {
+  console.log(&quot;Uppercase&quot;);
+} else {
+  console.log(&quot;Lowercase&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8122-83a7-c2df72118400"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8157-9c84-efb87c7452d5" class="">🧪 <strong>Q16: Form Validation – Age Range Check</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81de-ba04-cce337a44691" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f2-b6b7-f083a798ae8e" class="">You are developing a form that allows input only if the number (like age or score) lies between 10 and 50 (inclusive). Otherwise, reject.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e6-9b20-e360fe7f7f70" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f7-a3c5-e546ece7647c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let num = 25;
+
+if (num &gt;= 10 &amp;&amp; num &lt;= 50) {
+  console.log(&quot;Number is between 10 and 50&quot;);
+} else {
+  console.log(&quot;Number is outside the range&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8169-8437-c1df56cfbac4"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c0-a652-ca37f558aad9" class="">🧪 <strong>Q17: E-Commerce Checkout – Discount Rule</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816a-a5cf-fb2bbfe57422" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b2-b934-dc7d1d273a01" class="">While checking out from an online store, customers get a 10% discount if the cart total exceeds ₹1000. Display the final payable amount.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-b831-f5823d1db27f" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81fd-a81c-eeb0e096e9f1" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let totalAmount = 1200;
+
+if (totalAmount &gt; 1000) {
+  let discount = totalAmount * 0.10;
+  let finalAmount = totalAmount - discount;
+  console.log(&quot;Discounted Total:&quot;, finalAmount);
+} else {
+  console.log(&quot;No discount. Pay:&quot;, totalAmount);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a4-9dd4-fba22fd09ca7"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ba-b91e-d7180f03bffd" class="">🧪 <strong>Q18: Hospital System – Age Group Classification</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8157-9bb7-dbe75e4ff4d5" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8199-8473-f0ef8fdc7f65" class="">In a hospital registration form, categorize patients based on age groups: Child, Teenager, Adult, Senior.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e6-b066-eb458e9be055" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810e-a2cf-c2868d8da00d" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let age = 45;
+
+if (age &lt;= 12) {
+  console.log(&quot;Child&quot;);
+} else if (age &lt;= 19) {
+  console.log(&quot;Teenager&quot;);
+} else if (age &lt;= 59) {
+  console.log(&quot;Adult&quot;);
+} else {
+  console.log(&quot;Senior&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818b-a084-d429bb9d0cbe"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fa-b85f-ec29b28784f8" class="">🧪 <strong>Q19: Smart Assistant – Time-Based Greeting</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-8905-e025d7e9ca72" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e7-b9f6-d579b80b3953" class="">You&#x27;re building a smart voice assistant that greets the user depending on the current time of the day.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-98c5-fa7bd135acbb" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8102-a492-df3d5fd3d68c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let hour = 21; // value from 0 to 23
+
+if (hour &gt;= 5 &amp;&amp; hour &lt;= 11) {
+  console.log(&quot;Good Morning&quot;);
+} else if (hour &gt;= 12 &amp;&amp; hour &lt;= 17) {
+  console.log(&quot;Good Afternoon&quot;);
+} else if (hour &gt;= 18 &amp;&amp; hour &lt;= 21) {
+  console.log(&quot;Good Evening&quot;);
+} else {
+  console.log(&quot;Good Night&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8123-b358-c8c9d53e2ef0"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8133-b113-e893d389f252" class="">🧪 <strong>Q20: Multi-Platform Login – Email or Phone</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8112-8160-f825c29393d0" class=""><strong>📝 Scenario:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-a978-d59ce6991b27" class="">In a login system, users should be allowed to sign in using either their <strong>email</strong> or <strong>phone number</strong>. If neither is provided, reject the login.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8114-a648-f73e8d43d5eb" class=""><strong>✅ Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d8-9092-eb409f257657" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let email = &quot;&quot;;
+let phone = &quot;9876543210&quot;;
+
+if (email !== &quot;&quot; || phone !== &quot;&quot;) {
+  console.log(&quot;Login accepted&quot;);
+} else {
+  console.log(&quot;Enter credentials&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814d-8867-dd61c88c50cc"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8114-8396-c8b002ebc9a4" class="">🧪 <strong>Q21: Check if a Number is Prime</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-8dfe-ea7c8dfb756a" class=""><strong>Problem:</strong> Print whether a number is prime or not.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e8-b710-f115150d5f49" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let num = 7;
+let isPrime = true;
+
+if (num &lt; 2) {
+  isPrime = false;
+} else {
+  for (let i = 2; i &lt;= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      isPrime = false;
+      break;
+    }
+  }
+}
+
+console.log(isPrime ? &quot;Prime Number&quot; : &quot;Not a Prime Number&quot;);
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814c-93b5-c890277d8e7a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810b-9205-e0afe9ffc454" class="">🧪 <strong>Q22: Check Eligibility for Driving License</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-ab0e-f281c4b04dc7" class=""><strong>Problem:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c1-baa2-f4feb69631d8" class="bulleted-list"><li style="list-style-type:disc">Age &lt; 18 → Not eligible</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815a-b335-d698e7827da0" class="bulleted-list"><li style="list-style-type:disc">Age 18–59 → Eligible</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f3-9996-f189fa7797e5" class="bulleted-list"><li style="list-style-type:disc">Age ≥ 60 → Eligible with medical test</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8149-9893-d6ca4faa9371" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let age = 65;
+
+if (age &lt; 18) {
+  console.log(&quot;Not eligible for driving license&quot;);
+} else if (age &lt;= 59) {
+  console.log(&quot;Eligible for driving license&quot;);
+} else {
+  console.log(&quot;Eligible with a medical test&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8133-a724-e3cb59de8413"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8125-830f-ed9c373791f3" class="">🧪 <strong>Q23: Check if Character is a Vowel</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8133-94a4-d1563c1afb83" class=""><strong>Problem:</strong> Check if a character is a vowel (a, e, i, o, u).</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8130-a8dc-cb3697a7ec5a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let char = &#x27;e&#x27;;
+
+if (&#x27;aeiouAEIOU&#x27;.includes(char)) {
+  console.log(&quot;Vowel&quot;);
+} else {
+  console.log(&quot;Consonant&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819b-bd96-c7dc09c290c8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8129-b3a2-f169b25ad2c2" class="">🧪 <strong>Q24: Validate PIN Code (4 or 6 digits only)</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dd-b327-d7be2f2e1886" class=""><strong>Problem:</strong> Check if a PIN is either 4 or 6 digits.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8104-be4b-f9f9e254d401" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let pin = &quot;1234&quot;;
+
+if ((pin.length === 4 || pin.length === 6) &amp;&amp; !isNaN(pin)) {
+  console.log(&quot;Valid PIN&quot;);
+} else {
+  console.log(&quot;Invalid PIN&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818f-a215-cf67653eb05e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-819a-9532-fc27eeac0def" class="">🧪 <strong>Q25: Print Smaller of Two Numbers</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fa-b6f7-d1581c28183c" class=""><strong>Problem:</strong> Print the smaller number.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-819e-90d9-cb6933870923" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let a = 9, b = 3;
+
+if (a &lt; b) {
+  console.log(&quot;Smaller number is:&quot;, a);
+} else {
+  console.log(&quot;Smaller number is:&quot;, b);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ab-b698-d6c7afc8a060"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814e-acb7-c3ab8a3cf63a" class="">🧪 <strong>Q26: Check Type of Triangle</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8145-b6db-c0e4e46147ac" class=""><strong>Problem:</strong> Based on 3 sides, print:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8148-b857-de911708fb53" class="bulleted-list"><li style="list-style-type:disc">All sides equal → &quot;Equilateral&quot;</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8185-8cb4-c00d47b40345" class="bulleted-list"><li style="list-style-type:disc">Two sides equal → &quot;Isosceles&quot;</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ef-aa31-ffae2acfe6f4" class="bulleted-list"><li style="list-style-type:disc">All sides different → &quot;Scalene&quot;</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81fc-8c1c-eb817bcf76f0" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let a = 5, b = 5, c = 5;
+
+if (a === b &amp;&amp; b === c) {
+  console.log(&quot;Equilateral Triangle&quot;);
+} else if (a === b || b === c || a === c) {
+  console.log(&quot;Isosceles Triangle&quot;);
+} else {
+  console.log(&quot;Scalene Triangle&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8122-a38e-f9e91cdd2d9b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ab-a927-e1435972eabd" class="">🧪 <strong>Q27: Movie Ticket Pricing Based on Age</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8109-a5ec-c960a41f1ee5" class=""><strong>Problem:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810a-8bb4-e656d7e2f3ac" class="bulleted-list"><li style="list-style-type:disc">Age &lt; 5 → Free</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e9-9041-c54ee4340206" class="bulleted-list"><li style="list-style-type:disc">5–17 → ₹100</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8151-ba52-c87d5e1dc63c" class="bulleted-list"><li style="list-style-type:disc">18–60 → ₹150</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814a-a0e8-e4fcd58f2d96" class="bulleted-list"><li style="list-style-type:disc">60 → ₹120</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810b-8fea-c62194b32f8f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let age = 62;
+let price;
+
+if (age &lt; 5) {
+  price = 0;
+} else if (age &lt;= 17) {
+  price = 100;
+} else if (age &lt;= 60) {
+  price = 150;
+} else {
+  price = 120;
+}
+
+console.log(&quot;Ticket Price: ₹&quot; + price);
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815e-b5d2-cf6b421da98c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8175-8000-e23ccbac58c0" class="">🧪 <strong>Q28: Check if Year is Century Year</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-a8fd-db342a89734d" class=""><strong>Problem:</strong> A century year is divisible by 100. Print Yes/No.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8110-8388-ff71ab9bae5c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let year = 1900;
+
+if (year % 100 === 0) {
+  console.log(&quot;Yes, it&#x27;s a century year&quot;);
+} else {
+  console.log(&quot;No, it&#x27;s not a century year&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8121-aa0b-eeb613b06783"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81dc-9e2d-d7b71a4836f3" class="">🧪 <strong>Q29: Assign Office Shift Based on Time</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8185-8009-e21d1e94ad12" class=""><strong>Problem:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8167-a96b-d1b194eb0e84" class="bulleted-list"><li style="list-style-type:disc">6–13 hrs → Morning Shift</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813a-a9ab-f30d71152eba" class="bulleted-list"><li style="list-style-type:disc">14–21 hrs → Evening Shift</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8150-8576-c0e98fc68da0" class="bulleted-list"><li style="list-style-type:disc">Else → Night Shift</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8132-ac18-f22e904995f7" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let time = 22;
+
+if (time &gt;= 6 &amp;&amp; time &lt;= 13) {
+  console.log(&quot;Morning Shift&quot;);
+} else if (time &gt;= 14 &amp;&amp; time &lt;= 21) {
+  console.log(&quot;Evening Shift&quot;);
+} else {
+  console.log(&quot;Night Shift&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f8-9532-e1ced21e4fb0"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8102-9f48-cf548a4e4132" class="">🧪 <strong>Q30: Check if User is Admin or Guest</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-b38b-fb0701b08cd9" class=""><strong>Problem:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8139-ad3d-fc2c7c294917" class="bulleted-list"><li style="list-style-type:disc">If <code>role = &quot;admin&quot;</code> → print Admin Access</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8163-9bcd-e0ff2ea1688a" class="bulleted-list"><li style="list-style-type:disc">Else if <code>role = &quot;guest&quot;</code> → print Guest Access</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814d-866f-f7237a6dab3b" class="bulleted-list"><li style="list-style-type:disc">Else → print No Access</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81a1-bbdc-d02ddfb4c39b" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let role = &quot;admin&quot;;
+
+if (role === &quot;admin&quot;) {
+  console.log(&quot;Admin Access&quot;);
+} else if (role === &quot;guest&quot;) {
+  console.log(&quot;Guest Access&quot;);
+} else {
+  console.log(&quot;No Access&quot;);
+}
+</code></pre></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

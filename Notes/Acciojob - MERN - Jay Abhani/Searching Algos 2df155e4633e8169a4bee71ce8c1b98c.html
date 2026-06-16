@@ -1,0 +1,971 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Searching Algos</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-8169-a4be-e71ce8c1b98c" class="page sans"><header><h1 class="page-title" dir="auto">Searching Algos</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8164-a9ba-e8831c37bf3f" class="">🔍 Linear Search in JavaScript – Explained in Detail</h3></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81be-8ed4-c30a390927ce"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8124-99f4-d54594089030" class="">✅ What is Linear Search?</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8186-9b92-dc82f0845f03" class=""><strong>Linear Search</strong> (also known as <strong>sequential search</strong>) is the simplest searching algorithm where you <strong>iterate through each element</strong> of an array to find a target value.</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a0-bfbf-ec72a2472999" class="bulleted-list"><li style="list-style-type:disc"><strong>Time Complexity:</strong> <code>O(n)</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d8-b940-d11d46630679" class="bulleted-list"><li style="list-style-type:disc"><strong>Space Complexity:</strong> <code>O(1)</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8157-b354-c726c45089af" class="bulleted-list"><li style="list-style-type:disc">Best case: <code>O(1)</code> (element is at the first index)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8122-9f47-eee080996999" class="bulleted-list"><li style="list-style-type:disc">Worst case: <code>O(n)</code> (element not found or at the end)</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a6-9ba3-c14c3afe61c1"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8176-a5cd-e56c8bbea518" class="">🧠 How It Works</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8110-a455-ea35df04995c" class="bulleted-list"><li style="list-style-type:disc">Start from the <strong>first element</strong>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816b-a23c-d8c60a5ce509" class="bulleted-list"><li style="list-style-type:disc">Compare it with the <strong>target value</strong>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d6-b832-ef592b5b7df0" class="bulleted-list"><li style="list-style-type:disc">If matched, return the index (or value).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8198-b723-f2fefe12d81d" class="bulleted-list"><li style="list-style-type:disc">If not, move to the <strong>next element</strong>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81eb-9210-c7b9c1f91064" class="bulleted-list"><li style="list-style-type:disc">If the end is reached and no match is found, return <code>1</code> or a &quot;not found&quot; message.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e7-bb31-c9ed4e58c95d"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81b8-8a33-ee880ae97348" class="">🧪 Basic Example – Return Index</h2></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-81d0-8407-d1e7d9544634" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function linearSearch(arr, target) {
+  for (let i = 0; i &lt; arr.length; i++) {
+    // Compare current element with target
+    if (arr[i] === target) {
+      return i; // Return the index if found
+    }
+  }
+  return -1; // Return -1 if not found
+}
+
+let numbers = [5, 3, 8, 4, 9];
+console.log(linearSearch(numbers, 4)); // Output: 3
+console.log(linearSearch(numbers, 7)); // Output: -1
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a1-b79a-e745c1e70717"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-810b-8fc5-dc38e5f49dfd" class="">🧪 Modified Version – Return Boolean</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81db-b64f-eff71f27edca" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function isFound(arr, target) {
+  for (let element of arr) {
+    if (element === target) {
+      return true;
+    }
+  }
+  return false;
+}
+
+console.log(isFound([1, 2, 3, 4], 3)); // true
+console.log(isFound([1, 2, 3, 4], 9)); // false
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a3-b7c7-cd8a71e34b38"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8184-8716-f648cf6ac03b" class="">🧪 Linear Search on Strings</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8125-ab18-f8851e80b137" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function linearSearchString(str, char) {
+  for (let i = 0; i &lt; str.length; i++) {
+    if (str[i] === char) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+console.log(linearSearchString(&quot;hello&quot;, &quot;e&quot;)); // 1
+console.log(linearSearchString(&quot;hello&quot;, &quot;z&quot;)); // -1
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8130-9473-f7885cd41229"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8104-a5d4-f4dc5ed5dc6b" class="">🔁 Linear Search with Objects/Array of Objects</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8142-886b-d13be842d5ce" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let users = [
+  { id: 1, name: &quot;Ujjwal&quot; },
+  { id: 2, name: &quot;Ravi&quot; },
+  { id: 3, name: &quot;Amit&quot; }
+];
+
+function findUserByName(arr, name) {
+  for (let i = 0; i &lt; arr.length; i++) {
+    if (arr[i].name === name) {
+      return arr[i];
+    }
+  }
+  return null;
+}
+
+console.log(findUserByName(users, &quot;Ravi&quot;)); // { id: 2, name: &quot;Ravi&quot; }
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81dd-abf4-efc7ea6b8fb3"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8110-9b73-fe6a73b71ea7" class="">🧮 Time and Space Complexity Analysis</h2></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-81d3-94fd-c1875f33b89c" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8169-98e4-e360b7e082f5"><td id="nwWt" class="">Scenario</td><td id="&gt;lUE" class="">Time Complexity</td><td id="&lt;Pii" class="">Explanation</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81f4-8898-cf3ee8e7dcc9"><td id="nwWt" class="">Best Case</td><td id="&gt;lUE" class="">O(1)</td><td id="&lt;Pii" class="">First element matches</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8167-aa10-ec1e242d7d56"><td id="nwWt" class="">Average Case</td><td id="&gt;lUE" class="">O(n)</td><td id="&lt;Pii" class="">Match in middle</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-814a-8cb6-e85f15ad12ee"><td id="nwWt" class="">Worst Case</td><td id="&gt;lUE" class="">O(n)</td><td id="&lt;Pii" class="">Match at end or not present</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81ed-92b0-e2b5ad0d2cdd"><td id="nwWt" class="">Space Complexity</td><td id="&gt;lUE" class="">O(1)</td><td id="&lt;Pii" class="">Only one index variable is used</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811b-bb40-c876d6056eb2"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8175-a6fc-d8b3db3b15f3" class="">📌 When to Use Linear Search?</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f4-8536-f2ca2fcce89a" class="bulleted-list"><li style="list-style-type:disc">When the array is <strong>small or unsorted</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c9-bb61-fea4419f6c32" class="bulleted-list"><li style="list-style-type:disc">When <strong>no additional memory</strong> (like hash maps) should be used</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817c-8283-e31fb38b64c9" class="bulleted-list"><li style="list-style-type:disc">When a <strong>simple solution</strong> is acceptable</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815a-8824-c6f36f319793"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8183-a5a0-f16b8910f5fe" class="">❌ Limitations</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819c-996a-f348645bb3f4" class="bulleted-list"><li style="list-style-type:disc">Slow for <strong>large datasets</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8198-96b8-ddbcc69006df" class="bulleted-list"><li style="list-style-type:disc">Inefficient compared to <strong>binary search</strong> (on sorted arrays)</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b9-8a6a-f43129df2c25"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8110-93aa-c36372b02464" class="">✅ Summary</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a2-b688-fa74ee9ea70c" class="bulleted-list"><li style="list-style-type:disc">Linear Search is a <strong>simple</strong> and <strong>brute-force</strong> method.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d3-8091-c4c36b7d0dea" class="bulleted-list"><li style="list-style-type:disc">It checks every element <strong>one by one</strong> until the target is found.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8174-bb99-c7b0e86012e2" class="bulleted-list"><li style="list-style-type:disc">Use it for <strong>unsorted arrays</strong> or <strong>quick, small-scale lookups</strong>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8194-8ac2-f1240269fa30" class="bulleted-list"><li style="list-style-type:disc">For sorted arrays, consider using <strong>binary search</strong> for better performance (<code>O(log n)</code>).</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-b126-cbb0800f4118" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81eb-ab17-df21c67d0651" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ed-a4a4-fe77628a70a0" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8142-b40d-d0583103c2a7" class="">🔍 Binary Search in JavaScript – Explained in Detail</h3></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813c-af4b-ce7171fe27ed"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c5-b056-c82d08419fb9" class="">✅ What is Binary Search?</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-bbcb-f8f1a5b0f46d" class=""><strong>Binary Search</strong> is a highly efficient searching algorithm used to find an element in a <strong>sorted array</strong>. It works by <strong>repeatedly dividing the search range in half</strong>, eliminating half of the elements each time.</p></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-8188-beeb-c578e0b5b1d0" class="">⚠️ Important: The array must be sorted in ascending or descending order.</blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815e-93b0-f8e0344ae98b"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8143-8f98-d1dae890ba3d" class="">🧠 How Binary Search Works</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81d1-b2bf-e93966204a70" class="numbered-list" start="1"><li>Start with the <strong>low</strong> (start of the array) and <strong>high</strong> (end of the array) pointers.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8173-8cb6-ea3622f6f462" class="numbered-list" start="2"><li>Find the <strong>middle element</strong>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-812c-a2d4-f3ff00d54b13" class="numbered-list" start="3"><li>If the <strong>middle value equals the target</strong>, return the index.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-818f-b2c5-eff883e3087a" class="numbered-list" start="4"><li>If the target is <strong>less than the middle</strong>, search the <strong>left half</strong>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81df-952d-f6ec7e2741b5" class="numbered-list" start="5"><li>If the target is <strong>greater than the middle</strong>, search the <strong>right half</strong>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8164-834b-ede71e27fb35" class="numbered-list" start="6"><li>Repeat until <code>low &gt; high</code>.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b4-8fd0-ceb4f97b8dd5"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8185-b3b1-d586493d9c12" class="">⏱️ Time &amp; Space Complexity</h2></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-81b8-9feb-dfd1f839172b" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-810e-bffc-d0d675452af7"><td id="{{XF" class="">Scenario</td><td id="jmue" class="">Time Complexity</td><td id="Uy_Y" class="">Space Complexity</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-812d-b054-d417e750ddc8"><td id="{{XF" class="">Best Case</td><td id="jmue" class="">O(1)</td><td id="Uy_Y" class="">O(1)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-813f-8902-cd1c0c53b18e"><td id="{{XF" class="">Average Case</td><td id="jmue" class="">O(log n)</td><td id="Uy_Y" class="">O(1)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81d4-9fe4-f49c84aa3005"><td id="{{XF" class="">Worst Case</td><td id="jmue" class="">O(log n)</td><td id="Uy_Y" class="">O(1)</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8117-896f-ca26ac566141"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-815b-bd58-cbb811363435" class="">🛠️ Binary Search – Iterative Version</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81fd-b5fc-e5d04704172b" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function binarySearch(arr, target) {
+  let low = 0;
+  let high = arr.length - 1;
+
+  while (low &lt;= high) {
+    let mid = Math.floor((low + high) / 2);
+
+    if (arr[mid] === target) {
+      return mid; // Target found
+    } else if (arr[mid] &lt; target) {
+      low = mid + 1; // Search right half
+    } else {
+      high = mid - 1; // Search left half
+    }
+  }
+
+  return -1; // Target not found
+}
+
+let numbers = [2, 4, 6, 8, 10, 12, 14];
+console.log(binarySearch(numbers, 10)); // Output: 4
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c7-b9e8-da310c9463f2"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8129-b381-c75b1f76cc13" class="">🧠 Dry Run Example</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-a37a-d7deeb70be14" class="">Array: <code>[2, 4, 6, 8, 10, 12, 14]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813c-8405-dc210f9a98b9" class="">Target: <code>10</code></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c8-a4c7-e5470004f4fc" class="bulleted-list"><li style="list-style-type:disc">Iteration 1: low = 0, high = 6 → mid = 3 → arr[3] = 8<div style="display:contents" dir="auto"><p id="2df155e4-633e-81ac-bdf3-f471fab4eee2" class="">→ 10 &gt; 8 → search in right half (low = 4)</p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818b-93c9-e944b29c3acf" class="bulleted-list"><li style="list-style-type:disc">Iteration 2: low = 4, high = 6 → mid = 5 → arr[5] = 12<div style="display:contents" dir="auto"><p id="2df155e4-633e-81a1-95c7-d8d18c10f5ca" class="">→ 10 &lt; 12 → search in left half (high = 4)</p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8106-af37-f07c0d990733" class="bulleted-list"><li style="list-style-type:disc">Iteration 3: low = 4, high = 4 → mid = 4 → arr[4] = 10 → <strong>found</strong></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815d-b4c0-f467d4f4c2ae"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8126-b4c4-fa66ecde4dd3" class="">🧑‍💻 Binary Search – Recursive Version</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8168-a5b7-e689c18a89c9" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function binarySearchRecursive(arr, target, low = 0, high = arr.length - 1) {
+  if (low &gt; high) return -1;
+
+  let mid = Math.floor((low + high) / 2);
+
+  if (arr[mid] === target) return mid;
+  else if (arr[mid] &gt; target) {
+    return binarySearchRecursive(arr, target, low, mid - 1);
+  } else {
+    return binarySearchRecursive(arr, target, mid + 1, high);
+  }
+}
+
+console.log(binarySearchRecursive([1, 3, 5, 7, 9], 5)); // Output: 2
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812e-ac17-fc85a7233704"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81bc-a04f-c822fb140c20" class="">🧪 Handling Edge Cases</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8103-9fef-d6e67a89c2e9" class="bulleted-list"><li style="list-style-type:disc">Array is empty → return -1</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ab-b158-c9741750acb2" class="bulleted-list"><li style="list-style-type:disc">Target not found → return -1</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81aa-82b6-e9e75333e1c0" class="bulleted-list"><li style="list-style-type:disc">Array not sorted → <strong>binary search won&#x27;t work</strong></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8150-8977-ed721deacaa6"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81cc-b2ea-cc135ded54e9" class="">⚠️ Sorted Input Required</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bf-b41c-ea98c9bca211" class="">Always ensure the array is <strong>sorted</strong> before applying binary search.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e2-98ef-f04b38c301bd" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [10, 3, 7, 1];
+arr.sort((a, b) =&gt; a - b); // Sort before binary search
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e3-9029-c8db8a86dfac"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-816a-9a11-dad0fbe46f72" class="">✅ Use Cases</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d6-89df-d88cd70f5213" class="bulleted-list"><li style="list-style-type:disc">Searching in large sorted datasets</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e0-83d1-cf756b05c06c" class="bulleted-list"><li style="list-style-type:disc">Searching in dictionaries or sorted user lists</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816f-8fb6-c621bad4adc6" class="bulleted-list"><li style="list-style-type:disc">Implementing efficient lookup features (e.g., auto-suggestions)</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8160-8279-ca7dc416e87c"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a3-9649-fb98e49c55b2" class="">❌ Limitations</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81cd-bbef-f73d13cb2544" class="bulleted-list"><li style="list-style-type:disc">Only works on sorted arrays</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f8-8bc7-d6bf9841491d" class="bulleted-list"><li style="list-style-type:disc">Less efficient for small arrays (linear search may be faster)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8123-92e9-ddb88f29c324" class="bulleted-list"><li style="list-style-type:disc">Not useful if data changes frequently (requires re-sorting)</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8122-a545-d7c1afa2acbd"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8113-be63-d9be65e75dab" class="">📌 Summary</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8173-ac4d-da24e740859f" class="bulleted-list"><li style="list-style-type:disc">Binary Search is <strong>fast</strong> (<code>O(log n)</code>) for sorted data.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d8-8f35-cf0fbf5d98e6" class="bulleted-list"><li style="list-style-type:disc">It repeatedly <strong>halves the search space</strong>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c6-9b8a-f5e455026d8c" class="bulleted-list"><li style="list-style-type:disc">Prefer <strong>iterative</strong> for simplicity, <strong>recursive</strong> for conceptual clarity.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e8-992c-d357eb501355" class="bulleted-list"><li style="list-style-type:disc">Always ensure the array is <strong>sorted</strong> before applying it.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ca-8458-d259b518e5cc" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819c-99cd-c08482d76f13" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f8-9a9f-cb58318df66e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818e-9193-ef7da52cb655" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81b1-bce5-eb1e2606051a" class="">🔍 What is a <code>Map</code>?</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8174-a899-cf7af8b94335" class="">A <code>Map</code> is a collection of elements where each element is stored as a <strong>key-value pair</strong>. It remembers the <strong>original insertion order</strong> of the keys, meaning you can iterate over the map in the order in which elements were added.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81eb-8a47-d34db3160044" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let map = new Map();
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8196-8b85-f52e64bbab0e"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8146-874f-c9495c2bfdc9" class="">✅ Why Use <code>Map</code> Instead of Object?</h2></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-81be-acce-f8fd0cce5646" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-818e-b223-eeb9015722d6"><td id="c;Ws" class="">Feature</td><td id="W[OA" class=""><code>Map</code></td><td id="gLny" class=""><code>Object</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8180-907c-daaa940fbcd1"><td id="c;Ws" class="">Key Types</td><td id="W[OA" class="">Any (objects, functions, etc)</td><td id="gLny" class="">Only strings or symbols</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81e6-ab85-ce92f89c8328"><td id="c;Ws" class="">Order of Keys</td><td id="W[OA" class="">Ordered</td><td id="gLny" class="">Unordered</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8183-9fba-e637c26281bd"><td id="c;Ws" class="">Size property</td><td id="W[OA" class=""><code>map.size</code></td><td id="gLny" class="">Need manual tracking</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81f8-9bb2-eaf544c181d0"><td id="c;Ws" class="">Iteration</td><td id="W[OA" class=""><code>map.forEach</code>, <code>for...of</code></td><td id="gLny" class="">More cumbersome</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-810a-8baf-e8dc95f746c7"><td id="c;Ws" class="">Performance (frequent insert/delete)</td><td id="W[OA" class="">Better</td><td id="gLny" class="">Slower in some cases</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a5-857e-e9aab590d963"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-819a-bc1e-d1049c9a6617" class="">🛠️ Creating a Map</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8132-94cc-c5119c59c57a" class="">1. <strong>Empty Map</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81cd-9332-f0c774bf59ba" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let myMap = new Map();
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816e-a055-e53793e19226" class="">2. <strong>Map with initial values</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-813f-858b-cb7edbd21e4a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let myMap = new Map([
+  [&#x27;name&#x27;, &#x27;Ujjwal&#x27;],
+  [&#x27;age&#x27;, 25],
+  [&#x27;isStudent&#x27;, true]
+]);
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b1-ba80-ffa074120f71"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8180-b6cf-c0aa11eaff14" class="">📌 Key Methods of Map</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8146-a00d-c7e863156145" class="">1. <code>set(key, value)</code> → Adds or updates an entry</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-819f-8e82-d30db3cff69a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">myMap.set(&#x27;language&#x27;, &#x27;JavaScript&#x27;);
+myMap.set(10, &#x27;ten&#x27;); // Key can be a number
+myMap.set(true, &#x27;yes&#x27;); // Boolean key
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815f-8fbe-f8e43c5db9c8" class="">2. <code>get(key)</code> → Retrieves the value</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81bd-8e49-d4a574e4c00e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(myMap.get(&#x27;language&#x27;)); // JavaScript
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8107-91d0-de781f9a57e9" class="">3. <code>has(key)</code> → Checks if a key exists</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ec-9d32-ec0639df4d81" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(myMap.has(10)); // true
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8121-8424-fb0b3990adfe" class="">4. <code>delete(key)</code> → Removes a specific element</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812f-86ed-ece7baa897fe" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">myMap.delete(10);
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f8-85c0-e35ad1f14dca" class="">5. <code>clear()</code> → Removes all elements</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d6-87fd-ddcbf30d913c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">myMap.clear();
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8126-8c05-ddda7a075e67" class="">6. <code>size</code> → Returns the number of elements</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81a3-b137-cbd0955cb046" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(myMap.size); // 0
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c5-a640-c40bfd72766c"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81cb-966c-fe9e968afe58" class="">🔁 Iterating a Map</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81bb-863f-df9aad34bfb1" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let map = new Map([
+  [&#x27;a&#x27;, 1],
+  [&#x27;b&#x27;, 2],
+  [&#x27;c&#x27;, 3]
+]);
+
+// 1. for...of (entries)
+for (let [key, value] of map) {
+  console.log(`${key} =&gt; ${value}`);
+}
+
+// 2. keys only
+for (let key of map.keys()) {
+  console.log(key);
+}
+
+// 3. values only
+for (let value of map.values()) {
+  console.log(value);
+}
+
+// 4. forEach
+map.forEach((value, key) =&gt; {
+  console.log(`${key}: ${value}`);
+});
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8177-85ea-d7615df98951"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ff-9136-d56e3b1a3338" class="">💡 Key Features</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8183-bd90-e31c5c0b154a" class="numbered-list" start="1"><li><strong>Preserves Insertion Order</strong>:<div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b0-b1cc-ecd94e6c88a9" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let m = new Map();
+m.set(&#x27;x&#x27;, 1);
+m.set(&#x27;y&#x27;, 2);
+// Iteration will return x before y
+</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8195-b1d9-c596ffb63054" class="numbered-list" start="2"><li><strong>Accepts Objects as Keys</strong>:<div style="display:contents" dir="auto"><pre id="2df155e4-633e-8135-8f2b-f842eb9b8f3b" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let obj = { id: 1 };
+m.set(obj, &#x27;Object Value&#x27;);
+console.log(m.get(obj)); // Object Value
+</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81b5-8d3c-cbd0beee42d5" class="numbered-list" start="3"><li><strong>Distinct NaN keys allowed</strong>:<div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c0-9ad9-e6971bf718ba" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">m.set(NaN, &#x27;not a number&#x27;);
+console.log(m.get(NaN)); // not a number
+</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815d-a35d-dbe8001a7d41"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81b1-ac49-d03a37cec43f" class="">🔄 Map vs Object - When to Use What?</h2></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-811c-bf87-e8c00b6a82fb" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81ca-a5c2-d4566595cb0f"><td id="}~R}" class="">Use Case</td><td id="ocPM" class="">Choose</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-810c-80f0-d4e71556c4c8"><td id="}~R}" class="">Frequent addition/removal of entries</td><td id="ocPM" class=""><code>Map</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81cf-9937-e0ff35ad555b"><td id="}~R}" class="">Keys need to be non-string values</td><td id="ocPM" class=""><code>Map</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81ab-a8c8-c9bb26c54dc7"><td id="}~R}" class="">JSON serialization needed</td><td id="ocPM" class=""><code>Object</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81b7-8ad1-d4dfad499579"><td id="}~R}" class="">Simple key-value pairs with string keys</td><td id="ocPM" class=""><code>Object</code></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f3-9b28-d928a951fb2e"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-814e-8ee8-f4de6212502a" class="">✅ Practical Example</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8116-9e2f-f2c56f3ecce3" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let userRoles = new Map();
+
+userRoles.set(&#x27;Ujjwal&#x27;, &#x27;Admin&#x27;);
+userRoles.set(&#x27;Ravi&#x27;, &#x27;Editor&#x27;);
+userRoles.set(&#x27;Amit&#x27;, &#x27;Viewer&#x27;);
+
+// Check Role
+if (userRoles.get(&#x27;Ravi&#x27;) === &#x27;Editor&#x27;) {
+  console.log(&#x27;Ravi can edit content.&#x27;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810c-9032-e0ba88475acc"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81e0-9411-fe2f4a667012" class="">🧠 Summary</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8197-814f-e039fb4c6896" class="bulleted-list"><li style="list-style-type:disc"><code>Map</code> is ideal for more complex key-value pairs.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8135-ad4e-fd012f2e4001" class="bulleted-list"><li style="list-style-type:disc">It maintains insertion order, unlike plain objects.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81db-8efb-e311d7c14c30" class="bulleted-list"><li style="list-style-type:disc">It provides better performance for large-scale operations or frequent additions/removals.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8154-b1a8-f915f7c8dbaf" class="bulleted-list"><li style="list-style-type:disc">It supports any data type as a key, including functions and objects.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8135-abc9-f5b6d69e66c0" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817f-b6bf-db09a0e14ba4" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8130-9ce5-ea0a7ec051f4" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a7-9ae6-dd60dee2e5bc" class=""><strong>Problem 1: Count Frequency of Elements in an Array</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814b-b302-f937ee36a59b" class=""><strong>Description:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dd-a2d0-c6c49d4b7b17" class="">Given an array of numbers, count how many times each number appears.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f0-bb12-ded8b0271d8d" class=""><strong>Input:</strong> <code>[1, 2, 2, 3, 1, 4, 2]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dd-acc5-d3b6dc228a43" class=""><strong>Output:</strong> <code>{1 =&gt; 2, 2 =&gt; 3, 3 =&gt; 1, 4 =&gt; 1}</code></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8169-9099-db3793d1f4f5" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function countFrequency(arr) {
+  let map = new Map();
+
+  for (let num of arr) {
+    // If number exists, increment count, else set to 1
+    map.set(num, (map.get(num) || 0) + 1);
+  }
+
+  return map;
+}
+
+console.log(countFrequency([1, 2, 2, 3, 1, 4, 2]));
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c1-988c-e243f46b668b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a1-8608-ef569fbbfd82" class=""><strong>Problem 2: Find First Non-Repeating Element</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ed-b2ee-e4e470897702" class=""><strong>Description:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e6-a6ea-d046ad952284" class="">Return the first element in the array that appears only once.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818c-b4ad-d9ed693d0f9a" class=""><strong>Input:</strong> <code>[2, 3, 4, 2, 3, 5, 4]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-96d0-ccc5b91edb85" class=""><strong>Output:</strong> <code>5</code></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8100-8739-e5df26060372" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function firstNonRepeating(arr) {
+  let freqMap = new Map();
+
+  for (let num of arr) {
+    freqMap.set(num, (freqMap.get(num) || 0) + 1);
+  }
+
+  for (let num of arr) {
+    if (freqMap.get(num) === 1) return num;
+  }
+
+  return null;
+}
+
+console.log(firstNonRepeating([2, 3, 4, 2, 3, 5, 4]));
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814c-9ca6-ecb2c0437f5a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8171-8c23-f08c34ea8932" class=""><strong>Problem 3: Check if Two Strings are Anagrams</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818f-9196-d674d92efcbc" class=""><strong>Description:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-a656-d8b33a24fe51" class="">Two strings are anagrams if they contain the same characters with the same frequency.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814a-9bb8-cd25b6972d55" class=""><strong>Input:</strong> <code>&quot;listen&quot;</code>, <code>&quot;silent&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8130-ad9d-dd02ca6f0b51" class=""><strong>Output:</strong> <code>true</code></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ea-b81b-ef724cb25edd" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function areAnagrams(str1, str2) {
+  if (str1.length !== str2.length) return false;
+
+  let map = new Map();
+
+  for (let char of str1) {
+    map.set(char, (map.get(char) || 0) + 1);
+  }
+
+  for (let char of str2) {
+    if (!map.has(char)) return false;
+    map.set(char, map.get(char) - 1);
+    if (map.get(char) &lt; 0) return false;
+  }
+
+  return true;
+}
+
+console.log(areAnagrams(&quot;listen&quot;, &quot;silent&quot;));
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819d-b16c-de8e9b818fff"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8110-be0c-cb7a6a05ece1" class=""><strong>Problem 4: Store and Retrieve Student Grades</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813e-acfe-f60cd562d82f" class=""><strong>Description:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a7-8944-ec3899fa1bc4" class="">Store student names and their grades. Then retrieve the grade of a specific student.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812f-81b3-e373965528c6" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function studentGrades() {
+  let grades = new Map();
+
+  // Set grades
+  grades.set(&quot;Amit&quot;, 85);
+  grades.set(&quot;Ravi&quot;, 92);
+  grades.set(&quot;Ujjwal&quot;, 78);
+
+  // Retrieve
+  console.log(&quot;Grade of Ravi:&quot;, grades.get(&quot;Ravi&quot;));
+}
+
+studentGrades();
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8156-8218-eca1143c2468"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8196-9f8e-cc9b750dbb0c" class=""><strong>Problem 5: Remove Duplicates from an Array</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8107-91be-d384deaca34f" class=""><strong>Description:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8173-b06c-e7c7b1f29199" class="">Use a Map to filter unique elements and preserve the order.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8184-b58c-fa073fcdbc29" class=""><strong>Input:</strong> <code>[1, 2, 2, 3, 1, 4]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8179-8cb7-d556f0613ce4" class=""><strong>Output:</strong> <code>[1, 2, 3, 4]</code></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8100-a604-f5a78787e656" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function removeDuplicates(arr) {
+  let map = new Map();
+
+  for (let num of arr) {
+    map.set(num, true); // Only one key per number
+  }
+
+  return Array.from(map.keys());
+}
+
+console.log(removeDuplicates([1, 2, 2, 3, 1, 4]));
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-a5c2-f5bcb77baf89" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

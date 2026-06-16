@@ -1,0 +1,763 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>SQL Basics</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-815c-a53d-d875278533fd" class="page sans"><header><h1 class="page-title" dir="auto">SQL Basics</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="2df155e4-633e-8179-b9a9-e1f4f0b2917a" class="">data - raw facts</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-b015-c325d93d68e5" class="">information - processed data / meaningful data</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ce-8f06-e69b67671993" class="">→ business decision</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-a377-d8d40e5d7c22" class="">database - where data is stored</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8173-a4d4-df44a6c3a3b7" class="">dbms - managing data / operations on data</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-82ca-f79e2e683a96" class="">rdbms - tables (relation)</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818f-ac7f-d471f9407aec" class="">non-rdbms - documents, graphs, trees</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819f-83f4-caca51542d16" class="">sql - language to work with data</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8145-9c89-cc360bb0c1a4" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d3-90be-d4ff5f1f9a9f" class="">\sql</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81aa-8053-efade72b41b0" class="">\connect root@localhost</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817a-8b14-e2bc451a909c" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81db-a7bd-d2766afb878a" class="">🔹 PART 0: SQL &amp; Database Fundamentals (Foundations)</h1></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8111-b636-c78624dbe5b3"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81bf-965e-c26ff4a27fa1" class="">0.1 What Problem Does a Database Solve?</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8169-8381-e59a0c309d5d" class="">Imagine this situation 👇</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a6-97be-c171dcf6b0b9" class="">You’re building:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814d-b611-c278133b3405" class="bulleted-list"><li style="list-style-type:disc">a <strong>website</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c5-a7bf-d63d915ca033" class="bulleted-list"><li style="list-style-type:disc">a <strong>mobile app</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8123-a4c2-d75d00dbf4f6" class="bulleted-list"><li style="list-style-type:disc">an <strong>admin panel</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a1-b6f6-dd073fa94173" class="bulleted-list"><li style="list-style-type:disc">a <strong>backend system</strong></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c1-890e-c0c4ebe3b3d9" class="">You need to store:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812b-8efc-f6ebd701fde3" class="bulleted-list"><li style="list-style-type:disc">users</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8100-bb4a-d90517139425" class="bulleted-list"><li style="list-style-type:disc">passwords</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8159-8c32-ec252c8babf7" class="bulleted-list"><li style="list-style-type:disc">orders</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b4-9588-cef01477b3f8" class="bulleted-list"><li style="list-style-type:disc">payments</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8162-bb2d-c7936d82d8a4" class="bulleted-list"><li style="list-style-type:disc">logs</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8117-99ac-ccb88497cfd1" class="bulleted-list"><li style="list-style-type:disc">attendance</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8107-a062-e6ced843dc97" class="bulleted-list"><li style="list-style-type:disc">scores</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f9-8efe-f8b0f544cc93" class="bulleted-list"><li style="list-style-type:disc">messages</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8171-a2e4-fe219f75d478" class="">❌ Bad way (real beginners do this)</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8196-b7c5-c28d141a4fc6" class="bulleted-list"><li style="list-style-type:disc">Excel files</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812a-a859-c50bc2eee05d" class="bulleted-list"><li style="list-style-type:disc">JSON files</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ac-9aae-ea3330654c54" class="bulleted-list"><li style="list-style-type:disc">Hardcoded data in code</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e3-9de7-d23e7cf3c2fd" class="">❌ Problems</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8146-a5c6-c6753ecfcaa4" class="bulleted-list"><li style="list-style-type:disc">Data gets lost</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ec-b61d-e5219105ebfa" class="bulleted-list"><li style="list-style-type:disc">Multiple users can’t access safely</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c2-9ad3-d10a823e3c86" class="bulleted-list"><li style="list-style-type:disc">Searching becomes slow</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812f-890d-d8baedf3aede" class="bulleted-list"><li style="list-style-type:disc">No security</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816f-80b9-d371255b61be" class="bulleted-list"><li style="list-style-type:disc">No structure</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818e-acab-e99ac71c3d95" class="">✅ Correct way (industry way)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818b-845e-c934e634c030" class="">➡️ <strong>Use a Database</strong></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f4-835d-e9f1583948b0"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8176-8988-f50a22797c64" class="">0.2 What is a Database?</h2></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-81e6-a63a-f3213dcc1a5e" class="">Database = a structured place to store data permanently</blockquote></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8186-b2bc-d09a5a5e6b7b" class="">Think of it like:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8145-b8eb-eeec90719c16" class="bulleted-list"><li style="list-style-type:disc">Excel, but <strong>super powerful</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8123-a08e-ddae4cfbe27a" class="bulleted-list"><li style="list-style-type:disc">Handles <strong>millions of rows</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811b-84b9-f7ac4914c3a7" class="bulleted-list"><li style="list-style-type:disc">Used by <strong>multiple users at the same time</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ce-96d5-d80b16d66827" class="bulleted-list"><li style="list-style-type:disc">Safe &amp; fast</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814d-9ea7-fefec99e7e20" class="">Real Examples</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81af-ade8-f8e678be6e2b" class="bulleted-list"><li style="list-style-type:disc">Instagram → users, posts, likes</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a2-9d55-e8af65d6de5b" class="bulleted-list"><li style="list-style-type:disc">Amazon → products, orders</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ec-906c-c479cf8789cd" class="bulleted-list"><li style="list-style-type:disc">Zomato → restaurants, orders</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812c-b941-f6c1daf5847d" class="bulleted-list"><li style="list-style-type:disc">Your company → employees, attendance</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810f-8247-c99339124b7d"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ae-8c1d-e874a4f667d6" class="">0.3 What is a Table?</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811e-9512-c2896aa2e019" class="">A <strong>table</strong> stores data in rows and columns.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8120-9311-f3665ebb2483" class="">Example: <code>users</code> table</p></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-81ea-9679-fb8b1e9c05a9" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8105-8f63-df7fc0f39fb4"><th id="pqjZ" class="simple-table-header-color simple-table-header">id</th><th id="_yp^" class="simple-table-header-color simple-table-header">name</th><th id=":A]S" class="simple-table-header-color simple-table-header">email</th><th id="gU`Y" class="simple-table-header-color simple-table-header">is_active</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-813a-8fee-ecb0f0e6c45b"><td id="pqjZ" class="">1</td><td id="_yp^" class="">Jay</td><td id=":A]S" class=""><a href="mailto:jay@mail.com">jay@mail.com</a></td><td id="gU`Y" class="">true</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81cb-913b-c24d599171d0"><td id="pqjZ" class="">2</td><td id="_yp^" class="">Neha</td><td id=":A]S" class=""><a href="mailto:neha@mail.com">neha@mail.com</a></td><td id="gU`Y" class="">true</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8116-92a7-efc4903f7fd9" class="">Important terms</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819b-bbc9-ed5dc73a5913" class="bulleted-list"><li style="list-style-type:disc"><strong>Column</strong> → name, email, is_active</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8100-8c81-f4b93cd1b21d" class="bulleted-list"><li style="list-style-type:disc"><strong>Row</strong> → one complete user</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818d-a4d2-fa3c693c6003" class="bulleted-list"><li style="list-style-type:disc"><strong>Record</strong> → same as row</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810c-a6e8-f64095e2caab" class="">📌 <strong>Industry language</strong>:</p></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-8120-bfe7-d0d17f7f1c6a" class="">“Insert a record”, “Fetch rows”, “Update user record”</blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8172-ab36-f88bc4c9551d"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a5-ba43-c626278a1cde" class="">0.4 What is SQL?</h2></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-8186-ab9c-e781fd28ff4a" class="">SQL = Structured Query Language</blockquote></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-9f1f-c66bf60f92ac" class="">SQL is <strong>not a programming language</strong> like JS or Java.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d9-a2a3-eb48cedc1108" class="">SQL is:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8113-b359-e0bb84e12bf1" class="bulleted-list"><li style="list-style-type:disc">a <strong>query language</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b1-9027-db41446bcfc2" class="bulleted-list"><li style="list-style-type:disc">used to <strong>talk to databases</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ce-a051-c14e4a216917" class="bulleted-list"><li style="list-style-type:disc">used to:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e2-b16a-ca71906be5ff" class="bulleted-list"><li style="list-style-type:circle">insert data</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8150-ba37-c7a5924d1609" class="bulleted-list"><li style="list-style-type:circle">read data</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ec-84d2-e4cc0eb7bed7" class="bulleted-list"><li style="list-style-type:circle">update data</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819e-af55-d28945ef9797" class="bulleted-list"><li style="list-style-type:circle">delete data</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a0-8e8c-cf13b0acc909" class="">Simple Example</h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js" integrity="sha512-sijCOJblSCXYYmXdwvqV0tak8QJW5iy2yLB1wAbbLc3OOIueqymizRFWUS/mwKctnzPKpNdPJV3aK1zlDMJmXQ==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-81f2-91d2-ffd071b93213" class="code code-wrap"><code class="language-sql" style="white-space:pre-wrap;word-break:break-all">SELECT * FROM users;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a1-8b3b-f48229121e88" class="">Meaning:</p></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-8125-963a-d0561f845b28" class="">“Give me all data from users table”</blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81bf-aa2b-eb8bbb6e84e8"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-818d-982d-e007cbe11db3" class="">0.5 SQL vs MySQL (VERY IMPORTANT)</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8108-8051-f23384a3ccbe" class="">Many beginners get confused here.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818c-beb1-edcef820a1e3" class="">SQL</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8105-8353-dc7ba98861f8" class="bulleted-list"><li style="list-style-type:disc">A <strong>language</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81af-9c60-f5e02910611c" class="bulleted-list"><li style="list-style-type:disc">Rules + syntax</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8162-af0d-fa7dbe2c38fe" class="bulleted-list"><li style="list-style-type:disc">Same everywhere (mostly)</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810e-b510-c582f51524fb" class="">MySQL</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817a-b004-e268d86f6e30" class="bulleted-list"><li style="list-style-type:disc">A <strong>database software</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815e-a9b3-c84a351e934e" class="bulleted-list"><li style="list-style-type:disc">Understands SQL</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8138-bbcc-c648d197fc8b" class="bulleted-list"><li style="list-style-type:disc">Stores data physically on disk</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c7-b135-c8e3ba1bb494" class="">So:</p></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-81dd-bce0-f60a18d4db73" class="">You write SQL,<div style="display:contents" dir="auto"><p id="2df155e4-633e-815e-99cf-ededa028b30e" class="">MySQL <strong>executes it</strong>.</p></div></blockquote></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-819b-8d7c-c722c263ec50" class="">Real Analogy</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8122-b721-decb03f4714c" class="bulleted-list"><li style="list-style-type:disc">English → Language</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819d-8c35-ebc0f62e0149" class="bulleted-list"><li style="list-style-type:disc">Human → understands English</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-87c0-e060f7553e85" class="">➡️ SQL → Language</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8100-b4c0-cfa34ef23a5b" class="">➡️ MySQL → understands SQL</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8120-8162-e3b1f8cdfffc"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-817a-b094-f4ba400b78e9" class="">0.6 What is MySQL and Why Industry Uses It?</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-ab19-ef2f36b9d45b" class="">MySQL is:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d5-b771-ddd43d48e1a5" class="bulleted-list"><li style="list-style-type:disc">Open source</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816c-bb6b-f33b818bb568" class="bulleted-list"><li style="list-style-type:disc">Fast</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81af-9636-f94ab2f29644" class="bulleted-list"><li style="list-style-type:disc">Reliable</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f3-9e2a-cd5f7ba30153" class="bulleted-list"><li style="list-style-type:disc">Used in <strong>real companies</strong></li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ae-9b4a-d58f86e914ac" class="">Where MySQL is used</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81db-8efe-d2a856eaa726" class="bulleted-list"><li style="list-style-type:disc">Backend APIs (Node.js, Java, PHP)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8167-b88f-e8be95f8cd5a" class="bulleted-list"><li style="list-style-type:disc">Admin dashboards</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81be-b800-fa1439960b1e" class="bulleted-list"><li style="list-style-type:disc">Reporting tools</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812d-9135-d94e96a96db1" class="bulleted-list"><li style="list-style-type:disc">Production apps</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8198-9fcb-dfd0687d8ad3" class="">Companies using MySQL</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813e-896e-d346be3cf4e2" class="bulleted-list"><li style="list-style-type:disc">Startups</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816b-b4f4-d1c8ca223e70" class="bulleted-list"><li style="list-style-type:disc">SaaS products</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8172-b3e7-f0f98afb326c" class="bulleted-list"><li style="list-style-type:disc">Internal tools</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e8-a37b-f63da964329a" class="bulleted-list"><li style="list-style-type:disc">ERP systems</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814e-9209-c4c9334a07b3"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8138-ad21-ed34bd745ae5" class="">0.7 How Does Data Flow in Real Applications?</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e4-96cd-c3c831753dd1" class="">Let’s understand <strong>big picture</strong> (very important).</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814a-a565-c1b112f195d6" class="">Step-by-step</h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8168-8d11-f9d7ea7dc036" class="numbered-list" start="1"><li>User opens website</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-819b-a9a1-eccabcb76d93" class="numbered-list" start="2"><li>Clicks <strong>Login</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-810e-9a2d-c9e49a144db5" class="numbered-list" start="3"><li>Frontend sends request</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-817c-873d-f90a506807ff" class="numbered-list" start="4"><li>Backend runs SQL query</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8135-b5e4-d7a738f536ac" class="numbered-list" start="5"><li>MySQL returns data</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8107-966b-c92bdc620126" class="numbered-list" start="6"><li>Backend sends response to frontend</li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ba-b2dc-dc24c5d73cf6" class="">📌 SQL runs <strong>ONLY on backend</strong>, never in browser.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811d-b900-e5de091cac7d"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-817c-8829-ebf7e8111911" class="">0.8 Does Entire App Download From Server?</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-b103-d6e02de2b1bc" class="">This clears a BIG confusion.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e8-9ca8-db9db4eda33b" class="">What actually happens</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f0-a0d1-d2cf3b03e5d0" class="bulleted-list"><li style="list-style-type:disc">Browser downloads:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b5-8320-e4424b9135bb" class="bulleted-list"><li style="list-style-type:circle"><code>index.html</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813c-8fd4-c681103335b8" class="bulleted-list"><li style="list-style-type:circle">JS files</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f4-9e4b-cd5f159499be" class="bulleted-list"><li style="list-style-type:circle">CSS</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8174-848c-cb0add1393fb" class="bulleted-list"><li style="list-style-type:disc">Database data ❌ NOT downloaded</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8158-a14c-dd962611b634" class="">Data is fetched:</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8172-a3c9-f526e07f9f13" class="bulleted-list"><li style="list-style-type:disc"><strong>on demand</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8190-aeac-e32cb249a12e" class="bulleted-list"><li style="list-style-type:disc">via API calls</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8125-9cbc-cb2523dcfc93" class="bulleted-list"><li style="list-style-type:disc">using SQL at backend</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-b43a-d127ab360c77" class="">So:</p></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-815e-8765-cae1e100d270" class="">Database stays on server<div style="display:contents" dir="auto"><p id="2df155e4-633e-8114-b650-cdadd3aecd65" class="">SQL runs on server</p></div></blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8157-bbe7-dc2985e0f415"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8111-9e9b-dd634163f4d1" class="">0.9 Why SQL Is Still Mandatory in 2025</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-969b-d616bbd73a18" class="">People say:</p></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-81dd-b564-c335b3546956" class="">“ORM use karo, SQL nahi”</blockquote></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c4-abbf-f3456249ceab" class="">Reality:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b2-ac39-cb3267ee0b04" class="bulleted-list"><li style="list-style-type:disc">ORM internally uses SQL</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ae-a074-d80f43c13824" class="bulleted-list"><li style="list-style-type:disc">Debugging requires SQL</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f4-b790-d53ad1e92cbb" class="bulleted-list"><li style="list-style-type:disc">Performance tuning requires SQL</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813e-b6b5-f48205aaa732" class="bulleted-list"><li style="list-style-type:disc">Interviews ask SQL</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8161-998e-d1abdee2b3c9" class="">📌 <strong>Strong SQL = strong backend developer</strong></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818f-8fb7-f315caba3f89"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-811f-8854-c8043b4d6382" class="">0.10 Mental Model You Must Lock In</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8175-a4e9-f66a33d031b8" class="">Before moving forward, lock this in your head:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81bf-8e56-e875c0e7e090" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">Application → Backend → SQL → MySQL → Data
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813c-bdf9-e5bcc6de9f13" class="">You:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812d-ac0a-f5fb8587ee19" class="bulleted-list"><li style="list-style-type:disc"><strong>write SQL</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e9-8a3d-e47696bef8a0" class="bulleted-list"><li style="list-style-type:disc">MySQL:</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8119-b9b0-cc740d3735bf" class="bulleted-list"><li style="list-style-type:disc"><strong>stores &amp; retrieves data</strong></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814f-968d-dffcbbaa5449"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8196-a8dd-d077757e69b2" class="">🧪 Quick Check</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81cb-b5b5-ca26e9079b45" class="numbered-list" start="1"><li>Is SQL a database?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8198-932c-fd42fba2af30" class="numbered-list" start="2"><li>Is MySQL a language?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81a8-8ee0-f7eb16d8d674" class="numbered-list" start="3"><li>Does browser run SQL?</li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c4-8418-cf5e5123e73e" class="">(If you answered correctly → you’re on right track)</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c2-a880-f4057b7eeca6" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e5-8965-f90072aca8fd" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8160-b979-f5d38f7784f8" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81b1-80b2-ebcde06bade0" class="">2.4 Common Datatypes (Only What Industry Uses Daily)</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c7-823b-c6f8e70e8957" class="">We will <strong>not overload</strong> you.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8184-a243-dcf02f978424" class="">1️⃣ INT</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-a3fe-c7b19ac8f96c" class="">Used for:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8147-a192-c9b703f5d2e8" class="bulleted-list"><li style="list-style-type:disc">IDs</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fe-bd8a-c4edc5893813" class="bulleted-list"><li style="list-style-type:disc">counts</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e3-b6d8-d7bff585e244" class="bulleted-list"><li style="list-style-type:disc">numbers</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8128-86ff-f40dfcc113da" class="code code-wrap"><code class="language-sql" style="white-space:pre-wrap;word-break:break-all">id INT
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8141-ae3c-fbb4370a8bc8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bd-8908-df6380cd59c4" class="">2️⃣ VARCHAR(length)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c5-af71-ef9d58e97665" class="">Used for:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8107-8359-d846971aedbd" class="bulleted-list"><li style="list-style-type:disc">names</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fd-8de2-fc8866aa6d3f" class="bulleted-list"><li style="list-style-type:disc">email</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b4-88df-f903b7984fa5" class="bulleted-list"><li style="list-style-type:disc">titles</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8131-8cfe-c2310b8de75b" class="code code-wrap"><code class="language-sql" style="white-space:pre-wrap;word-break:break-all">name VARCHAR(100)
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8132-9951-ee5087f45c3a" class="">📌 Why length matters:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b1-b207-ea2e35ed7531" class="bulleted-list"><li style="list-style-type:disc">Saves memory</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816a-a642-efc0ef18c0a0" class="bulleted-list"><li style="list-style-type:disc">Improves performance</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817d-9c14-fb9496125704"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f8-b712-fd229cc1a652" class="">3️⃣ TEXT</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8194-bb43-e8ca4f683f16" class="">Used for:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810a-9d08-ffc086922c02" class="bulleted-list"><li style="list-style-type:disc">descriptions</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8139-ab68-d0dfdcc75a11" class="bulleted-list"><li style="list-style-type:disc">comments</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818a-a64e-f6ba81ff49e1" class="bulleted-list"><li style="list-style-type:disc">messages</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8177-acc3-d34af03d7214" class="code code-wrap"><code class="language-sql" style="white-space:pre-wrap;word-break:break-all">bio TEXT
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8106-b485-cf289b6d1543"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a4-a4bf-d6301b00cbfc" class="">4️⃣ BOOLEAN</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b6-ac5e-ec977bbd7f77" class="">Used for:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815e-84c7-c3354e6a1ae1" class="bulleted-list"><li style="list-style-type:disc">flags</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a5-8982-ed00f7c04f48" class="bulleted-list"><li style="list-style-type:disc">yes/no values</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b2-8ea3-c5d0597e0afb" class="code code-wrap"><code class="language-sql" style="white-space:pre-wrap;word-break:break-all">is_active BOOLEAN
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819b-b784-e5d2d6e38510" class="">Internally:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c2-b38a-ef43ecf42312" class="bulleted-list"><li style="list-style-type:disc">true → 1</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8123-baa3-f80f0dfe576c" class="bulleted-list"><li style="list-style-type:disc">false → 0</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8169-b6da-effb9686c9d0"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8172-b8e8-fe773ece9fd4" class="">5️⃣ DATE</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8135-94e6-f19d2e649baa" class="">Used for:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c6-8e7e-c4cb24de719d" class="bulleted-list"><li style="list-style-type:disc">birth date</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813e-89f8-f760740d6253" class="bulleted-list"><li style="list-style-type:disc">joining date</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8170-84f4-d053914c607d" class="code code-wrap"><code class="language-sql" style="white-space:pre-wrap;word-break:break-all">joining_date DATE
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811c-83db-fb3d99a985f2"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8168-b02c-ecf07841f057" class="">6️⃣ DATETIME</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811f-ac94-db3be416ed08" class="">Used for:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8167-9509-c30ece24fece" class="bulleted-list"><li style="list-style-type:disc">created_at</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8130-947c-f529a84f6695" class="bulleted-list"><li style="list-style-type:disc">updated_at</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ff-b597-f309c2a662b7" class="bulleted-list"><li style="list-style-type:disc">logs</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818a-8199-fd393aaf6457" class="code code-wrap"><code class="language-sql" style="white-space:pre-wrap;word-break:break-all">created_at DATETIME
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814f-b78e-fc2a72a3fc54"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8133-8a55-c91930bc30b0" class="">7️⃣ DECIMAL</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d9-8b63-e211733e2973" class="">Used for:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8176-8c23-e3fb5827832e" class="bulleted-list"><li style="list-style-type:disc">salary</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811f-9ff3-dca09eaf5938" class="bulleted-list"><li style="list-style-type:disc">price</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8122-9f91-c71f4521aade" class="bulleted-list"><li style="list-style-type:disc">money</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e1-b957-c706daec561a" class="code code-wrap"><code class="language-sql" style="white-space:pre-wrap;word-break:break-all">salary DECIMAL(10,2)
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-b7e1-f14ba6b097b2" class="">📌 NEVER use FLOAT for money.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8127-8f54-db4a87a98d53"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a2-a7e7-e81eb6e4fe7a" class="">2.5 Constraints (Rules That Protect Your Data)</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811d-8f56-d64abdf12d0b" class="">Constraints = <strong>data safety rules</strong></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8160-adc4-ca62c114e922"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a4-ad0d-d939baf543b3" class="">🔹 PRIMARY KEY (MOST IMPORTANT)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817e-9b1f-d6249a61eb98" class="">Rules:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811f-963a-f2461841f9f6" class="bulleted-list"><li style="list-style-type:disc">Uniquely identifies a row</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812c-a89b-e26a513799df" class="bulleted-list"><li style="list-style-type:disc">Cannot be NULL</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8106-b518-e62636bab54b" class="bulleted-list"><li style="list-style-type:disc">Only ONE per table</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8179-8379-c060f59bf913" class="code code-wrap"><code class="language-sql" style="white-space:pre-wrap;word-break:break-all">id INT PRIMARY KEY
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-b544-c6ca98dd16c3" class="">Industry meaning:</p></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-8161-93ec-e737ace8499f" class="">“This row can be uniquely referenced”</blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8196-bff6-c0a96d9f555a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8156-a82f-f5a29e38fc2d" class="">🔹 AUTO_INCREMENT</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-96cd-cc59efd97729" class="">Used with IDs.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818b-86ea-dc7834a40669" class="code code-wrap"><code class="language-sql" style="white-space:pre-wrap;word-break:break-all">id INT AUTO_INCREMENT
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818e-8fdf-d290df7e5dfc" class="">Meaning:</p></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-8195-bd7f-e40d737226ca" class="">MySQL automatically increases value</blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810a-8b51-d6232ca057fd"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8184-b596-e3d851bacdbe" class="">🔹 NOT NULL</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-9a87-c06455ffddf8" class="">Prevents missing data.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810a-8e41-c91b5baeab2d" class="code code-wrap"><code class="language-sql" style="white-space:pre-wrap;word-break:break-all">name VARCHAR(100) NOT NULL
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a4-9321-c29cf1b41188"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f4-b128-e5b6e3979224" class="">🔹 UNIQUE</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-b68b-f9caa6512aed" class="">Prevents duplicates.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8189-8871-c45099c90768" class="code code-wrap"><code class="language-sql" style="white-space:pre-wrap;word-break:break-all">email VARCHAR(150) UNIQUE
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8159-b0be-f2267c557fd9"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8150-ad3c-ee69ce6d05d0" class="">🔹 DEFAULT</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-8b1f-f4c8469532bd" class="">Sets default value.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8166-97e3-ec213eb11332" class="code code-wrap"><code class="language-sql" style="white-space:pre-wrap;word-break:break-all">is_active BOOLEAN DEFAULT true
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c7-9b4e-cbef64b34653" class="">
+</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817b-8ae1-f599bb6f5c8a" class="bulleted-list"><li style="list-style-type:disc">- show databases<br/>show databases;</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8165-9ba8-f0bcc61e16c9" class="bulleted-list"><li style="list-style-type:disc">- create database<br/>create database company_db;<br/>create database test_db;</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816e-8cbb-fcf9ffd26e86" class="bulleted-list"><li style="list-style-type:disc">- delete database<br/>drop database test_db;</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8116-909b-eabe34358493" class="bulleted-list"><li style="list-style-type:disc">- create a table<br/>-- create table tab_name (<br/>--	col_name datatype constraints,<br/>-- secondcol,<br/>-- thirdcol<br/>-- );</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817f-a6c8-ee191954e1b7" class="bulleted-list"><li style="list-style-type:disc">- check current database<br/>select database();</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8109-a46c-e990c2e36bce" class="bulleted-list"><li style="list-style-type:disc">- select company_db<br/>use company_db;</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810d-9e14-fa8c2227031a" class="bulleted-list"><li style="list-style-type:disc">- create users table<br/>create table users (<br/>id int auto_increment primary key,<br/>name varchar(100) not null,<br/>email varchar(150) unique,<br/>password varchar(255) not null,<br/>is_active boolean default true,<br/>created_at datetime<br/>);</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813d-b208-fd36a0e03582" class="bulleted-list"><li style="list-style-type:disc">- describe table<br/>describe users;</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a2-a2f5-c4d071ff6f28" class="bulleted-list"><li style="list-style-type:disc">- create employees table<br/>CREATE TABLE employees (<br/>id INT AUTO_INCREMENT PRIMARY KEY,<br/>full_name VARCHAR(120) NOT NULL,<br/>department VARCHAR(50),<br/>salary DECIMAL(10,2),<br/>joining_date DATE,<br/>is_permanent BOOLEAN DEFAULT false<br/>);</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8145-a69c-c4e0340a5482" class="bulleted-list"><li style="list-style-type:disc">- create products table<br/>create table products (<br/>id int auto_increment primary key,<br/>name varchar(100) not null,<br/>price decimal(10, 2),<br/>stock_quantity int,<br/>is_available boolean,<br/>created_at datetime<br/>);</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8146-99eb-cf83dc306201" class="bulleted-list"><li style="list-style-type:disc">- show all tables<br/>show tables;</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8126-bc76-d33e5c85c2cd" class="bulleted-list"><li style="list-style-type:disc">- insert data in users table<br/>describe users;<br/>insert into users (name, email, password, created_at)<br/>values (&quot;Jay Abhani&quot;, &quot;<a href="mailto:abhani57@gmail.com">abhani57@gmail.com</a>&quot;, 12345, now());</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8177-8b62-ffa68a664d34" class="">insert into users (name, email, password, created_at)<br/>values (&quot;Neha Sharma&quot;, &quot;<a href="mailto:nehasharma@gmail.com">nehasharma@gmail.com</a>&quot;, 12345678, now()),<br/>(),<br/>(),<br/>();</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c0-8895-ed46a99dfd1f" class="bulleted-list"><li style="list-style-type:disc">- retriving all records of users<br/>select * from users;</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a8-b70b-c07e7ec2350a" class="bulleted-list"><li style="list-style-type:disc">- adding 50 records to users<br/>INSERT INTO users (name, email, password, is_active, created_at) VALUES<br/>(&#x27;Aarav Sharma&#x27;, &#x27;aarav.sharma@example.com&#x27;, &#x27;$2y$hash001&#x27;, true, &#x27;2024-01-01 10:15:00&#x27;),<br/>(&#x27;Vivaan Patel&#x27;, &#x27;vivaan.patel@example.com&#x27;, &#x27;$2y$hash002&#x27;, true, &#x27;2024-01-02 11:20:00&#x27;),<br/>(&#x27;Aditya Verma&#x27;, &#x27;aditya.verma@example.com&#x27;, &#x27;$2y$hash003&#x27;, false, &#x27;2024-01-03 09:45:00&#x27;),<br/>(&#x27;Vihaan Mehta&#x27;, &#x27;vihaan.mehta@example.com&#x27;, &#x27;$2y$hash004&#x27;, true, &#x27;2024-01-04 14:10:00&#x27;),<br/>(&#x27;Arjun Singh&#x27;, &#x27;arjun.singh@example.com&#x27;, &#x27;$2y$hash005&#x27;, true, &#x27;2024-01-05 16:30:00&#x27;),</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-8d8b-f8a035db2d14" class="">(&#x27;Sai Reddy&#x27;, &#x27;sai.reddy@example.com&#x27;, &#x27;$2y$hash006&#x27;, true, &#x27;2024-01-06 08:40:00&#x27;),<br/>(&#x27;Krishna Iyer&#x27;, &#x27;krishna.iyer@example.com&#x27;, &#x27;$2y$hash007&#x27;, false, &#x27;2024-01-07 12:00:00&#x27;),<br/>(&#x27;Rohan Das&#x27;, &#x27;rohan.das@example.com&#x27;, &#x27;$2y$hash008&#x27;, true, &#x27;2024-01-08 13:15:00&#x27;),<br/>(&#x27;Ananya Gupta&#x27;, &#x27;ananya.gupta@example.com&#x27;, &#x27;$2y$hash009&#x27;, true, &#x27;2024-01-09 17:50:00&#x27;),<br/>(&#x27;Ishita Jain&#x27;, &#x27;ishita.jain@example.com&#x27;, &#x27;$2y$hash010&#x27;, true, &#x27;2024-01-10 09:25:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f4-9192-c32f84393975" class="">(&#x27;Neha Kapoor&#x27;, &#x27;neha.kapoor@example.com&#x27;, &#x27;$2y$hash011&#x27;, false, &#x27;2024-01-11 11:35:00&#x27;),<br/>(&#x27;Pooja Malhotra&#x27;, &#x27;pooja.malhotra@example.com&#x27;, &#x27;$2y$hash012&#x27;, true, &#x27;2024-01-12 15:45:00&#x27;),<br/>(&#x27;Rahul Khanna&#x27;, &#x27;rahul.khanna@example.com&#x27;, &#x27;$2y$hash013&#x27;, true, &#x27;2024-01-13 18:10:00&#x27;),<br/>(&#x27;Kunal Bansal&#x27;, &#x27;kunal.bansal@example.com&#x27;, &#x27;$2y$hash014&#x27;, true, &#x27;2024-01-14 10:00:00&#x27;),<br/>(&#x27;Amit Mishra&#x27;, &#x27;amit.mishra@example.com&#x27;, &#x27;$2y$hash015&#x27;, false, &#x27;2024-01-15 12:20:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8162-bc47-e46603395fe2" class="">(&#x27;Suresh Yadav&#x27;, &#x27;suresh.yadav@example.com&#x27;, &#x27;$2y$hash016&#x27;, true, &#x27;2024-01-16 14:40:00&#x27;),<br/>(&#x27;Nikhil Arora&#x27;, &#x27;nikhil.arora@example.com&#x27;, &#x27;$2y$hash017&#x27;, true, &#x27;2024-01-17 16:55:00&#x27;),<br/>(&#x27;Deepak Chauhan&#x27;, &#x27;deepak.chauhan@example.com&#x27;, &#x27;$2y$hash018&#x27;, true, &#x27;2024-01-18 09:30:00&#x27;),<br/>(&#x27;Manish Pandey&#x27;, &#x27;manish.pandey@example.com&#x27;, &#x27;$2y$hash019&#x27;, false, &#x27;2024-01-19 11:10:00&#x27;),<br/>(&#x27;Sanjay Roy&#x27;, &#x27;sanjay.roy@example.com&#x27;, &#x27;$2y$hash020&#x27;, true, &#x27;2024-01-20 13:45:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-87bb-d6d710cbb179" class="">(&#x27;Ritika Sen&#x27;, &#x27;ritika.sen@example.com&#x27;, &#x27;$2y$hash021&#x27;, true, &#x27;2024-01-21 15:30:00&#x27;),<br/>(&#x27;Sneha Kulkarni&#x27;, &#x27;sneha.kulkarni@example.com&#x27;, &#x27;$2y$hash022&#x27;, true, &#x27;2024-01-22 17:20:00&#x27;),<br/>(&#x27;Pankaj Tiwari&#x27;, &#x27;pankaj.tiwari@example.com&#x27;, &#x27;$2y$hash023&#x27;, false, &#x27;2024-01-23 09:50:00&#x27;),<br/>(&#x27;Ashish Goyal&#x27;, &#x27;ashish.goyal@example.com&#x27;, &#x27;$2y$hash024&#x27;, true, &#x27;2024-01-24 11:40:00&#x27;),<br/>(&#x27;Vikas Saxena&#x27;, &#x27;vikas.saxena@example.com&#x27;, &#x27;$2y$hash025&#x27;, true, &#x27;2024-01-25 14:15:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8110-b7e7-e70c3ec20058" class="">(&#x27;Mehul Shah&#x27;, &#x27;mehul.shah@example.com&#x27;, &#x27;$2y$hash026&#x27;, true, &#x27;2024-01-26 16:05:00&#x27;),<br/>(&#x27;Hardik Joshi&#x27;, &#x27;hardik.joshi@example.com&#x27;, &#x27;$2y$hash027&#x27;, false, &#x27;2024-01-27 18:00:00&#x27;),<br/>(&#x27;Pranav Kulkarni&#x27;, &#x27;pranav.kulkarni@example.com&#x27;, &#x27;$2y$hash028&#x27;, true, &#x27;2024-01-28 10:10:00&#x27;),<br/>(&#x27;Alok Tripathi&#x27;, &#x27;alok.tripathi@example.com&#x27;, &#x27;$2y$hash029&#x27;, true, &#x27;2024-01-29 12:35:00&#x27;),<br/>(&#x27;Shubham Agarwal&#x27;, &#x27;shubham.agarwal@example.com&#x27;, &#x27;$2y$hash030&#x27;, true, &#x27;2024-01-30 14:55:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c7-bf59-c8d0545c6072" class="">(&#x27;Ravi Prakash&#x27;, &#x27;ravi.prakash@example.com&#x27;, &#x27;$2y$hash031&#x27;, false, &#x27;2024-01-31 16:40:00&#x27;),<br/>(&#x27;Karthik Nair&#x27;, &#x27;karthik.nair@example.com&#x27;, &#x27;$2y$hash032&#x27;, true, &#x27;2024-02-01 09:15:00&#x27;),<br/>(&#x27;Siddharth Rao&#x27;, &#x27;siddharth.rao@example.com&#x27;, &#x27;$2y$hash033&#x27;, true, &#x27;2024-02-02 11:25:00&#x27;),<br/>(&#x27;Varun Mallick&#x27;, &#x27;varun.mallick@example.com&#x27;, &#x27;$2y$hash034&#x27;, true, &#x27;2024-02-03 13:35:00&#x27;),<br/>(&#x27;Abhishek Soni&#x27;, &#x27;abhishek.soni@example.com&#x27;, &#x27;$2y$hash035&#x27;, false, &#x27;2024-02-04 15:45:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813b-a3f5-cccb3460bd19" class="">(&#x27;Mohit Chawla&#x27;, &#x27;mohit.chawla@example.com&#x27;, &#x27;$2y$hash036&#x27;, true, &#x27;2024-02-05 17:30:00&#x27;),<br/>(&#x27;Tarun Bhatia&#x27;, &#x27;tarun.bhatia@example.com&#x27;, &#x27;$2y$hash037&#x27;, true, &#x27;2024-02-06 10:05:00&#x27;),<br/>(&#x27;Naveen Khatri&#x27;, &#x27;naveen.khatri@example.com&#x27;, &#x27;$2y$hash038&#x27;, true, &#x27;2024-02-07 12:15:00&#x27;),<br/>(&#x27;Harsh Vardhan&#x27;, &#x27;harsh.vardhan@example.com&#x27;, &#x27;$2y$hash039&#x27;, false, &#x27;2024-02-08 14:25:00&#x27;),<br/>(&#x27;Yogesh Solanki&#x27;, &#x27;yogesh.solanki@example.com&#x27;, &#x27;$2y$hash040&#x27;, true, &#x27;2024-02-09 16:35:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81aa-aeb4-c71e9a366984" class="">(&#x27;Aakash Tomar&#x27;, &#x27;aakash.tomar@example.com&#x27;, &#x27;$2y$hash041&#x27;, true, &#x27;2024-02-10 18:00:00&#x27;),<br/>(&#x27;Rohit Choudhary&#x27;, &#x27;rohit.choudhary@example.com&#x27;, &#x27;$2y$hash042&#x27;, true, &#x27;2024-02-11 09:45:00&#x27;),<br/>(&#x27;Gaurav Bhatt&#x27;, &#x27;gaurav.bhatt@example.com&#x27;, &#x27;$2y$hash043&#x27;, false, &#x27;2024-02-12 11:55:00&#x27;),<br/>(&#x27;Sameer Sheikh&#x27;, &#x27;sameer.sheikh@example.com&#x27;, &#x27;$2y$hash044&#x27;, true, &#x27;2024-02-13 14:10:00&#x27;),<br/>(&#x27;Imran Khan&#x27;, &#x27;imran.khan@example.com&#x27;, &#x27;$2y$hash045&#x27;, true, &#x27;2024-02-14 16:20:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81de-ba26-db7b36fecd98" class="">(&#x27;Zaid Ansari&#x27;, &#x27;zaid.ansari@example.com&#x27;, &#x27;$2y$hash046&#x27;, true, &#x27;2024-02-15 18:30:00&#x27;),<br/>(&#x27;Faizan Ali&#x27;, &#x27;faizan.ali@example.com&#x27;, &#x27;$2y$hash047&#x27;, false, &#x27;2024-02-16 10:40:00&#x27;),<br/>(&#x27;Rehan Siddiqui&#x27;, &#x27;rehan.siddiqui@example.com&#x27;, &#x27;$2y$hash048&#x27;, true, &#x27;2024-02-17 12:50:00&#x27;),<br/>(&#x27;Ayaan Khan&#x27;, &#x27;ayaan.khan@example.com&#x27;, &#x27;$2y$hash049&#x27;, true, &#x27;2024-02-18 15:00:00&#x27;),<br/>(&#x27;Salman Farooq&#x27;, &#x27;salman.farooq@example.com&#x27;, &#x27;$2y$hash050&#x27;, true, &#x27;2024-02-19 17:10:00&#x27;);</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a9-84b7-fab13dea6e18" class="">select * from users;</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818f-b2e3-f0ecd88e9ab8" class="bulleted-list"><li style="list-style-type:disc">- adding 50 records to employees<br/>INSERT INTO employees (full_name, department, salary, joining_date, is_permanent) VALUES<br/>(&#x27;Rahul Mehta&#x27;, &#x27;Engineering&#x27;, 55000, &#x27;2021-03-15&#x27;, true),<br/>(&#x27;Anjali Sharma&#x27;, &#x27;HR&#x27;, 42000, &#x27;2022-01-10&#x27;, true),<br/>(&#x27;Amit Patel&#x27;, &#x27;Engineering&#x27;, 60000, &#x27;2020-07-05&#x27;, true),<br/>(&#x27;Neha Verma&#x27;, &#x27;Marketing&#x27;, 38000, &#x27;2023-06-20&#x27;, false),<br/>(&#x27;Suresh Kumar&#x27;, &#x27;Finance&#x27;, 52000, &#x27;2019-11-12&#x27;, true),</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-925e-e538f08aedd8" class="">(&#x27;Pooja Nair&#x27;, &#x27;HR&#x27;, 40000, &#x27;2022-09-01&#x27;, false),<br/>(&#x27;Rohan Singh&#x27;, &#x27;Sales&#x27;, 45000, &#x27;2023-02-18&#x27;, false),<br/>(&#x27;Kunal Shah&#x27;, &#x27;Engineering&#x27;, 75000, &#x27;2018-04-25&#x27;, true),<br/>(&#x27;Ishita Gupta&#x27;, &#x27;Marketing&#x27;, 47000, &#x27;2021-08-30&#x27;, true),<br/>(&#x27;Manoj Yadav&#x27;, &#x27;Operations&#x27;, 50000, &#x27;2020-12-05&#x27;, true),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8116-8557-e72456e131d3" class="">(&#x27;Sneha Kulkarni&#x27;, &#x27;Finance&#x27;, 48000, &#x27;2022-05-14&#x27;, false),<br/>(&#x27;Vikas Malhotra&#x27;, &#x27;Sales&#x27;, 53000, &#x27;2021-10-22&#x27;, true),<br/>(&#x27;Arjun Rao&#x27;, &#x27;Engineering&#x27;, 68000, &#x27;2017-06-11&#x27;, true),<br/>(&#x27;Nikita Joshi&#x27;, &#x27;HR&#x27;, 39000, &#x27;2023-04-03&#x27;, false),<br/>(&#x27;Deepak Chauhan&#x27;, &#x27;Operations&#x27;, 46000, &#x27;2022-01-19&#x27;, true),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ec-908c-e35f3b087dc7" class="">(&#x27;Priya Bansal&#x27;, &#x27;Marketing&#x27;, 44000, &#x27;2021-03-08&#x27;, true),<br/>(&#x27;Harsh Vardhan&#x27;, &#x27;Engineering&#x27;, 72000, &#x27;2019-09-17&#x27;, true),<br/>(&#x27;Kavita Mishra&#x27;, &#x27;Finance&#x27;, 51000, &#x27;2020-02-27&#x27;, true),<br/>(&#x27;Mohit Agarwal&#x27;, &#x27;Sales&#x27;, 48000, &#x27;2022-07-09&#x27;, false),<br/>(&#x27;Ritu Saxena&#x27;, &#x27;Operations&#x27;, 47000, &#x27;2023-08-01&#x27;, false),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8106-a69a-c3459ee91056" class="">(&#x27;Nilesh Desai&#x27;, &#x27;Engineering&#x27;, 66000, &#x27;2020-01-15&#x27;, true),<br/>(&#x27;Ayesha Khan&#x27;, &#x27;HR&#x27;, 41000, &#x27;2021-06-12&#x27;, true),<br/>(&#x27;Tarun Bhatia&#x27;, &#x27;Sales&#x27;, 52000, &#x27;2019-10-10&#x27;, true),<br/>(&#x27;Simran Kaur&#x27;, &#x27;Marketing&#x27;, 46000, &#x27;2022-11-05&#x27;, false),<br/>(&#x27;Rakesh Tiwari&#x27;, &#x27;Finance&#x27;, 58000, &#x27;2018-08-19&#x27;, true),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813b-af3e-ff0b1d70c70b" class="">(&#x27;Shubham Jain&#x27;, &#x27;Engineering&#x27;, 70000, &#x27;2020-05-23&#x27;, true),<br/>(&#x27;Pallavi Joshi&#x27;, &#x27;HR&#x27;, 39500, &#x27;2023-02-01&#x27;, false),<br/>(&#x27;Yogesh Solanki&#x27;, &#x27;Operations&#x27;, 48000, &#x27;2021-07-14&#x27;, true),<br/>(&#x27;Abhishek Soni&#x27;, &#x27;Sales&#x27;, 51000, &#x27;2022-03-30&#x27;, false),<br/>(&#x27;Meena Iyer&#x27;, &#x27;Finance&#x27;, 54000, &#x27;2019-12-11&#x27;, true),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816b-8df3-cec6a7ffcfab" class="">(&#x27;Rohit Choudhary&#x27;, &#x27;Engineering&#x27;, 69000, &#x27;2018-09-09&#x27;, true),<br/>(&#x27;Snehal Patil&#x27;, &#x27;Marketing&#x27;, 43000, &#x27;2021-04-26&#x27;, true),<br/>(&#x27;Karan Malhotra&#x27;, &#x27;Sales&#x27;, 56000, &#x27;2020-06-18&#x27;, true),<br/>(&#x27;Divya Shah&#x27;, &#x27;HR&#x27;, 40500, &#x27;2022-10-08&#x27;, false),<br/>(&#x27;Sunil Pawar&#x27;, &#x27;Operations&#x27;, 49000, &#x27;2019-01-21&#x27;, true),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814c-83bf-c5cb087edfd7" class="">(&#x27;Alok Tripathi&#x27;, &#x27;Engineering&#x27;, 74000, &#x27;2017-11-30&#x27;, true),<br/>(&#x27;Rina Dutta&#x27;, &#x27;Finance&#x27;, 52500, &#x27;2020-08-03&#x27;, true),<br/>(&#x27;Naveen Khatri&#x27;, &#x27;Sales&#x27;, 54500, &#x27;2021-09-16&#x27;, true),<br/>(&#x27;Preeti Arora&#x27;, &#x27;Marketing&#x27;, 45500, &#x27;2022-02-12&#x27;, false),<br/>(&#x27;Gaurav Bhatt&#x27;, &#x27;Engineering&#x27;, 71000, &#x27;2018-03-27&#x27;, true),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8143-8c0f-e9b1f26998a0" class="">(&#x27;Sonal Mehta&#x27;, &#x27;HR&#x27;, 42000, &#x27;2021-12-01&#x27;, true),<br/>(&#x27;Manish Pandey&#x27;, &#x27;Operations&#x27;, 50500, &#x27;2020-10-20&#x27;, true),<br/>(&#x27;Kriti Saxena&#x27;, &#x27;Marketing&#x27;, 46500, &#x27;2023-01-11&#x27;, false),<br/>(&#x27;Vivek Mishra&#x27;, &#x27;Finance&#x27;, 59000, &#x27;2019-05-06&#x27;, true),<br/>(&#x27;Aditya Kulkarni&#x27;, &#x27;Engineering&#x27;, 68000, &#x27;2022-06-28&#x27;, true);</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810f-89e7-e1e64fcba3e4" class="bulleted-list"><li style="list-style-type:disc">- adding 50 record to products<br/>INSERT INTO products (name, price, stock_quantity, is_available, created_at) VALUES<br/>(&#x27;Wireless Mouse&#x27;, 799.00, 120, true, &#x27;2024-01-01 10:00:00&#x27;),<br/>(&#x27;Mechanical Keyboard&#x27;, 3499.00, 45, true, &#x27;2024-01-02 11:00:00&#x27;),<br/>(&#x27;USB-C Charger 65W&#x27;, 1899.00, 60, true, &#x27;2024-01-03 12:00:00&#x27;),<br/>(&#x27;Laptop Stand&#x27;, 1299.00, 80, true, &#x27;2024-01-04 13:00:00&#x27;),<br/>(&#x27;Bluetooth Headphones&#x27;, 2599.00, 35, true, &#x27;2024-01-05 14:00:00&#x27;),<br/>(&#x27;Webcam Full HD&#x27;, 2199.00, 25, true, &#x27;2024-01-06 10:30:00&#x27;),<br/>(&#x27;External HDD 1TB&#x27;, 4999.00, 15, true, &#x27;2024-01-07 11:30:00&#x27;),<br/>(&#x27;Gaming Mouse Pad&#x27;, 499.00, 150, true, &#x27;2024-01-08 12:30:00&#x27;),<br/>(&#x27;Noise Cancelling Earbuds&#x27;, 3999.00, 0, false, &#x27;2024-01-09 13:30:00&#x27;),<br/>(&#x27;Desk Lamp LED&#x27;, 1799.00, 40, true, &#x27;2024-01-10 14:30:00&#x27;),</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8188-a005-dca23eb4cb77" class="">(&#x27;Portable SSD 512GB&#x27;, 6899.00, 10, true, &#x27;2024-01-11 10:15:00&#x27;),<br/>(&#x27;USB Hub 7-in-1&#x27;, 1599.00, 55, true, &#x27;2024-01-12 11:15:00&#x27;),<br/>(&#x27;Wireless Presenter&#x27;, 1199.00, 20, true, &#x27;2024-01-13 12:15:00&#x27;),<br/>(&#x27;Laptop Backpack&#x27;, 2499.00, 65, true, &#x27;2024-01-14 13:15:00&#x27;),<br/>(&#x27;Monitor 24 Inch&#x27;, 12499.00, 8, true, &#x27;2024-01-15 14:15:00&#x27;),<br/>(&#x27;Desk Organizer&#x27;, 699.00, 95, true, &#x27;2024-01-16 10:45:00&#x27;),<br/>(&#x27;Office Chair&#x27;, 15999.00, 5, true, &#x27;2024-01-17 11:45:00&#x27;),<br/>(&#x27;WiFi Router&#x27;, 3299.00, 30, true, &#x27;2024-01-18 12:45:00&#x27;),<br/>(&#x27;Extension Board&#x27;, 999.00, 110, true, &#x27;2024-01-19 13:45:00&#x27;),<br/>(&#x27;Mobile Tripod&#x27;, 899.00, 0, false, &#x27;2024-01-20 14:45:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8157-9e72-c60342d4f69f" class="">(&#x27;Smart Watch&#x27;, 5499.00, 22, true, &#x27;2024-01-21 10:00:00&#x27;),<br/>(&#x27;Fitness Band&#x27;, 2999.00, 40, true, &#x27;2024-01-22 11:00:00&#x27;),<br/>(&#x27;Power Bank 20000mAh&#x27;, 2299.00, 35, true, &#x27;2024-01-23 12:00:00&#x27;),<br/>(&#x27;HDMI Cable&#x27;, 599.00, 90, true, &#x27;2024-01-24 13:00:00&#x27;),<br/>(&#x27;Wireless Earphones&#x27;, 1999.00, 50, true, &#x27;2024-01-25 14:00:00&#x27;),<br/>(&#x27;Keyboard Cover&#x27;, 399.00, 120, true, &#x27;2024-01-26 10:30:00&#x27;),<br/>(&#x27;Laptop Cooling Pad&#x27;, 1499.00, 28, true, &#x27;2024-01-27 11:30:00&#x27;),<br/>(&#x27;Smart Plug&#x27;, 1299.00, 32, true, &#x27;2024-01-28 12:30:00&#x27;),<br/>(&#x27;Tablet Stand&#x27;, 999.00, 70, true, &#x27;2024-01-29 13:30:00&#x27;),<br/>(&#x27;Desk Clock Digital&#x27;, 1199.00, 25, true, &#x27;2024-01-30 14:30:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8194-984b-c9dbad53eb2e" class="">(&#x27;VR Headset&#x27;, 18999.00, 3, true, &#x27;2024-02-01 10:00:00&#x27;),<br/>(&#x27;Gaming Controller&#x27;, 3499.00, 18, true, &#x27;2024-02-02 11:00:00&#x27;),<br/>(&#x27;Graphics Tablet&#x27;, 6499.00, 12, true, &#x27;2024-02-03 12:00:00&#x27;),<br/>(&#x27;Smart Speaker&#x27;, 4599.00, 20, true, &#x27;2024-02-04 13:00:00&#x27;),<br/>(&#x27;Portable Projector&#x27;, 22999.00, 2, true, &#x27;2024-02-05 14:00:00&#x27;),<br/>(&#x27;Microphone USB&#x27;, 2999.00, 14, true, &#x27;2024-02-06 10:30:00&#x27;),<br/>(&#x27;Webcam Cover&#x27;, 299.00, 200, true, &#x27;2024-02-07 11:30:00&#x27;),<br/>(&#x27;Ethernet Cable&#x27;, 499.00, 100, true, &#x27;2024-02-08 12:30:00&#x27;),<br/>(&#x27;Smart Light Bulb&#x27;, 1599.00, 45, true, &#x27;2024-02-09 13:30:00&#x27;),<br/>(&#x27;Laptop Sleeve&#x27;, 1299.00, 60, true, &#x27;2024-02-10 14:30:00&#x27;);</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8109-b2e1-e653dd722b54" class="bulleted-list"><li style="list-style-type:disc">- users<br/>-- employees<br/>-- products</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8194-a67e-ce5d5469cd54" class="bulleted-list"><li style="list-style-type:disc">- select all users<br/>select * from users;</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c7-b882-f5303b79f659" class="bulleted-list"><li style="list-style-type:disc">- users -&gt; id, name and email<br/>select id, name, email as user_email from users;</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f8-9afe-c443ecff23cb" class="bulleted-list"><li style="list-style-type:disc">- order by<br/>select * from users<br/>order by name desc;</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8156-9205-d382992bab4f" class="bulleted-list"><li style="list-style-type:disc">- limit<br/>select * from users<br/>order by id desc<br/>limit 5;</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c3-957b-fa17b2263fd3" class="bulleted-list"><li style="list-style-type:disc">- distinct<br/>select * from employees;<br/>select distinct department from employees;</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819e-b6a3-df902069b254" class="bulleted-list"><li style="list-style-type:disc">- create students table<br/>CREATE TABLE students (<br/>id INT AUTO_INCREMENT PRIMARY KEY,<br/>name VARCHAR(100) NOT NULL,<br/>email VARCHAR(150) UNIQUE NOT NULL,<br/>course VARCHAR(100) NOT NULL,<br/>admission_date DATE NOT NULL,<br/>is_active BOOLEAN DEFAULT TRUE<br/>);</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814b-8ec0-c8849a81cacf" class="bulleted-list"><li style="list-style-type:disc">- adding 50 records to students<br/>INSERT INTO students (name, email, course, admission_date, is_active) VALUES<br/>(&#x27;Aarav Sharma&#x27;, &#x27;aarav.sharma@student.com&#x27;, &#x27;Web Development&#x27;, &#x27;2023-01-10&#x27;, true),<br/>(&#x27;Vivaan Patel&#x27;, &#x27;vivaan.patel@student.com&#x27;, &#x27;Data Science&#x27;, &#x27;2023-01-15&#x27;, true),<br/>(&#x27;Aditya Verma&#x27;, &#x27;aditya.verma@student.com&#x27;, &#x27;Web Development&#x27;, &#x27;2023-01-20&#x27;, false),<br/>(&#x27;Vihaan Mehta&#x27;, &#x27;vihaan.mehta@student.com&#x27;, &#x27;Python Programming&#x27;, &#x27;2023-02-01&#x27;, true),<br/>(&#x27;Arjun Singh&#x27;, &#x27;arjun.singh@student.com&#x27;, &#x27;Data Analytics&#x27;, &#x27;2023-02-05&#x27;, true),</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8172-a760-fd67bc954433" class="">(&#x27;Sai Reddy&#x27;, &#x27;sai.reddy@student.com&#x27;, &#x27;Web Development&#x27;, &#x27;2023-02-10&#x27;, true),<br/>(&#x27;Krishna Iyer&#x27;, &#x27;krishna.iyer@student.com&#x27;, &#x27;Machine Learning&#x27;, &#x27;2023-02-15&#x27;, false),<br/>(&#x27;Rohan Das&#x27;, &#x27;rohan.das@student.com&#x27;, &#x27;Python Programming&#x27;, &#x27;2023-02-20&#x27;, true),<br/>(&#x27;Ananya Gupta&#x27;, &#x27;ananya.gupta@student.com&#x27;, &#x27;Web Development&#x27;, &#x27;2023-03-01&#x27;, true),<br/>(&#x27;Ishita Jain&#x27;, &#x27;ishita.jain@student.com&#x27;, &#x27;Data Science&#x27;, &#x27;2023-03-05&#x27;, true),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81aa-9963-ca17afd6f2f3" class="">(&#x27;Neha Kapoor&#x27;, &#x27;neha.kapoor@student.com&#x27;, &#x27;Digital Marketing&#x27;, &#x27;2023-03-10&#x27;, false),<br/>(&#x27;Pooja Malhotra&#x27;, &#x27;pooja.malhotra@student.com&#x27;, &#x27;Web Development&#x27;, &#x27;2023-03-15&#x27;, true),<br/>(&#x27;Rahul Khanna&#x27;, &#x27;rahul.khanna@student.com&#x27;, &#x27;Data Analytics&#x27;, &#x27;2023-03-20&#x27;, true),<br/>(&#x27;Kunal Bansal&#x27;, &#x27;kunal.bansal@student.com&#x27;, &#x27;Python Programming&#x27;, &#x27;2023-04-01&#x27;, true),<br/>(&#x27;Amit Mishra&#x27;, &#x27;amit.mishra@student.com&#x27;, &#x27;Machine Learning&#x27;, &#x27;2023-04-05&#x27;, false),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-ae8c-fffcd42b7c08" class="">(&#x27;Suresh Yadav&#x27;, &#x27;suresh.yadav@student.com&#x27;, &#x27;Web Development&#x27;, &#x27;2023-04-10&#x27;, true),<br/>(&#x27;Nikhil Arora&#x27;, &#x27;nikhil.arora@student.com&#x27;, &#x27;Data Science&#x27;, &#x27;2023-04-15&#x27;, true),<br/>(&#x27;Deepak Chauhan&#x27;, &#x27;deepak.chauhan@student.com&#x27;, &#x27;Python Programming&#x27;, &#x27;2023-04-20&#x27;, true),<br/>(&#x27;Manish Pandey&#x27;, &#x27;manish.pandey@student.com&#x27;, &#x27;Digital Marketing&#x27;, &#x27;2023-05-01&#x27;, false),<br/>(&#x27;Sanjay Roy&#x27;, &#x27;sanjay.roy@student.com&#x27;, &#x27;Web Development&#x27;, &#x27;2023-05-05&#x27;, true),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81eb-8253-c6667e229b71" class="">(&#x27;Ritika Sen&#x27;, &#x27;ritika.sen@student.com&#x27;, &#x27;Data Analytics&#x27;, &#x27;2023-05-10&#x27;, true),<br/>(&#x27;Sneha Kulkarni&#x27;, &#x27;sneha.kulkarni@student.com&#x27;, &#x27;Python Programming&#x27;, &#x27;2023-05-15&#x27;, true),<br/>(&#x27;Pankaj Tiwari&#x27;, &#x27;pankaj.tiwari@student.com&#x27;, &#x27;Web Development&#x27;, &#x27;2023-05-20&#x27;, false),<br/>(&#x27;Ashish Goyal&#x27;, &#x27;ashish.goyal@student.com&#x27;, &#x27;Machine Learning&#x27;, &#x27;2023-06-01&#x27;, true),<br/>(&#x27;Vikas Saxena&#x27;, &#x27;vikas.saxena@student.com&#x27;, &#x27;Data Science&#x27;, &#x27;2023-06-05&#x27;, true),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-9ca8-f717f79593f7" class="">(&#x27;Mehul Shah&#x27;, &#x27;mehul.shah@student.com&#x27;, &#x27;Web Development&#x27;, &#x27;2023-06-10&#x27;, true),<br/>(&#x27;Hardik Joshi&#x27;, &#x27;hardik.joshi@student.com&#x27;, &#x27;Digital Marketing&#x27;, &#x27;2023-06-15&#x27;, false),<br/>(&#x27;Pranav Kulkarni&#x27;, &#x27;pranav.kulkarni@student.com&#x27;, &#x27;Python Programming&#x27;, &#x27;2023-06-20&#x27;, true),<br/>(&#x27;Alok Tripathi&#x27;, &#x27;alok.tripathi@student.com&#x27;, &#x27;Data Analytics&#x27;, &#x27;2023-07-01&#x27;, true),<br/>(&#x27;Shubham Agarwal&#x27;, &#x27;shubham.agarwal@student.com&#x27;, &#x27;Web Development&#x27;, &#x27;2023-07-05&#x27;, true),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-9025-e1924e6f9bce" class="">(&#x27;Ravi Prakash&#x27;, &#x27;ravi.prakash@student.com&#x27;, &#x27;Machine Learning&#x27;, &#x27;2023-07-10&#x27;, false),<br/>(&#x27;Karthik Nair&#x27;, &#x27;karthik.nair@student.com&#x27;, &#x27;Data Science&#x27;, &#x27;2023-07-15&#x27;, true),<br/>(&#x27;Siddharth Rao&#x27;, &#x27;siddharth.rao@student.com&#x27;, &#x27;Web Development&#x27;, &#x27;2023-07-20&#x27;, true),<br/>(&#x27;Varun Mallick&#x27;, &#x27;varun.mallick@student.com&#x27;, &#x27;Python Programming&#x27;, &#x27;2023-08-01&#x27;, true),<br/>(&#x27;Abhishek Soni&#x27;, &#x27;abhishek.soni@student.com&#x27;, &#x27;Digital Marketing&#x27;, &#x27;2023-08-05&#x27;, false),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813d-961f-cc152d4d2dcf" class="">(&#x27;Mohit Chawla&#x27;, &#x27;mohit.chawla@student.com&#x27;, &#x27;Web Development&#x27;, &#x27;2023-08-10&#x27;, true),<br/>(&#x27;Tarun Bhatia&#x27;, &#x27;tarun.bhatia@student.com&#x27;, &#x27;Data Analytics&#x27;, &#x27;2023-08-15&#x27;, true),<br/>(&#x27;Naveen Khatri&#x27;, &#x27;naveen.khatri@student.com&#x27;, &#x27;Python Programming&#x27;, &#x27;2023-08-20&#x27;, true),<br/>(&#x27;Harsh Vardhan&#x27;, &#x27;harsh.vardhan@student.com&#x27;, &#x27;Machine Learning&#x27;, &#x27;2023-09-01&#x27;, false),<br/>(&#x27;Yogesh Solanki&#x27;, &#x27;yogesh.solanki@student.com&#x27;, &#x27;Web Development&#x27;, &#x27;2023-09-05&#x27;, true),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f4-8243-dede6e31fbc0" class="">(&#x27;Aakash Tomar&#x27;, &#x27;aakash.tomar@student.com&#x27;, &#x27;Data Science&#x27;, &#x27;2023-09-10&#x27;, true),<br/>(&#x27;Rohit Choudhary&#x27;, &#x27;rohit.choudhary@student.com&#x27;, &#x27;Web Development&#x27;, &#x27;2023-09-15&#x27;, true),<br/>(&#x27;Gaurav Bhatt&#x27;, &#x27;gaurav.bhatt@student.com&#x27;, &#x27;Digital Marketing&#x27;, &#x27;2023-09-20&#x27;, false),<br/>(&#x27;Sameer Sheikh&#x27;, &#x27;sameer.sheikh@student.com&#x27;, &#x27;Python Programming&#x27;, &#x27;2023-10-01&#x27;, true),<br/>(&#x27;Imran Khan&#x27;, &#x27;imran.khan@student.com&#x27;, &#x27;Data Analytics&#x27;, &#x27;2023-10-05&#x27;, true);</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

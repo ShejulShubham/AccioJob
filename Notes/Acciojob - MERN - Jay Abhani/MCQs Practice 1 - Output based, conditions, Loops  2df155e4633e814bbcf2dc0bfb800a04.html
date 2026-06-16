@@ -1,0 +1,1001 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>MCQs Practice 1 - Output based, conditions, Loops and Arrays</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-814b-bcf2-dc0bfb800a04" class="page sans"><header><h1 class="page-title" dir="auto">MCQs Practice 1 - Output based, conditions, Loops and Arrays</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e7-af3b-f093f717dc59" class="">✅ <strong>1. What will be the output of the following code?</strong></h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-8130-9be7-c64b4a3a5d88" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(5 + &quot;5&quot;);</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8129-88f0-e6b764bb4c35" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e7-83c7-e4200446f977" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d2-9894-e6079890451a" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8160-99c4-ffc90132cf46" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8147-bbb9-c1f599ef2412" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-abc8-f062478efcd5" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ef-8b0f-d5ec90eae371" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8104-89e6-fa45e2191a73" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8180-8247-e0151379748e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8100-8735-db1a9e8f2537" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810c-8c5e-c56b881b552f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-8196-dee0b0d0ea6f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8111-a6ef-cd78a67787c6" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811f-bbd1-f6449bd05bcf" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-b943-fc2ea14f4b64" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-8a51-f53ef4463397" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816e-8a01-e853bff28094" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d3-8fba-e2edaebcb47b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813f-8b3f-ea440c79e843" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-b71c-f3115be03b0c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f8-804d-c72295dbc778" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-97dc-f7d189eb186f" class=""><strong>A.</strong> <code>10</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bd-81cb-d205b991acb7" class=""><strong>B.</strong> <code>55</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dc-93ce-f1618c46374d" class=""><strong>C.</strong> <code>&quot;10&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8129-857a-c65cfe74e492" class=""><strong>D.</strong> <code>&quot;55&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-b078-e39a7e0bfc86" class="">✅ <strong>Correct Answer:</strong> D</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-aef3-ddb6086ede5c" class=""><strong>Explanation:</strong> <code>5 + &quot;5&quot;</code> performs string concatenation → <code>&quot;55&quot;</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ca-9d72-f8131b015687"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8133-b42a-f08350bf2ebe" class="">✅ <strong>2. What is the output of this code?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8148-b009-c7d4800eb40a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;5&quot; - 2);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814a-8d39-f4877327b087" class=""><strong>A.</strong> <code>&quot;3&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8116-907d-f43b873d4e1d" class=""><strong>B.</strong> <code>3</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8140-9c1d-ed0d7a8ee573" class=""><strong>C.</strong> <code>NaN</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8109-b762-dfb74de1c655" class=""><strong>D.</strong> <code>&quot;52&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8178-9449-c2bb25291c95" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813c-94f3-c0cc3149eea5" class=""><strong>Explanation:</strong> <code>&quot;5&quot;</code> is coerced to number → <code>5 - 2 = 3</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a6-894f-d184bddb1e29"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c1-b604-df08d2750c6b" class="">✅ <strong>3. What does this output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8137-bcb2-fd0f92a7bc73" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(true + false);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dc-a90c-e29234cddc21" class=""><strong>A.</strong> <code>truefalse</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8101-87d8-e186dc35790e" class=""><strong>B.</strong> <code>1</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bd-a23b-d9691a067398" class=""><strong>C.</strong> <code>0</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ef-b817-e8f5162e2494" class=""><strong>D.</strong> <code>NaN</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8124-bf07-d8598f632920" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819e-9a6c-c6b1b7c83d84" class=""><strong>Explanation:</strong> <code>true → 1</code>, <code>false → 0</code>, so <code>1 + 0 = 1</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b4-90c3-cb4318c4acba"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81cc-bd2f-e3dc79522a01" class="">✅ <strong>4. What is the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8117-b188-d999647cedbe" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;10&quot; * &quot;2&quot;);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816c-afa9-d4674372de21" class=""><strong>A.</strong> <code>&quot;102&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8124-b1b1-d71ccc9f50ba" class=""><strong>B.</strong> <code>20</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-ba9a-fa2df5f23826" class=""><strong>C.</strong> <code>NaN</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8171-a389-ef691940d8cf" class=""><strong>D.</strong> <code>10</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-9bb7-c6a5d4d7f4e9" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818a-bfb6-d80fae68af84" class=""><strong>Explanation:</strong> <code>&quot;10&quot;</code> and <code>&quot;2&quot;</code> are both converted to numbers → <code>10 * 2 = 20</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8191-b68e-e6bd8ecdd5b9"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-819c-bc66-cb6830659047" class="">✅ <strong>5. What will this print?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d4-a169-e8bce260c16c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(null + 5);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-806c-da84568b2435" class=""><strong>A.</strong> <code>null5</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819a-bc2e-d51d71fd3428" class=""><strong>B.</strong> <code>5</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8126-974e-d7005b1c89c7" class=""><strong>C.</strong> <code>NaN</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-9720-ce232a57a7a9" class=""><strong>D.</strong> <code>undefined</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a8-a067-d1244bed76e2" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817a-be22-ed775eca8f2d" class=""><strong>Explanation:</strong> <code>null</code> is treated as <code>0</code>, so <code>0 + 5 = 5</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8124-98ae-dae6b3dd8b5a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e1-b1d0-f1de9904f6a2" class="">✅ <strong>6. Output of this code?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8138-a6b3-d0e4042a0613" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(undefined + 1);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d2-ba08-eed5b5b0de41" class=""><strong>A.</strong> <code>1</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8108-8268-c0e35c54f6a6" class=""><strong>B.</strong> <code>undefined1</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811d-bc13-ecc05ccf7c2c" class=""><strong>C.</strong> <code>NaN</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819c-b97b-e5585d9e21a2" class=""><strong>D.</strong> <code>null</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8135-80ac-f4113f411b1b" class="">✅ <strong>Correct Answer:</strong> C</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-9125-d46737ba0ae4" class=""><strong>Explanation:</strong> <code>undefined + 1</code> results in <code>NaN</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8153-8d86-e90ffedb0ab8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b5-a7c2-cb48354f52b8" class="">✅ <strong>7. What will this print?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815d-b669-f07e21d5c0bf" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;2&quot; + 3 + 4);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810c-b7c1-ec001cece88a" class=""><strong>A.</strong> <code>234</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8166-830a-e08c8953f7bf" class=""><strong>B.</strong> <code>9</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81aa-9625-e7d67d56b541" class=""><strong>C.</strong> <code>7</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-b601-c8db299f5f22" class=""><strong>D.</strong> <code>undefined</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d3-ba7e-dff3d7201ded" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813a-ac44-d3b9ddc01631" class=""><strong>Explanation:</strong> <code>&quot;2&quot; + 3 → &quot;23&quot;</code>, then <code>&quot;23&quot; + 4 → &quot;234&quot;</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8103-a429-c2723a35a386"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d7-864a-eb944070fc6e" class="">✅ <strong>8. What is the result of this?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810c-abc3-d0d8dde8cf4e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(3 + 4 + &quot;5&quot;);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ab-a1a8-e9be461defc4" class=""><strong>A.</strong> <code>&quot;345&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813d-9ba2-cef4f7468bb4" class=""><strong>B.</strong> <code>&quot;75&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-aed7-c7d8f5231254" class=""><strong>C.</strong> <code>75</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f1-bd71-dcbe139fdc60" class=""><strong>D.</strong> <code>&quot;7 + 5&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ca-85c0-d1bb5b97adfc" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8109-9b48-c7e54c6e81c4" class=""><strong>Explanation:</strong> <code>3 + 4 = 7</code>, then <code>7 + &quot;5&quot; → &quot;75&quot;</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d5-8925-ca58ab545e46"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d3-b163-e0b04df4fcc1" class="">✅ <strong>9. What does this return?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8192-87ea-e7064ee73ef8" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log([] + []);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8180-afea-faa5a47992d5" class=""><strong>A.</strong> <code>[]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-81de-f93cbbfe9513" class=""><strong>B.</strong> <code>&quot;&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818b-a8e8-e33c164f9085" class=""><strong>C.</strong> <code>NaN</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ca-ac33-e8b2ccb5be67" class=""><strong>D.</strong> <code>undefined</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811e-b5f2-d94901936aae" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-8b4c-dfec88530378" class=""><strong>Explanation:</strong> Empty arrays are converted to empty strings → <code>&quot;&quot; + &quot;&quot; = &quot;&quot;</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d4-bf0d-dcf965030350"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813f-bd99-e7b136b4441a" class="">✅ <strong>10. What is the result?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d1-ba99-da4a14f30073" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(typeof NaN);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a5-b8ae-cb59e5713406" class=""><strong>A.</strong> <code>number</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c1-bf52-ed1f77b940df" class=""><strong>B.</strong> <code>NaN</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ad-b177-c76edf677b40" class=""><strong>C.</strong> <code>undefined</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e6-b064-fe930216bd10" class=""><strong>D.</strong> <code>object</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-9813-e8dd513d2a38" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ec-8d8a-c12d7860d22f" class=""><strong>Explanation:</strong> In JavaScript, <code>NaN</code> is of type <code>&quot;number&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810e-9170-df6216ba2a80" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b3-bb68-ccaf09bbb37a" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815c-9156-c86b0b35735a" class="">✅ <strong>11. What is the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81df-b42f-f085c0aa0012" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;5&quot; - &quot;2&quot;);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8108-81dd-f60bae63329b" class=""><strong>A.</strong> <code>&quot;3&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8125-89db-ef0db0472727" class=""><strong>B.</strong> <code>3</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8187-97dc-d9b5ac6d81b5" class=""><strong>C.</strong> <code>NaN</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-a296-ea0925550ed4" class=""><strong>D.</strong> <code>52</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81df-a6ce-f179e5282b28" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-8c1a-d00919d6c77e" class=""><strong>Explanation:</strong> Both strings are converted to numbers → <code>5 - 2 = 3</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8146-9ce2-fbe58c0fa006"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8122-aca2-df75d6c0c989" class="">✅ <strong>12. Output of this code?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81dc-bac3-fd4bdab652dd" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;10&quot; / 2);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-bc87-cb30036a1648" class=""><strong>A.</strong> <code>5</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-8738-ee8f04448436" class=""><strong>B.</strong> <code>&quot;102&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d1-bc24-d8f3c5a3d88c" class=""><strong>C.</strong> <code>NaN</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819c-82c3-c7c0cdfed4cd" class=""><strong>D.</strong> <code>&quot;5&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8138-97a2-ffbc1b288b97" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-8efc-eebc9e09cf0e" class=""><strong>Explanation:</strong> <code>&quot;10&quot;</code> is coerced to number → <code>10 / 2 = 5</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c2-b728-e2a9d905b928"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f0-9d5c-e8bc839b3705" class="">✅ <strong>13. What does this print?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81fa-8970-d063f5833257" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;hello&quot; * 2);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-98c4-fb006110f7b2" class=""><strong>A.</strong> <code>hellohello</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f1-b3f1-f578ea39f1e5" class=""><strong>B.</strong> <code>NaN</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b2-9d10-f5cd20a1d263" class=""><strong>C.</strong> <code>undefined</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813d-ada0-df6939536436" class=""><strong>D.</strong> <code>hello2</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e4-b395-f263a0e7e157" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8189-a174-c66f0f401600" class=""><strong>Explanation:</strong> <code>&quot;hello&quot;</code> cannot be coerced to number → <code>NaN</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818c-a65a-febbd98ee6c3"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8138-9778-ec29e7c387a4" class="">✅ <strong>14. What will be logged?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c6-889f-de448fe3fac9" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log([] + {});
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-a38c-cb95395b2f31" class=""><strong>A.</strong> <code>[object Object]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8129-85f7-d63d0da43202" class=""><strong>B.</strong> <code>{}</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-bc26-d223b3b4a515" class=""><strong>C.</strong> <code>[]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815a-823b-fc7ba4a275a2" class=""><strong>D.</strong> <code>NaN</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-aaf7-f583fbda85eb" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ca-8c0f-e0d30641c230" class=""><strong>Explanation:</strong> <code>[] → &quot;&quot;</code>, <code>{}</code> → <code>&quot;[object Object]&quot;</code> → <code>&quot;&quot; + &quot;[object Object]&quot; = &quot;[object Object]&quot;</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8143-b0f1-d251c7850c1c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81eb-b352-c643856cf675" class="">✅ <strong>15. What is the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8197-91c5-dc96e72d4754" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log({} + []);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8194-9060-c6c550c904ed" class=""><strong>A.</strong> <code>&quot;[object Object]&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a4-b2ca-e92e7cca1bd4" class=""><strong>B.</strong> <code>{}</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a3-a340-f2b5348f2dd8" class=""><strong>C.</strong> <code>0</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8186-8587-d22752d12fbc" class=""><strong>D.</strong> <code>NaN</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8161-a606-ca94559cb306" class="">✅ <strong>Correct Answer:</strong> D</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8199-a9fc-e76aa42485ad" class=""><strong>Explanation:</strong> When <code>{}</code> is parsed as a block and not an object, it leads to <code>NaN</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814c-b27c-f6b30cbe37b9"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bb-9d9e-d0c03d1f3c8d" class="">✅ <strong>16. What does this return?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f8-b14d-c9cc7c87c0b7" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(typeof null);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-a3d4-fdba003eca57" class=""><strong>A.</strong> <code>object</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813e-81e7-f276b2b05311" class=""><strong>B.</strong> <code>null</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f5-a7d0-f659dafaed74" class=""><strong>C.</strong> <code>undefined</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8129-a474-dcdc2eadcd40" class=""><strong>D.</strong> <code>boolean</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-b5ce-f932229a922d" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8146-91cd-fd883ef42619" class=""><strong>Explanation:</strong> It&#x27;s a known JavaScript quirk — <code>typeof null === &quot;object&quot;</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d0-983d-d41aa8a8a102"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8128-9358-db75aa17fadf" class="">✅ <strong>17. Output of this code?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8101-9508-fa3339e5dfbc" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(&quot;5&quot; + 2 - 1);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a4-a304-c9d545cf8f01" class=""><strong>A.</strong> <code>521</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8187-b941-ddc62a842e06" class=""><strong>B.</strong> <code>51</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f1-9390-df429c49863f" class=""><strong>C.</strong> <code>NaN</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a1-80fc-cf0217726de4" class=""><strong>D.</strong> <code>None of the above</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d9-bee6-ebb74975251b" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-8b5e-fe1100a92752" class=""><strong>Explanation:</strong> <code>&quot;5&quot; + 2 → &quot;52&quot;</code> → <code>&quot;52&quot; - 1 = 51&quot;</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8185-b56b-e7e3fdb9dae5"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8174-a708-e889dbbc32c3" class="">✅ <strong>18. What is printed here?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81fc-8b0e-f5df43d84f81" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(typeof typeof 1);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813a-b046-f0d0c64d302f" class=""><strong>A.</strong> <code>number</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8198-9aa9-e298173a9058" class=""><strong>B.</strong> <code>typeof</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-b51a-eeac401af482" class=""><strong>C.</strong> <code>string</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813a-9ec3-eb6116460755" class=""><strong>D.</strong> <code>undefined</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8149-9d50-d25c13870218" class="">✅ <strong>Correct Answer:</strong> C</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8110-b282-f19bf7c0c400" class=""><strong>Explanation:</strong> <code>typeof 1 → &quot;number&quot;</code>, then <code>typeof &quot;number&quot; → &quot;string&quot;</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e2-a664-dbcdfdaf45e1"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81cd-8849-eaf1696da9be" class="">✅ <strong>19. Output of this?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8113-aaa8-f8ee6ea87b25" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(1 + true + &quot;2&quot;);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-8d19-f2f8052a50e0" class=""><strong>A.</strong> <code>12</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c7-8af4-c14736a20a6b" class=""><strong>B.</strong> <code>22</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a7-b1d2-fb460a55a4ac" class=""><strong>C.</strong> <code>&quot;22&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81aa-b524-efcc766ba633" class=""><strong>D.</strong> <code>3</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8185-8e44-c731cd315816" class="">✅ <strong>Correct Answer:</strong> C</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-9659-cf335e99041c" class=""><strong>Explanation:</strong> <code>1 + true → 2</code>, then <code>2 + &quot;2&quot; = &quot;22&quot;</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c1-8042-c0d52d05930d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810f-84c9-e85065058757" class="">✅ <strong>20. What is the result?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-817d-8313-cd558deee647" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(false == 0);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8157-9a4b-ce7895e6491e" class=""><strong>A.</strong> <code>false</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818f-aa1d-fa37f00fe03b" class=""><strong>B.</strong> <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c1-9901-eb77eddb9ab2" class=""><strong>C.</strong> <code>NaN</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ac-96ee-f519c0dbfeb4" class=""><strong>D.</strong> <code>undefined</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-967d-f985eec30a3a" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a5-be29-ca9b636fb47e" class=""><strong>Explanation:</strong> Loose equality (<code>==</code>) coerces types → <code>false == 0</code> is <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-b227-c9536c04b44d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810d-917d-f4e7f48d9242" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812e-8397-e4ce1361c5cc" class="">✅ <strong>21. What will be the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ca-9bd3-c1c0741124c8" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">if (&quot;0&quot;) {
+  console.log(&quot;Yes&quot;);
+} else {
+  console.log(&quot;No&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a1-b3d3-f82bc442400a" class=""><strong>A.</strong> Yes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f8-bdd0-c492a18d4055" class=""><strong>B.</strong> No</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8144-8686-e203eebf510c" class=""><strong>C.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810f-8b63-f9f465459e66" class=""><strong>D.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8105-9d97-d45f19d993d2" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c9-90bd-efbbf741af64" class=""><strong>Explanation:</strong> Non-empty strings (even <code>&quot;0&quot;</code>) are truthy → <code>if</code> block runs.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81db-bf75-e4a0d3022fbd"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8101-b5d5-c0922c5f2e99" class="">✅ <strong>22. What is printed?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8104-9da0-d5afaea6609b" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">if (null || undefined) {
+  console.log(&quot;One is true&quot;);
+} else {
+  console.log(&quot;Both false&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-8ae9-c690211316a1" class=""><strong>A.</strong> One is true</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816d-b479-f4f167acf066" class=""><strong>B.</strong> Both false</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c3-8260-e92ab82e9c50" class=""><strong>C.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a5-9e0d-d0b50c2285a2" class=""><strong>D.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-8f2b-e4d3a207ae3a" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818e-9730-fa01d695dd31" class=""><strong>Explanation:</strong> Both <code>null</code> and <code>undefined</code> are falsy → <code>else</code> block runs.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a7-9820-dcdf490c4ae8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8165-873b-f20a00b0c430" class="">✅ <strong>23. What will this log?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8109-96bb-ecb7295a0aa6" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let x = &quot;&quot;;
+if (x == false) {
+  console.log(&quot;Loose true&quot;);
+} else {
+  console.log(&quot;Loose false&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810d-bc29-d91b89efeaa4" class=""><strong>A.</strong> Loose true</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-8c4f-f4d0367be419" class=""><strong>B.</strong> Loose false</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819a-b747-eed1d70d91e8" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f6-9255-d945f88b1de3" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-8e2a-d532bbb6f468" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-9cd6-ddafbfaf1d15" class=""><strong>Explanation:</strong> <code>&quot;&quot; == false</code> is <code>true</code> due to coercion.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8185-9b7f-e270ea23c2a7"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a9-aa13-dbebff42d323" class="">✅ <strong>24. Output of this code?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8158-8cc9-fd9c6cbf0607" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">if (NaN) {
+  console.log(&quot;NaN is true&quot;);
+} else {
+  console.log(&quot;NaN is false&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8183-ad1a-df83629c8dba" class=""><strong>A.</strong> NaN is true</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8164-8f10-c1f36c653e4f" class=""><strong>B.</strong> NaN is false</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8190-ace5-f82b7ea8796d" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8104-a2a8-ea74216e973f" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8149-b247-f35484b601f9" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8152-ad56-d359bf98d6f8" class=""><strong>Explanation:</strong> <code>NaN</code> is falsy → <code>else</code> block runs.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810c-a3e8-fa5e2e724517"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812e-9182-c37dc18be2ff" class="">✅ <strong>25. What is the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818a-94b8-e1df694dcfb3" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let value = &quot;false&quot;;
+if (value) {
+  console.log(&quot;It’s true&quot;);
+} else {
+  console.log(&quot;It’s false&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ac-bd4b-c920385e6692" class=""><strong>A.</strong> It’s true</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812c-8429-fb343fc75c96" class=""><strong>B.</strong> It’s false</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ad-a3b2-e6cfc92e3269" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-a38a-d8a00a43b929" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-b970-e7df3b743482" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814e-816d-f890373168b2" class=""><strong>Explanation:</strong> <code>&quot;false&quot;</code> is a non-empty string → truthy.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8189-b114-c3a2642bdb32"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b6-8495-ff169bc120b5" class="">✅ <strong>26. What does this print?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ff-b137-e86bc1fe47c6" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">if ([] == false) {
+  console.log(&quot;Equal&quot;);
+} else {
+  console.log(&quot;Not Equal&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81eb-a179-fad2a03031dc" class=""><strong>A.</strong> Equal</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812c-8277-fb1ef464efb4" class=""><strong>B.</strong> Not Equal</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e9-9af2-e3c7ab76db6c" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811a-901f-c41d14f69712" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-8d63-d77481ba39c6" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f8-9056-dabc1126bda1" class=""><strong>Explanation:</strong> <code>[] == false</code> → <code>[] → &quot;&quot; → 0</code>, <code>false → 0</code> → <code>true</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ea-bf40-c9ad6eaebe4d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f4-9877-ea4d53506dda" class="">✅ <strong>27. What is printed?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81fb-8ea5-c4e483146907" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">if ({} == false) {
+  console.log(&quot;Yes&quot;);
+} else {
+  console.log(&quot;No&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-87cb-c9a29170a3eb" class=""><strong>A.</strong> Yes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8135-8f2a-e28c76f01826" class=""><strong>B.</strong> No</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8148-be56-e4656977eb99" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a6-bae5-e743d361848b" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c1-a962-d5ced9507c4f" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8174-aa1e-e462e72044fb" class=""><strong>Explanation:</strong> <code>{}</code> is not loosely equal to <code>false</code> → comparison fails.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8166-a972-d4353066628e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8150-8c5f-f269da70b897" class="">✅ <strong>28. Output of this block?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b6-86de-c439a5fe642e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let a = &quot;5&quot;;
+if (a === 5) {
+  console.log(&quot;Strict Match&quot;);
+} else {
+  console.log(&quot;No Match&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8194-8452-f83038e3d149" class=""><strong>A.</strong> Strict Match</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817a-9457-f77b8c8fb658" class=""><strong>B.</strong> No Match</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-b20e-c4fd175d6736" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8175-8f68-edb3e45581d5" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8129-882c-c3f70a0c38ea" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8160-9f64-ff732be5f9ef" class=""><strong>Explanation:</strong> <code>&quot;5&quot;</code> is string, <code>5</code> is number → strict equality fails.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8131-833b-e5e5cdf262c6"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812e-89bb-c84f89129244" class="">✅ <strong>29. What does this show?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b2-9867-fc7680e69ad7" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let x = 0;
+if (x || &quot;hello&quot;) {
+  console.log(&quot;Entered&quot;);
+} else {
+  console.log(&quot;Skipped&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b8-b07e-c086d89849a0" class=""><strong>A.</strong> Entered</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81da-8703-d40d66033f8f" class=""><strong>B.</strong> Skipped</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816d-af12-c996578ff58c" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-8601-cde4264c5a64" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8193-88c7-fb4448ede1ab" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8156-99c5-de4a3950cc1c" class=""><strong>Explanation:</strong> <code>0 || &quot;hello&quot;</code> → <code>&quot;hello&quot;</code> → truthy → <code>if</code> runs.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8109-9806-dca306c86413"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8171-af58-fee8922df9bb" class="">✅ <strong>30. What is the output here?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8196-8292-e1e0ce603b2a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let val = !!&quot;&quot;;
+if (val) {
+  console.log(&quot;Truthy&quot;);
+} else {
+  console.log(&quot;Falsy&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810f-86a4-f4f6afb6c32b" class=""><strong>A.</strong> Truthy</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d8-be50-fa0a07fa299c" class=""><strong>B.</strong> Falsy</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ca-819b-c8480c30e046" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8107-a613-cb5922125128" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8120-94d6-ea9365a8d06e" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815e-9b37-dea0cbb7c8ca" class=""><strong>Explanation:</strong> <code>!!&quot;&quot;</code> → <code>false</code>, since empty string is falsy.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8157-92dc-fa7a169a2a5d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813c-abf3-da7a183a24c5" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818a-b120-cfb4c6494720" class="">✅ <strong>31. What is the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81db-9ddf-fc22d4a15565" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">if (0 &amp;&amp; 1) {
+  console.log(&quot;Yes&quot;);
+} else {
+  console.log(&quot;No&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b6-9ea1-fe6978d1dede" class=""><strong>A.</strong> Yes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-ac44-f9f2113c8ee4" class=""><strong>B.</strong> No</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81aa-85fa-ff73bb67f21b" class=""><strong>C.</strong> 1</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-a370-d5ded7ad73aa" class=""><strong>D.</strong> 0</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819f-b872-c2d6689ee1e4" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-a8f6-d2bcd0ce3485" class=""><strong>Explanation:</strong> <code>0 &amp;&amp; 1 → 0</code> (falsy) → <code>else</code> block runs.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813d-b9a9-ed9c70660b1c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-817d-a309-c50e5a86083f" class="">✅ <strong>32. What does this print?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818b-803b-d3ee2e06f5d7" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">if (1 &amp;&amp; &quot;hello&quot;) {
+  console.log(&quot;Go&quot;);
+} else {
+  console.log(&quot;Stop&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d3-91f9-d801601b84cf" class=""><strong>A.</strong> Go</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b2-8027-da3bbbbe5135" class=""><strong>B.</strong> Stop</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814d-a24e-fe5c24264332" class=""><strong>C.</strong> 1hello</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8148-96bc-cc38b89c88be" class=""><strong>D.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c5-8a6a-de191eb18ffb" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8114-937f-c02d78882180" class=""><strong>Explanation:</strong> Both <code>1</code> and <code>&quot;hello&quot;</code> are truthy → <code>if</code> condition is true.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f3-9a59-e6ddab90cd32"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8146-9800-f85b7fff0c81" class="">✅ <strong>33. What is the output here?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8146-aa22-d2ebd59e2a30" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let x = 5;
+if (x &gt; 2 &amp;&amp; x &lt; 10) {
+  console.log(&quot;In range&quot;);
+} else {
+  console.log(&quot;Out of range&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812e-a706-da0bcbe37df8" class=""><strong>A.</strong> In range</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811b-b216-eff5f46eb80b" class=""><strong>B.</strong> Out of range</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e7-9b8d-d25b699e5d06" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8196-b6eb-d4f8e3377c6f" class=""><strong>D.</strong> false</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e5-8154-c6a2a19d0b05" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8141-ac42-f3bfd7f9b46d" class=""><strong>Explanation:</strong> <code>5 &gt; 2 &amp;&amp; 5 &lt; 10</code> → <code>true</code> → enters <code>if</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b8-a4f8-f761fd7bea4a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c4-9ae0-fdea3fd9b4b4" class="">✅ <strong>34. What is printed?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81fb-83db-eccc96b481ec" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let x = false;
+if (!x) {
+  console.log(&quot;Not false&quot;);
+} else {
+  console.log(&quot;Still false&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-823b-ddc9ca3f3feb" class=""><strong>A.</strong> Not false</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8168-9b2d-c6fd31b22ce3" class=""><strong>B.</strong> Still false</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817f-9ecf-f424d1f7f551" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8198-bf16-cce96fa4c074" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-b73f-e25f2a447f09" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cd-812a-d68a4d71a8d5" class=""><strong>Explanation:</strong> <code>!false → true</code> → <code>if</code> runs.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8160-ae0e-f02c6716f364"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ee-aebb-fa6e63d726f0" class="">✅ <strong>35. Output of this?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f1-8dde-f7746cc73d3b" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">if (&quot;&quot; || 0 || null) {
+  console.log(&quot;Truthy&quot;);
+} else {
+  console.log(&quot;Falsy&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8179-9770-e8df77b2e032" class=""><strong>A.</strong> Truthy</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8119-8af2-f531a76dc7c7" class=""><strong>B.</strong> Falsy</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8156-b1cc-eb2f4498a667" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8140-b735-c3e7527d662e" class=""><strong>D.</strong> 0</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8179-baad-c60fafad5a50" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ad-8df4-d1f3d3f5dc6b" class=""><strong>Explanation:</strong> All are falsy → <code>else</code> block runs.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8153-ae4c-fc451fcdb1ac"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e3-a37e-d2fb3bd403a5" class="">✅ <strong>36. What is the result?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81af-90e4-c2cd47add7cf" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let a = false;
+if (a == &quot;false&quot;) {
+  console.log(&quot;Equal&quot;);
+} else {
+  console.log(&quot;Not Equal&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d2-9ab1-d139e0b84ae7" class=""><strong>A.</strong> Equal</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d2-9e05-ecbc52aa289c" class=""><strong>B.</strong> Not Equal</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8112-864e-dd243ffa61c6" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8172-89ae-cc3124daae09" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8148-9072-ca4571a0f27e" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-a26b-f801545ac6ab" class=""><strong>Explanation:</strong> <code>false == &quot;false&quot;</code> → <code>false</code> (no coercion match)</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8183-85bc-f1c9ce7d816f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f8-9630-d3bc323b61b3" class="">✅ <strong>37. What does this return?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d0-aed2-de422d45769f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">if (Infinity) {
+  console.log(&quot;Endless&quot;);
+} else {
+  console.log(&quot;Finite&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81be-9ecc-e2bcd9c67bcb" class=""><strong>A.</strong> Endless</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-9401-ee40e000cdd4" class=""><strong>B.</strong> Finite</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-8f0a-d506345a79ae" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-8178-d625fcd3f384" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-adfa-f2a1d5415f0c" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c2-9cdb-ecd7b4717988" class=""><strong>Explanation:</strong> <code>Infinity</code> is a truthy value.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81df-9390-e5f6739859b4"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8124-8892-cc2f9e3a743f" class="">✅ <strong>38. What will be the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8167-b100-cbebec80cbc5" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let x = &quot; &quot;;
+if (x) {
+  console.log(&quot;Space is truthy&quot;);
+} else {
+  console.log(&quot;Space is falsy&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c8-9ec5-ce95ff36a03e" class=""><strong>A.</strong> Space is truthy</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8169-91f1-c03d01601c4a" class=""><strong>B.</strong> Space is falsy</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e6-a00b-d5a468557e3d" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810a-a456-cf020bf22b95" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8126-9e78-f69045dfd20c" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8189-b490-cd2062f77d03" class=""><strong>Explanation:</strong> <code>&quot; &quot;</code> (space character) is a non-empty string → truthy.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8157-b2b1-c4c429f9ce4b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fa-a4b2-cd78a8915886" class="">✅ <strong>39. What is printed?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8111-8057-dce4b3527a65" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">if (false || true &amp;&amp; false) {
+  console.log(&quot;Yes&quot;);
+} else {
+  console.log(&quot;No&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819c-9fc4-ed47e85769a0" class=""><strong>A.</strong> Yes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c8-8e87-e25d52a97cc8" class=""><strong>B.</strong> No</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-a787-d4cb2845621b" class=""><strong>C.</strong> true</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811c-a879-ea3a0b689a01" class=""><strong>D.</strong> false</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cf-956c-d7c42225457f" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8144-b818-f73c8dafb609" class=""><strong>Explanation:</strong> <code>true &amp;&amp; false → false</code>, then <code>false || false → false</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e3-9291-e5e9fd0ec869"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814f-a175-c8782bf4b545" class="">✅ <strong>40. What is the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c1-8ce6-d0a96d0b9701" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let x = 0;
+if (!!x) {
+  console.log(&quot;True&quot;);
+} else {
+  console.log(&quot;False&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-b1aa-d41359180900" class=""><strong>A.</strong> True</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818d-804f-e5687afc2501" class=""><strong>B.</strong> False</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8125-a2b5-fe381a19d1fc" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8119-900e-c0cb25af1654" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b3-a36a-d5bfd0545b8a" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-8dc7-eea681fcc071" class=""><strong>Explanation:</strong> <code>!!0 → false</code> → <code>else</code> block runs.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e1-a23c-e36662ce98f6" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8118-a699-c28cf09dbc0c" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8132-8a27-d262a49c93dd" class="">✅ <strong>41. What is the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d4-9ed8-fcd8f0bf6dd6" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">for (let i = 0; i &lt; 3; i++) {
+  setTimeout(() =&gt; console.log(i), 100);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ac-8aed-dd79d409e2cb" class=""><strong>A.</strong> 0 1 2</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81de-8271-c6223c758ad9" class=""><strong>B.</strong> 3 3 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813e-9e4a-f01da797096b" class=""><strong>C.</strong> 0 0 0</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8195-b54a-cf6a4a0cdcd0" class=""><strong>D.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811e-aa3f-feedea1af663" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b6-8935-d00a5d979444" class=""><strong>Explanation:</strong> <code>let</code> has block scope, so each <code>i</code> is preserved in <code>setTimeout</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e9-882b-c79fc3ac7e34"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8134-8c28-ee1e67aa957c" class="">✅ <strong>42. What will this print?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812b-a587-ddd714d00e8b" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">for (var i = 0; i &lt; 3; i++) {
+  setTimeout(() =&gt; console.log(i), 100);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c5-b709-c3da972840ba" class=""><strong>A.</strong> 0 1 2</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815c-9210-ca54225191e8" class=""><strong>B.</strong> 2 2 2</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811f-b643-feb3b5dae28e" class=""><strong>C.</strong> 3 3 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81af-ac01-f0a335fd3e90" class=""><strong>D.</strong> 0 0 0</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8179-8c1d-e0739ae19e40" class="">✅ <strong>Correct Answer:</strong> C</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811c-a359-de60e7602680" class=""><strong>Explanation:</strong> <code>var</code> is function-scoped, so all <code>console.log(i)</code> run after loop ends → <code>i = 3</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81dc-8b20-c6523ddcfd3f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8121-89be-db9e037a6876" class="">✅ <strong>43. What is the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-814a-9cdf-e34c32ef9cd3" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let count = 0;
+while (count &lt; 3) {
+  console.log(count++);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b9-83bb-cc33e6f502f2" class=""><strong>A.</strong> 0 1 2</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e4-b99c-c6e05cf1b62e" class=""><strong>B.</strong> 1 2 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8142-900e-f35d33cbc0ed" class=""><strong>C.</strong> 0 1 2 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819f-9d03-e9ddbda40a25" class=""><strong>D.</strong> Infinite loop</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811c-a997-f157287d9ac2" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-85f1-c79ba85f6c59" class=""><strong>Explanation:</strong> <code>count++</code> prints first, then increments → logs 0, 1, 2</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8114-bd41-d2186eaff24b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c1-b7f9-dcabb8858d98" class="">✅ <strong>44. Output of this code?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e4-932b-e9c34a937302" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">for (let i = 0; i &lt; 5; i++) {
+  if (i === 3) break;
+  console.log(i);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-b6a7-eb4463521148" class=""><strong>A.</strong> 0 1 2 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cf-81c2-c52286f7a236" class=""><strong>B.</strong> 0 1 2</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8142-8f71-c629a27ef1bc" class=""><strong>C.</strong> 1 2 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a1-b5c8-f00ea49f5580" class=""><strong>D.</strong> 0 1 2 4</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818b-b41c-caafd90f004b" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8188-8027-e3f8c63823a2" class=""><strong>Explanation:</strong> Loop breaks when <code>i === 3</code> → doesn’t print 3</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b6-ae30-db647e895615"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ab-8924-e16e4e9c82f1" class="">✅ <strong>45. What does this print?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8106-b19f-c4bcd06c0e5c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">for (let i = 0; i &lt; 5; i++) {
+  if (i % 2 === 0) continue;
+  console.log(i);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8112-8a0a-eda7b108981d" class=""><strong>A.</strong> 1 2 3 4</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ed-aecd-d9b3214fec74" class=""><strong>B.</strong> 0 2 4</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-9522-ed8555009ac4" class=""><strong>C.</strong> 1 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81af-adfc-e2f49b9ebb07" class=""><strong>D.</strong> 0 1 2 3 4</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ad-8d9e-fa15858d016f" class="">✅ <strong>Correct Answer:</strong> C</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814d-a537-c24fdc53772d" class=""><strong>Explanation:</strong> <code>continue</code> skips even numbers → logs only 1 and 3</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819a-8754-f91d56957ada"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ee-a107-e54574d9ab70" class="">✅ <strong>46. Output of this code?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8129-84a8-ecdcb7c60175" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let i = 0;
+do {
+  console.log(i);
+  i++;
+} while (i &lt; 3);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-9ab6-db16e1f6c1ab" class=""><strong>A.</strong> 0 1 2</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-9fc5-e2fc5f861db2" class=""><strong>B.</strong> 1 2 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-be17-f9a7cff43235" class=""><strong>C.</strong> 0 1 2 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811c-bc04-cde0b29b7770" class=""><strong>D.</strong> Infinite loop</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8100-8337-c00f8eeba46f" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8187-af96-ee4aa9c93d4c" class=""><strong>Explanation:</strong> <code>do...while</code> runs first then checks → logs 0, 1, 2</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d2-bcdd-ce3f23690a42"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811d-b672-ff68777ac559" class="">✅ <strong>47. What will be printed?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8177-acde-ee2e1897a424" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let sum = 0;
+for (let i = 1; i &lt;= 5; i++) {
+  if (i === 3) continue;
+  sum += i;
+}
+console.log(sum);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813f-8724-f237ec37b25b" class=""><strong>A.</strong> 15</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-bcfc-e0c203b16637" class=""><strong>B.</strong> 12</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8129-befa-de7246e06e67" class=""><strong>C.</strong> 10</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e8-bb2e-dbf7082b268a" class=""><strong>D.</strong> 9</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a5-95c0-d3fb99e454cf" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811f-ba0a-cff3090bbb4b" class=""><strong>Explanation:</strong> Skips 3 → sum = 1 + 2 + 4 + 5 = <strong>12</strong></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c9-b2fb-d9602965a6ed"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8108-b78a-eeaba7b87c9f" class="">✅ <strong>48. What is the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b9-8068-de257b867810" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">for (let i = 0; i &lt; 2; i++) {
+  for (let j = 0; j &lt; 2; j++) {
+    console.log(i + &quot;,&quot; + j);
+  }
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b0-a940-edd6372c6728" class=""><strong>A.</strong> 0,0 1,1</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8152-897d-d9b27d183f71" class=""><strong>B.</strong> 0,0 0,1 1,0 1,1</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810a-a792-f0c72fdbdcba" class=""><strong>C.</strong> 1,0 1,1</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8137-a018-dfe71b6b3a05" class=""><strong>D.</strong> 0,1 1,0</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8100-9440-ef4ca9772de0" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81be-920f-f581f1a74e43" class=""><strong>Explanation:</strong> Nested loop runs 4 times → all (i, j) combinations</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8177-a3e9-f5408c6273ca"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d8-a083-dfb302c1dade" class="">✅ <strong>49. What is the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8104-bf44-e16bce63fab3" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">for (let i = 5; i &gt; 0; i -= 2) {
+  console.log(i);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-960c-ca9b3641c94f" class=""><strong>A.</strong> 5 4 3 2 1</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-99c6-c71ada24e73a" class=""><strong>B.</strong> 5 3 1</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-8a85-c6535ea662c1" class=""><strong>C.</strong> 4 2</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810f-8176-ea210c0b6d60" class=""><strong>D.</strong> 5 2</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816b-b54a-c81c6986c401" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a5-8567-f40108747d02" class=""><strong>Explanation:</strong> Decrements by 2 → logs 5, 3, 1</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8155-9412-d2788fbfcf0b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8190-aea2-d013b4b4abeb" class="">✅ <strong>50. What will this code print?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815c-9600-f1f6b81323c5" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let i = 0;
+while (i++ &lt; 3) {
+  console.log(i);
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8128-9b9e-f0567a9ff4e8" class=""><strong>A.</strong> 1 2 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a4-aa72-e94cac622e43" class=""><strong>B.</strong> 0 1 2</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810e-9695-d205d464831e" class=""><strong>C.</strong> 1 2 3 4</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-9d5c-e9de1f7da4b1" class=""><strong>D.</strong> 0 1 2 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8137-b4a9-cfd117b32e12" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8107-8785-ecb3e5ac0fbf" class=""><strong>Explanation:</strong> <code>i++ &lt; 3</code> → compare before increment, but log after → prints 1, 2, 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-89bc-c86d705f1c9c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814f-9551-f91befa057a9" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81eb-80d2-ee52475abc61" class="">✅ <strong>51. What is the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8122-bd37-e479b8e830d6" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2, 3];
+arr[5] = 6;
+console.log(arr.length);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-9f1a-def7c45d32c6" class=""><strong>A.</strong> 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-838f-f71211deec91" class=""><strong>B.</strong> 5</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8131-bce1-e25164b1f2d2" class=""><strong>C.</strong> 6</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8108-b1a8-d54a71214267" class=""><strong>D.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8142-8613-d29a4b8131d0" class="">✅ <strong>Correct Answer:</strong> C</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8159-b702-f3d50bb6ea68" class=""><strong>Explanation:</strong> JavaScript arrays are dynamic. <code>arr[5] = 6</code> creates undefined holes → length becomes 6.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f6-b565-c9880d7c8d38"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8109-8200-f846c4a8f792" class="">✅ <strong>52. What does this print?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ec-8c53-dfa6e483ecc1" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [10, 20, 30];
+console.log(arr[3]);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8128-a9c6-cf9a036d6bb1" class=""><strong>A.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ef-bec1-fe410a25d93d" class=""><strong>B.</strong> 0</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-a051-d02c94e73049" class=""><strong>C.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8184-b5ff-dae9ee15b4a0" class=""><strong>D.</strong> null</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8175-a1eb-f7d40b1b67cf" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810c-9185-d3648c5af7d5" class=""><strong>Explanation:</strong> Accessing out-of-bounds index gives <code>undefined</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8170-bae7-c3d841574c91"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810d-9236-ea6a2e97414c" class="">✅ <strong>53. Output of this code?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e0-8912-ce3db0d72077" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2, 3];
+arr.length = 0;
+console.log(arr);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a4-9fbb-cb16a59db8f1" class=""><strong>A.</strong> [1, 2, 3]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a3-8e78-f92e6fc5757f" class=""><strong>B.</strong> []</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c1-821a-c7daa24a45ba" class=""><strong>C.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8123-aaf5-e610f565b679" class=""><strong>D.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a1-a9c3-c7d933e68711" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8146-a2a5-f7daf4d3dec1" class=""><strong>Explanation:</strong> Setting length to 0 clears the array.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8126-9678-f9e0428ecfb8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8155-94e5-c7a65159c0f4" class="">✅ <strong>54. What is printed?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8124-ad12-ef611e55413b" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2, 3];
+console.log(arr.splice(1, 1));
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-b33a-d30eb9eb5dc6" class=""><strong>A.</strong> [1]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e8-a02b-f06292e6b04d" class=""><strong>B.</strong> [2]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e1-992c-cd100fce7031" class=""><strong>C.</strong> [3]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818a-8ee8-feab7c0f3ec4" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c9-80c8-e4e52e3393e3" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f2-8420-dd8dce7aa29e" class=""><strong>Explanation:</strong> <code>splice(1, 1)</code> removes 1 element at index 1 → [2]</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c1-a7ce-c5c52e08050d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c0-afe1-c995d2d250bc" class="">✅ <strong>55. What is the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81dd-8319-eaa76ccb81ff" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2];
+arr.push(arr);
+console.log(arr.length);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814e-9c87-fcf0c045f7ca" class=""><strong>A.</strong> 2</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f0-89fa-e64684fa68d6" class=""><strong>B.</strong> 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816e-86dc-c78445344537" class=""><strong>C.</strong> 4</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8148-8eb3-f1fa844dc21d" class=""><strong>D.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d5-b3d3-ecdaf1379df1" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811a-aed1-c03cbf4a2a17" class=""><strong>Explanation:</strong> Pushing <code>arr</code> into itself makes it self-referencing → still counts as 1 element.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819f-94ac-e692ada18644"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8159-8248-fa713880e5e1" class="">✅ <strong>56. What does this print?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8158-8002-f22bd98cb256" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2, 3];
+let result = arr.map(x =&gt; {
+  if (x % 2 === 0) return;
+  else return x * 2;
+});
+console.log(result);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f4-9b36-f364020f19f1" class=""><strong>A.</strong> [2, undefined, 6]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a8-bfa8-f898fe8d3416" class=""><strong>B.</strong> [2, null, 6]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819e-bdc2-dcd3eef537b5" class=""><strong>C.</strong> [2, 0, 6]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81da-99ec-d7ff76a903d0" class=""><strong>D.</strong> [2, , 6]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814f-b1fe-edbad7057513" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8159-987f-fccde333f5b1" class=""><strong>Explanation:</strong> <code>.map()</code> returns <code>undefined</code> if <code>return</code> is empty → for even number 2.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81af-ac8e-c04fcce67dc1"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8130-9c45-d328518001d1" class="">✅ <strong>57. Output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f9-8060-ff359366be48" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2, 3];
+arr[10] = 99;
+console.log(arr[6]);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8108-bb31-f7e66220d4a0" class=""><strong>A.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c0-9ea4-e8bd06bd02b2" class=""><strong>B.</strong> 0</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e7-8b10-fee9b4db7b63" class=""><strong>C.</strong> null</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fc-8a6d-d568dbd960a8" class=""><strong>D.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ca-a5b8-f286e5501263" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8146-a057-d9e400083769" class=""><strong>Explanation:</strong> Intermediate values (index 3 to 9) are <code>undefined</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814d-956b-d696eec3cf23"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a7-94b3-d0b71c7b4a34" class="">✅ <strong>58. What will this log?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8191-b82f-d203042146cd" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [4, 5, 6];
+console.log(arr.pop(), arr);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-a59b-d8963663013d" class=""><strong>A.</strong> 6 [4, 5]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8196-a7e1-cda1e5af4c66" class=""><strong>B.</strong> 4 [5, 6]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-9faa-c999cda10a46" class=""><strong>C.</strong> 5 [4, 6]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-992b-e9b143f3e042" class=""><strong>D.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c8-80c5-fbf2bdf5641b" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b9-845f-e1b139b32637" class=""><strong>Explanation:</strong> <code>.pop()</code> removes and returns the last element (6).</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f4-802c-db8b3c713210"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818d-9dc4-fa8a279e4256" class="">✅ <strong>59. What is printed?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8155-b069-e1b6ab2b8721" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = new Array(3);
+console.log(arr);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810f-9c29-d6cdf4a382cc" class=""><strong>A.</strong> [undefined, undefined, undefined]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ac-bcf5-fac6105bc09d" class=""><strong>B.</strong> [null, null, null]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a9-a2de-e27c13d5d70f" class=""><strong>C.</strong> [empty × 3]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-85b4-e5157bb1eeba" class=""><strong>D.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8198-9ade-dbe1bbd92a67" class="">✅ <strong>Correct Answer:</strong> C</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-bf5f-ea1c2047c375" class=""><strong>Explanation:</strong> <code>new Array(3)</code> creates an empty array of length 3 (with empty slots).</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c6-bc1c-f54a0ea80f7f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c5-9546-c050e2797ed4" class="">✅ <strong>60. Output of this code?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-816c-b38d-dce205bad192" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2, 3];
+arr.length = 5;
+console.log(arr[4]);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e9-bea2-e5585145913c" class=""><strong>A.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815a-9585-d780b0936d75" class=""><strong>B.</strong> 0</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815a-86a3-d57f32a52af5" class=""><strong>C.</strong> null</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e4-a555-d1b111ee5be9" class=""><strong>D.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819f-a916-c437d0b328b4" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8128-9cc4-c187f98abc12" class=""><strong>Explanation:</strong> Length increased, new slots are <code>undefined</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8192-8204-d7a495570975" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d4-925c-d13e36d1f42d" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a5-9752-f36cf7bc8992" class="">✅ <strong>61. What is the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8112-81de-ffcf7c6f5f5d" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2, 3];
+let copy = arr;
+copy.push(4);
+console.log(arr);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814e-9ba3-fed05f2763af" class=""><strong>A.</strong> [1, 2, 3]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8114-a5a8-f477a735c3d9" class=""><strong>B.</strong> [1, 2, 3, 4]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f2-a395-f2f0ed01a174" class=""><strong>C.</strong> [4]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819b-937b-ed0e56c6e66e" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8123-93b3-ccc7282cb448" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-b6fe-ff713d84a980" class=""><strong>Explanation:</strong> <code>copy</code> and <code>arr</code> point to the same reference → both updated.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ea-9ec7-ec556722e4b7"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e0-8f2c-c554af780295" class="">✅ <strong>62. What will be printed?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8165-b902-c0759ebed4b8" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2, 3];
+console.log(typeof arr);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-8bbf-db8bdf74dc7f" class=""><strong>A.</strong> array</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8190-8704-f440a503b9ac" class=""><strong>B.</strong> object</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a3-b006-d6348fd46d02" class=""><strong>C.</strong> string</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8111-abea-de7f2cff72e7" class=""><strong>D.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8167-b664-f62100e6a094" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dc-9ebd-ce2e4b6781c2" class=""><strong>Explanation:</strong> In JavaScript, arrays are objects (<code>typeof [] === &quot;object&quot;</code>).</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8189-884f-f49e4b0484fa"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811b-b201-e8b01cbbbce7" class="">✅ <strong>63. Output of this?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81a4-9bd1-de96fd335c22" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2, 3];
+console.log(arr.includes(2));
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814a-be24-f43977dde586" class=""><strong>A.</strong> true</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b8-a474-eba162ce020f" class=""><strong>B.</strong> false</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8177-ac44-c080ba98edc8" class=""><strong>C.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8125-9c97-e18d56f4b3bb" class=""><strong>D.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-b88b-f9e1e3799a08" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81df-b3be-d8ddb9113b64" class=""><strong>Explanation:</strong> <code>includes(2)</code> returns <code>true</code> as 2 exists in the array.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d4-af25-e846375d3508"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a1-b3ae-cc7e422d5a57" class="">✅ <strong>64. What is the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e9-b20d-fba0f82cabec" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2, 3];
+console.log(arr.indexOf(4));
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8163-b9cc-c8f18698e07a" class=""><strong>A.</strong> -1</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e9-a4c4-fd9eb5fe82d7" class=""><strong>B.</strong> 0</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dc-a82c-e57b6e69558f" class=""><strong>C.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811d-8e17-f0751cdb07e7" class=""><strong>D.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bf-bd8e-e0004d34b1e2" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815c-b3ee-f188a5e59961" class=""><strong>Explanation:</strong> <code>indexOf</code> returns -1 if the element is not found.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d5-8a16-e51183933597"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814f-b288-fcf94f7ab735" class="">✅ <strong>65. What does this print?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-814c-85b5-f8a7e0bccfd1" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2, 3];
+arr.shift();
+console.log(arr);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810d-9641-c90a553710bc" class=""><strong>A.</strong> [2, 3]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811f-bc8a-f3d7139e1fbe" class=""><strong>B.</strong> [1, 2]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-ba2d-fa11f1f758c5" class=""><strong>C.</strong> [3]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8164-a646-c7d7296b2698" class=""><strong>D.</strong> [1, 3]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8185-a35f-ef89857e456d" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8155-880e-e9bc011de8e4" class=""><strong>Explanation:</strong> <code>.shift()</code> removes the first element.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81be-819a-dff942329fa9"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f3-880b-ea71fa6c43f2" class="">✅ <strong>66. Output of this?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8127-9223-c21b22301446" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2, 3, 4, 5];
+console.log(arr.slice(1, 3));
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8184-ad4d-c7765a5d7849" class=""><strong>A.</strong> [2, 3]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-a174-d39c74080214" class=""><strong>B.</strong> [1, 2, 3]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813b-8163-fe5bf4d83ee3" class=""><strong>C.</strong> [3, 4]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d1-8859-e1d1c92a9157" class=""><strong>D.</strong> [2, 3, 4]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811d-8a07-e6a2511b44da" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8192-a32d-e6d97c2f6121" class=""><strong>Explanation:</strong> <code>slice(1, 3)</code> returns elements from index 1 to 2.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fa-9a39-fb7773c23c2d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813c-a320-eefc6a6aaa4a" class="">✅ <strong>67. What does this log?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8198-b066-d2ef08945bed" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2, 3];
+arr = [];
+console.log(arr.length);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8132-8f56-fd588cca1c50" class=""><strong>A.</strong> 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8191-8ad9-c6d705951be9" class=""><strong>B.</strong> 0</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-8276-fb991c52b81f" class=""><strong>C.</strong> undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c6-b3f9-f8892fa73c4d" class=""><strong>D.</strong> Error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814a-9a2a-e1034b268d1c" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81be-9428-eb75dc326da3" class=""><strong>Explanation:</strong> Reassigning to an empty array → length becomes 0.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8193-ab35-e544b2034f97"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8193-a7ff-f257830696ac" class="">✅ <strong>68. What is the output?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8146-9596-e2116687baeb" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let [a, , b] = [1, 2, 3];
+console.log(a, b);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812d-a295-ff011c467416" class=""><strong>A.</strong> 1 2</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-abd6-dbe7bc931c4e" class=""><strong>B.</strong> 1 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8171-8746-c9f97be14660" class=""><strong>C.</strong> 2 3</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-97b1-d2512e5faf1c" class=""><strong>D.</strong> 1 undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8147-85d7-c5a958118f76" class="">✅ <strong>Correct Answer:</strong> B</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8140-8ddf-d1f206d12ae1" class=""><strong>Explanation:</strong> Skips middle element → a = 1, b = 3.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c5-a516-e79bad517acf"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e7-859a-d2d6a875968a" class="">✅ <strong>69. What will this print?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-816f-9afb-d69447514b07" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [10];
+arr.length = 5;
+console.log(arr);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8173-92c2-d1ecd3046d7d" class=""><strong>A.</strong> [10, 0, 0, 0, 0]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-b221-cc18662830b5" class=""><strong>B.</strong> [10, undefined, undefined, undefined, undefined]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b1-aaf8-c99f35851789" class=""><strong>C.</strong> [10, empty × 4]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-9e4a-d2cb961baf90" class=""><strong>D.</strong> [undefined × 5]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8184-92d0-c84ad0de23b7" class="">✅ <strong>Correct Answer:</strong> C</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8196-8214-f943ea64cc48" class=""><strong>Explanation:</strong> Expanding array length creates empty slots (not <code>undefined</code> values directly).</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8100-a706-c7e5a36de8ca"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81aa-943a-eec747aa1fee" class="">✅ <strong>70. What is the result?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81cb-aec1-f2f5ed23b1ae" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let arr = [1, 2, 3];
+arr.length = 1;
+console.log(arr);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ef-bd02-e20582deca1f" class=""><strong>A.</strong> [1]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-8992-d2f27655e56d" class=""><strong>B.</strong> [1, 2, 3]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8142-9251-dd59c99d82f1" class=""><strong>C.</strong> []</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b2-b40b-ded63f678793" class=""><strong>D.</strong> [1, undefined, undefined]</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d1-8fda-c5efbbeb7a75" class="">✅ <strong>Correct Answer:</strong> A</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8140-82dd-e92c21867e88" class=""><strong>Explanation:</strong> Reducing <code>length</code> truncates the array → only index 0 remains.</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

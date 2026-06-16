@@ -1,0 +1,762 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ReactJS Interview Questions</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-81dc-8d49-ccf041294c79" class="page sans"><header><h1 class="page-title" dir="auto">ReactJS Interview Questions</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-819c-a5b3-f12cb67d2add" class="">✅ ReactJS Interview Questions – Part 1 (Basics)</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814e-a40a-d54bbb2c7d7d" class=""><strong>1. What is React?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8160-9fb3-fbb326380d15" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d0-9bf5-ff0c42bf41f9" class="">React is a JavaScript library used to build user interfaces, especially single-page applications. It focuses on building reusable UI components and efficiently updating the UI using a virtual DOM.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813c-8e30-e4fa40d83d59"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8158-873b-cf33af7a3c9a" class=""><strong>2. Why is React called a library and not a framework?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-bf57-d6da1df6e477" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a9-86c8-fd094ab1a87e" class="">React only handles the UI layer of an application. It doesn’t enforce routing, state management, or data handling patterns. Developers choose additional libraries as needed, which makes React flexible.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8190-aa1a-f1ea5e30a8cf"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f7-ab0f-e4ab54e0fa7e" class=""><strong>3. What are the main features of React?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c0-9285-f446d2c36ef7" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8191-bf2f-c0c7d47aba66" class="bulleted-list"><li style="list-style-type:disc">Component-based architecture</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b4-87eb-d27fa39833ed" class="bulleted-list"><li style="list-style-type:disc">Virtual DOM</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8114-83a8-f2842e6d2e58" class="bulleted-list"><li style="list-style-type:disc">Declarative UI</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8133-b53d-c65b8dd344a4" class="bulleted-list"><li style="list-style-type:disc">One-way data flow</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812f-bab8-d12a01c19202" class="bulleted-list"><li style="list-style-type:disc">Hooks for state and lifecycle management</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8138-8eaf-e6d704570624"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f2-ab19-d6dfb719054b" class=""><strong>4. What is JSX?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8165-a236-faa52cd62512" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-9ea8-d283d8639a35" class="">JSX is a syntax extension for JavaScript that allows writing HTML-like code inside JavaScript. It gets transpiled into <code>React.createElement()</code> calls by tools like Babel.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b5-91bb-f9504058d381"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fb-b052-d8f9a44ec50a" class=""><strong>5. Can React work without JSX?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bb-ae0f-ed82ca654640" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c8-a03a-e9a2253ea9c5" class="">Yes. JSX is optional. React can be written using <code>React.createElement()</code>, but JSX improves readability and developer experience.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81df-972a-cb569bbab749"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c0-bdbd-db4cd75c9141" class=""><strong>6. What is a component in React?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816d-a223-e90f836730b5" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8149-bb9d-f48b518942f6" class="">A component is a reusable piece of UI. It can be a function or a class that returns JSX and optionally manages its own state and logic.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814e-bc90-f53af94ea757"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a4-9619-d018f469549a" class=""><strong>7. What are the types of components in React?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c0-88d4-c5f3c1389844" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8117-8018-cef66b42c20c" class="bulleted-list"><li style="list-style-type:disc">Functional Components</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8148-9505-fce83076c8db" class="bulleted-list"><li style="list-style-type:disc">Class Components</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81be-99ea-f74550623a63" class="">Modern React primarily uses functional components with hooks.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8159-bd0c-e7c37cb73e08"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8188-81a1-ff875557e28a" class=""><strong>8. What is the difference between functional and class components?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a9-8d06-db868adc8773" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8136-9d5b-e5b9d87dd352" class="">Functional components are simple JavaScript functions and use hooks for state and lifecycle.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-8d4b-e510a64859fa" class="">Class components use ES6 classes and lifecycle methods. Functional components are preferred today.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f0-9f96-f62209df4c1d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e0-9284-eb84a53ebcf8" class=""><strong>9. What is props in React?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8145-b8f5-c91bbe2ec849" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-8078-f3eb71d038b7" class="">Props (properties) are read-only inputs passed from a parent component to a child component. They help make components reusable and dynamic.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e1-80f7-c7ec2b92a202"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a9-bff3-ffe9773fa6be" class=""><strong>10. What is state in React?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-8fc1-cd0856888f8f" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8155-b0ab-f32a7fc0d3a1" class="">State is a built-in object used to store data that can change over time. When state changes, the component re-renders to reflect the updated data.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815b-894b-e93717aae3ca"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8163-bd5e-c207d18b5ac5" class="">📌 Part 1 Coverage</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819a-9417-d0cadb6b2ae1" class="bulleted-list"><li style="list-style-type:disc">React basics</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c7-b0ce-fdcc862a3c14" class="bulleted-list"><li style="list-style-type:disc">JSX</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81cc-b063-f5161feee1c5" class="bulleted-list"><li style="list-style-type:disc">Components</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8165-b419-d4b6622451e8" class="bulleted-list"><li style="list-style-type:disc">Props vs State</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8143-8ef2-ccdeb17e39d3" class="bulleted-list"><li style="list-style-type:disc">Core concepts interviewers expect first</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d0-9134-d5c702593f3b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-8671-c9d81a2bd62c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815d-82f7-dd0e3ef731f8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8197-89f6-f0f09465dcc9" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81e0-ac82-f46639edbe02" class="">✅ ReactJS Interview Questions – Part 2</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8175-a8b9-d0459568fb1d" class=""><em>(Virtual DOM, Rendering &amp; Reconciliation)</em></h3></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ee-b1fa-c65e0be0ef95"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a4-a7fb-fc94518b4f21" class=""><strong>11. What is the Virtual DOM?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812c-b94d-c17fa8f079e4" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d5-a225-fee33ad0dcae" class="">The Virtual DOM is a lightweight JavaScript object that represents the real DOM. React uses it to track UI changes and update only the necessary parts of the real DOM efficiently.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8104-8337-f19b674531b4"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e8-8d24-cc310ef9d5ed" class=""><strong>12. Why does React use the Virtual DOM instead of the real DOM?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816a-afaf-fce3ce7fb5a1" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8157-9fa5-ea81bdff6796" class="">Direct DOM manipulation is slow. React compares the Virtual DOM with the previous version (diffing) and updates only the changed nodes in the real DOM, improving performance.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81be-bcbb-e104b035db8a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8194-ac6c-ec39062c4d70" class=""><strong>13. What is reconciliation in React?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8135-badb-d4a7e0fd5ffc" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b3-9ecd-f34ef4113457" class="">Reconciliation is the process where React compares the previous Virtual DOM with the new one to determine the minimum number of changes required to update the real DOM.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814e-bb8b-e43385c18447"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8107-a87e-f284909e35bf" class=""><strong>14. What is diffing in React?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-bdc6-cfcde84c9f27" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dd-93ac-e96cc682931b" class="">Diffing is the algorithm React uses during reconciliation to compare two Virtual DOM trees and identify what has changed.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c8-9ccf-e3e85ad91634"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-817c-9ae0-f1934fa92907" class=""><strong>15. How does React identify which elements need to be updated?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-840a-cca71e4b79e8" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8161-836f-d36b4e52c716" class="">React compares elements by type and key. If the type or key changes, React recreates the component; otherwise, it updates only the changed properties.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816b-ba0d-dcdd8f91e730"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bb-b5dc-d58c50455d30" class=""><strong>16. What are keys in React and why are they important?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c0-8c1f-c68beeaa380e" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c8-99fc-ccf57d4b739a" class="">Keys are unique identifiers used when rendering lists. They help React efficiently track and update individual items when the list changes.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816c-83a2-c7a0dab57332"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e5-af3f-e58a709f94d8" class=""><strong>17. What happens if keys are not used in lists?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8104-a2b0-cf9b71a41848" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fa-8a07-d8a45c5eca42" class="">Without keys, React may re-render unnecessary components, leading to performance issues and unexpected UI behavior.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812f-9ec8-da766fd687df"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ce-96d5-ceab057bdc85" class=""><strong>18. Can we use array index as key?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8190-8c4d-f2a87e445816" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8175-9526-f1a36e54b7fc" class="">Yes, but it’s not recommended when the list can change. Using index as a key can cause incorrect re-renders when items are added, removed, or reordered.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e1-87d2-fdd90dd413f2"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b3-9092-dc3e4e779ab0" class=""><strong>19. What triggers a re-render in React?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817a-a4a1-cb8d253f149a" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813c-842b-d59cb15fddf9" class="bulleted-list"><li style="list-style-type:disc">State change</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c3-b7a4-e9acfa8a78e4" class="bulleted-list"><li style="list-style-type:disc">Props change</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d4-9235-caec1698053a" class="bulleted-list"><li style="list-style-type:disc">Parent component re-render</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d0-a787-d32a701e2f19" class="bulleted-list"><li style="list-style-type:disc">Context value change</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b4-b809-e4435a409f2e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81af-bf15-f528cd3daeb8" class=""><strong>20. Does React re-render the entire page on state change?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8111-abd3-d4af99c9fbd1" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a5-8ace-cf466e2f1a92" class="">No. React re-renders the component and its children in the Virtual DOM, then updates only the changed parts in the real DOM.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b5-a40d-c91ea128df0a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c0-bceb-d468adaa6bf9" class="">📌 Part 2 Coverage</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8113-b30f-f7a938fbfe29" class="bulleted-list"><li style="list-style-type:disc">Virtual DOM</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8195-99d9-f71ff02fd1e4" class="bulleted-list"><li style="list-style-type:disc">Reconciliation &amp; diffing</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8145-9330-cbd4e979c292" class="bulleted-list"><li style="list-style-type:disc">Keys and list rendering</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816b-b441-f317df4d4e15" class="bulleted-list"><li style="list-style-type:disc">Re-render triggers</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fc-b839-ff9e9fd6d581" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a3-b774-e23a2a0d2e63" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b4-ada8-cb2aa36b442a" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-9479-de6b83602849" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-811d-b4a8-c3c37207fd00" class="">✅ ReactJS Interview Questions – Part 3</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d6-82b1-fbf6f9da0ce0" class=""><em>(Hooks Introduction &amp; Rules of Hooks)</em></h3></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e1-b800-c1098cc02c5c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818e-bf13-ccd9d101ba96" class=""><strong>21. What are React Hooks?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-b1cb-fcb3d99f5a41" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-ada4-f9fa145d30e2" class="">Hooks are functions that allow functional components to use React features like state, lifecycle methods, and context without writing class components.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8194-b2e7-cad213bda82e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815b-89d0-d3d967cd8cad" class=""><strong>22. Why were Hooks introduced in React?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8139-9018-e03ad39c58ee" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ac-b1c8-fc65f64a761d" class="">Hooks were introduced to solve problems like complex class components, duplicated logic, and confusion around <code>this</code>. They make code cleaner, reusable, and easier to understand.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8143-830f-cdae9a1e660e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8173-b14a-eff4d6e8b8be" class=""><strong>23. Name some commonly used React Hooks.</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a6-9d67-da4257835535" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8130-b3cd-c90a829880b2" class="bulleted-list"><li style="list-style-type:disc"><code>useState</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b1-81ae-e7f22f359523" class="bulleted-list"><li style="list-style-type:disc"><code>useEffect</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a4-8f35-f1dc3c1c547f" class="bulleted-list"><li style="list-style-type:disc"><code>useContext</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e1-a4bb-ddf262ea65fe" class="bulleted-list"><li style="list-style-type:disc"><code>useRef</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815c-9045-c558c5ca52cf" class="bulleted-list"><li style="list-style-type:disc"><code>useMemo</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812d-8670-d22d2f48ddc9" class="bulleted-list"><li style="list-style-type:disc"><code>useCallback</code></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ef-a67f-e44c8f27dd0d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8177-8dd3-e6750826176f" class=""><strong>24. Can Hooks be used in class components?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8177-9d10-d51bba3af145" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8174-888e-d68202b9a887" class="">No. Hooks can only be used inside functional components or custom hooks, not in class components.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8135-9c7f-fa01f4408a89"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8107-a4b4-fcc0bc498174" class=""><strong>25. What are the Rules of Hooks?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8142-be01-d2719bc6d62b" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81e5-b700-ec3bd0a154e8" class="numbered-list" start="1"><li>Call hooks only at the top level</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81d0-8970-dc9bb1b074e6" class="numbered-list" start="2"><li>Call hooks only inside React functional components or custom hooks</li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81df-9d38-f91325cecda0" class="">These rules ensure hooks work correctly across renders.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8155-99ca-feddddcd0747"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8123-ab8c-c0302f39893a" class=""><strong>26. Why should Hooks not be called inside loops or conditions?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81aa-8e7f-cfd415199ea5" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818d-a5d0-dbb8f0e67b7e" class="">Hooks rely on the order in which they are called. Calling them conditionally can change this order, causing React to associate incorrect state with hooks.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8110-af94-e2264c433d6f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8163-9a6b-f45f0875a0f4" class=""><strong>27. What is </strong><code><strong>useState</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ff-bf5b-ed1da156e12a" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8104-8181-e47f7e4771ad" class=""><code>useState</code> is a hook that allows functional components to store and update state values.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ba-9c6b-d0c5cb0c0b75"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f4-a845-e340120ac027" class=""><strong>28. What is </strong><code><strong>useEffect</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8108-a620-c61b4e55432a" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-9749-ecd466241ec0" class=""><code>useEffect</code> is a hook used to perform side effects such as data fetching, subscriptions, timers, or DOM updates after rendering.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8143-90d2-fd1ffe168d16"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8138-9f96-fa784d38ebda" class=""><strong>29. What is the difference between </strong><code><strong>useEffect</strong></code><strong> and lifecycle methods?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817f-97ad-ee4c5e61f5db" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8156-9b46-e08db9fb348b" class=""><code>useEffect</code> can replace <code>componentDidMount</code>, <code>componentDidUpdate</code>, and <code>componentWillUnmount</code> using dependency arrays and cleanup functions.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8170-9f2d-db2429e8af2f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81dc-b66c-db7413255f00" class=""><strong>30. What is a custom hook?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-9edf-d528531f8ed9" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8193-a1ed-e1edab1075d1" class="">A custom hook is a reusable function that starts with <code>use</code> and contains one or more React hooks to share logic across components.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8179-a129-c8f2995ce5f1"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818d-a31c-c0c3982708f4" class="">📌 Part 3 Coverage</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816b-8e1a-e95c0d131e22" class="bulleted-list"><li style="list-style-type:disc">Introduction to hooks</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a9-a3b4-f6873ec5ef01" class="bulleted-list"><li style="list-style-type:disc">Why hooks exist</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817a-a3fd-ef4ee159587a" class="bulleted-list"><li style="list-style-type:disc">Rules of hooks</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8186-b881-c212d9ef402f" class="bulleted-list"><li style="list-style-type:disc">Core hooks overview</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8193-bc2f-f7b1b20d1083" class="bulleted-list"><li style="list-style-type:disc">Custom hooks</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811f-86fe-d4d6ac5fcc7c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-bcfe-c8fabbb2140a" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8120-83aa-fcf31ca4b182" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d5-bdac-ecec76d9e8f8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8184-a07f-e733f17ca4a6" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-810c-9155-fbdb4eae0e72" class="">✅ ReactJS Interview Questions – Part 4</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816e-97d1-f9cc2657efb6" class=""><em>(useState &amp; useEffect – Deep Interview Questions)</em></h3></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b8-8b5d-f64ab3c4af72"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810f-8c20-e0a912e289ff" class=""><strong>31. What is </strong><code><strong>useState</strong></code><strong> and how does it work?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8122-9164-e0dd5e6d281e" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8161-894e-c5d331bd6a49" class=""><code>useState</code> allows functional components to store state. It returns an array with the current state value and a function to update it. Updating state triggers a re-render of the component.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ee-81f5-e9baefff269c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816f-aaae-fca783f55b72" class=""><strong>32. Why does </strong><code><strong>useState</strong></code><strong> return an array and not an object?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8168-8e07-fabf986e8362" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-97d9-eeab936fe6a0" class="">Arrays allow flexible naming through destructuring. The order of values is fixed, making it easier and faster for React to implement internally.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a0-a4ea-f1ee4380ae5b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e6-bc8b-fc8d32b31a6a" class=""><strong>33. Is </strong><code><strong>setState</strong></code><strong> in </strong><code><strong>useState</strong></code><strong> synchronous or asynchronous?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b8-b17f-c18c3959513c" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812c-a3a7-e69393787d1c" class="">State updates are asynchronous. React batches multiple updates together to improve performance, so the updated value is not available immediately.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8184-a024-ff2129dd86f4"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ea-be43-f725c79b8445" class=""><strong>34. What happens if we update state with the same value?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e6-9e69-fb3bebcb0cd3" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f2-ae2a-d16be71daa37" class="">React compares the new state with the previous one using <code>Object.is</code>. If they are the same, React skips re-rendering.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b5-9cbe-de57fd07d23b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816d-a548-d2a8e8cef4a7" class=""><strong>35. How do you update state based on the previous state?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a3-a9e3-c1b0bafcd25c" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81df-a310-df05ac71ce03" class="">By passing a callback function to the state updater function.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8183-8149-c8e9d4eec65d" class="">Example:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-815f-8661-ed8a8ab8fda0" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">setCount(prevCount =&gt; prevCount + 1);
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8153-a620-d4f42c5290f3"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8106-90e8-c10f569e1361" class=""><strong>36. What is lazy initialization in </strong><code><strong>useState</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-8388-d7a6ce2b32cb" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-aa27-f5817341443c" class="">Lazy initialization allows passing a function to <code>useState</code> so the initial state is calculated only once during the first render.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8117-86b9-e1ee02bd682a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8171-8152-eafc40ae91e9" class=""><strong>37. What is </strong><code><strong>useEffect</strong></code><strong> used for?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e7-bc3b-df13a8dad1c2" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b6-b48b-f69176105410" class=""><code>useEffect</code> is used to perform side effects like API calls, subscriptions, event listeners, timers, and manual DOM updates.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813c-8319-fbd27c29bd6e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8118-af79-fbed01a75b88" class=""><strong>38. How does the dependency array in </strong><code><strong>useEffect</strong></code><strong> work?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-9943-fdfa75ecc458" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8176-ae41-f4ce2f9229ab" class="bulleted-list"><li style="list-style-type:disc">No dependency array → runs after every render</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c6-906b-eec861e861f4" class="bulleted-list"><li style="list-style-type:disc">Empty array <code>[]</code> → runs once on mount</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8142-9225-dca2763eadf0" class="bulleted-list"><li style="list-style-type:disc">With dependencies → runs when those dependencies change</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810e-8be2-ca3a2e8c9138"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d5-839f-d48b24e02fa2" class=""><strong>39. What is the cleanup function in </strong><code><strong>useEffect</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8176-8085-d7298013a08c" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8196-900d-cbe9c03f4133" class="">The cleanup function runs before the effect re-executes or when the component unmounts. It is used to clean up subscriptions, timers, or event listeners.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a0-bb1b-ecc28168f78a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81dc-bca4-d62e47423cfb" class=""><strong>40. Can we use multiple </strong><code><strong>useEffect</strong></code><strong> hooks in a component?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8188-bc15-fffd082b7e8e" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-8eb5-f68fd604642b" class="">Yes. Using multiple <code>useEffect</code> hooks is recommended to separate unrelated side effects and keep code clean and maintainable.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ef-ad83-f825bfa1038e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81cc-a2da-f000b9138b94" class="">📌 Part 4 Coverage</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816b-b170-dc71207ff121" class="bulleted-list"><li style="list-style-type:disc"><code>useState</code> behavior</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a5-85a1-e85f685501d9" class="bulleted-list"><li style="list-style-type:disc">Async state updates</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816a-8f26-e184fd20a401" class="bulleted-list"><li style="list-style-type:disc">Lazy initialization</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81bf-9495-dd5f7b2ac1a4" class="bulleted-list"><li style="list-style-type:disc"><code>useEffect</code> dependency patterns</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8135-b761-eb6e2432f104" class="bulleted-list"><li style="list-style-type:disc">Cleanup functions</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8189-8246-db7b2827aaf2" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fc-8385-df962e47d36f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-9d6d-ea79523dc9f8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8171-9d3b-d6f1e992a955" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81df-9883-c1f6ddef8ce4" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-814d-8992-dc29d13c0974" class="">✅ ReactJS Interview Questions – Part 5</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ca-99f7-c758c262d6f7" class=""><em>(Context API – State Sharing &amp; Global Data)</em></h3></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d6-80bf-d81fd4c63d93"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814f-ace6-f1145eeb0e6d" class=""><strong>41. What is Context API in React?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816c-92d0-c008633dc5ad" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8163-a4cc-e6a27650785e" class="">Context API is a way to share data globally across the component tree without passing props manually at every level (props drilling).</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8100-a97d-feba10129e84"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813b-be2f-cc4f009db11a" class=""><strong>42. When should you use Context API?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b6-bf69-ff2c8fddf412" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814e-9899-c2cdc5958b88" class="">Context should be used for global data such as authentication state, theme, language preferences, or user settings that are needed by many components.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c0-83bd-dac94d21c3c6"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8119-99c2-ccb702528fe6" class=""><strong>43. What problem does Context API solve?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8173-a4c8-dde956aa7eb6" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812d-bcf3-f9d52be6258f" class="">It solves the problem of <strong>props drilling</strong>, where data has to be passed through multiple intermediate components unnecessarily.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819f-80d1-f6aa89f74f33"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-819e-b06e-d6f84036662d" class=""><strong>44. What are the main parts of Context API?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-a571-d2399915d1b7" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815f-85a0-f9d9dbd19109" class="bulleted-list"><li style="list-style-type:disc"><code>createContext()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8145-9fbf-eb7a6ec636f7" class="bulleted-list"><li style="list-style-type:disc"><code>Provider</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d3-8242-fe4735fba029" class="bulleted-list"><li style="list-style-type:disc"><code>Consumer</code> (or <code>useContext</code> hook)</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8137-8a57-c7dc27cd25f8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a4-ac19-e891afab8766" class=""><strong>45. What is a Context Provider?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b6-899d-f706602f152a" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8192-b2b3-c6de1ae5a544" class="">A Provider is a component that supplies context data to its child components using the <code>value</code> prop.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8150-b874-c383e55aa9d7"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d0-8a19-ec2df9315c58" class=""><strong>46. What is </strong><code><strong>useContext</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8113-8bc1-c68e074cf6f1" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d1-a339-d3a22f00a776" class=""><code>useContext</code> is a hook that allows functional components to consume context values directly without using a Consumer component.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b5-b869-ef86d509d19d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815d-8739-fc15bc5ad595" class=""><strong>47. What happens when a context value changes?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8164-9f4c-c5b97f69bda3" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8140-95b4-f2a5b9cad771" class="">All components that consume that context re-render when the context value changes.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8155-8542-cb9a1641e5b4"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a5-b6ae-dd6d5d304603" class=""><strong>48. Can we have multiple contexts in a React app?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a2-b3e6-dc344653dcd8" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8123-a826-df77babeb292" class="">Yes. An application can have multiple contexts, such as AuthContext, ThemeContext, and CartContext.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8136-b4f4-c5247bc2ae1c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8111-8975-f5583210956e" class=""><strong>49. Is Context API a replacement for Redux?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d1-991b-e175ad415eb4" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d5-8a8f-fda8aa83ae3a" class="">No. Context API is good for simple global state, but Redux is better for complex state logic, middleware, debugging, and large-scale applications.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a3-a7c0-c60a86d25468"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814f-b0e0-e8396feba1f2" class=""><strong>50. What are the performance issues with Context API?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-b235-ea0e67b7b9bb" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8189-8a52-e1d9ed3c001c" class="">When the context value changes, all consuming components re-render. Without optimization, this can lead to unnecessary re-renders.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c5-b2f8-c71acfdab4a0"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810f-b8d0-dbe13e55a9cb" class="">📌 Part 5 Coverage</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818e-b8e4-c30ee248289b" class="bulleted-list"><li style="list-style-type:disc">Context basics</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8199-868a-d881218e3ca1" class="bulleted-list"><li style="list-style-type:disc">Provider &amp; <code>useContext</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fc-9531-dc8ea8df3e67" class="bulleted-list"><li style="list-style-type:disc">Props drilling</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810b-a879-ea89554c30bc" class="bulleted-list"><li style="list-style-type:disc">Performance considerations</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815d-b73d-f997118c886c" class="bulleted-list"><li style="list-style-type:disc">Context vs Redux</li></ul></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

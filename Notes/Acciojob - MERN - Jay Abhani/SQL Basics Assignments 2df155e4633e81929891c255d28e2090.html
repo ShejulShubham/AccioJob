@@ -1,0 +1,760 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>SQL Basics Assignments</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-8192-9891-c255d28e2090" class="page sans"><header><h1 class="page-title" dir="auto">SQL Basics Assignments</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8164-b85d-e50514ad971f" class="">🧪 Practice Tasks (Must Do) - 1</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ff-af3e-ddc3da4cdc0f" class="">Task 1: Create <code>products</code> table</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817a-a349-d1de0a6a9a41" class="">Columns:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fb-9969-ed852441a8c8" class="bulleted-list"><li style="list-style-type:disc">id (PK, auto increment)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8179-ab30-c84df737f257" class="bulleted-list"><li style="list-style-type:disc">name (required)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8156-9994-f827075298f7" class="bulleted-list"><li style="list-style-type:disc">price (decimal)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8148-afb0-e6c38f2199d8" class="bulleted-list"><li style="list-style-type:disc">stock_quantity (int)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ad-bd61-fa78c9faabad" class="bulleted-list"><li style="list-style-type:disc">is_available (boolean)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e0-9901-f3cf773ae10c" class="bulleted-list"><li style="list-style-type:disc">created_at (datetime)</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8191-b082-fd552a228b52"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8194-beb2-c1dcaff61da0" class="">Task 2: Create <code>students</code> table</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bb-b0ed-d8a938bf2034" class="">Columns:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8168-bcfa-c6bb79ca40f2" class="bulleted-list"><li style="list-style-type:disc">id</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810f-89ca-f8561f15b506" class="bulleted-list"><li style="list-style-type:disc">name</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d7-b71d-fc0723b0e763" class="bulleted-list"><li style="list-style-type:disc">email (unique)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8160-97cb-ec3830f7412e" class="bulleted-list"><li style="list-style-type:disc">course</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8191-ae11-c9e6ab701323" class="bulleted-list"><li style="list-style-type:disc">admission_date</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8146-9618-d3e4b09eab04" class="bulleted-list"><li style="list-style-type:disc">is_active</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-b6e6-d751a48df46e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-a579-d02aa3528ad6" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8198-ae0e-ec1e5fbaf74e" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81e2-8bf2-ed8aed251c97" class="">🧪 Practice Tasks (Must Do) - 2</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e6-8f2a-ec241d2633b2" class="">Task 1</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-a5b3-fd167e995a76" class="">Fetch:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f7-986b-daf8fc655cb2" class="bulleted-list"><li style="list-style-type:disc">name</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819f-b5fd-ee911bdd69a1" class="bulleted-list"><li style="list-style-type:disc">email<div style="display:contents" dir="auto"><p id="2df155e4-633e-81ff-8115-e4696cbaa57b" class="">from users table.</p></div></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81bb-95b6-d4cb5d84c0dd"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-819e-9890-ebaa4348b5e6" class="">Task 2</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8114-8e43-e917917f17d2" class="">Show:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814d-bb61-c8109ebce45e" class="bulleted-list"><li style="list-style-type:disc">full_name</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8156-984f-d285f8c7df18" class="bulleted-list"><li style="list-style-type:disc">salary</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81dd-8cdf-f79b60c28ea9" class="bulleted-list"><li style="list-style-type:disc">annual salary<div style="display:contents" dir="auto"><p id="2df155e4-633e-8115-9c7d-de428da5f1fe" class="">from employees.</p></div></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c3-9cef-cad5a1b9183c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c3-84ae-f07ea26442c6" class="">Task 3</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819b-9518-f53b048c4bc4" class="">Get <strong>latest 3 users</strong> sorted by creation date.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e8-b5f6-fc1b28df95f5"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8198-b385-dc3467f63145" class="">Task 4</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8179-8373-efdd0e8e5fa6" class="">List <strong>all unique courses</strong> from students table.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a3-b695-f14328fe58a9" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818f-bcd6-e8364b0ca205" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8112-8c2b-e888a1dca95a" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81fd-87b8-d7234b880683" class="">✅ EASY MCQs</h2></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81da-a20c-d7b76d1561f0"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bc-8633-c3adcc39e992" class="">1. What problem does a database primarily solve?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-a5a3-fd2a6182f516" class="">A. Writing backend code</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cd-8eb9-e2c38aecdd8d" class="">B. Storing data temporarily</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-a1cc-e5a639a0cfa0" class="">C. Structured, secure, multi-user data storage</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-a0c9-c3678f50ee3a" class="">D. Creating UI layouts</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8164-b417-e62c79811666"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8143-9355-d28966239d10" class="">2. Which of the following is NOT a database?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8155-abd2-cf54d821aa62" class="">A. MySQL</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8165-9dc4-f8c28361f2e1" class="">B. PostgreSQL</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-abdd-d3f5f9657cc7" class="">C. Excel</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b0-8fd0-efd36d1f4e7a" class="">D. MongoDB</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81eb-8982-ce78d4b7b9e0"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8126-aebd-d54168a22684" class="">3. In database terminology, a row is also called a:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d0-8ed1-d34a82163795" class="">A. Column</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8161-9f49-ca947e52cd1e" class="">B. Table</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ba-b6e8-e8041f958aac" class="">C. Record</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8184-8b19-d5c591f6f8eb" class="">D. Schema</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e2-9c16-c6b67dddc374"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fd-a36e-c7e3c77d3260" class="">4. SQL is best described as:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ac-93a1-c90ad2d045f2" class="">A. A programming language</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8138-b173-fb9799841dec" class="">B. A database</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cf-b2e3-cc47eeec8573" class="">C. A query language</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-bd63-d21139ef9262" class="">D. A server</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8123-961b-d1111e26df38"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a8-97a8-d0e25aaa37c6" class="">5. MySQL is:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ab-9490-c80325c9fc9d" class="">A. A language</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8166-88fa-fe6af90b3620" class="">B. A database software</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d5-8a66-d3ab7a5cd5d1" class="">C. A frontend framework</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-ad94-fd51ea86a8ba" class="">D. An ORM</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e0-8ce2-dd168d170412"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8139-9dbb-f4762291314f" class="">6. Where does SQL actually run?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c1-9997-d35087a50e83" class="">A. Browser</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8197-be78-d561ccad8db1" class="">B. Frontend</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-a6bd-ff1cfa624a5f" class="">C. Backend server</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817f-b291-de0c6cbb5431" class="">D. User’s device</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8184-a22d-fde9b1cb454d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811a-8e59-da8e72df66f1" class="">7. Which command lists all databases on a MySQL server?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81aa-a2bb-c7c9e4b707ce" class="">A. LIST DATABASES</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b0-a7c7-d891ad142b5e" class="">B. SHOW DATABASES</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816a-843c-ed163d862192" class="">C. GET DATABASES</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81be-a22e-f4fcf74a7914" class="">D. DISPLAY DATABASES</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8179-b424-d187ce044a76"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812e-8b76-f9e2e33a5c3c" class="">8. Why is <code>USE company_db;</code> important?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-8900-c68ac45f26f3" class="">A. It creates a database</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c9-9d76-d551786da635" class="">B. It deletes a database</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c1-b5d1-c65f703a30af" class="">C. It selects the working database</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-9b40-dc83cdfe0b75" class="">D. It backs up data</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8104-8e4f-d6bd86429fd2"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810a-b708-c842dedddee1" class="">9. Which datatype should NEVER be used for money?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-8a7f-ffdb38b4fa00" class="">A. INT</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-9ee9-d38fc14c25fd" class="">B. DECIMAL</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8114-89de-da4c19e11c0e" class="">C. FLOAT</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8125-87e6-c9490407dbe6" class="">D. VARCHAR</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814c-b583-e5342e7f1e39"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8141-a6b5-fb7067b41356" class="">10. What does <code>PRIMARY KEY</code> ensure?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-830f-da3476ecdd1d" class="">A. Fast queries</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e7-b4bb-dec2aff1905e" class="">B. Unique identification of rows</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d1-a0bb-c0f1910eb71f" class="">C. Automatic insertion</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-8d94-c553135f72eb" class="">D. Default values</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ae-a380-d29f61dbc6c3"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a1-88bf-ec6f1f101455" class="">11. What does <code>AUTO_INCREMENT</code> do?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-b716-db79e8c41ecc" class="">A. Increases salary automatically</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dd-9637-f4e3875304d7" class="">B. Generates unique IDs automatically</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8178-98fd-f8acb824f467" class="">C. Sorts records</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-8505-dc18f0fd11b7" class="">D. Deletes duplicates</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8102-b7da-e1580479460a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8111-9a07-d2e60900e258" class="">12. Which command inserts data into a table?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819a-a7e9-e0b3befd5d60" class="">A. ADD</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8120-bfc7-dfd891ed3f21" class="">B. UPDATE</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8174-9020-c76ad0f1a0ac" class="">C. INSERT</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811e-971a-e6ee81859a32" class="">D. CREATE</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8149-9130-f52a3d3510d6"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81de-9ce2-c8602e1533b9" class="">13. Why should column names always be specified in INSERT queries?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d8-9a67-e7620d58e8f8" class="">A. Faster execution</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8113-95d9-f67b0b13b7c3" class="">B. Cleaner output</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8173-8966-e0dfcc66d568" class="">C. Prevent schema-related bugs</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-83ba-deec84e11949" class="">D. Mandatory syntax</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8124-84a8-db53fee633b8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81af-afdb-d3811548d2c2" class="">14. What does <code>SELECT * FROM users;</code> do?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-b288-c0a66dd8da6d" class="">A. Deletes users</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8133-b1e6-fb970bb2ed2e" class="">B. Updates users</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ef-b328-d7e5e1080a45" class="">C. Fetches all columns and rows</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-bd58-cd0acba92b70" class="">D. Counts users</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8192-b74a-f7d347bdac0b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812f-91fc-c500a9722e5a" class="">15. Why is <code>SELECT *</code> avoided in production?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8166-ac68-c97759ad763d" class="">A. It is invalid</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8149-a1a6-feb84d4a8de3" class="">B. It is slow and unsafe</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8119-98f6-db0ea8f691f1" class="">C. It deletes data</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8157-8ad2-c685277207b0" class="">D. It causes errors</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d6-8d34-da88971a1ce2"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e9-853e-e7fab0ea52d1" class="">16. What does <code>ORDER BY created_at DESC</code> mean?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81da-a134-d4593abc1105" class="">A. Oldest data first</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b2-ae9b-e8950fd93bcd" class="">B. Random order</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8112-a46d-d47b7c2e795d" class="">C. Newest data first</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f5-b6fa-ef1ab67cd172" class="">D. Alphabetical order</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8157-91e4-e414b7844d73"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8169-8eb9-edf5af7cbb7e" class="">17. Which clause is used to filter rows?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81da-971f-c27e45cedd8c" class="">A. FROM</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ca-922d-e36296ba2a10" class="">B. SELECT</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8195-a94d-fbcba426ec1f" class="">C. WHERE</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bf-b50a-ca6eab192067" class="">D. LIMIT</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8162-a6ce-dcc9c747bd81"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ba-b2b6-ef9b17429d52" class="">18. What does <code>BETWEEN 40000 AND 80000</code> include?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81da-a957-cb494fe26e42" class="">A. Only values inside the range</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c9-9aed-ccc7d3481b95" class="">B. Excludes 40000 and 80000</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-a4df-e78b242af948" class="">C. Includes both ends</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8142-ba7d-d2f4164a8009" class="">D. Only integers</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b6-b2ef-ea616ae1c9fd"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8129-a507-fb51656c4f29" class="">19. What happens if UPDATE is run without WHERE?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815c-b317-e1c2df9cebca" class="">A. Error occurs</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814c-8424-dd431ba03fd3" class="">B. Only one row updates</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e1-9185-c7e98f4ed3a2" class="">C. All rows update</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8162-9c4b-d10e643c88c7" class="">D. Nothing happens</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c7-a9cc-d5bcc340a143"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b5-94fb-d0a47d07decd" class="">20. What does <code>COUNT(*)</code> return?</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8108-be83-d67ff7bf44c8" class="">A. Number of columns</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8139-a43a-e40ade20df74" class="">B. Number of non-null values</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-9cb5-d4d0cf553ae3" class="">C. Number of rows</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8120-bf45-e829035cac58" class="">D. Sum of values</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b3-a209-f36adbbdfa8e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b6-b9f4-e8f7b3ad818d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8176-9772-e22f725756ba" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f9-a9a1-e220a95b0575" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-817c-b38d-c11b9689c0cc" class="">Case Study 1</h1></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bd-929e-d58dad7bbbcc" class="">CREATE TABLE orders (<br/>id INT AUTO_INCREMENT PRIMARY KEY,<br/>customer_name VARCHAR(100) NOT NULL,<br/>product_name VARCHAR(100) NOT NULL,<br/>category VARCHAR(50),<br/>quantity INT NOT NULL,<br/>price DECIMAL(10,2) NOT NULL,<br/>order_status VARCHAR(20),<br/>is_paid BOOLEAN DEFAULT false,<br/>order_date DATE,<br/>created_at DATETIME<br/>);</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817e-99fa-f6bb500107cd" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81df-bfb0-d3bc85ab6447" class="">INSERT INTO orders<br/>(customer_name, product_name, category, quantity, price, order_status, is_paid, order_date, created_at)<br/>VALUES<br/>(&#x27;Aarav Sharma&#x27;,&#x27;Laptop&#x27;,&#x27;Electronics&#x27;,1,65000,&#x27;Delivered&#x27;,true,&#x27;2024-01-01&#x27;,&#x27;2024-01-01 10:00:00&#x27;),<br/>(&#x27;Vivaan Patel&#x27;,&#x27;Mouse&#x27;,&#x27;Electronics&#x27;,2,800,&#x27;Delivered&#x27;,true,&#x27;2024-01-02&#x27;,&#x27;2024-01-02 11:00:00&#x27;),<br/>(&#x27;Aditya Verma&#x27;,&#x27;Keyboard&#x27;,&#x27;Electronics&#x27;,1,2500,&#x27;Cancelled&#x27;,false,&#x27;2024-01-03&#x27;,&#x27;2024-01-03 12:00:00&#x27;),<br/>(&#x27;Vihaan Mehta&#x27;,&#x27;Office Chair&#x27;,&#x27;Furniture&#x27;,1,12000,&#x27;Delivered&#x27;,true,&#x27;2024-01-04&#x27;,&#x27;2024-01-04 13:00:00&#x27;),<br/>(&#x27;Arjun Singh&#x27;,&#x27;Desk Lamp&#x27;,&#x27;Furniture&#x27;,2,1500,&#x27;Pending&#x27;,false,&#x27;2024-01-05&#x27;,&#x27;2024-01-05 14:00:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8182-a78f-e2bbd8959d3e" class="">(&#x27;Sai Reddy&#x27;,&#x27;Mobile Phone&#x27;,&#x27;Electronics&#x27;,1,22000,&#x27;Delivered&#x27;,true,&#x27;2024-01-06&#x27;,&#x27;2024-01-06 10:30:00&#x27;),<br/>(&#x27;Krishna Iyer&#x27;,&#x27;Headphones&#x27;,&#x27;Electronics&#x27;,1,3000,&#x27;Delivered&#x27;,true,&#x27;2024-01-07&#x27;,&#x27;2024-01-07 11:30:00&#x27;),<br/>(&#x27;Rohan Das&#x27;,&#x27;Backpack&#x27;,&#x27;Accessories&#x27;,1,1800,&#x27;Pending&#x27;,false,&#x27;2024-01-08&#x27;,&#x27;2024-01-08 12:30:00&#x27;),<br/>(&#x27;Ananya Gupta&#x27;,&#x27;Notebook&#x27;,&#x27;Stationery&#x27;,5,100,&#x27;Delivered&#x27;,true,&#x27;2024-01-09&#x27;,&#x27;2024-01-09 13:30:00&#x27;),<br/>(&#x27;Ishita Jain&#x27;,&#x27;Pen Set&#x27;,&#x27;Stationery&#x27;,3,250,&#x27;Delivered&#x27;,true,&#x27;2024-01-10&#x27;,&#x27;2024-01-10 14:30:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ea-8b59-cdddd51a06b5" class="">(&#x27;Neha Kapoor&#x27;,&#x27;Water Bottle&#x27;,&#x27;Accessories&#x27;,2,500,&#x27;Cancelled&#x27;,false,&#x27;2024-01-11&#x27;,&#x27;2024-01-11 10:00:00&#x27;),<br/>(&#x27;Pooja Malhotra&#x27;,&#x27;Monitor&#x27;,&#x27;Electronics&#x27;,1,14000,&#x27;Delivered&#x27;,true,&#x27;2024-01-12&#x27;,&#x27;2024-01-12 11:00:00&#x27;),<br/>(&#x27;Rahul Khanna&#x27;,&#x27;Keyboard&#x27;,&#x27;Electronics&#x27;,2,2600,&#x27;Delivered&#x27;,true,&#x27;2024-01-13&#x27;,&#x27;2024-01-13 12:00:00&#x27;),<br/>(&#x27;Kunal Bansal&#x27;,&#x27;Laptop Stand&#x27;,&#x27;Accessories&#x27;,1,1500,&#x27;Pending&#x27;,false,&#x27;2024-01-14&#x27;,&#x27;2024-01-14 13:00:00&#x27;),<br/>(&#x27;Amit Mishra&#x27;,&#x27;Router&#x27;,&#x27;Electronics&#x27;,1,3200,&#x27;Delivered&#x27;,true,&#x27;2024-01-15&#x27;,&#x27;2024-01-15 14:00:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810f-baf4-cd16d4a3e3c3" class="">(&#x27;Suresh Yadav&#x27;,&#x27;Tablet&#x27;,&#x27;Electronics&#x27;,1,18000,&#x27;Delivered&#x27;,true,&#x27;2024-01-16&#x27;,&#x27;2024-01-16 10:15:00&#x27;),<br/>(&#x27;Nikhil Arora&#x27;,&#x27;Desk&#x27;,&#x27;Furniture&#x27;,1,9000,&#x27;Delivered&#x27;,true,&#x27;2024-01-17&#x27;,&#x27;2024-01-17 11:15:00&#x27;),<br/>(&#x27;Deepak Chauhan&#x27;,&#x27;Mouse Pad&#x27;,&#x27;Accessories&#x27;,3,300,&#x27;Pending&#x27;,false,&#x27;2024-01-18&#x27;,&#x27;2024-01-18 12:15:00&#x27;),<br/>(&#x27;Manish Pandey&#x27;,&#x27;Notebook&#x27;,&#x27;Stationery&#x27;,10,90,&#x27;Delivered&#x27;,true,&#x27;2024-01-19&#x27;,&#x27;2024-01-19 13:15:00&#x27;),<br/>(&#x27;Sanjay Roy&#x27;,&#x27;Printer&#x27;,&#x27;Electronics&#x27;,1,11000,&#x27;Cancelled&#x27;,false,&#x27;2024-01-20&#x27;,&#x27;2024-01-20 14:15:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b2-99ab-d1025e8b17a6" class="">(&#x27;Ritika Sen&#x27;,&#x27;Webcam&#x27;,&#x27;Electronics&#x27;,1,4500,&#x27;Delivered&#x27;,true,&#x27;2024-01-21&#x27;,&#x27;2024-01-21 10:00:00&#x27;),<br/>(&#x27;Sneha Kulkarni&#x27;,&#x27;Desk Organizer&#x27;,&#x27;Furniture&#x27;,1,1200,&#x27;Delivered&#x27;,true,&#x27;2024-01-22&#x27;,&#x27;2024-01-22 11:00:00&#x27;),<br/>(&#x27;Pankaj Tiwari&#x27;,&#x27;Chair&#x27;,&#x27;Furniture&#x27;,2,6000,&#x27;Pending&#x27;,false,&#x27;2024-01-23&#x27;,&#x27;2024-01-23 12:00:00&#x27;),<br/>(&#x27;Ashish Goyal&#x27;,&#x27;Smart Watch&#x27;,&#x27;Electronics&#x27;,1,5500,&#x27;Delivered&#x27;,true,&#x27;2024-01-24&#x27;,&#x27;2024-01-24 13:00:00&#x27;),<br/>(&#x27;Vikas Saxena&#x27;,&#x27;Calculator&#x27;,&#x27;Stationery&#x27;,1,700,&#x27;Delivered&#x27;,true,&#x27;2024-01-25&#x27;,&#x27;2024-01-25 14:00:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8199-a47a-e5eaca1418c3" class="">(&#x27;Mehul Shah&#x27;,&#x27;Power Bank&#x27;,&#x27;Electronics&#x27;,1,2000,&#x27;Delivered&#x27;,true,&#x27;2024-01-26&#x27;,&#x27;2024-01-26 10:30:00&#x27;),<br/>(&#x27;Hardik Joshi&#x27;,&#x27;Tablet Cover&#x27;,&#x27;Accessories&#x27;,1,800,&#x27;Pending&#x27;,false,&#x27;2024-01-27&#x27;,&#x27;2024-01-27 11:30:00&#x27;),<br/>(&#x27;Pranav Kulkarni&#x27;,&#x27;Keyboard&#x27;,&#x27;Electronics&#x27;,1,2700,&#x27;Delivered&#x27;,true,&#x27;2024-01-28&#x27;,&#x27;2024-01-28 12:30:00&#x27;),<br/>(&#x27;Alok Tripathi&#x27;,&#x27;Laptop&#x27;,&#x27;Electronics&#x27;,1,70000,&#x27;Delivered&#x27;,true,&#x27;2024-01-29&#x27;,&#x27;2024-01-29 13:30:00&#x27;),<br/>(&#x27;Shubham Agarwal&#x27;,&#x27;Pen Drive&#x27;,&#x27;Accessories&#x27;,2,600,&#x27;Delivered&#x27;,true,&#x27;2024-01-30&#x27;,&#x27;2024-01-30 14:30:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-93dc-fc8b8274021d" class="">(&#x27;Ravi Prakash&#x27;,&#x27;Monitor&#x27;,&#x27;Electronics&#x27;,1,13000,&#x27;Pending&#x27;,false,&#x27;2024-02-01&#x27;,&#x27;2024-02-01 10:00:00&#x27;),<br/>(&#x27;Karthik Nair&#x27;,&#x27;Desk Lamp&#x27;,&#x27;Furniture&#x27;,1,1600,&#x27;Delivered&#x27;,true,&#x27;2024-02-02&#x27;,&#x27;2024-02-02 11:00:00&#x27;),<br/>(&#x27;Siddharth Rao&#x27;,&#x27;Notebook&#x27;,&#x27;Stationery&#x27;,6,95,&#x27;Delivered&#x27;,true,&#x27;2024-02-03&#x27;,&#x27;2024-02-03 12:00:00&#x27;),<br/>(&#x27;Varun Mallick&#x27;,&#x27;Mouse&#x27;,&#x27;Electronics&#x27;,1,750,&#x27;Cancelled&#x27;,false,&#x27;2024-02-04&#x27;,&#x27;2024-02-04 13:00:00&#x27;),<br/>(&#x27;Abhishek Soni&#x27;,&#x27;Laptop Stand&#x27;,&#x27;Accessories&#x27;,1,1400,&#x27;Delivered&#x27;,true,&#x27;2024-02-05&#x27;,&#x27;2024-02-05 14:00:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8163-9c1c-f2b333732399" class="">(&#x27;Mohit Chawla&#x27;,&#x27;Router&#x27;,&#x27;Electronics&#x27;,1,3500,&#x27;Delivered&#x27;,true,&#x27;2024-02-06&#x27;,&#x27;2024-02-06 10:30:00&#x27;),<br/>(&#x27;Tarun Bhatia&#x27;,&#x27;Desk&#x27;,&#x27;Furniture&#x27;,1,9500,&#x27;Delivered&#x27;,true,&#x27;2024-02-07&#x27;,&#x27;2024-02-07 11:30:00&#x27;),<br/>(&#x27;Naveen Khatri&#x27;,&#x27;Webcam&#x27;,&#x27;Electronics&#x27;,1,4800,&#x27;Pending&#x27;,false,&#x27;2024-02-08&#x27;,&#x27;2024-02-08 12:30:00&#x27;),<br/>(&#x27;Harsh Vardhan&#x27;,&#x27;Headphones&#x27;,&#x27;Electronics&#x27;,1,3200,&#x27;Delivered&#x27;,true,&#x27;2024-02-09&#x27;,&#x27;2024-02-09 13:30:00&#x27;),<br/>(&#x27;Yogesh Solanki&#x27;,&#x27;Office Chair&#x27;,&#x27;Furniture&#x27;,1,12500,&#x27;Delivered&#x27;,true,&#x27;2024-02-10&#x27;,&#x27;2024-02-10 14:30:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814f-aabd-dfaf088b8b50" class="">(&#x27;Aakash Tomar&#x27;,&#x27;Power Bank&#x27;,&#x27;Electronics&#x27;,2,2100,&#x27;Delivered&#x27;,true,&#x27;2024-02-11&#x27;,&#x27;2024-02-11 10:00:00&#x27;),<br/>(&#x27;Rohit Choudhary&#x27;,&#x27;Tablet&#x27;,&#x27;Electronics&#x27;,1,19000,&#x27;Pending&#x27;,false,&#x27;2024-02-12&#x27;,&#x27;2024-02-12 11:00:00&#x27;),<br/>(&#x27;Gaurav Bhatt&#x27;,&#x27;Printer&#x27;,&#x27;Electronics&#x27;,1,11500,&#x27;Delivered&#x27;,true,&#x27;2024-02-13&#x27;,&#x27;2024-02-13 12:00:00&#x27;),<br/>(&#x27;Sameer Sheikh&#x27;,&#x27;Desk Organizer&#x27;,&#x27;Furniture&#x27;,2,1300,&#x27;Delivered&#x27;,true,&#x27;2024-02-14&#x27;,&#x27;2024-02-14 13:00:00&#x27;),<br/>(&#x27;Imran Khan&#x27;,&#x27;Calculator&#x27;,&#x27;Stationery&#x27;,1,750,&#x27;Delivered&#x27;,true,&#x27;2024-02-15&#x27;,&#x27;2024-02-15 14:00:00&#x27;);</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e1-a817-f8b1b1b04eeb" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816c-8c61-ea8141057a0b" class="">Q1. Fetch all <strong>paid orders</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b4-b971-d805ddcd1256" class="">Q2. Show <strong>latest 5 orders</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8113-a3af-c753153468a6" class="">Q3. Get all <strong>Electronics orders</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816c-befc-d1a4dfea1cef" class="">Q4. List orders where <strong>quantity &gt; 1</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d8-9a27-fed46d467b95" class="">Q5. Show orders with <strong>price between 1000 and 5000</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b2-b171-d983bff86e78" class="">Q6. Fetch <strong>unique categories</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e6-a6c9-f08ca8164463" class="">Q7. Find <strong>cancelled orders</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8126-ab7f-dc6fbd504bfa" class="">Q8. Show customer name &amp; product for <strong>unpaid orders</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fc-a31d-cad7ff2c9020" class="">Q9. Get all orders from <strong>January 2024</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8158-b56e-db894a906569" class="">Q10. Sort orders by <strong>highest price first</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b2-b884-db0137962ea1" class="">Q11. Count total orders</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8127-9175-e121d078c1dd" class="">Q12. Count paid orders</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810c-88cf-e217ff8975e1" class="">Q13. Find total revenue from paid orders</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b7-baeb-d08791a8b0ce" class="">Q14. Find average order price</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8156-ac0c-e88394743c31" class="">Q15. Get highest priced order</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fa-a12a-ef111e95e3b7" class="">Q16. Get lowest priced order</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8154-80f4-fb3445170291" class="">Q17. Get all <strong>Furniture orders</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8156-acbf-ee00327124ec" class="">Q18. Get orders where product name contains <strong>“Laptop”</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8105-9d0d-c8f84c101960" class="">Q19. Get unpaid orders sorted by <strong>latest first</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ea-b1d2-df1ac73e3e53" class="">Q20. Soft-cancel an order (safe update)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-92b8-e2657b2b6ddd" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810a-b996-cb0c199a7056" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ab-8d85-f281fb94f89b" class="">CREATE TABLE attendance (<br/>id INT AUTO_INCREMENT PRIMARY KEY,<br/>student_name VARCHAR(100) NOT NULL,<br/>course VARCHAR(50) NOT NULL,<br/>attendance_date DATE NOT NULL,<br/>status VARCHAR(10),          -- Present / Absent<br/>is_late BOOLEAN DEFAULT false,<br/>created_at DATETIME<br/>);</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81af-b7c0-c17e8c6d7b30" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8188-b9f1-cddcb3417586" class="">INSERT INTO attendance<br/>(student_name, course, attendance_date, status, is_late, created_at)<br/>VALUES<br/>(&#x27;Aarav Sharma&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-01&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-01 09:05:00&#x27;),<br/>(&#x27;Vivaan Patel&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-01&#x27;,&#x27;Present&#x27;,true,&#x27;2024-01-01 09:12:00&#x27;),<br/>(&#x27;Aditya Verma&#x27;,&#x27;Data Science&#x27;,&#x27;2024-01-01&#x27;,&#x27;Absent&#x27;,false,&#x27;2024-01-01 09:00:00&#x27;),<br/>(&#x27;Vihaan Mehta&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-01&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-01 09:02:00&#x27;),<br/>(&#x27;Arjun Singh&#x27;,&#x27;Python&#x27;,&#x27;2024-01-01&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-01 09:01:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c9-aee0-daac7ed3921e" class="">(&#x27;Sai Reddy&#x27;,&#x27;Python&#x27;,&#x27;2024-01-02&#x27;,&#x27;Present&#x27;,true,&#x27;2024-01-02 09:10:00&#x27;),<br/>(&#x27;Krishna Iyer&#x27;,&#x27;Data Science&#x27;,&#x27;2024-01-02&#x27;,&#x27;Absent&#x27;,false,&#x27;2024-01-02 09:00:00&#x27;),<br/>(&#x27;Rohan Das&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-02&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-02 09:03:00&#x27;),<br/>(&#x27;Ananya Gupta&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-02&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-02 09:04:00&#x27;),<br/>(&#x27;Ishita Jain&#x27;,&#x27;Python&#x27;,&#x27;2024-01-02&#x27;,&#x27;Present&#x27;,true,&#x27;2024-01-02 09:15:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81df-8e75-e5e08ae2ca1e" class="">(&#x27;Neha Kapoor&#x27;,&#x27;Data Science&#x27;,&#x27;2024-01-03&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-03 09:01:00&#x27;),<br/>(&#x27;Pooja Malhotra&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-03&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-03 09:02:00&#x27;),<br/>(&#x27;Rahul Khanna&#x27;,&#x27;Python&#x27;,&#x27;2024-01-03&#x27;,&#x27;Absent&#x27;,false,&#x27;2024-01-03 09:00:00&#x27;),<br/>(&#x27;Kunal Bansal&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-03&#x27;,&#x27;Present&#x27;,true,&#x27;2024-01-03 09:18:00&#x27;),<br/>(&#x27;Amit Mishra&#x27;,&#x27;Data Science&#x27;,&#x27;2024-01-03&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-03 09:05:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-b2bc-e37f445dc047" class="">(&#x27;Suresh Yadav&#x27;,&#x27;Python&#x27;,&#x27;2024-01-04&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-04 09:01:00&#x27;),<br/>(&#x27;Nikhil Arora&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-04&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-04 09:02:00&#x27;),<br/>(&#x27;Deepak Chauhan&#x27;,&#x27;Data Science&#x27;,&#x27;2024-01-04&#x27;,&#x27;Absent&#x27;,false,&#x27;2024-01-04 09:00:00&#x27;),<br/>(&#x27;Manish Pandey&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-04&#x27;,&#x27;Present&#x27;,true,&#x27;2024-01-04 09:14:00&#x27;),<br/>(&#x27;Sanjay Roy&#x27;,&#x27;Python&#x27;,&#x27;2024-01-04&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-04 09:03:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d1-8226-ebff9bbab5c5" class="">(&#x27;Ritika Sen&#x27;,&#x27;Data Science&#x27;,&#x27;2024-01-05&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-05 09:02:00&#x27;),<br/>(&#x27;Sneha Kulkarni&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-05&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-05 09:01:00&#x27;),<br/>(&#x27;Pankaj Tiwari&#x27;,&#x27;Python&#x27;,&#x27;2024-01-05&#x27;,&#x27;Absent&#x27;,false,&#x27;2024-01-05 09:00:00&#x27;),<br/>(&#x27;Ashish Goyal&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-05&#x27;,&#x27;Present&#x27;,true,&#x27;2024-01-05 09:16:00&#x27;),<br/>(&#x27;Vikas Saxena&#x27;,&#x27;Data Science&#x27;,&#x27;2024-01-05&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-05 09:03:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d3-8b07-c6611294ec5d" class="">(&#x27;Mehul Shah&#x27;,&#x27;Python&#x27;,&#x27;2024-01-06&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-06 09:02:00&#x27;),<br/>(&#x27;Hardik Joshi&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-06&#x27;,&#x27;Present&#x27;,true,&#x27;2024-01-06 09:20:00&#x27;),<br/>(&#x27;Pranav Kulkarni&#x27;,&#x27;Data Science&#x27;,&#x27;2024-01-06&#x27;,&#x27;Absent&#x27;,false,&#x27;2024-01-06 09:00:00&#x27;),<br/>(&#x27;Alok Tripathi&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-06&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-06 09:01:00&#x27;),<br/>(&#x27;Shubham Agarwal&#x27;,&#x27;Python&#x27;,&#x27;2024-01-06&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-06 09:04:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814b-a444-d3770601d31e" class="">(&#x27;Ravi Prakash&#x27;,&#x27;Data Science&#x27;,&#x27;2024-01-07&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-07 09:02:00&#x27;),<br/>(&#x27;Karthik Nair&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-07&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-07 09:03:00&#x27;),<br/>(&#x27;Siddharth Rao&#x27;,&#x27;Python&#x27;,&#x27;2024-01-07&#x27;,&#x27;Absent&#x27;,false,&#x27;2024-01-07 09:00:00&#x27;),<br/>(&#x27;Varun Mallick&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-07&#x27;,&#x27;Present&#x27;,true,&#x27;2024-01-07 09:19:00&#x27;),<br/>(&#x27;Abhishek Soni&#x27;,&#x27;Data Science&#x27;,&#x27;2024-01-07&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-07 09:05:00&#x27;),</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b1-8b1d-db368e4de790" class="">(&#x27;Mohit Chawla&#x27;,&#x27;Python&#x27;,&#x27;2024-01-08&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-08 09:02:00&#x27;),<br/>(&#x27;Tarun Bhatia&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-08&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-08 09:01:00&#x27;),<br/>(&#x27;Naveen Khatri&#x27;,&#x27;Data Science&#x27;,&#x27;2024-01-08&#x27;,&#x27;Absent&#x27;,false,&#x27;2024-01-08 09:00:00&#x27;),<br/>(&#x27;Harsh Vardhan&#x27;,&#x27;Web Development&#x27;,&#x27;2024-01-08&#x27;,&#x27;Present&#x27;,true,&#x27;2024-01-08 09:17:00&#x27;),<br/>(&#x27;Yogesh Solanki&#x27;,&#x27;Python&#x27;,&#x27;2024-01-08&#x27;,&#x27;Present&#x27;,false,&#x27;2024-01-08 09:03:00&#x27;);</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8174-9ed6-ee594bc29252" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8196-83b5-ef1bdc71ae80" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a1-b805-c8e458e12f04" class="">Q1. Fetch all <strong>present students</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8101-8ce1-e6df3254c5c0" class="">Q2. Fetch all <strong>absent students</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816d-a492-cff6acdae189" class="">Q3. Get attendance of <strong>Web Development</strong> course</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a5-9c7e-c2fb315c9210" class="">Q4. Show students who came <strong>late</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a4-a683-ffa88f147824" class="">Q5. Get attendance for <strong>2024-01-05</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d5-88b6-fa914e35ff47" class="">Q6. List <strong>unique courses</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c1-81f6-eb6ca219cfcd" class="">Q7. Show <strong>present but late</strong> students</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8146-9ddb-d109d76942fc" class="">Q8. Show student names &amp; course for <strong>absent records</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8168-a4f3-c1c7f156f9a3" class="">Q9. Get records ordered by <strong>latest entry first</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81cb-9380-e8357614ea3e" class="">Q10. Get <strong>first 5 attendance records</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812f-9472-eabfdf6bca93" class="">Q11. Count <strong>total attendance records</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8184-84d5-d9e238a00370" class="">Q12. Count <strong>present students</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8143-82b9-d33df62ab448" class="">Q13. Count <strong>absent students</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815c-82bc-f6d9d7b1a0fa" class="">Q14. Count students who came <strong>late</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8128-b9e3-c978446abcc6" class="">Q15. Count attendance for <strong>Python course</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810f-a98b-f752148afac6" class="">Q16. Fetch attendance between <strong>two dates</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8128-bcff-c7c986583d1e" class="">Q17. Find students whose name starts with <strong>A</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8153-bfba-e14818cb8071" class="">Q18. Get <strong>latest present students</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b1-8c8d-e01d0cd331a7" class="">Q19. Fetch records where course is <strong>Web Development or Python</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8163-8efb-deba8cbfdaab" class="">Q20. Mark a student as <strong>Absent (Safe Update)</strong></h3></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

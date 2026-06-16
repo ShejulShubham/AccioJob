@@ -1,0 +1,778 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>DOM Basics Exercises</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-81de-97b4-c452b221e3ab" class="page sans"><header><h1 class="page-title" dir="auto">DOM Basics Exercises</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8196-814c-c18732ec39b1" class="">🧪 <strong>Exercise 1: Highlight Active Navigation Tab</strong></h2></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8199-b461-c6eb4c2f2e80"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ea-9644-f0cc82d7db61" class="">🎯 <strong>Task:</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-bb99-ebbb05ab8370" class="">You are building a <strong>navbar</strong> for a personal portfolio website. When the page loads, the &quot;Home&quot; tab should appear highlighted to indicate that it is the active page.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8172-acd3-d7e461f88330"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ac-93a1-d82690b0110e" class="">🧾 <strong>Instructions:</strong></h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8160-b933-e0eea4d1973d" class="bulleted-list"><li style="list-style-type:disc">Select the <code>&lt;li&gt;</code> element with <code>id=&quot;home-tab&quot;</code> using a DOM selector.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8140-b426-e7049afb18c1" class="bulleted-list"><li style="list-style-type:disc">Add a CSS class called <code>&quot;active-tab&quot;</code> to that element using <code>classList.add()</code>.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8176-9e08-ebdbc6971379" class="">This class will be used to visually highlight the active tab.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a0-af44-eba1c1ac976d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a3-8f4a-f0726636d2e9" class="">🧱 <strong>Initial HTML Code:</strong></h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2df155e4-633e-81e4-831f-d88a29a6056f" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;ul id=&quot;navbar&quot;&gt;
+  &lt;li id=&quot;home-tab&quot;&gt;Home&lt;/li&gt;
+  &lt;li&gt;About&lt;/li&gt;
+  &lt;li&gt;Projects&lt;/li&gt;
+  &lt;li&gt;Contact&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8129-bf74-c811bb50f467"/></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8125-a83d-c23a87a1ad21"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bc-b0f5-d4b6d9cf6492" class="">🎨 <strong>CSS for Styling (Just for Visualization):</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8177-99c2-d0e1be5e1b78" class="code code-wrap"><code class="language-css" style="white-space:pre-wrap;word-break:break-all">.active-tab {
+  font-weight: bold;
+  color: royalblue;
+  text-decoration: underline;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8123-aae1-f9412d4be984" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8139-ace7-d7366ec31f34" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-812a-babd-f593d8b224f4" class="">🧪 <strong>Exercise 2: Add Testimonial Section Dynamically</strong></h2></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818b-b14c-c7efdf5da4bc"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8137-bb72-f84a381e287c" class="">🎯 <strong>Task:</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f0-95e4-c843232aaaee" class="">You&#x27;re building a <strong>landing page</strong> for a product. The testimonial section should be created and added dynamically using JavaScript when the page loads.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8192-b30d-e5226b92701a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814b-af1b-cd2542b045a6" class="">🧾 <strong>Instructions:</strong></h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813d-9d30-edac988425d2" class="bulleted-list"><li style="list-style-type:disc">Use <code>createElement()</code> to create a new <code>&lt;p&gt;</code> element.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81df-8fb2-f2786e6b6a2f" class="bulleted-list"><li style="list-style-type:disc">Use <code>textContent</code> to add this text:<div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-be0c-c29ceb234e58" class=""><code>&quot;This product changed my life!&quot;</code></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812b-8e04-c7321b7e5d4d" class="bulleted-list"><li style="list-style-type:disc">Use <code>appendChild()</code> to add this <code>&lt;p&gt;</code> inside the existing <code>&lt;div id=&quot;testimonials&quot;&gt;</code>.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8104-9e84-c523dcf4e33e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8154-89f0-ea2f2f00b320" class="">🧱 <strong>Initial HTML Code:</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81cf-8679-c52c3511508c" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;div id=&quot;testimonials&quot;&gt;
+  &lt;h2&gt;What Our Users Say&lt;/h2&gt;
+&lt;/div&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8153-93bc-ca8452b040b9"/></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8115-b1ae-d29284602254" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8196-940f-c57c9cbd025c" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8185-b7ef-f0b2b5201493" class="">🧪 <strong>Exercise 3: Update Hero Section Title and Style on Button Click</strong></h2></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81da-80db-cb4cfb8d0c6b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811c-810f-cea05128b6b2" class="">🎯 <strong>Task:</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-b700-f61f34c4e82f" class="">You&#x27;re working on the <strong>hero section</strong> of a portfolio homepage. When a user clicks a button, the main title should update and get visually highlighted.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81bd-b473-ca565edea919"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8141-bb0f-e4ecb78ad696" class="">🧾 <strong>Instructions:</strong></h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8173-9a81-f4a54f9616b8" class="bulleted-list"><li style="list-style-type:disc">Use <code>getElementById()</code> or <code>querySelector()</code> to select the <code>&lt;h1 id=&quot;hero-title&quot;&gt;</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8145-a261-dfbddd49578f" class="bulleted-list"><li style="list-style-type:disc">When the user clicks the button:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d5-8af9-cb409d86f016" class="bulleted-list"><li style="list-style-type:circle">Change the text to <code>&quot;Welcome to My Portfolio&quot;</code> using <code>textContent</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81aa-99c5-e50e32be1a64" class="bulleted-list"><li style="list-style-type:circle">Add a class <code>&quot;highlight&quot;</code> to the <code>&lt;h1&gt;</code> using <code>classList.add()</code>.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818c-a95b-cbd5a30fefcf"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f3-b155-f068dfea57da" class="">🧱 <strong>Initial HTML Code:</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818e-95d4-f0436c6e5932" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;section id=&quot;hero&quot;&gt;
+  &lt;h1 id=&quot;hero-title&quot;&gt;Hello World!&lt;/h1&gt;
+  &lt;button id=&quot;update-btn&quot;&gt;Update Title&lt;/button&gt;
+&lt;/section&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8194-aefb-c65075d57fc0"/></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8199-adc4-f0b7f45f0a46"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81db-a4fc-f432751645c4" class="">🎨 <strong>Optional CSS for </strong><code><strong>.highlight</strong></code><strong>:</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d7-ae3c-c3ad74a1048d" class="code code-wrap"><code class="language-css" style="white-space:pre-wrap;word-break:break-all">.highlight {
+  color: #007bff;
+  font-size: 2.5rem;
+  transition: 0.3s ease;
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8110-acd1-fa4859de0143" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c1-b43f-e6c4673ceeaf" class="">🧪 <strong>Exercise 4: Add and Remove Newsletter Pop-up</strong></h2></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814f-9cea-deb84d1fc3f6"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8167-87ed-e5b4bec5bb7b" class="">🎯 <strong>Task:</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819a-8e28-eb5e42f231d3" class="">On your blog website, a <strong>newsletter pop-up</strong> should appear when the user clicks the “Show Newsletter” button, and disappear when they click “Close”.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81cd-9b95-e1223d9a7934"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8179-895d-dfef3a7ac4a1" class="">🧾 <strong>Instructions:</strong></h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b2-8517-c64a6ba8514e" class="bulleted-list"><li style="list-style-type:disc">When the <strong>&quot;Show Newsletter&quot;</strong> button is clicked:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ca-9ec2-e20f662b897d" class="bulleted-list"><li style="list-style-type:circle">Use <code>createElement()</code> to create a <code>&lt;div&gt;</code> with text: <code>&quot;Subscribe to our Newsletter&quot;</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8106-9017-c8325556c66d" class="bulleted-list"><li style="list-style-type:circle">Give it an <code>id=&quot;newsletter&quot;</code> and add it to <code>&lt;body&gt;</code> using <code>appendChild()</code>.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811f-99b0-da1c23f91745" class="bulleted-list"><li style="list-style-type:disc">When the <strong>&quot;Close&quot;</strong> button is clicked:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8134-b16d-f166622a68e4" class="bulleted-list"><li style="list-style-type:circle">Use <code>getElementById()</code> and <code>removeChild()</code> to remove the newsletter popup from the DOM.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a7-8ee0-d76550715c2f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8146-bdb7-c8370690d2a9" class="">🧱 <strong>Initial HTML Code:</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8109-8cf7-cc2528fd6a16" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;button id=&quot;show-btn&quot;&gt;Show Newsletter&lt;/button&gt;
+&lt;button id=&quot;close-btn&quot;&gt;Close&lt;/button&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b5-90b0-eecf47054836"/></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-bbff-dca670407b48" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8153-846f-daa263c874d8" class="">🧪 <strong>Exercise 5: Toggle Dark Theme on Button Click</strong></h2></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e4-b415-cd8ff5dafbce"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f7-947a-c6619cd01c2f" class="">🎯 <strong>Task:</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-b3fe-de9ccd2d2038" class="">You’re building a <strong>dashboard or portfolio site</strong> that supports light and dark themes. When the user clicks the “Toggle Theme” button, the <code>dark-theme</code> class should be toggled on the <code>&lt;body&gt;</code> element.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8187-a796-e0a43d46bc01"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8132-b2b4-eaee6c23b6db" class="">🧾 <strong>Instructions:</strong></h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8199-9e14-cda6ccd272a6" class="bulleted-list"><li style="list-style-type:disc">Select the <code>&lt;body&gt;</code> element.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8176-9261-dd7ac8652179" class="bulleted-list"><li style="list-style-type:disc">When the button is clicked:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8182-8f09-cce3759c8210" class="bulleted-list"><li style="list-style-type:circle">Use <code>classList.toggle()</code> to add or remove the <code>&quot;dark-theme&quot;</code> class on <code>&lt;body&gt;</code>.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b3-9490-d91415846e02"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813f-af81-e52d876c5cd7" class="">🧱 <strong>Initial HTML Code:</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-813d-b099-d99ba9b2f4e9" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;button id=&quot;theme-toggle-btn&quot;&gt;Toggle Theme&lt;/button&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814b-b158-d7829e46ca9e"/></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c0-ae99-e5c840e5dd33"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b9-8110-e4d893b29820" class="">🎨 <strong>Optional CSS for </strong><code><strong>.dark-theme</strong></code><strong>:</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e9-82f7-c9107998dcce" class="code code-wrap"><code class="language-css" style="white-space:pre-wrap;word-break:break-all">.dark-theme {
+  background-color: #121212;
+  color: #ffffff;
+}
+</code></pre></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

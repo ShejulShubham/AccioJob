@@ -1,0 +1,1311 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CSS Grid Exercises</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-814b-98ee-e38611a59a70" class="page sans"><header><h1 class="page-title" dir="auto">CSS Grid Exercises</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8177-b5da-fb2e204eeb93" class=""><strong>Exercise 1 - Feature Cards Row (Landing Page Strip)</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819e-8f6e-dfc04fc9620c" class="">Goal: Build a reusable <strong>feature cards</strong> strip for a landing page using <strong>CSS Grid</strong> on the container. Keep it clean.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81af-a680-d8ee654d4f74"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81da-bc09-ea262ee95409" class=""><strong>Starter HTML (copy-paste)</strong></h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2df155e4-633e-8187-831d-d252569fdd4b" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
+  &lt;title&gt;Exercise 1 — Feature Cards Row&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;section class=&quot;section&quot; id=&quot;features-section&quot;&gt;
+    &lt;header class=&quot;section-header&quot;&gt;
+      &lt;h2 class=&quot;section-title&quot;&gt;Why Choose Us&lt;/h2&gt;
+      &lt;p class=&quot;section-subtitle&quot;&gt;Three core reasons teams trust our product.&lt;/p&gt;
+    &lt;/header&gt;
+
+    &lt;div class=&quot;feature-strip&quot; id=&quot;feature-strip&quot;&gt;
+      &lt;article class=&quot;card feature-card&quot; id=&quot;feature-1&quot;&gt;
+        &lt;div class=&quot;icon feature-icon&quot; aria-hidden=&quot;true&quot;&gt;⚡&lt;/div&gt;
+        &lt;h3 class=&quot;card-title&quot;&gt;Fast Performance&lt;/h3&gt;
+        &lt;p class=&quot;card-desc&quot;&gt;
+          Optimized loads and smooth interactions for every user.
+        &lt;/p&gt;
+        &lt;a class=&quot;card-cta&quot; href=&quot;#&quot; aria-label=&quot;Learn about performance&quot;&gt;Learn more →&lt;/a&gt;
+      &lt;/article&gt;
+
+      &lt;article class=&quot;card feature-card&quot; id=&quot;feature-2&quot;&gt;
+        &lt;div class=&quot;icon feature-icon&quot; aria-hidden=&quot;true&quot;&gt;🔒&lt;/div&gt;
+        &lt;h3 class=&quot;card-title&quot;&gt;Secure by Default&lt;/h3&gt;
+        &lt;p class=&quot;card-desc&quot;&gt;
+          Best practices baked in: encryption and safe defaults.
+        &lt;/p&gt;
+        &lt;a class=&quot;card-cta&quot; href=&quot;#&quot; aria-label=&quot;Learn about security&quot;&gt;Learn more →&lt;/a&gt;
+      &lt;/article&gt;
+
+      &lt;article class=&quot;card feature-card&quot; id=&quot;feature-3&quot;&gt;
+        &lt;div class=&quot;icon feature-icon&quot; aria-hidden=&quot;true&quot;&gt;🧩&lt;/div&gt;
+        &lt;h3 class=&quot;card-title&quot;&gt;Easy Integration&lt;/h3&gt;
+        &lt;p class=&quot;card-desc&quot;&gt;
+          Plug into your existing tools with minimal setup.
+        &lt;/p&gt;
+        &lt;a class=&quot;card-cta&quot; href=&quot;#&quot; aria-label=&quot;Learn about integrations&quot;&gt;Learn more →&lt;/a&gt;
+      &lt;/article&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a4-a467-f510e3178d3f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e5-bd79-f2ba2b1f664b" class=""><strong>Starter CSS (copy-paste)</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819d-a2bf-f56afb2b5f18" class="">Grid-specific properties are left as <strong>TODOs</strong> (fill them in).</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815e-98cb-f72f6dd7e6d7" class="code code-wrap"><code class="language-css" style="white-space:pre-wrap;word-break:break-all">/* --------- Base &amp; Layout (already done for you) --------- */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #111827;
+  background: #f8fafc;
+}
+
+.section {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  margin: 0 0 6px;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  margin: 0;
+  color: #6b7280;
+}
+
+/* --------- Feature Strip (make this a Grid) --------- */
+.feature-strip {
+  /* TODO: Turn this into a grid container */
+  /* TODO: Create 3 equal-width columns using fr units */
+  /* TODO: Add consistent spacing between cards */
+  /* TODO: Align items neatly */
+}
+
+/* --------- Card (visual styling only) --------- */
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.04);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #eef2ff;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.card-title {
+  margin: 0 0 6px;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.card-desc {
+  margin: 0 0 10px;
+  color: #4b5563;
+}
+
+.card-cta {
+  display: inline-block;
+  text-decoration: none;
+  color: #111827;
+  font-weight: 600;
+  border-bottom: 1px solid transparent;
+}
+.card-cta:hover {
+  border-bottom-color: #111827;
+}
+
+/* --------- Optional helper (not grid) --------- */
+@media (max-width: 720px) {
+  .section-title { font-size: 24px; }
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8148-a1ce-e2447f0ee51e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-80ee-fe710f319dc9" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815c-8b3d-ec73ee67d72d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814f-aecc-f59a34762058" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-9cf2-cacbb882ec98" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8190-a2eb-e74414414561" class=""><strong>Exercise 2 - App Layout Scaffold (Header / Sidebar / Content / Footer)</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d0-9728-d32114bf14b1" class="">Goal: Create a clean, reusable <strong>application layout</strong> using <strong>CSS Grid + named areas</strong>. This is a common scaffold for dashboards, docs, and admin panels.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810f-8934-d18a394d2ac8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8132-aec4-fcc437551c0a" class="">Starter HTML (copy-paste)</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81bd-b4c2-fa786618176f" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
+  &lt;title&gt;Exercise 2 — App Layout Scaffold&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;section class=&quot;app&quot; id=&quot;app-layout&quot;&gt;
+    &lt;header class=&quot;hd&quot; id=&quot;app-header&quot;&gt;Header — Brand / Search / User&lt;/header&gt;
+    &lt;aside class=&quot;sb&quot; id=&quot;app-sidebar&quot;&gt;
+      &lt;nav&gt;
+        &lt;ul class=&quot;nav&quot;&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Dashboard&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Projects&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Teams&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Settings&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/nav&gt;
+    &lt;/aside&gt;
+    &lt;main class=&quot;main&quot; id=&quot;app-main&quot;&gt;
+      &lt;article class=&quot;card&quot;&gt;
+        &lt;h2&gt;Welcome&lt;/h2&gt;
+        &lt;p&gt;This is your main content area. Add widgets, charts, or documents here.&lt;/p&gt;
+      &lt;/article&gt;
+      &lt;article class=&quot;card&quot;&gt;
+        &lt;h3&gt;Updates&lt;/h3&gt;
+        &lt;p&gt;Recent activity will appear in this section.&lt;/p&gt;
+      &lt;/article&gt;
+    &lt;/main&gt;
+    &lt;footer class=&quot;ft&quot; id=&quot;app-footer&quot;&gt;© 2025 Your Company&lt;/footer&gt;
+  &lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81dc-a30d-faf171407f69"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8134-a4ff-d8b841feadbe" class="">Starter CSS (copy-paste)</h3></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-811e-9f61-feea8cbd6fbd" class="">All Grid-specific properties are left as TODOs. Fill them in to complete the layout.</blockquote></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-814c-9bbc-d05aa6525a1a" class="code code-wrap"><code class="language-css" style="white-space:pre-wrap;word-break:break-all">/* ---------- Base styling (already done for you) ---------- */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #111827;
+  background: #f8fafc;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 16px;
+  min-height: 70vh;
+
+  /* TODO: Make this a grid container */
+  /* e.g., display: grid; */
+
+  /* TODO: Define two columns (fixed sidebar + fluid content) */
+  /* e.g., grid-template-columns: 220px 1fr; */
+
+  /* TODO: Define three rows (header, content area, footer) */
+  /* e.g., grid-template-rows: 60px 1fr 50px; */
+
+  /* TODO: Create named areas for header, sidebar, main, footer */
+  /* e.g., grid-template-areas: &quot;hd hd&quot; &quot;sb main&quot; &quot;ft ft&quot;; */
+
+  /* Optional spacing between regions */
+  /* e.g., gap: 12px; */
+}
+
+/* Assign elements to their grid areas (leave as TODOs) */
+.hd {
+  /* TODO: place header into named area */
+  /* e.g., grid-area: hd; */
+
+  background: #111827; color: #fff; border-radius: 10px;
+  display: grid; place-items: center; padding: 0 12px;
+}
+.sb {
+  /* TODO: place sidebar into named area */
+  /* e.g., grid-area: sb; */
+
+  background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px;
+  padding: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.04);
+}
+.main {
+  /* TODO: place main into named area */
+  /* e.g., grid-area: main; */
+
+  display: grid;
+  /* Optional: internal grid to stack cards nicely */
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.ft {
+  /* TODO: place footer into named area */
+  /* e.g., grid-area: ft; */
+
+  background: #eef2f7; border-radius: 10px;
+  display: grid; place-items: center; color: #334155;
+}
+
+/* Helpers */
+.nav { list-style: none; padding: 0; margin: 0; }
+.nav li { margin: 6px 0; }
+.nav a { text-decoration: none; color: #111827; }
+.nav a:hover { text-decoration: underline; }
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.04);
+}
+.card h2, .card h3 { margin: 0 0 8px; }
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cd-885a-c8a2e729e241" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b1-9cfc-e73eaae32288" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a0-bf5c-c19a0ec2618e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8192-995b-f9270decde97" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-a98e-db3a23265430" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8147-bb53-fc634dd2db79" class=""><strong>Exercise 3 - Blog Cards Grid (Marketing/News Section)</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d1-ac70-d976e26198c8" class="">Goal: Build a <strong>blog cards grid</strong> for a homepage/news page using <strong>CSS Grid</strong> on the wrapper. Keep it simple, clean, and reusable.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819e-bc15-c97742cfe468"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f7-a77c-e98a72b573c7" class="">Starter HTML (copy-paste)</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-813f-b75e-f831a968e5c9" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
+  &lt;title&gt;Exercise 3 — Blog Cards Grid&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;section class=&quot;section&quot; id=&quot;blog-section&quot;&gt;
+    &lt;header class=&quot;section-header&quot;&gt;
+      &lt;h2 class=&quot;section-title&quot;&gt;Latest from the Blog&lt;/h2&gt;
+      &lt;p class=&quot;section-subtitle&quot;&gt;Insights, tutorials, and product updates.&lt;/p&gt;
+    &lt;/header&gt;
+
+    &lt;div class=&quot;blog-grid&quot; id=&quot;blog-grid&quot;&gt;
+      &lt;!-- Featured card (should span wider on desktop) --&gt;
+      &lt;article class=&quot;card blog-card featured&quot; id=&quot;post-0&quot;&gt;
+        &lt;img class=&quot;card-img&quot; src=&quot;https://picsum.photos/800/420?blog0&quot; alt=&quot;Cover&quot; /&gt;
+        &lt;div class=&quot;card-body&quot;&gt;
+          &lt;h3 class=&quot;card-title&quot;&gt;Launching Our New Design System&lt;/h3&gt;
+          &lt;p class=&quot;card-excerpt&quot;&gt;A closer look at the principles and patterns that power our UI across web and mobile.&lt;/p&gt;
+          &lt;div class=&quot;meta-row&quot;&gt;
+            &lt;span class=&quot;meta&quot;&gt;Design&lt;/span&gt;
+            &lt;a class=&quot;read-more&quot; href=&quot;#&quot;&gt;Read →&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/article&gt;
+
+      &lt;!-- Regular cards --&gt;
+      &lt;article class=&quot;card blog-card&quot; id=&quot;post-1&quot;&gt;
+        &lt;img class=&quot;card-img&quot; src=&quot;https://picsum.photos/800/420?blog1&quot; alt=&quot;Cover&quot; /&gt;
+        &lt;div class=&quot;card-body&quot;&gt;
+          &lt;h3 class=&quot;card-title&quot;&gt;Optimizing Bundle Size&lt;/h3&gt;
+          &lt;p class=&quot;card-excerpt&quot;&gt;Practical strategies to cut JS bloat without sacrificing features.&lt;/p&gt;
+          &lt;div class=&quot;meta-row&quot;&gt;
+            &lt;span class=&quot;meta&quot;&gt;Engineering&lt;/span&gt;
+            &lt;a class=&quot;read-more&quot; href=&quot;#&quot;&gt;Read →&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/article&gt;
+
+      &lt;article class=&quot;card blog-card&quot; id=&quot;post-2&quot;&gt;
+        &lt;img class=&quot;card-img&quot; src=&quot;https://picsum.photos/800/420?blog2&quot; alt=&quot;Cover&quot; /&gt;
+        &lt;div class=&quot;card-body&quot;&gt;
+          &lt;h3 class=&quot;card-title&quot;&gt;Behind the Scenes: Uptime&lt;/h3&gt;
+          &lt;p class=&quot;card-excerpt&quot;&gt;How we monitor, alert, and respond to keep things running.&lt;/p&gt;
+          &lt;div class=&quot;meta-row&quot;&gt;
+            &lt;span class=&quot;meta&quot;&gt;Ops&lt;/span&gt;
+            &lt;a class=&quot;read-more&quot; href=&quot;#&quot;&gt;Read →&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/article&gt;
+
+      &lt;article class=&quot;card blog-card&quot; id=&quot;post-3&quot;&gt;
+        &lt;img class=&quot;card-img&quot; src=&quot;https://picsum.photos/800/420?blog3&quot; alt=&quot;Cover&quot; /&gt;
+        &lt;div class=&quot;card-body&quot;&gt;
+          &lt;h3 class=&quot;card-title&quot;&gt;Writing Accessible Components&lt;/h3&gt;
+          &lt;p class=&quot;card-excerpt&quot;&gt;ARIA, focus management, and keyboard UX—made approachable.&lt;/p&gt;
+          &lt;div class=&quot;meta-row&quot;&gt;
+            &lt;span class=&quot;meta&quot;&gt;Accessibility&lt;/span&gt;
+            &lt;a class=&quot;read-more&quot; href=&quot;#&quot;&gt;Read →&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/article&gt;
+
+      &lt;article class=&quot;card blog-card&quot; id=&quot;post-4&quot;&gt;
+        &lt;img class=&quot;card-img&quot; src=&quot;https://picsum.photos/800/420?blog4&quot; alt=&quot;Cover&quot; /&gt;
+        &lt;div class=&quot;card-body&quot;&gt;
+          &lt;h3 class=&quot;card-title&quot;&gt;Product Roadmap: Q4&lt;/h3&gt;
+          &lt;p class=&quot;card-excerpt&quot;&gt;What we’re building next and why it matters.&lt;/p&gt;
+          &lt;div class=&quot;meta-row&quot;&gt;
+            &lt;span class=&quot;meta&quot;&gt;Product&lt;/span&gt;
+            &lt;a class=&quot;read-more&quot; href=&quot;#&quot;&gt;Read →&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/article&gt;
+
+      &lt;article class=&quot;card blog-card&quot; id=&quot;post-5&quot;&gt;
+        &lt;img class=&quot;card-img&quot; src=&quot;https://picsum.photos/800/420?blog5&quot; alt=&quot;Cover&quot; /&gt;
+        &lt;div class=&quot;card-body&quot;&gt;
+          &lt;h3 class=&quot;card-title&quot;&gt;Customer Story: Team Nova&lt;/h3&gt;
+          &lt;p class=&quot;card-excerpt&quot;&gt;How a fast-growing startup scaled workflows with our platform.&lt;/p&gt;
+          &lt;div class=&quot;meta-row&quot;&gt;
+            &lt;span class=&quot;meta&quot;&gt;Case Study&lt;/span&gt;
+            &lt;a class=&quot;read-more&quot; href=&quot;#&quot;&gt;Read →&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/article&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8112-9820-c887512fa6c8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8125-81f1-cfafc4ea0234" class="">Starter CSS (copy-paste)</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d1-9c7d-ed733f890b80" class="code code-wrap"><code class="language-css" style="white-space:pre-wrap;word-break:break-all">/* ---- Base &amp; Type ---- */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #111827; background: #f8fafc;
+}
+.section { max-width: 1100px; margin: 40px auto; padding: 0 16px; }
+.section-header { text-align: center; margin-bottom: 20px; }
+.section-title { margin: 0 0 6px; font-size: 28px; line-height: 1.2; }
+.section-subtitle { margin: 0; color: #6b7280; }
+
+/* ---- Blog Grid (make this a Grid) ---- */
+.blog-grid {
+  /* TODO: enable grid */
+  /* e.g., display: grid; */
+
+  /* TODO: create columns for desktop (e.g., 3 columns) */
+  /* e.g., grid-template-columns: repeat(3, 1fr); */
+
+  /* TODO: add gaps between cards */
+  /* e.g., gap: 16px; */
+
+  /* TODO: align cards cleanly inside their cells */
+  /* e.g., justify-items: stretch; align-items: start; */
+}
+
+/* ---- Featured card span (desktop) ---- */
+.featured {
+  /* TODO: make this featured card span across columns */
+  /* e.g., grid-column: 1 / 3; */
+}
+
+/* ---- Card styling (visual only) ---- */
+.card {
+  background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px;
+  overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.04);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
+
+.card-img { width: 100%; height: 180px; object-fit: cover; display: block; }
+.card-body { padding: 14px; display: grid; gap: 8px; }
+.card-title { margin: 0; font-size: 18px; line-height: 1.3; }
+.card-excerpt { margin: 0; color: #4b5563; }
+
+.meta-row {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 8px; margin-top: 2px;
+}
+.meta {
+  background: #eef2ff; color: #3730a3; padding: 4px 8px; border-radius: 999px;
+  font-size: 12px; font-weight: 600;
+}
+.read-more { text-decoration: none; color: #111827; font-weight: 600; }
+.read-more:hover { text-decoration: underline; }
+
+/* ---- Simple responsiveness without minmax/auto-fit ---- */
+@media (max-width: 980px) {
+  /* TODO: reduce columns for tablet (e.g., 2 columns) */
+  /* e.g., .blog-grid { grid-template-columns: repeat(2, 1fr); } */
+
+  /* TODO: update featured span for 2-column layout */
+  /* e.g., .featured { grid-column: 1 / 3; } */
+}
+@media (max-width: 640px) {
+  /* TODO: single column on mobile */
+  /* e.g., .blog-grid { grid-template-columns: 1fr; } */
+
+  /* Optional: featured naturally becomes 1 column wide */
+  /* e.g., .featured { grid-column: auto; } */
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ef-a60e-f6a5582667d3" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-84e7-c295acd72c51" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8180-865b-de033f536477" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817a-8993-f3ced5ec35e1" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812f-9c96-e403afa196df" class=""><strong>Exercise 4 - Pricing Table (3 Plans)</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ea-b9bb-d7dceacb7c92" class="">Goal: Build a clean <strong>pricing table</strong> layout for a product/site using <strong>CSS Grid</strong> on the wrapper. Keep it simple, reusable.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811e-a94f-ed9584c8277b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fa-82ba-d1563bb97e03" class="">Starter HTML (copy–paste)</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-817c-a312-d2d15fca4722" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
+  &lt;title&gt;Exercise 4 — Pricing Table&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;section class=&quot;section&quot; id=&quot;pricing&quot;&gt;
+    &lt;header class=&quot;section-header&quot;&gt;
+      &lt;h2 class=&quot;section-title&quot;&gt;Simple, Transparent Pricing&lt;/h2&gt;
+      &lt;p class=&quot;section-subtitle&quot;&gt;Choose the plan that fits your team today.&lt;/p&gt;
+    &lt;/header&gt;
+
+    &lt;div class=&quot;pricing-grid&quot; id=&quot;pricing-grid&quot;&gt;
+      &lt;!-- Plan 1 --&gt;
+      &lt;article class=&quot;plan&quot;&gt;
+        &lt;header class=&quot;plan-head&quot;&gt;
+          &lt;h3 class=&quot;plan-name&quot;&gt;Basic&lt;/h3&gt;
+          &lt;p class=&quot;plan-tagline&quot;&gt;For individual projects&lt;/p&gt;
+        &lt;/header&gt;
+        &lt;div class=&quot;plan-price&quot;&gt;
+          &lt;span class=&quot;currency&quot;&gt;₹&lt;/span&gt;&lt;span class=&quot;amount&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;cycle&quot;&gt;/mo&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;ul class=&quot;plan-features&quot;&gt;
+          &lt;li&gt;1 project&lt;/li&gt;
+          &lt;li&gt;Community support&lt;/li&gt;
+          &lt;li&gt;Basic analytics&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;a href=&quot;#&quot; class=&quot;plan-cta&quot; aria-label=&quot;Choose Basic plan&quot;&gt;Get Started&lt;/a&gt;
+      &lt;/article&gt;
+
+      &lt;!-- Plan 2 (recommended) --&gt;
+      &lt;article class=&quot;plan plan--featured&quot; aria-label=&quot;Recommended plan: Pro&quot;&gt;
+        &lt;div class=&quot;badge&quot;&gt;Recommended&lt;/div&gt;
+        &lt;header class=&quot;plan-head&quot;&gt;
+          &lt;h3 class=&quot;plan-name&quot;&gt;Pro&lt;/h3&gt;
+          &lt;p class=&quot;plan-tagline&quot;&gt;For growing teams&lt;/p&gt;
+        &lt;/header&gt;
+        &lt;div class=&quot;plan-price&quot;&gt;
+          &lt;span class=&quot;currency&quot;&gt;₹&lt;/span&gt;&lt;span class=&quot;amount&quot;&gt;999&lt;/span&gt;&lt;span class=&quot;cycle&quot;&gt;/mo&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;ul class=&quot;plan-features&quot;&gt;
+          &lt;li&gt;Unlimited projects&lt;/li&gt;
+          &lt;li&gt;Email support&lt;/li&gt;
+          &lt;li&gt;Advanced analytics&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;a href=&quot;#&quot; class=&quot;plan-cta&quot; aria-label=&quot;Choose Pro plan&quot;&gt;Start Pro&lt;/a&gt;
+      &lt;/article&gt;
+
+      &lt;!-- Plan 3 --&gt;
+      &lt;article class=&quot;plan&quot;&gt;
+        &lt;header class=&quot;plan-head&quot;&gt;
+          &lt;h3 class=&quot;plan-name&quot;&gt;Business&lt;/h3&gt;
+          &lt;p class=&quot;plan-tagline&quot;&gt;For org-wide rollouts&lt;/p&gt;
+        &lt;/header&gt;
+        &lt;div class=&quot;plan-price&quot;&gt;
+          &lt;span class=&quot;currency&quot;&gt;₹&lt;/span&gt;&lt;span class=&quot;amount&quot;&gt;2999&lt;/span&gt;&lt;span class=&quot;cycle&quot;&gt;/mo&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;ul class=&quot;plan-features&quot;&gt;
+          &lt;li&gt;SSO &amp; roles&lt;/li&gt;
+          &lt;li&gt;Priority support&lt;/li&gt;
+          &lt;li&gt;Custom reports&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;a href=&quot;#&quot; class=&quot;plan-cta&quot; aria-label=&quot;Choose Business plan&quot;&gt;Contact Sales&lt;/a&gt;
+      &lt;/article&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817e-aa10-eae41ff465ba"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8189-b84a-c4ee0a81ae97" class="">Starter CSS (copy–paste)</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f0-8f1c-c6ef54a45899" class="code code-wrap"><code class="language-css" style="white-space:pre-wrap;word-break:break-all">/* ---- Base ---- */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #111827; background: #f8fafc;
+}
+.section { max-width: 1100px; margin: 40px auto; padding: 0 16px; }
+.section-header { text-align: center; margin-bottom: 20px; }
+.section-title { margin: 0 0 6px; font-size: 28px; line-height: 1.2; }
+.section-subtitle { margin: 0; color: #6b7280; }
+
+/* ---- Pricing grid (make this a Grid) ---- */
+.pricing-grid {
+  /* TODO: Enable grid */
+  /* e.g., display: grid; */
+
+  /* TODO: Create 3 equal columns on desktop */
+  /* e.g., grid-template-columns: repeat(3, 1fr); */
+
+  /* TODO: Add consistent spacing between plans */
+  /* e.g., gap: 16px; */
+
+  /* TODO: Align items neatly inside cells */
+  /* e.g., justify-items: stretch; align-items: start; */
+}
+
+/* ---- Plan card (visuals) ---- */
+.plan {
+  background: #fff; border: 1px solid #e5e7eb; border-radius: 14px;
+  padding: 18px; box-shadow: 0 2px 10px rgba(0,0,0,.04);
+  position: relative; transition: transform .15s ease, box-shadow .15s ease;
+  display: grid; gap: 12px;
+}
+.plan:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
+
+.plan--featured { border-color: #3730a3; box-shadow: 0 6px 24px rgba(55,48,163,.18); }
+.badge {
+  position: absolute; top: -10px; right: 14px;
+  background: #3730a3; color: #fff; padding: 4px 10px; border-radius: 999px;
+  font-size: 12px; font-weight: 700;
+}
+
+.plan-head { display: grid; gap: 4px; }
+.plan-name { margin: 0; font-size: 20px; }
+.plan-tagline { margin: 0; color: #4b5563; }
+
+.plan-price { font-weight: 800; font-size: 28px; display: flex; align-items: baseline; gap: 2px; }
+.currency { font-size: 16px; font-weight: 700; color: #4b5563; }
+.amount { font-size: 32px; }
+.cycle { font-size: 14px; color: #6b7280; }
+
+.plan-features { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.plan-features li::before { content: &quot;✔ &quot;; color: #059669; font-weight: 700; }
+
+.plan-cta {
+  display: inline-block; text-decoration: none;
+  background: #111827; color: #fff; padding: 10px 14px; border-radius: 10px; text-align: center;
+}
+.plan--featured .plan-cta { background: #3730a3; }
+
+/* ---- Responsiveness (without minmax/auto-fit) ---- */
+@media (max-width: 980px) {
+  /* TODO: Switch to 2 columns on tablet */
+  /* e.g., .pricing-grid { grid-template-columns: repeat(2, 1fr); } */
+}
+@media (max-width: 640px) {
+  /* TODO: Single column on mobile */
+  /* e.g., .pricing-grid { grid-template-columns: 1fr; } */
+}
+</code></pre></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

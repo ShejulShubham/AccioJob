@@ -1,0 +1,1173 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Day 5 Assignments</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-819c-b09b-ca0e4bf2a628" class="page sans"><header><h1 class="page-title" dir="auto">Day 5 Assignments</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-810a-8d1a-cdfb10ab297d" class="">📝 <strong>Assignment 1 — Show a message only if user is logged in</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8101-b55f-fa79e459e95e" class=""><strong>👉 Task:</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f7-9fb9-efed7297509b" class="">Create two variables:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-81d7-823a-db7c56fcc789" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">const isLoggedIn = true;
+const username = &quot;Ujjwal&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8183-a5ff-e19fa6d13d6a" class="">If logged in → display:</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8120-982c-cfaa15667228" class=""><code>Welcome, Ujjwal!</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c9-985c-cf567bc94b3b" class="">If not → display:</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e7-9db9-cc895bdb815f" class=""><code>Please log in to continue.</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811f-aa22-f12e65c8c813" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ab-91e6-d9d7c20a8dfe" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81bd-8f01-feb708d87d66" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">export default function ShowMessage() {
+    const isLoggedIn = false;
+    const username = &quot;Ujjwal&quot;;
+
+    return (
+        &lt;div&gt;
+            {isLoggedIn ? (
+                &lt;p&gt;Welcome {username}&lt;/p&gt;
+            ) : (
+                &lt;p&gt;Please login first!&lt;/p&gt;
+            )}
+        &lt;/div&gt;
+    )
+}
+
+
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d8-96d2-eecae56f2dc1" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8118-bcf1-e8f73068211e" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c5-9cf3-c15be3f969b8" class="">📝 <strong>Assignment 2 — Show a discount message for premium users</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81df-8102-cc743e26e0ca" class="">👉 Task:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81be-9b37-f74df4102fdd" class="">Make a variable:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d0-b4c0-d92535a185c6" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">const isPremiumUser = false;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8172-8723-f5e861f65bf6" class="">If true → show <code>&quot;You get 50% discount!&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8162-ae96-ffa848eafc22" class="">Else → show <code>&quot;Upgrade to premium for discounts!&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817f-a6c7-f43cc940d71c" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810a-af2f-cba4814dfb89" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">export default function DiscountMessage() {
+    const isPremiumUser = false;
+
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;📝 Assignment 2 — Show a discount message for premium users&lt;/h2&gt;
+            {isPremiumUser &amp;&amp; &lt;p&gt;You get 50% discount!&lt;/p&gt;}
+            {!isPremiumUser &amp;&amp; &lt;p&gt;Upgrade to premium for discounts!&lt;/p&gt;}
+        &lt;/div&gt;
+    )
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8174-acb8-d64fc2f39512" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8189-879d-f8b165afcd98" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8190-8810-cbb526942fd2" class="">📝 <strong>Assignment 3 — Return different components based on age</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8180-86d9-d8cf767ed101" class="">👉 Task:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ad-af2c-c3f5217ee91b" class="">Create:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815e-83f7-d3f85d35ef58" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">const age = 17;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818e-b1dc-f07f67a9ddc5" class="">If <code>age &gt;= 18</code> → render <code>&lt;Adult /&gt;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cd-9033-fd59f41fbaf3" class="">Else → render <code>&lt;Minor /&gt;</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8151-add1-e9515d6b63bc" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815d-b20d-f091e61070e8" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8126-9e59-dc78bfe54045" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">export default function BasedOnAge() {
+    let age = 17;
+    if(age &gt; 18) {
+        return &lt;Adult /&gt;
+    } else {
+        return &lt;Minor /&gt;
+    }
+}
+
+function Adult() {
+    return &lt;h3&gt;Info - Adult&lt;/h3&gt;
+}
+
+function Minor() {
+    return &lt;h3&gt;Info - Minor&lt;/h3&gt;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e5-b736-d5486eb45b3e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a9-9347-da7c06c5becf" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81eb-ab1a-dd42ad365a40" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-816d-ba2d-e3f13853b105" class="">📝 <strong>Assignment 4 — Create a Greeting component</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8187-9d57-ee3e641cdafc" class="">👉 Task:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b3-86d6-d70f1a30a01b" class="">Pass these props:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c5-bf82-ee5685e507f2" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;Greeting name=&quot;Aarav&quot; city=&quot;Delhi&quot; /&gt;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814c-948b-c0c79bab78cc" class="">Inside child, show:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8142-8694-ed88889a2f8e" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">Hello Aarav from Delhi!
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813d-a3e4-e9950f19323b" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8110-a20b-f5cc6ba32ddc" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;Greeting name=&quot;Jay&quot; city=&quot;Pune&quot; /&gt;
+
+
+export default function Greeting({name, city}) {
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;📝 Assignment 4 — Create a Greeting component&lt;/h2&gt;
+            &lt;p&gt;Hello {name} from {city}!&lt;/p&gt;
+        &lt;/div&gt;
+    )
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8139-994c-c877c891f67c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8181-82c4-e26ca6671443" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8196-816d-ef3eec45c428" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-819e-ba4c-fff8fa37a82c" class="">📝 <strong>Assignment 5 — Pass multiple data types as props</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8107-b441-c59fe26cdf7b" class="">👉 Task:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814f-b41d-fa6d3a2a13e2" class="">Send:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c1-9a04-d7e231ffc171" class="bulleted-list"><li style="list-style-type:disc">name <code>&quot;Rohan&quot;</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8166-998e-eb8a48eea344" class="bulleted-list"><li style="list-style-type:disc">age <code>{21}</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81bd-8ed0-c2063b631bfb" class="bulleted-list"><li style="list-style-type:disc">isOnline <code>{true}</code></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8152-b9d6-d6baae4b76c2" class="">Display them inside child.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-87b9-d66051348d22" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8114-810f-dad8a358b834" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;MultipleDataTypes
+          name=&quot;Rohan&quot;
+          age={21}
+          isOnline={true}
+ /&gt;
+        
+export default function MultipleDataTypes({ name, age, isOnline }) {
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;📝 Assignment 5 — Pass multiple data types as props&lt;/h2&gt;
+            &lt;h3&gt;{name}&lt;/h3&gt;
+            &lt;p&gt;Age: {age}&lt;/p&gt;
+
+            {/* Conditional rendering based on prop */}
+            &lt;p&gt;Status: {isOnline ? &quot;🟢 Online&quot; : &quot;🔴 Offline&quot;}&lt;/p&gt;
+        &lt;/div&gt;
+    );
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-a5ad-e8c873e4df8a" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d4-a82f-c3e8ae52f3e5" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8175-8dcf-c45dd1f6b580" class="">📝 <strong>Assignment 6 — Pass an array as props and list items</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8148-aa63-e6de581182a0" class="">👉 Task:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810c-8a05-e03ffa415369" class="">Pass:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81a5-bb89-c58470bf278f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;Skills list={[&quot;HTML&quot;, &quot;CSS&quot;, &quot;React&quot;]} /&gt;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ca-8e5c-c729cabc8817" class="">Child should display all skills in a <code>&lt;ul&gt;</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e0-a02d-ef4eda6597bb" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c9-a78b-e97e7a9b3a23" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;Skills list={[&quot;HTML&quot;, &quot;CSS&quot;, &quot;React&quot;]} /&gt;
+
+export default function Skills({list}) {
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;📝 Assignment 6 — Pass an array as props and list items&lt;/h2&gt;
+            &lt;ul&gt;
+                {list.map((s, i) =&gt; (
+                    &lt;li key={i}&gt;{s}&lt;/li&gt;
+                ))}
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    )
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815a-8745-cb9dc4a83b2d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bf-84a2-fa8ef2bd9885" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b0-b161-f2561ab03524" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c3-81f5-ce55fd0d2e6b" class="">📝 <strong>Assignment 7 — Pass an object as a prop</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8106-8ffc-dc362388c2f9" class="">👉 Task:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cc-ba3c-f00e31dee56a" class="">Pass a user object:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ce-80c9-e4068e1bb747" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;User info={{ name: &quot;Sara&quot;, age: 20, email: &quot;sara@mail.com&quot; }} /&gt;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f9-892c-c433e2d56f9d" class="">Render all values in child.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-9a79-cecd183b261b" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b4-90f6-d6ff0780bd2f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all"> &lt;User info={{ name: &quot;Sara&quot;, age: 20, email: &quot;sara@mail.com&quot; }} /&gt;
+
+
+export default function User({ info }) {
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;📝 Assignment 7 — Pass an object as a prop&lt;/h2&gt;
+            &lt;h2&gt;{info.name}&lt;/h2&gt;
+            &lt;p&gt;Age: {info.age}&lt;/p&gt;
+            &lt;p&gt;Email: {info.email}&lt;/p&gt;
+        &lt;/div&gt;
+    );
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a1-8864-f9e4b45ce1b2" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e1-829d-d9d0ac0663c6" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a9-b529-d79715f30dfc" class="">📝 <strong>Assignment 8 — Reusable Button using props</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ed-b032-f94186c05a37" class="">👉 Task:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8177-89b2-cb2a9f001a95" class="">Make this usage work:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812e-adf7-dce6b1b7ea9d" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;Button text=&quot;Login&quot; color=&quot;green&quot; /&gt;
+&lt;Button text=&quot;Signup&quot; color=&quot;blue&quot; /&gt;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815e-829d-d6d77ce788df" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d5-8826-db7815bd6396" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;h2&gt;📝 Assignment 8 — Reusable Button using props&lt;/h2&gt;
+&lt;Button text=&quot;Login&quot; color=&quot;green&quot; /&gt;
+ &lt;Button text=&quot;Signup&quot; color=&quot;blue&quot; /&gt;
+
+export default function Button({ text, color }) {
+    return (
+        &lt;div&gt;
+            &lt;button style={{ background: color, padding: &quot;8px 16px&quot;, color: &quot;white&quot; }}&gt;
+                {text}
+            &lt;/button&gt;
+        &lt;/div&gt;
+    );
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8199-bd7c-c15b1c24f4b8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bd-9117-f9e9f005e608" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8156-a84c-f3b68550cfa2" class="">📝 <strong>Assignment 9 — Card that uses ternary with props</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-817b-829e-e31630817fa9" class="">👉 Task:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ab-b46c-dacccfde9cb2" class="">Pass:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8172-9e44-e7a27f242342" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;ProductCard title=&quot;iPhone&quot; inStock={false} /&gt;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bd-bfbb-dc06c546e302" class="">Render:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8122-8e15-d6b93af244eb" class="bulleted-list"><li style="list-style-type:disc">Green “In Stock”</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8108-81d8-d176fbb0d7ed" class="bulleted-list"><li style="list-style-type:disc">Red “Out of Stock”</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8145-a41c-e944bb28322b" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815c-8bf3-cb0d87461d0f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;ProductCard title=&quot;iPhone&quot; inStock={true} /&gt;
+
+export default function ProductCard({title, inStock}) {
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;📝 Assignment 9 — Card that uses ternary with props&lt;/h2&gt;
+            &lt;h3&gt;{title}&lt;/h3&gt;
+            &lt;p&gt;
+                {inStock ? (
+                    &lt;span style={{color: &quot;green&quot;}}&gt;In Stock&lt;/span&gt;
+                ) : (
+                    &lt;span style={{color: &quot;red&quot;}}&gt;Out of Stock&lt;/span&gt;
+                )}
+            &lt;/p&gt;
+        &lt;/div&gt;
+    )
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ab-ac98-c1e96177935a" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8122-8d26-f59958540e33" class="">📝 <strong>Assignment 10 — Pass a function as a prop</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f0-8d5e-f247308a2b30" class="">👉 Task:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8149-acda-d49305c3b944" class="">Create:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8113-ac9d-e2435eff56e7" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;Child onPress={() =&gt; alert(&quot;Pressed!&quot;)} /&gt;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bf-aad3-c93f9b128cf6" class="">Child should run that function on button click.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-892e-cce5a998b3b4" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81a9-b95b-e0371e00e2cb" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;FuncAsProp onPress={() =&gt; alert(&quot;Pressed!&quot;)} /&gt;
+
+export default function FuncAsProp({onPress}) {
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;📝 Assignment 10 — Pass a function as a prop&lt;/h2&gt;
+            &lt;button onClick={onPress}&gt;Click Me&lt;/button&gt;
+        &lt;/div&gt;
+    )
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d4-99d3-f4c2e8118363" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8133-8f51-e82afd93863e" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ed-82d2-d1aabdb7fbc1" class="">📝 <strong>Assignment 11 — Props Drilling (3 levels)</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811b-ada0-c47a01f1402f" class="">👉 Task:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-a3a1-d2383eb1a047" class="">Pass a name <code>&quot;Ujjwal&quot;</code> from App → Level1 → Level2 → Level3.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816e-b095-de109373d139" class="">Level3 should render it.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ed-8985-c54c19190f76" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;h2&gt;📝 Assignment 11 — Props Drilling (3 levels)&lt;/h2&gt;
+&lt;NamePropDrill /&gt;
+
+export default function NamePropDrill() {
+    return &lt;Level1 name=&quot;Jay&quot; /&gt;
+}
+
+function Level1({name}) {
+    return &lt;Level2 name={name} /&gt;
+}
+
+function Level2({name}) {
+    return &lt;Level3 name={name} /&gt;
+}
+
+function Level3({name}) {
+    return &lt;h3&gt;Welcome {name}&lt;/h3&gt;
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8145-af4b-cae81ce04309" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c2-94f0-d12c77ff6674" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8198-adde-f6802fa1412f" class="">📝 <strong>Assignment 12 — Props Drilling + children together</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b7-bbbc-cf10f1ef6d45" class="">👉 Task:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c5-99cc-f694e8d28553" class="">Send <code>&quot;Welcome User&quot;</code> from App to Level1 → Level2 → Card component.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8115-9a90-c766a06f8860" class="">Card should wrap children.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-813e-8041-c776bfcc4d4c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;h2&gt;📝 Assignment 12 — Props Drilling + children together&lt;/h2&gt;
+&lt;ChildrenPropDrill /&gt;
+
+export default function ChildrenPropDrill() {
+    return &lt;Level1 message=&quot;Welcome User&quot; /&gt;
+}
+
+function Level1({message}) {
+    return &lt;Level2 message={message} /&gt;
+}
+
+function Level2({message}) {
+    return (
+        &lt;Card&gt;
+            &lt;h3&gt;{message}&lt;/h3&gt;
+        &lt;/Card&gt;
+    )
+}
+
+function Card({children}) {
+    return (
+        &lt;div&gt;{children}&lt;/div&gt;
+    )
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8187-9e6c-eb2e884d6605" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-8cb9-f7d2239d3d0c" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8156-8c2d-da24f44be816" class="">📝 <strong>Assignment 13 — Conditional Rendering + Props (Show user role)</strong></h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8111-a6f5-d9c4e1ba8175" class="">👉 Task</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8175-8aa2-e729dff52455" class="">Create a <code>&lt;UserRole /&gt;</code> component that accepts two props:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812b-a104-e63e87618643" class="bulleted-list"><li style="list-style-type:disc"><code>name</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b7-b82c-e8f780b6bc07" class="bulleted-list"><li style="list-style-type:disc"><code>role</code> → <code>&quot;admin&quot;</code> or <code>&quot;user&quot;</code></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a8-9fd2-db1d7768f0f1" class="">If role is <strong>admin</strong> → show:</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-83a8-d330d4aa0701" class=""><code>Aarav (Admin Access)</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f5-940d-dbe6018913b4" class="">If role is <strong>user</strong> → show:</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8180-b085-e7fb3fb36f41" class=""><code>Aarav (User Access)</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811e-9aca-fe9ac2676366" class="">Use ternary.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e9-870e-d047929d5cab" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8191-8e28-d64b1edf6015" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;h2&gt;📝 Assignment 13 — Conditional Rendering + Props (Show user role)&lt;/h2&gt;
+&lt;UserRole name=&quot;Aarav&quot; role=&quot;user&quot; /&gt;
+
+export default function UserRole({ name, role }) {
+  return (
+    &lt;h2&gt;
+      {name} ({role === &quot;admin&quot; ? &quot;Admin Access&quot; : &quot;User Access&quot;})
+    &lt;/h2&gt;
+  );
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814d-abd8-de767e9067e4" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-939f-d5ae1dc1bdc4" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8130-a184-f2db36265f7b" class="">📝 <strong>Assignment 14 — children Prop + Condition (Custom Card)</strong></h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8132-9c86-eb6eefb6eee3" class="">👉 Task</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814d-9976-e4347c7a5111" class="">Make a <code>&lt;Card&gt;</code> component that takes:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8142-90ad-da5b2a269359" class="bulleted-list"><li style="list-style-type:disc"><code>title</code> prop</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b3-8753-f37d2586193a" class="bulleted-list"><li style="list-style-type:disc"><code>children</code></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81da-839c-cd2af7e8d14b" class="">Inside child, if title is missing → show <code>&quot;No Title Provided&quot;</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ec-9a14-d471fb3c3f44" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8106-b0f4-ebb703333e3f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;h2&gt;📝 Assignment 14 — children Prop + Condition (Custom Card)&lt;/h2&gt;
+          &lt;Card&gt;
+            &lt;p&gt;This is inside the card.&lt;/p&gt;
+          &lt;/Card&gt;
+
+export default function Card({title, children}) {
+    return (
+        &lt;div&gt;
+            &lt;h3&gt;{title ? title : &quot;No Title Provided&quot;}&lt;/h3&gt;
+
+            {children}
+        &lt;/div&gt;
+    )
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8100-af48-cf236658feaf" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8113-87f9-f5b09e239cd0" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8188-a662-f3ca6092f403" class="">📝 <strong>Assignment 15 — Props Drilling (4 Levels) + Conditional Rendering</strong></h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bf-ae2c-f909f6665550" class="">👉 Task</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814a-8c9c-e6382d1a84f7" class="">Pass <code>&quot;Online&quot;</code> status from App → A → B → C → StatusBox.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c7-b1c9-f7f0197801db" class="">Inside StatusBox:</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8194-bb13-f58e26f1261d" class="">If status === <code>&quot;Online&quot;</code> → green text</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c5-9731-cf54b56b04a3" class="">Else → red text.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ba-bed3-d58eb16c611d" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81bd-a47a-ddb4b877c920" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;h2&gt;📝 Assignment 15 — Props Drilling (4 Levels) + Conditional Rendering&lt;/h2&gt;
+&lt;Status /&gt;
+
+export default function Status() {
+    return &lt;A status=&quot;Online&quot; /&gt;
+}
+
+function A({status}) {
+    return &lt;B status={status} /&gt;
+}
+
+function B({status}) {
+    return &lt;C status={status} /&gt;
+}
+
+function C({status}) {
+    return &lt;StatusBox status={status} /&gt;
+}
+
+function StatusBox({status}) {
+    return (
+        &lt;h3 style={{color: status === &quot;Online&quot; ? &quot;green&quot; : &quot;red&quot;}}&gt;
+            {status}
+        &lt;/h3&gt;
+    )
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c5-926a-fe916d8240bc" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ad-a90f-c633b56f6f26" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8107-bb73-d62ca8b83a2c" class="">📝 <strong>Assignment 16 — Pass Array + children + Conditional Rendering</strong></h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8165-a0df-dac9379c24e0" class="">👉 Task</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b2-836b-d0aedd5946cc" class="">Create a <code>&lt;List /&gt;</code> component with props:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8156-94a6-e3e37e1cd292" class="bulleted-list"><li style="list-style-type:disc"><code>items</code> (array)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ff-92f1-c2c3c4b7e96f" class="bulleted-list"><li style="list-style-type:disc">children (heading or description)</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ff-9358-e84eeb8ea901" class="">If items array is empty → show <code>&quot;No items found&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d8-bdf2-c6daa05cb36b" class="">Else → show the list.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e9-888c-c53068545f88" class="">Usage example:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812e-a7a7-ce88fb585231" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;List items={[10, 20, 30]}&gt;
+  &lt;h2&gt;Numbers List&lt;/h2&gt;
+&lt;/List&gt;
+</code></pre></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81da-906a-f11a6d857350" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;h2&gt;📝 Assignment 16 — Pass Array + children + Conditional Rendering&lt;/h2&gt;
+          &lt;List items={[10, 20, 30, 40]}&gt;
+            &lt;h2&gt;Numbers List&lt;/h2&gt;
+          &lt;/List&gt;
+
+export default function List({items, children}) {
+    return (
+        &lt;div&gt;
+            {children}
+
+            {items.length === 0 ? (
+                &lt;p&gt;No items fiund&lt;/p&gt;
+            ) : (
+                &lt;ul&gt;
+                    {items.map((item, i) =&gt; (
+                        &lt;li key={i}&gt;{item}&lt;/li&gt;
+                    ))}
+                &lt;/ul&gt;
+            )}
+        &lt;/div&gt;
+    )
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8191-8623-d8355f849c34" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-973e-ead9c469f29b" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8126-a670-f01528985ac8" class="">📝 <strong>Assignment 17 — Pass Function Prop + children Prop</strong></h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8134-a020-cad6cc834085" class="">👉 Task</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813c-a6a1-c8bd8900998e" class="">Make a <code>&lt;Wrapper&gt;</code> component that:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812a-8fd6-d055760bccec" class="bulleted-list"><li style="list-style-type:disc">Wraps children inside a bordered box</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8127-a926-e2a740ff56af" class="bulleted-list"><li style="list-style-type:disc">Takes a function prop <code>onClick</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a8-bbea-ec194436f883" class="bulleted-list"><li style="list-style-type:disc">When box is clicked → call that function</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-8850-c66ba334b004" class="">Usage:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818c-8cf8-f2ba66cd4d34" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;Wrapper onClick={() =&gt; alert(&quot;Box clicked!&quot;)}&gt;
+  &lt;h2&gt;Content inside wrapper&lt;/h2&gt;
+&lt;/Wrapper&gt;
+</code></pre></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8119-99dd-d4dcb85370ce" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;h2&gt;📝 Assignment 17 — Pass Function Prop + children Prop&lt;/h2&gt;
+          &lt;Wrapper onClick={() =&gt; alert(&quot;Box clicked!&quot;)}&gt;
+            &lt;h2&gt;Content inside wrapper&lt;/h2&gt;
+          &lt;/Wrapper&gt;
+
+export default function Wrapper({onClick, children}) {
+    return (
+        &lt;div onClick={onClick}&gt;
+            {children}
+        &lt;/div&gt;
+    )
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811f-b8fa-f414b744ccca" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fa-ac2a-e8e18028cb65" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-bf84-c4bc6e789931" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-813d-b553-f37974a155db" class="">📝 <strong>Assignment 18 — Passing Component as Prop + Conditional Rendering</strong></h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8181-b247-f175c9730fda" class="">👉 Task</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-a85b-fdf2d4bf0b3e" class="">Create a <code>&lt;Card /&gt;</code> that accepts:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d0-a8aa-e163128f9d1c" class="bulleted-list"><li style="list-style-type:disc"><code>title</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816a-9d8e-cced2d099c0c" class="bulleted-list"><li style="list-style-type:disc"><code>icon</code> → JSX icon component</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818c-9ab7-ca613c913457" class="">Usage:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81cd-90d2-f695c1911886" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;Card
+  title=&quot;Notifications&quot;
+  icon={&lt;span&gt;🔔&lt;/span&gt;}
+/&gt;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8125-ba88-c8e316bab4d1" class="">Inside Card:</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-b3d3-c22662d3feef" class="">If icon not provided → show <code>&quot;No Icon&quot;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ff-9b6c-f4f139868c9b" class="">Else show given icon.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c3-9c00-f6d17d4c6bfb" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8107-90f2-fd0b7b3acf37" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">&lt;h2&gt;📝 Assignment 18 — Passing Component as Prop + Conditional Rendering&lt;/h2&gt;
+        &lt;Card2
+          title=&quot;Notifications&quot;
+          icon={&lt;span&gt;🔔&lt;/span&gt;}
+        /&gt;
+
+export default function Card2({title, icon}) {
+    return (
+        &lt;div&gt;
+            &lt;h3&gt;{title}&lt;/h3&gt;
+
+            {icon ? icon : &lt;p&gt;No Icon&lt;/p&gt;}
+        &lt;/div&gt;
+    )
+}</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-ac6d-e7559a161fd4" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8195-b5c5-d1e5eee132ee" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-9454-fa07d7d70534" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8175-a5f7-c6b1fb62b836" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b6-a58b-c02e3818c3fd" class="">App.jsx</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8141-9141-da873e6247e7" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import &#x27;./App.css&#x27;
+import BasedOnAge from &#x27;./components/BasedOnAge&#x27;
+import DiscountMessage from &#x27;./components/DiscountMessage&#x27;
+import Greeting from &#x27;./components/Greeting&#x27;
+import MultipleDataTypes from &#x27;./components/MultipleDataTypes&#x27;
+import ShowMessage from &#x27;./components/ShowMessage&#x27;
+import Skills from &#x27;./components/Skills&#x27;
+import User from &#x27;./components/User&#x27;
+import Button from &#x27;./components/Button&#x27;
+import ProductCard from &#x27;./components/ProductCard&#x27;
+import FuncAsProp from &#x27;./components/FuncAsProp&#x27;
+import NamePropDrill from &#x27;./components/NamePropDrill&#x27;
+import ChildrenPropDrill from &#x27;./components/ChildrenPropDrill&#x27;
+import UserRole from &#x27;./components/UserRole&#x27;
+import Card from &#x27;./components/Card&#x27;
+import Status from &#x27;./components/Status&#x27;
+import List from &#x27;./components/List&#x27;
+import Wrapper from &#x27;./components/Wrapper&#x27;
+import Card2 from &#x27;./components/Card2&#x27;
+
+function App() {
+
+  return (
+    &lt;div className=&quot;app-shell&quot;&gt;
+      &lt;div className=&quot;assignment-card&quot;&gt;
+        &lt;ShowMessage /&gt;
+        &lt;DiscountMessage /&gt;
+        &lt;BasedOnAge /&gt;
+        &lt;Greeting name=&quot;Jay&quot; city=&quot;Pune&quot; /&gt;
+        &lt;MultipleDataTypes
+          name=&quot;Rohan&quot;
+          age={21}
+          isOnline={true}
+        /&gt;
+
+        &lt;Skills list={[&quot;HTML&quot;, &quot;CSS&quot;, &quot;React&quot;]} /&gt;
+
+        &lt;User info={{ name: &quot;Sara&quot;, age: 20, email: &quot;sara@mail.com&quot; }} /&gt;
+
+        &lt;h2&gt;📝 Assignment 8 — Reusable Button using props
+        &lt;/h2&gt;
+        &lt;Button text=&quot;Login&quot; color=&quot;green&quot; /&gt;
+        &lt;Button text=&quot;Signup&quot; color=&quot;blue&quot; /&gt;
+
+        &lt;ProductCard title=&quot;iPhone&quot; inStock={true} /&gt;
+
+        &lt;FuncAsProp onPress={() =&gt; alert(&quot;Pressed!&quot;)} /&gt;
+
+        &lt;h2&gt;📝 Assignment 11 — Props Drilling (3 levels)&lt;/h2&gt;
+        &lt;NamePropDrill /&gt;
+
+        &lt;h2&gt;📝 Assignment 12 — Props Drilling + children together&lt;/h2&gt;
+        &lt;ChildrenPropDrill /&gt;
+
+        &lt;h2&gt;📝 Assignment 13 — Conditional Rendering + Props (Show user role)&lt;/h2&gt;
+        &lt;UserRole name=&quot;Aarav&quot; role=&quot;user&quot; /&gt;
+
+        &lt;h2&gt;📝 Assignment 14 — children Prop + Condition (Custom Card)&lt;/h2&gt;
+        &lt;Card&gt;
+          &lt;p&gt;This is inside the card.&lt;/p&gt;
+        &lt;/Card&gt;
+
+        &lt;h2&gt;📝 Assignment 15 — Props Drilling (4 Levels) + Conditional Rendering&lt;/h2&gt;
+        &lt;Status /&gt;
+
+        &lt;h2&gt;📝 Assignment 16 — Pass Array + children + Conditional Rendering&lt;/h2&gt;
+        &lt;List items={[10, 20, 30, 40]}&gt;
+          &lt;h2&gt;Numbers List&lt;/h2&gt;
+        &lt;/List&gt;
+
+        &lt;h2&gt;📝 Assignment 17 — Pass Function Prop + children Prop&lt;/h2&gt;
+        &lt;Wrapper onClick={() =&gt; alert(&quot;Box clicked!&quot;)}&gt;
+          &lt;h2&gt;Content inside wrapper&lt;/h2&gt;
+        &lt;/Wrapper&gt;
+
+        &lt;h2&gt;📝 Assignment 18 — Passing Component as Prop + Conditional Rendering&lt;/h2&gt;
+        &lt;Card2
+          title=&quot;Notifications&quot;
+          icon={&lt;span&gt;🔔&lt;/span&gt;}
+        /&gt;
+
+
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default App
+</code></pre></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

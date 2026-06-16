@@ -1,0 +1,1552 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CSS Revision Exercises</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-8186-9317-ce81ff913ed0" class="page sans"><header><h1 class="page-title" dir="auto">CSS Revision Exercises</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8149-ae09-cdee658b6299" class=""><strong>Exercise 1 — Build and Style a Personal Profile Page</strong></h1></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a5-920a-df8b5a1b8543" class=""><strong>Initial HTML (with HTML TODOs)</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8115-9fa7-e17edae6e28d" class=""><strong>index.html</strong></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2df155e4-633e-81ca-b921-ff5da932dd14" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Profile Page&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- TODO: Wrap everything in a &lt;div&gt; with class=&quot;container&quot; --&gt;
+  &lt;div class=&quot;container&quot;&gt;
+
+    &lt;header id=&quot;main-header&quot;&gt;
+      &lt;!-- TODO: Add an &lt;img&gt; with class=&quot;logo&quot; above the heading --&gt;
+      &lt;h1 class=&quot;page-title&quot;&gt;Welcome to My Profile&lt;/h1&gt;
+    &lt;/header&gt;
+
+    &lt;section class=&quot;profile&quot;&gt;
+      &lt;h2 class=&quot;section-title&quot;&gt;About Me&lt;/h2&gt;
+      &lt;p class=&quot;description&quot;&gt;I am learning CSS selectors and practicing to style pages effectively.&lt;/p&gt;
+      &lt;!-- TODO: Add another &lt;p&gt; with class=&quot;description&quot; for a fun fact --&gt;
+    &lt;/section&gt;
+
+    &lt;section class=&quot;skills&quot;&gt;
+      &lt;h2 class=&quot;section-title&quot;&gt;Skills&lt;/h2&gt;
+      &lt;ul class=&quot;skill-list&quot;&gt;
+        &lt;li class=&quot;skill-item&quot;&gt;HTML&lt;/li&gt;
+        &lt;li class=&quot;skill-item&quot;&gt;CSS&lt;/li&gt;
+        &lt;li class=&quot;skill-item&quot;&gt;JavaScript&lt;/li&gt;
+        &lt;!-- TODO: Add two more &lt;li class=&quot;skill-item&quot;&gt; for extra skills --&gt;
+      &lt;/ul&gt;
+    &lt;/section&gt;
+
+    &lt;footer id=&quot;main-footer&quot;&gt;
+      &lt;p class=&quot;footer-text&quot;&gt;© 2025 My Portfolio&lt;/p&gt;
+      &lt;!-- TODO: Add a &lt;a&gt; with class=&quot;footer-link&quot; for LinkedIn or GitHub --&gt;
+    &lt;/footer&gt;
+
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f1-9ce5-eb0e60d2c889"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8115-8194-f3fa58a575c1" class=""><strong>Initial CSS (with CSS TODOs)</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81eb-8a4b-c456a7f3942c" class=""><strong>styles.css</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-819c-a132-e4b19b4cce7d" class="code code-wrap"><code class="language-css" style="white-space:pre-wrap;word-break:break-all">/* TODO: Use universal selector to reset margin and padding for all elements */
+* {
+  /* your code here */
+}
+
+/* TODO: Style the body element
+   - font-family
+   - text color
+   - background color
+   - line-height */
+body {
+  /* your code here */
+}
+
+/* TODO: Style the main header (#main-header)
+   - background color
+   - text color
+   - padding
+   - center text */
+#main-header {
+  /* your code here */
+}
+
+/* TODO: Style the page title (.page-title)
+   - larger font size
+   - bold weight
+   - some letter spacing */
+.page-title {
+  /* your code here */
+}
+
+/* TODO: Style the logo image (.logo)
+   - set width
+   - add margin below */
+.logo {
+  /* your code here */
+}
+
+/* TODO: Style the profile section (.profile)
+   - background white
+   - padding
+   - width
+   - margin auto
+   - border-radius
+   - subtle box-shadow */
+.profile {
+  /* your code here */
+}
+
+/* TODO: Style the section titles (.section-title)
+   - larger font size
+   - distinct color
+   - bottom margin */
+.section-title {
+  /* your code here */
+}
+
+/* TODO: Style the description paragraphs (.description)
+   - font size
+   - color
+   - margin-bottom */
+.description {
+  /* your code here */
+}
+
+/* TODO: Style the skills section (.skills)
+   - similar to .profile for consistency */
+.skills {
+  /* your code here */
+}
+
+/* TODO: Grouping selector for .description and .skill-item
+   - base font-size
+   - text color */
+.description,
+.skill-item {
+  /* your code here */
+}
+
+/* TODO: Style the skill list (.skill-list)
+   - remove default list style
+   - add spacing between items */
+.skill-list {
+  /* your code here */
+}
+
+/* TODO: Style the footer (#main-footer)
+   - background color
+   - text color
+   - center text
+   - padding */
+#main-footer {
+  /* your code here */
+}
+
+/* TODO: Style the footer link (.footer-link)
+   - text color
+   - remove underline */
+.footer-link {
+  /* your code here */
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816a-8838-ffa210a6ceb5" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8101-9ffd-dcae022bb734" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-833e-ee249343120e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b8-906d-cb2fc9dc02ec" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8155-9387-c3c2be3b4aaf" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-813b-99c9-ef9e469b5114" class=""><strong>Exercise 2 — Craft Clean Typography for a Blog Article</strong></h1></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-819b-9197-d2e5fdacc0cd" class="">Goal</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a9-bc94-c1a11ca99397" class="">Build a readable blog article layout by practicing <strong>font setup and text styling</strong>:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81cd-add9-d41eea226a99" class="bulleted-list"><li style="list-style-type:disc">Import and apply <strong>two font families</strong> (headings vs body)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819d-b55d-c5189dafd8d1" class="bulleted-list"><li style="list-style-type:disc">Control <strong>font-size, weight, line-height, letter-spacing</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812f-a9a9-f663abf872e7" class="bulleted-list"><li style="list-style-type:disc">Style <strong>headings, paragraphs, links, lists, blockquotes, code</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81da-af44-efadef99cc62" class="bulleted-list"><li style="list-style-type:disc">Create small <strong>utility classes</strong> for text (lead/muted/caps/small/mono)</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8188-add5-fa0e2cbd2dd0"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8178-a20a-cd00db642f69" class="">Initial HTML (with HTML TODOs)</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8124-a2be-d974168f2ba4" class=""><strong>index.html</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c6-a463-df10be07b688" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;title&gt;Blog Article — Typography Practice&lt;/title&gt;
+  &lt;!-- TODO: Add a Google Fonts &lt;link&gt; for a serif (for headings) and a sans-serif (for body).
+       Example fonts you can choose: &quot;Merriweather&quot; (serif) + &quot;Inter&quot; (sans-serif) --&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot; /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- container --&gt;
+  &lt;div class=&quot;page&quot;&gt;
+
+    &lt;header id=&quot;site-header&quot;&gt;
+      &lt;h1 class=&quot;site-title&quot;&gt;Typographic Rhythm in Web Articles&lt;/h1&gt;
+      &lt;!-- TODO: Add a short site tagline in a &lt;p class=&quot;tagline&quot;&gt; under the title --&gt;
+    &lt;/header&gt;
+
+    &lt;main id=&quot;content&quot;&gt;
+      &lt;article class=&quot;article&quot;&gt;
+        &lt;header class=&quot;article-header&quot;&gt;
+          &lt;h2 class=&quot;article-title&quot;&gt;Designing for Readability&lt;/h2&gt;
+          &lt;p class=&quot;byline&quot;&gt;By &lt;span class=&quot;author&quot;&gt;Aarav Mehta&lt;/span&gt; · &lt;time class=&quot;date&quot;&gt;Sep 1, 2025&lt;/time&gt;&lt;/p&gt;
+        &lt;/header&gt;
+
+        &lt;!-- TODO: Add a &quot;lead&quot; intro paragraph with class=&quot;lead&quot; before the standard paragraphs --&gt;
+        &lt;p class=&quot;para&quot;&gt;
+          When we read on screens, details like line-height, measure, and contrast dramatically affect comprehension and fatigue.
+        &lt;/p&gt;
+        &lt;p class=&quot;para&quot;&gt;
+          Good typography is not just aesthetic—it&#x27;s functional. It guides the eye, clarifies hierarchy, and improves retention.
+          &lt;!-- TODO: Wrap the words “not just aesthetic—it&#x27;s functional” with &lt;strong&gt; to emphasize --&gt;
+        &lt;/p&gt;
+
+        &lt;blockquote class=&quot;quote&quot;&gt;
+          “Typography is the craft of endowing human language with a durable visual form.” — Robert Bringhurst
+        &lt;/blockquote&gt;
+
+        &lt;h3 class=&quot;section-heading&quot;&gt;Core Practices&lt;/h3&gt;
+        &lt;ul class=&quot;list&quot;&gt;
+          &lt;li class=&quot;list-item&quot;&gt;Use a comfortable line-height and readable font-size.&lt;/li&gt;
+          &lt;li class=&quot;list-item&quot;&gt;Limit line length (measure) to 60–75 characters.&lt;/li&gt;
+          &lt;li class=&quot;list-item&quot;&gt;Establish consistent spacing between blocks.&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;p class=&quot;para&quot;&gt;
+          Inline code like &lt;code class=&quot;code-inline&quot;&gt;line-height: 1.6;&lt;/code&gt; and &lt;code class=&quot;code-inline&quot;&gt;letter-spacing&lt;/code&gt; can be used to fine-tune text rhythm.
+        &lt;/p&gt;
+
+        &lt;h3 class=&quot;section-heading&quot;&gt;Further Reading&lt;/h3&gt;
+        &lt;p class=&quot;para&quot;&gt;
+          Explore &lt;a class=&quot;text-link&quot; href=&quot;https://practicaltypography.com&quot; target=&quot;_blank&quot;&gt;Practical Typography&lt;/a&gt; for deep dives and examples.
+        &lt;/p&gt;
+
+        &lt;!-- Utilities showcase --&gt;
+        &lt;p class=&quot;muted&quot;&gt;Note: The following line uses small caps and reduced size.&lt;/p&gt;
+        &lt;p class=&quot;caps small&quot;&gt;typography utilities demo&lt;/p&gt;
+        &lt;!-- TODO: Add one more paragraph that uses class=&quot;mono&quot; to show monospaced text --&gt;
+      &lt;/article&gt;
+    &lt;/main&gt;
+
+    &lt;footer id=&quot;site-footer&quot;&gt;
+      &lt;p class=&quot;footer-text&quot;&gt;© 2025 Readable Web&lt;/p&gt;
+      &lt;!-- TODO: Add a link with class=&quot;footer-link&quot; to your GitHub or LinkedIn --&gt;
+    &lt;/footer&gt;
+
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8102-ace6-ca9a0962d9a4"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a3-a7a8-fabb3b874e35" class="">Initial CSS (with CSS TODOs)</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8173-9110-c506b7c99742" class=""><strong>styles.css</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8180-a6b8-d42091d062b8" class="code code-wrap"><code class="language-css" style="white-space:pre-wrap;word-break:break-all">/* TODO: Universal reset (margin, padding) and box-sizing */
+* {
+  /* your code */
+}
+
+/* TODO: Base page styles on body
+   - Set body font-family (sans-serif from your chosen font)
+   - Base font-size (e.g., 16px), line-height, text color, background color */
+body {
+  /* your code */
+}
+
+/* TODO: Layout container (.page)
+   - Set max-width (e.g., 72ch or 800px)
+   - Center with margin, add comfortable padding */
+.page {
+  /* your code */
+}
+
+/* TODO: Header (#site-header) spacing and title (.site-title)
+   - Add vertical spacing
+   - Set heading font-family (serif from your chosen font)
+   - Adjust font-size and letter-spacing for .site-title */
+#site-header {
+  /* your code */
+}
+.site-title {
+  /* your code */
+}
+
+/* TODO: Tagline (.tagline)
+   - Slightly muted color
+   - Smaller font-size than body
+   - Top margin */
+.tagline {
+  /* your code */
+}
+
+/* TODO: Article basics (.article)
+   - Ensure readable line-height and paragraph spacing rhythm */
+.article {
+  /* your code */
+}
+
+/* TODO: Article title (.article-title) and byline (.byline)
+   - Serif font for titles, weight/size adjustments
+   - Muted/secondary color for byline */
+.article-title {
+  /* your code */
+}
+.byline {
+  /* your code */
+}
+
+/* TODO: Paragraphs (.para) spacing
+   - Bottom margin to separate blocks */
+.para {
+  /* your code */
+}
+
+/* TODO: Lead paragraph (.lead)
+   - Slightly larger font-size
+   - Increased line-height
+   - Maybe a softer color */
+.lead {
+  /* your code */
+}
+
+/* TODO: Section headings (.section-heading)
+   - Serif heading font
+   - Top/bottom margins to create hierarchy */
+.section-heading {
+  /* your code */
+}
+
+/* TODO: Lists (.list &amp; .list-item)
+   - Comfortable left padding
+   - Bottom margin for items */
+.list {
+  /* your code */
+}
+.list-item {
+  /* your code */
+}
+
+/* TODO: Blockquote (.quote)
+   - Left border
+   - Italic style
+   - Padding and margin for separation
+   - Slightly larger or distinct color */
+.quote {
+  /* your code */
+}
+
+/* TODO: Inline code (.code-inline)
+   - Monospace stack
+   - Background, padding, and border-radius */
+.code-inline {
+  /* your code */
+}
+
+/* TODO: Links inside article (.text-link)
+   - Color, remove underline by default
+   - Underline on hover */
+.text-link {
+  /* your code */
+}
+.text-link:hover {
+  /* your code */
+}
+
+/* TODO: Utilities: .muted, .caps, .small, .mono
+   - .muted: lighter color
+   - .caps: transform to uppercase and letter-spacing
+   - .small: smaller font-size
+   - .mono: monospace font */
+.muted {
+  /* your code */
+}
+.caps {
+  /* your code */
+}
+.small {
+  /* your code */
+}
+.mono {
+  /* your code */
+}
+
+/* TODO: Footer (#site-footer)
+   - Top margin, subdued background, centered text, padding */
+#site-footer {
+  /* your code */
+}
+.footer-text {
+  /* your code */
+}
+.footer-link {
+  /* your code */
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8180-ada9-e42b9645979c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a7-b992-db04d2fa8d73" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e4-b962-fead352b299e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815e-9dec-c7caf7b82581" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8133-988d-d7c192e9a5df" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-818f-9476-fec0ee769533" class=""><strong>Exercise 3 — Design a Callout Panel Set with Colors &amp; Backgrounds</strong></h1></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-812d-bf0c-e1bc7a473cae" class=""><strong>Goal</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-b32a-c59254ed438f" class="">Build a <strong>set of callout panels</strong> to practice:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8112-b080-fe98330cc023" class="bulleted-list"><li style="list-style-type:disc">Applying <strong>solid background colors</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8121-ba1f-d3aa1b972650" class="bulleted-list"><li style="list-style-type:disc">Using <strong>background images</strong> with size, position, repeat, and attachment</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8132-8775-fa29ba7087d1" class="bulleted-list"><li style="list-style-type:disc">Pairing accessible <strong>text colors</strong> with their backgrounds</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8132-96db-e599d6b0f88d" class="bulleted-list"><li style="list-style-type:disc">Adding consistent <strong>borders and spacing</strong></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8108-96f9-d43399f05289"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-812c-92fd-f3668f0df4ec" class=""><strong>Initial HTML (with HTML TODOs)</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d5-8e8a-fefe13890853" class=""><strong>index.html</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812a-ab20-f8e3e1f51a72" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;title&gt;Callout Panels — Colors &amp; Backgrounds&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot; /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- TODO: Wrap all content in a div.shell --&gt;
+  &lt;div class=&quot;shell&quot;&gt;
+
+    &lt;header id=&quot;hero&quot;&gt;
+      &lt;!-- TODO: Add a heading with class=&quot;page-title&quot; --&gt;
+      &lt;!-- TODO: Add a subtitle paragraph with class=&quot;page-subtitle&quot; --&gt;
+      &lt;!-- TODO: Add an empty decorative div with class=&quot;hero-banner&quot; --&gt;
+    &lt;/header&gt;
+
+    &lt;main id=&quot;content&quot;&gt;
+      &lt;section class=&quot;panel-set&quot;&gt;
+        &lt;!-- Info panel --&gt;
+        &lt;article class=&quot;callout info&quot;&gt;
+          &lt;h2 class=&quot;callout-title&quot;&gt;Info&lt;/h2&gt;
+          &lt;p class=&quot;callout-text&quot;&gt;Use calm colors for informational messages.&lt;/p&gt;
+          &lt;!-- TODO: Add a list with class=&quot;callout-list&quot; and two li.callout-item --&gt;
+        &lt;/article&gt;
+
+        &lt;!-- Success panel --&gt;
+        &lt;article class=&quot;callout success&quot;&gt;
+          &lt;h2 class=&quot;callout-title&quot;&gt;Success&lt;/h2&gt;
+          &lt;p class=&quot;callout-text&quot;&gt;Green signals positive feedback or confirmation.&lt;/p&gt;
+        &lt;/article&gt;
+
+        &lt;!-- Warning panel --&gt;
+        &lt;article class=&quot;callout warning&quot;&gt;
+          &lt;h2 class=&quot;callout-title&quot;&gt;Warning&lt;/h2&gt;
+          &lt;p class=&quot;callout-text&quot;&gt;Amber tones are ideal for caution or reminders.&lt;/p&gt;
+        &lt;/article&gt;
+
+        &lt;!-- Danger panel --&gt;
+        &lt;article class=&quot;callout danger&quot;&gt;
+          &lt;h2 class=&quot;callout-title&quot;&gt;Danger&lt;/h2&gt;
+          &lt;p class=&quot;callout-text&quot;&gt;Red should only be used for critical alerts.&lt;/p&gt;
+        &lt;/article&gt;
+
+        &lt;!-- TODO: Add one more callout with class=&quot;note&quot; for general notes --&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+
+    &lt;footer id=&quot;site-footer&quot;&gt;
+      &lt;p class=&quot;footer-text&quot;&gt;© 2025 Callout Lab&lt;/p&gt;
+      &lt;!-- TODO: Add a footer link with class=&quot;footer-link&quot; --&gt;
+    &lt;/footer&gt;
+
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b6-8ea7-c0419246f57c"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8167-92db-c7f7030ede21" class=""><strong>Initial CSS (with CSS TODOs)</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b6-862f-fe4904fe52ff" class=""><strong>styles.css</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810a-b7fe-c5eb7fdf951d" class="code code-wrap"><code class="language-css" style="white-space:pre-wrap;word-break:break-all">/* === Reset &amp; Base === */
+/* TODO: Universal selector to reset margin, padding, and set box-sizing */
+* {
+  /* your code */
+}
+
+/* TODO: Style the body
+   - font-family
+   - text color
+   - background-color */
+body {
+  /* your code */
+}
+
+/* TODO: .shell container
+   - max-width
+   - center align with margin
+   - padding */
+.shell {
+  /* your code */
+}
+
+/* === Hero Section === */
+/* TODO: #hero
+   - text-align center
+   - margin bottom */
+#hero {
+  /* your code */
+}
+
+/* TODO: .page-title
+   - font size
+   - margin bottom */
+.page-title {
+  /* your code */
+}
+
+/* TODO: .page-subtitle
+   - muted text color
+   - margin bottom */
+.page-subtitle {
+  /* your code */
+}
+
+/* TODO: .hero-banner
+   - background-image (use a placeholder image)
+   - background-size, background-position
+   - background-attachment: fixed
+   - height and border-radius */
+.hero-banner {
+  /* your code */
+}
+
+/* === Panel Set === */
+/* TODO: .panel-set
+   - vertical spacing between panels */
+.panel-set {
+  /* your code */
+}
+
+/* TODO: .callout base
+   - background-color: white
+   - border-left
+   - padding
+   - border-radius
+   - margin bottom */
+.callout {
+  /* your code */
+}
+
+/* TODO: .callout-title
+   - font size
+   - margin bottom */
+.callout-title {
+  /* your code */
+}
+
+/* TODO: .callout-text
+   - font size
+   - line-height
+   - margin bottom */
+.callout-text {
+  /* your code */
+}
+
+/* Variants */
+/* TODO: .info: blue tones */
+/* TODO: .success: green tones */
+/* TODO: .warning: amber tones */
+/* TODO: .danger: red tones */
+/* TODO: .note: gray tones */
+.info {
+  /* your code */
+}
+.success {
+  /* your code */
+}
+.warning {
+  /* your code */
+}
+.danger {
+  /* your code */
+}
+.note {
+  /* your code */
+}
+
+/* TODO: .callout-list
+   - remove default list style
+   - add padding
+   - spacing */
+.callout-list {
+  /* your code */
+}
+
+/* TODO: .callout-item
+   - spacing between items
+   - optional subtle border-left */
+.callout-item {
+  /* your code */
+}
+
+/* Footer */
+/* TODO: #site-footer
+   - background-color
+   - text-align
+   - padding
+   - margin top */
+#site-footer {
+  /* your code */
+}
+.footer-text {
+  /* your code */
+}
+.footer-link {
+  /* your code */
+}
+
+/* Grouping example */
+/* TODO: Group .callout-title and .footer-text for shared letter-spacing */
+.callout-title,
+.footer-text {
+  /* your code */
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cd-9513-fdb2599dc8c7" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-9904-fb80103b79ef" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-a1c9-e81b6529767c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81af-baba-c9a2d2d5ca03" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81b8-a700-e87c104eceba" class=""><strong>Exercise 4 — Build a Product Feature Grid (Box Model &amp; Spacing)</strong></h1></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-815b-82c7-c4ff762be99c" class="">Goal</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fa-944c-e90fbb30a1a9" class="">Create a <strong>product feature grid</strong> using only box-model fundamentals and simple display rules:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817d-b788-d9d85f2cc71d" class="bulleted-list"><li style="list-style-type:disc">Control <strong>width/height</strong>, <strong>padding</strong>, <strong>margin</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8138-b47c-e544fe39aeaf" class="bulleted-list"><li style="list-style-type:disc">Apply <strong>borders</strong> and <strong>border-radius</strong> (optional)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817a-a397-ca544e3d3c6a" class="bulleted-list"><li style="list-style-type:disc">Use <strong>display</strong> (<code>block</code>, <code>inline-block</code>) to create a simple multi-column layout <strong>without flexbox</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8170-a1be-d43b79196c61" class="bulleted-list"><li style="list-style-type:disc">Manage <strong>inner spacing</strong> (card header, body, footer)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d8-9119-de16b794ebfe" class="bulleted-list"><li style="list-style-type:disc">Keep styles consistent across cards</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8174-a53f-dc2094f6b0ee"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8117-9637-d2f60b2845cb" class="">Initial HTML (with HTML TODOs)</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-acb1-c9485ddd2d05" class=""><strong>index.html</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8199-9a09-f03a43f501c2" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;title&gt;Product Feature Grid — Box Model Practice&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot; /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- TODO: Wrap the page with a div.container --&gt;
+  &lt;div class=&quot;container&quot;&gt;
+
+    &lt;header id=&quot;site-header&quot;&gt;
+      &lt;h1 class=&quot;page-title&quot;&gt;Featured Products&lt;/h1&gt;
+      &lt;p class=&quot;page-subtitle&quot;&gt;Clean, reusable card layout using only box model &amp; display.&lt;/p&gt;
+    &lt;/header&gt;
+
+    &lt;main id=&quot;catalog&quot;&gt;
+      &lt;!-- TODO: Wrap all cards inside a section.cards --&gt;
+      &lt;section class=&quot;cards&quot;&gt;
+
+        &lt;!-- CARD 1 --&gt;
+        &lt;article class=&quot;card&quot;&gt;
+          &lt;!-- TODO: Replace src with your product image later --&gt;
+          &lt;img class=&quot;card-img&quot; src=&quot;https://picsum.photos/seed/p1/480/320&quot; alt=&quot;Product 1&quot; /&gt;
+          &lt;div class=&quot;card-body&quot;&gt;
+            &lt;h2 class=&quot;card-title&quot;&gt;Wireless Headphones&lt;/h2&gt;
+            &lt;p class=&quot;card-desc&quot;&gt;Over-ear comfort with 30h battery life and crisp audio.&lt;/p&gt;
+            &lt;div class=&quot;meta&quot;&gt;
+              &lt;span class=&quot;price&quot;&gt;₹3,499&lt;/span&gt;
+              &lt;!-- TODO: Add a span.badge to mark &quot;New&quot; or &quot;Sale&quot; --&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;card-actions&quot;&gt;
+            &lt;button class=&quot;btn&quot;&gt;Add to Cart&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+
+        &lt;!-- CARD 2 --&gt;
+        &lt;article class=&quot;card&quot;&gt;
+          &lt;img class=&quot;card-img&quot; src=&quot;https://picsum.photos/seed/p2/480/320&quot; alt=&quot;Product 2&quot; /&gt;
+          &lt;div class=&quot;card-body&quot;&gt;
+            &lt;h2 class=&quot;card-title&quot;&gt;Smartwatch S2&lt;/h2&gt;
+            &lt;p class=&quot;card-desc&quot;&gt;Track health metrics and notifications on the go.&lt;/p&gt;
+            &lt;div class=&quot;meta&quot;&gt;
+              &lt;span class=&quot;price&quot;&gt;₹5,999&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;card-actions&quot;&gt;
+            &lt;button class=&quot;btn&quot;&gt;Add to Cart&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+
+        &lt;!-- CARD 3 --&gt;
+        &lt;article class=&quot;card&quot;&gt;
+          &lt;img class=&quot;card-img&quot; src=&quot;https://picsum.photos/seed/p3/480/320&quot; alt=&quot;Product 3&quot; /&gt;
+          &lt;div class=&quot;card-body&quot;&gt;
+            &lt;h2 class=&quot;card-title&quot;&gt;Portable Speaker&lt;/h2&gt;
+            &lt;p class=&quot;card-desc&quot;&gt;Loud, clear sound in a palm-sized body.&lt;/p&gt;
+            &lt;div class=&quot;meta&quot;&gt;
+              &lt;span class=&quot;price&quot;&gt;₹2,199&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;card-actions&quot;&gt;
+            &lt;button class=&quot;btn&quot;&gt;Add to Cart&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+
+        &lt;!-- CARD 4 --&gt;
+        &lt;article class=&quot;card&quot;&gt;
+          &lt;img class=&quot;card-img&quot; src=&quot;https://picsum.photos/seed/p4/480/320&quot; alt=&quot;Product 4&quot; /&gt;
+          &lt;div class=&quot;card-body&quot;&gt;
+            &lt;h2 class=&quot;card-title&quot;&gt;Ergo Keyboard&lt;/h2&gt;
+            &lt;p class=&quot;card-desc&quot;&gt;Split design to reduce strain during long sessions.&lt;/p&gt;
+            &lt;div class=&quot;meta&quot;&gt;
+              &lt;span class=&quot;price&quot;&gt;₹4,299&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;card-actions&quot;&gt;
+            &lt;button class=&quot;btn&quot;&gt;Add to Cart&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+
+        &lt;!-- TODO: Duplicate any card and customize its content to make at least 5 cards total --&gt;
+
+      &lt;/section&gt;
+    &lt;/main&gt;
+
+    &lt;footer id=&quot;site-footer&quot;&gt;
+      &lt;p class=&quot;footer-text&quot;&gt;© 2025 Acme Storefront&lt;/p&gt;
+      &lt;!-- TODO: Add a link.footer-link to your GitHub or demo project --&gt;
+    &lt;/footer&gt;
+
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818d-8f39-c0e46321fc69"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-811a-a4ef-fddc934374c4" class="">Initial CSS (with CSS TODOs)</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-9495-fd6f16bd1092" class=""><strong>styles.css</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818b-99da-d19af59887d5" class="code code-wrap"><code class="language-css" style="white-space:pre-wrap;word-break:break-all">/* === Reset &amp; Base === */
+/* TODO: Universal reset for margin, padding, and set box-sizing */
+* {
+  /* your code */
+}
+
+/* TODO: Body base
+   - Set a clean font, text color, background
+   - Line-height for readability */
+body {
+  /* your code */
+}
+
+/* === Layout Wrappers === */
+/* TODO: .container
+   - max-width (e.g., 1100px)
+   - center with margin
+   - horizontal padding */
+.container {
+  /* your code */
+}
+
+/* TODO: #site-header
+   - vertical spacing
+   - center text */
+#site-header {
+  /* your code */
+}
+
+.page-title {
+  /* TODO: bottom margin */
+}
+
+.page-subtitle {
+  /* TODO: muted color and small bottom margin */
+}
+
+/* === Card Grid (no flex/grid) === */
+/* Use inline-block for columns and manage horizontal gaps with margins */
+.cards {
+  /* TODO: top spacing from header */
+}
+
+/* TODO: .card
+   - display: inline-block
+   - width (e.g., 31% to allow 3 per row with margins)
+   - vertical-align: top
+   - background-color: #fff
+   - border, border-radius
+   - margin (to create gaps)
+   - overflow: hidden (to clip image corners) */
+.card {
+  /* your code */
+}
+
+/* === Card Parts === */
+/* TODO: .card-img
+   - display: block
+   - width: 100%
+   - height: auto */
+.card-img {
+  /* your code */
+}
+
+/* TODO: .card-body
+   - padding
+   - manage spacing to next block */
+.card-body {
+  /* your code */
+}
+
+/* TODO: .card-title
+   - font-size
+   - margin-bottom */
+.card-title {
+  /* your code */
+}
+
+/* TODO: .card-desc
+   - color (slightly muted)
+   - margin-bottom */
+.card-desc {
+  /* your code */
+}
+
+/* TODO: .meta
+   - spacing top/bottom inside card-body */
+.meta {
+  /* your code */
+}
+
+/* TODO: .price
+   - stronger weight or color emphasis */
+.price {
+  /* your code */
+}
+
+/* TODO: .badge
+   - optional: small inline box with padding, border, and rounded corners */
+.badge {
+  /* your code */
+}
+
+/* TODO: .card-actions
+   - padding
+   - border-top to separate from body */
+.card-actions {
+  /* your code */
+}
+
+/* TODO: .btn
+   - display: block or inline-block
+   - padding
+   - border
+   - background-color
+   - color
+   - border-radius
+   - cursor: pointer */
+.btn {
+  /* your code */
+}
+
+/* === Footer === */
+/* TODO: #site-footer
+   - top margin
+   - background-color (soft)
+   - centered text
+   - padding
+   - border-radius (optional) */
+#site-footer {
+  /* your code */
+}
+
+.footer-text {
+  /* your code */
+}
+
+.footer-link {
+  /* your code */
+}
+
+/* === Grouping Selector Example === */
+/* TODO: Share small letter-spacing across titles and footer-text */
+.card-title,
+.footer-text {
+  /* your code */
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-b26b-d3f6dad3462d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816e-917c-c7fb39e3b01d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e9-bf4b-d63cdb518c46" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

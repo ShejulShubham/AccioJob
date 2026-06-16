@@ -1,0 +1,984 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Practice Page I</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-81f5-bb71-e0695e5a33e6" class="page sans"><header><h1 class="page-title" dir="auto">Practice Page I</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="ltr"><figure id="2df155e4-633e-8140-99eb-d2e3c0e35f34" class="image"><a href="Practice%20Page%20I/127.0.0.1_5500_index.html_(1).png"><img style="width:2490px" src="Practice%20Page%20I/127.0.0.1_5500_index.html_(1).png"/></a></figure></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8142-a60c-f05aa799c21c" class="">📄 <code>index.html</code></h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2df155e4-633e-81a1-902e-fcd2c1375ec5" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;/&gt;
+  &lt;title&gt;Interactive Posterfolio &lt;!-- TODO: rename project title --&gt;&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- ====== HEADER ====== --&gt;
+  &lt;header class=&quot;site-header&quot;&gt;
+    &lt;div class=&quot;brand&quot;&gt;
+      &lt;div class=&quot;logo-dot&quot;&gt;&lt;/div&gt;
+      &lt;h1 class=&quot;brand-title&quot;&gt;Posterfolio &lt;!-- TODO: change brand name --&gt;&lt;/h1&gt;
+    &lt;/div&gt;
+    &lt;nav class=&quot;nav&quot;&gt;
+      &lt;!-- TODO: Replace # with real section IDs below --&gt;
+      &lt;a href=&quot;#hero&quot; class=&quot;nav-link&quot;&gt;Home&lt;/a&gt;
+      &lt;a href=&quot;#features&quot; class=&quot;nav-link&quot;&gt;Highlights&lt;/a&gt;
+      &lt;a href=&quot;#gallery&quot; class=&quot;nav-link&quot;&gt;Gallery&lt;/a&gt;
+      &lt;a href=&quot;#cta&quot; class=&quot;nav-link&quot;&gt;Contact&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;!-- ====== HERO / POSTER ====== --&gt;
+  &lt;section id=&quot;hero&quot; class=&quot;hero&quot;&gt;
+    &lt;div class=&quot;hero-art&quot;&gt;
+      &lt;!-- Decorative floating shapes --&gt;
+      &lt;span class=&quot;blob b1&quot;&gt;&lt;/span&gt;
+      &lt;span class=&quot;blob b2&quot;&gt;&lt;/span&gt;
+      &lt;span class=&quot;blob b3&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;hero-content&quot;&gt;
+      &lt;h2 class=&quot;hero-title&quot;&gt;Design Your Story
+        &lt;!-- TODO: change main headline --&gt;
+      &lt;/h2&gt;
+      &lt;p class=&quot;hero-subtitle&quot;&gt;
+        A minimal, interactive one-page poster to showcase you or your project.
+        &lt;!-- TODO: personalize this line --&gt;
+      &lt;/p&gt;
+      &lt;a href=&quot;#features&quot; class=&quot;btn primary-btn&quot;&gt;Explore Highlights&lt;/a&gt;
+      &lt;!-- TODO: Add a second button that links to #gallery --&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;!-- ====== FEATURE STRIP ====== --&gt;
+  &lt;section id=&quot;features&quot; class=&quot;features&quot;&gt;
+    &lt;article class=&quot;feature-card&quot;&gt;
+      &lt;div class=&quot;feature-icon&quot;&gt;★&lt;/div&gt;
+      &lt;h3 class=&quot;feature-title&quot;&gt;Clean Layout&lt;/h3&gt;
+      &lt;p class=&quot;feature-text&quot;&gt;
+        Simple sections and gentle motion keep focus on content.
+      &lt;/p&gt;
+      &lt;!-- TODO: Replace icon and text to match your theme --&gt;
+    &lt;/article&gt;
+
+    &lt;article class=&quot;feature-card&quot;&gt;
+      &lt;div class=&quot;feature-icon&quot;&gt;✦&lt;/div&gt;
+      &lt;h3 class=&quot;feature-title&quot;&gt;Subtle Motion&lt;/h3&gt;
+      &lt;p class=&quot;feature-text&quot;&gt;
+        Basic transforms &amp; transitions make it feel alive.
+      &lt;/p&gt;
+    &lt;/article&gt;
+
+    &lt;article class=&quot;feature-card&quot;&gt;
+      &lt;div class=&quot;feature-icon&quot;&gt;✺&lt;/div&gt;
+      &lt;h3 class=&quot;feature-title&quot;&gt;Lightweight&lt;/h3&gt;
+      &lt;p class=&quot;feature-text&quot;&gt;
+        Pure HTML &amp; CSS—no JS required.
+      &lt;/p&gt;
+    &lt;/article&gt;
+    &lt;!-- TODO: Add 1 more feature-card of your own --&gt;
+  &lt;/section&gt;
+
+  &lt;!-- ====== GALLERY STRIP ====== --&gt;
+  &lt;section id=&quot;gallery&quot; class=&quot;gallery&quot;&gt;
+    &lt;!-- TODO: Replace placeholders with your images (royalty-free) and alt text --&gt;
+    &lt;figure class=&quot;tile&quot;&gt;
+      &lt;img src=&quot;https://picsum.photos/seed/one/600/400&quot; alt=&quot;Placeholder artwork one&quot;/&gt;
+      &lt;figcaption&gt;Concept One&lt;/figcaption&gt;
+    &lt;/figure&gt;
+    &lt;figure class=&quot;tile&quot;&gt;
+      &lt;img src=&quot;https://picsum.photos/seed/two/600/400&quot; alt=&quot;Placeholder artwork two&quot;/&gt;
+      &lt;figcaption&gt;Concept Two&lt;/figcaption&gt;
+    &lt;/figure&gt;
+    &lt;figure class=&quot;tile&quot;&gt;
+      &lt;img src=&quot;https://picsum.photos/seed/three/600/400&quot; alt=&quot;Placeholder artwork three&quot;/&gt;
+      &lt;figcaption&gt;Concept Three&lt;/figcaption&gt;
+    &lt;/figure&gt;
+    &lt;figure class=&quot;tile&quot;&gt;
+      &lt;img src=&quot;https://picsum.photos/seed/four/600/400&quot; alt=&quot;Placeholder artwork four&quot;/&gt;
+      &lt;figcaption&gt;Concept Four&lt;/figcaption&gt;
+    &lt;/figure&gt;
+  &lt;/section&gt;
+
+  &lt;!-- ====== CTA STRIP ====== --&gt;
+  &lt;section id=&quot;cta&quot; class=&quot;cta&quot;&gt;
+    &lt;h3 class=&quot;cta-title&quot;&gt;Build Something Beautiful&lt;/h3&gt;
+    &lt;p class=&quot;cta-text&quot;&gt;
+      Customize colors, content, and tiles. Make this poster truly yours.
+      &lt;!-- TODO: swap with your call-to-action --&gt;
+    &lt;/p&gt;
+    &lt;a href=&quot;#hero&quot; class=&quot;btn outline-btn&quot;&gt;Back to Top&lt;/a&gt;
+    &lt;!-- TODO: Replace with a real link (mailto/portfolio/LinkedIn) --&gt;
+  &lt;/section&gt;
+
+  &lt;!-- ====== FOOTER ====== --&gt;
+  &lt;footer class=&quot;site-footer&quot;&gt;
+    &lt;p&gt;© &lt;span id=&quot;year&quot;&gt;2025&lt;/span&gt; &lt;!-- TODO: update year automatically if you add JS later --&gt;
+      &lt;strong&gt;Your Name&lt;/strong&gt;. All rights reserved.
+      &lt;!-- TODO: replace name --&gt;
+    &lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8132-8708-db2aea1a0f46"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810b-8287-f083d00884e5" class="">🎨 <code>style.css</code></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-811c-b7de-dba37116dc2c" class="code code-wrap"><code class="language-css" style="white-space:pre-wrap;word-break:break-all">/* ========== BASE / THEME ========== */
+/* TODO: Adjust the color palette to match your vibe */
+:root { /* (No CSS variables used for values to keep it basic) */ }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: system-ui, Arial, sans-serif;
+  color: #111;
+  background: #f7f7fb;
+  line-height: 1.5;
+}
+
+/* Reusable */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease, color 200ms ease;
+}
+.primary-btn { background: #111; color: #fff; }
+.primary-btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+.outline-btn { border-color: #111; color: #111; background: transparent; }
+.outline-btn:hover { background: #111; color: #fff; transform: translateY(-2px); }
+
+/* ========== HEADER ========== */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  background: #ffffffcc; backdrop-filter: blur(6px); /* basic, still looks modern */
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; border-bottom: 1px solid #eee;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.logo-dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: #111;
+  animation: pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+.brand-title { font-size: 18px; margin: 0; }
+.nav { display: flex; gap: 12px; }
+.nav-link {
+  color: #111; text-decoration: none; padding: 8px 10px; border-radius: 6px;
+  transition: background 200ms ease, transform 200ms ease;
+}
+.nav-link:hover { background: #efefef; transform: translateY(-1px); }
+
+/* ========== HERO ========== */
+.hero {
+  position: relative; overflow: hidden;
+  min-height: 78vh; display: grid; place-items: center;
+  padding: 56px 16px; background: linear-gradient(180deg, #fff, #f2f5ff);
+}
+.hero-art { position: absolute; inset: 0; pointer-events: none; }
+.blob {
+  position: absolute; width: 160px; height: 160px; border-radius: 24px;
+  background: #111; opacity: 0.06; filter: blur(2px);
+  animation: float 9s ease-in-out infinite;
+}
+.b1 { top: 12%; left: 8%; transform: rotate(6deg); }
+.b2 { top: 40%; right: 10%; animation-duration: 11s; }
+.b3 { bottom: 8%; left: 30%; animation-duration: 13s; }
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(3deg); }
+}
+
+.hero-content { text-align: center; max-width: 720px; }
+.hero-title { font-size: 44px; line-height: 1.1; margin: 0 0 10px; }
+.hero-subtitle { margin: 0 0 18px; color: #444; }
+
+/* ========== FEATURES ========== */
+.features {
+  display: flex; flex-wrap: wrap; gap: 16px;
+  padding: 40px 16px; justify-content: center;
+  background: #fff;
+}
+.feature-card {
+  width: 260px; padding: 18px; border-radius: 14px; border: 1px solid #eee;
+  background: #fafafa; transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.feature-card:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(0,0,0,0.10); }
+.feature-icon { font-size: 22px; }
+.feature-title { margin: 8px 0 6px; font-size: 18px; }
+.feature-text { margin: 0; color: #555; }
+
+/* ========== GALLERY ========== */
+.gallery {
+  padding: 40px 16px; background: #f8f9ff;
+  display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+}
+.tile {
+  width: 260px; border-radius: 12px; overflow: hidden; background: #fff; border: 1px solid #eee;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.tile img { display: block; width: 100%; height: auto; }
+.tile figcaption { padding: 10px; font-size: 14px; color: #333; }
+.tile:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 16px 28px rgba(0,0,0,0.12); }
+
+/* ========== CTA ========== */
+.cta {
+  padding: 56px 16px; text-align: center; background: #fff;
+}
+.cta-title { font-size: 28px; margin: 0 0 10px; }
+.cta-text { margin: 0 0 18px; color: #444; }
+
+/* ========== FOOTER ========== */
+.site-footer {
+  padding: 20px 16px; text-align: center; color: #666; background: #f2f2f7;
+  border-top: 1px solid #eaeaea;
+}
+
+/* ========== (Optional) Tiny Responsive Tweak ========== */
+/* TODO: If allowed, uncomment this basic media query for smaller screens */
+/*
+@media (max-width: 520px) {
+  .hero-title { font-size: 34px; }
+  .feature-card, .tile { width: 100%; max-width: 360px; }
+}
+*/
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81bb-a390-d724c8629979"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81e1-95be-d16ec8e37947" class="">✅ Student TODOs</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-810a-b50f-c73b0730cc90" class="numbered-list" start="1"><li>Rename the <strong>project title</strong> and <strong>brand name</strong>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-813c-a781-c3f0fdf6ff22" class="numbered-list" start="2"><li>Update <strong>nav links</strong> to match sections (IDs already present).</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8121-b070-f1b883bc24f0" class="numbered-list" start="3"><li>Customize the <strong>hero headline</strong> and <strong>subtitle</strong>; add a <strong>second button</strong> to <code>#gallery</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8151-87f8-c13420d0d910" class="numbered-list" start="4"><li>Replace <strong>feature icons/text</strong>; <strong>add one more</strong> <code>.feature-card</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8122-bc01-dee08da5fcb8" class="numbered-list" start="5"><li>Swap gallery images &amp; write <strong>meaningful alt text</strong>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8186-afb1-eed1fbcdd631" class="numbered-list" start="6"><li>Edit <strong>CTA</strong> copy and link (e.g., mailto or portfolio).</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81d1-ae7a-dbb142141167" class="numbered-list" start="7"><li>Replace <strong>footer name</strong> and year (or add JS later to auto-update).</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8110-b80d-c18aa960dd82" class="numbered-list" start="8"><li>Change the <strong>color feel</strong> by tweaking backgrounds/borders (keep it simple).</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8167-934c-fc58b37ae801" class="numbered-list" start="9"><li>(Optional) <strong>Uncomment the media query</strong> for small screens.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8138-aa35-f9ce48901c6a" class="numbered-list numbered-list-digits-2" start="10"><li>Keep motion subtle—no flashy animations; you may add 1 tasteful hover to <code>.nav-link</code> or <code>.btn</code>.</li></ol></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

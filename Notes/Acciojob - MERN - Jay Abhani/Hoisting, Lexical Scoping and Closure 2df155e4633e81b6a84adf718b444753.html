@@ -1,0 +1,1026 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Hoisting, Lexical Scoping and Closure</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-81b6-a84a-df718b444753" class="page sans"><header><h1 class="page-title" dir="auto">Hoisting, Lexical Scoping and Closure</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810d-8358-c5c89a587225" class=""><strong>Hoisting in JavaScript: Comprehensive Explanation</strong></h3></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819a-b075-fea0912f4893"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8101-bd60-dd9cbbbb2c39" class=""><strong>What is Hoisting?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8122-8576-fcfc4b850c79" class="">Hoisting is a mechanism in JavaScript where variable and function declarations are moved to the top of their containing scope during the <strong>creation phase</strong> of the execution context. This means you can reference variables or functions before their declaration in code, though their behavior depends on how they are declared (<code>var</code>, <code>let</code>, <code>const</code>, or as functions).</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c5-9fb6-ee578ade270b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b9-8c35-f16f2f006982" class=""><strong>How Hoisting Works?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8105-a63f-f0e6c81814b8" class="">When JavaScript code is executed, two phases occur:</p></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8175-9429-dd2b81d45c50" class="numbered-list" start="1"><li><strong>Creation Phase</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-812d-9ea7-c1ab74db8518" class="bulleted-list"><li style="list-style-type:disc">Memory is allocated for variables, functions, and classes.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810d-80d8-f68f7a464a89" class="bulleted-list"><li style="list-style-type:disc">Declarations are hoisted to the top of their scope.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813c-9f0a-c5f5f01e3755" class="bulleted-list"><li style="list-style-type:disc">Initialization is done differently based on the type (<code>undefined</code> for <code>var</code>, no initialization for <code>let</code> and <code>const</code>, and full hoisting for function declarations).</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81f2-a890-f3b1b665fe37" class="numbered-list" start="2"><li><strong>Execution Phase</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8114-a4bf-f0e882ee1250" class="bulleted-list"><li style="list-style-type:disc">Code is executed line by line.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d0-9a11-eb19aad5fb57" class="bulleted-list"><li style="list-style-type:disc">Variables and functions are assigned values if their initialization exists in the code.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8147-b576-c50bc6b6e04e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8184-baa7-cfa8005c1e24" class=""><strong>Behavior of Hoisting for Variables</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81a4-a1dd-ddbb0838491a" class="numbered-list" start="1"><li><code><strong>var</strong></code>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81db-96bb-c5d9e5bcbe92" class="bulleted-list"><li style="list-style-type:disc">Hoisted to the top of the scope and initialized with <code>undefined</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ce-80f4-da35577cd5be" class="bulleted-list"><li style="list-style-type:disc">Can be accessed before its declaration, but the value will be <code>undefined</code>.</li></ul></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-8196-bf3e-cef2a92abc36" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(a); // undefined
+var a = 10;
+console.log(a); // 10
+</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-812d-a529-c5a910338543" class="numbered-list" start="2"><li><code><strong>let</strong></code><strong> and </strong><code><strong>const</strong></code>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f3-bb22-d5dc185ac201" class="bulleted-list"><li style="list-style-type:disc">Hoisted but <strong>not initialized</strong>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8136-8e0c-f9e9e5d2637a" class="bulleted-list"><li style="list-style-type:disc">Exist in the <strong>Temporal Dead Zone (TDZ)</strong> until the code reaches their declaration.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c0-9e26-e25eb85474a4" class="bulleted-list"><li style="list-style-type:disc">Accessing them before declaration results in a <code>ReferenceError</code>.</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8158-af37-e8116f04c8f7" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(b); // ReferenceError: Cannot access &#x27;b&#x27; before initialization
+let b = 20;
+</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8112-b59f-ebf409a2034c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8145-bb94-f0918681b956" class=""><strong>Temporal Dead Zone (TDZ)</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8133-b365-cfc6bcd7b353" class="">The <strong>TDZ</strong> is the period between the start of the block and the point where the variable is declared. Variables in the TDZ are hoisted but cannot be accessed until the code execution reaches their declaration.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810e-aad0-e7f13af63ce3" class=""><strong>Example</strong>:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8109-af15-ef3d793b7985" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">{
+    console.log(x); // ReferenceError
+    let x = 5;      // x is hoisted but in TDZ
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815d-a848-c1dce1e56e3a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815b-ab50-c092a855d218" class=""><strong>Behavior of Hoisting for Functions</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-817f-a690-dbdcee535ed5" class="numbered-list" start="1"><li><strong>Function Declarations</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8142-b3cc-f3fe353730ac" class="bulleted-list"><li style="list-style-type:disc">Fully hoisted, including their body.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8173-bcf2-cb881d03020e" class="bulleted-list"><li style="list-style-type:disc">Can be called before their declaration.</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818d-8cc5-fc3638a305be" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">greet(); // &quot;Hello!&quot;
+function greet() {
+    console.log(&quot;Hello!&quot;);
+}
+</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81ed-9d5a-c41a8b57be0c" class="numbered-list" start="2"><li><strong>Function Expressions</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8102-a69e-ed85ce878ed3" class="bulleted-list"><li style="list-style-type:disc">Behave like variables.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8178-8130-d0e8a16cc18f" class="bulleted-list"><li style="list-style-type:disc">Their hoisting depends on how they are declared (<code>var</code>, <code>let</code>, or <code>const</code>).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8150-a60e-d8e30230b630" class="bulleted-list"><li style="list-style-type:disc">Not initialized during hoisting.</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-813b-9d5d-e902c9c756cb" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(greet); // undefined (because `var` is hoisted as undefined)
+var greet = function () {
+    console.log(&quot;Hi!&quot;);
+};
+
+console.log(greet); // Function is now defined
+</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8126-9c0f-c27e78edec9a" class="numbered-list" start="3"><li><strong>Arrow Functions</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8112-8da1-ebf09454b3f4" class="bulleted-list"><li style="list-style-type:disc">Also behave like variables and depend on how they are declared (<code>let</code>, <code>const</code>, or <code>var</code>).</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e7-b89f-ea2e4e7fb8f3"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816b-93f1-c159281ecdc4" class=""><strong>Behavior of Hoisting for Classes</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8186-8e41-fd430129522e" class="">Classes are hoisted but not initialized, meaning they behave like <code>let</code> and <code>const</code>:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813b-95eb-c70c93944e62" class="bulleted-list"><li style="list-style-type:disc">Accessing a class before its declaration results in a <code>ReferenceError</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8111-915c-c96255f47743" class="bulleted-list"><li style="list-style-type:disc">Methods and static properties are not hoisted individually; the class must be fully declared before it can be used.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c2-b684-ef8fcd56ba35" class=""><strong>Example</strong>:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81cb-b1f8-fa337cb0c252" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">const obj = new MyClass(); // ReferenceError
+class MyClass {
+    constructor() {
+        this.name = &quot;Example&quot;;
+    }
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fc-b184-f968f06075a2"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8173-be62-d58ad0349c0f" class=""><strong>Hoisting in Function Parameters</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8173-b697-d9adfe39d67c" class="">Function parameters are implicitly hoisted, similar to <code>let</code>. However, they are automatically initialized with the value passed during the function call or <code>undefined</code> if no value is provided.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cf-9d52-e4c0715f8560" class=""><strong>Example</strong>:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812f-9c8e-ea832ca52e2d" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function myFunc(param1, param2) {
+    console.log(param1); // 10
+    console.log(param2); // undefined (no value passed)
+}
+myFunc(10);
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f2-bb55-e3733df91fd3" class=""><strong>Key Details:</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81fb-87b8-ff5ee5514d1b" class="numbered-list" start="1"><li>Parameters cannot be redeclared inside the function using <code>let</code> or <code>const</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-816c-8010-e2002d91c66a" class="numbered-list" start="2"><li>They can be shadowed inside nested blocks.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815e-b08f-cbf46a4a3496"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ea-801a-dfcfc44b2bd2" class=""><strong>Scopes in JavaScript</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81bb-a2a4-ed548a2c234d" class="numbered-list" start="1"><li><strong>Global Scope</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8186-b4e9-ee6d7fa43a17" class="bulleted-list"><li style="list-style-type:disc">Variables declared outside of functions or blocks.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81df-aa04-dfa8c8300ec4" class="bulleted-list"><li style="list-style-type:disc">Accessible throughout the program.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8115-92ad-d2921451d58f" class="numbered-list" start="2"><li><strong>Function Scope</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f2-9a99-d0452467a829" class="bulleted-list"><li style="list-style-type:disc">Variables declared with <code>var</code> inside a function are accessible only within that function.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-810d-ab61-f8b9288ac273" class="numbered-list" start="3"><li><strong>Block Scope</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8187-8a69-d9358cd0cbc9" class="bulleted-list"><li style="list-style-type:disc">Variables declared with <code>let</code> or <code>const</code> are accessible only within the block they are defined in.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8162-acb9-e4ce56642626"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813b-948c-ca3bc74695ff" class=""><strong>Why Hoisting Happens?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8179-a288-e0902f9a7d04" class="">The purpose of hoisting is to allow flexible ordering of code. By hoisting declarations to the top of the scope, JavaScript ensures that the interpreter recognizes variables, functions, and classes even if they are referenced before being explicitly declared.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8182-b609-d83f3c445665"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8155-9dc5-df60a8aeca8d" class=""><strong>Key Differences in Hoisting</strong></h3></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-811e-9e76-e45f6008763d" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81f8-84d9-f377302a392c"><td id="[c_W" class=""><strong>Entity</strong></td><td id="}SE?" class=""><strong>Hoisted?</strong></td><td id="}L:~" class=""><strong>Initialized?</strong></td><td id="_o&gt;t" class=""><strong>Access Before Declaration?</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81a0-a509-edb2de1a0495"><td id="[c_W" class=""><code><strong>var</strong></code></td><td id="}SE?" class="">Yes</td><td id="}L:~" class=""><code>undefined</code></td><td id="_o&gt;t" class="">Yes, but value is <code>undefined</code>.</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8195-ab72-d30d417d9ced"><td id="[c_W" class=""><code><strong>let</strong></code></td><td id="}SE?" class="">Yes</td><td id="}L:~" class="">No (TDZ)</td><td id="_o&gt;t" class="">No, <code>ReferenceError</code>.</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8117-99d0-e8f276c97eb2"><td id="[c_W" class=""><code><strong>const</strong></code></td><td id="}SE?" class="">Yes</td><td id="}L:~" class="">No (TDZ)</td><td id="_o&gt;t" class="">No, <code>ReferenceError</code>.</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81fc-8225-f0db1d508f06"><td id="[c_W" class=""><strong>Function Declaration</strong></td><td id="}SE?" class="">Yes</td><td id="}L:~" class="">Fully hoisted with body</td><td id="_o&gt;t" class="">Yes, can call before declaration.</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8123-8262-fd7dd8797e56"><td id="[c_W" class=""><strong>Function Expression (</strong><code><strong>var</strong></code><strong>)</strong></td><td id="}SE?" class="">Yes</td><td id="}L:~" class=""><code>undefined</code></td><td id="_o&gt;t" class="">No, behaves like <code>var</code>.</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-814a-a4df-e407963dffd8"><td id="[c_W" class=""><strong>Function Expression (</strong><code><strong>let</strong></code><strong> or </strong><code><strong>const</strong></code><strong>)</strong></td><td id="}SE?" class="">Yes</td><td id="}L:~" class="">No (TDZ)</td><td id="_o&gt;t" class="">No, <code>ReferenceError</code>.</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8138-9d60-c15dab33e5eb"><td id="[c_W" class=""><strong>Class</strong></td><td id="}SE?" class="">Yes</td><td id="}L:~" class="">No (TDZ)</td><td id="_o&gt;t" class="">No, <code>ReferenceError</code>.</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8196-8fa4-c0f25d62271a"><td id="[c_W" class=""><strong>Function Parameters</strong></td><td id="}SE?" class="">Yes</td><td id="}L:~" class="">Initialized with argument value</td><td id="_o&gt;t" class="">Yes, using the passed argument value.</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8182-8837-e2c1d14f6805"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8101-aea7-eaab2ebbafde" class=""><strong>Practical Examples</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81e8-9b9a-e4f23c85cba7" class="numbered-list" start="1"><li><code><strong>var</strong></code><strong> Hoisting</strong>:<div style="display:contents" dir="auto"><pre id="2df155e4-633e-8125-8af8-e745e2b9abee" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(x); // undefined
+var x = 10;
+console.log(x); // 10
+</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8174-8e56-ee997e7eb775" class="numbered-list" start="2"><li><code><strong>let</strong></code><strong> and TDZ</strong>:<div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ab-9371-f1c85dff06cc" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(y); // ReferenceError
+let y = 20;
+</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-813f-9321-d1b37d3c02b1" class="numbered-list" start="3"><li><strong>Function Declaration</strong>:<div style="display:contents" dir="auto"><pre id="2df155e4-633e-81aa-a18c-c9c49d4bc5df" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">greet(); // &quot;Hello!&quot;
+function greet() {
+    console.log(&quot;Hello!&quot;);
+}
+</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81f1-9e48-d2fd14909e49" class="numbered-list" start="4"><li><strong>Class Hoisting</strong>:<div style="display:contents" dir="auto"><pre id="2df155e4-633e-811a-b12e-c5e78d224b89" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">const obj = new MyClass(); // ReferenceError
+class MyClass {
+    constructor() {
+        this.name = &quot;Example&quot;;
+    }
+}
+</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81ae-8174-caf5e02dc9ee" class="numbered-list" start="5"><li><strong>Function Parameters</strong>:<div style="display:contents" dir="auto"><pre id="2df155e4-633e-814c-9635-c50db66a9f07" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function myFunc(param1 = 5) {
+    console.log(param1); // 10
+}
+myFunc(10);
+</code></pre></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817c-a238-d83b1b833fd8"/></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-8e1a-e0e944c1efa1" class="">By understanding hoisting and scoping, you can write more predictable and bug-free JavaScript code.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-9ff0-eea41af60fb4" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b1-b462-cc5799559194" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e1-98f4-e5deaaee2074" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-a12e-e9f10c018c3b" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813f-ba3b-d25eef56d9dc" class=""><strong>Lexical Scoping in JavaScript: Simple Explanation</strong></h3></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810f-b4e8-c16c611f50fa"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816d-ac9d-f8a3678478c4" class=""><strong>What is Lexical Scoping?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-afa9-d86a95acf017" class="">Imagine your code is like a set of <strong>nested boxes</strong> (scopes), where each box contains variables. <strong>Lexical scoping</strong> means that a function can look into the boxes it is written inside (outer scopes) to find variables, but it cannot see inside smaller boxes (inner scopes).</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8198-914a-db059cc7f441"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-819b-b766-c3368bdf639a" class=""><strong>Key Points About Lexical Scoping</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-813e-8a5d-cf1658539028" class="numbered-list" start="1"><li><strong>Where Variables Can Be Accessed</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d4-af1f-c7220ba3e00d" class="bulleted-list"><li style="list-style-type:disc">A function can use variables from its own box (scope) and any boxes it is written inside (outer scopes).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818a-ac19-cf69a0c8f7d8" class="bulleted-list"><li style="list-style-type:disc">A variable outside a function cannot access variables inside the function.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-810f-bdef-c177f9771741" class="numbered-list" start="2"><li><strong>Why &quot;Lexical&quot;?</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8191-a153-f1da7b0a7581" class="bulleted-list"><li style="list-style-type:disc">It’s called <strong>lexical</strong> because it depends on <strong>where the function is written</strong> in the code, not where it is called.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812c-9fbc-fb7f647a0947"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81cb-90a8-f60fe94c8e33" class=""><strong>Simple Example</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81dd-91d2-e2ffa42d22e7" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function outerFunction() {
+    let outerVariable = &quot;Hello from the outer scope&quot;;
+
+    function innerFunction() {
+        console.log(outerVariable); // Can access outerVariable
+    }
+
+    innerFunction();
+}
+
+outerFunction();
+// Output: &quot;Hello from the outer scope&quot;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a0-bbfb-ea7a5c870bbf" class=""><strong>What’s Happening?</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a4-905b-faaca4a0e38b" class="bulleted-list"><li style="list-style-type:disc"><code>outerFunction</code> creates a variable called <code>outerVariable</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8147-a1af-fa164f1479ad" class="bulleted-list"><li style="list-style-type:disc"><code>innerFunction</code> is written <strong>inside</strong> <code>outerFunction</code>, so it can access <code>outerVariable</code>.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810e-9e5f-e15d83c621d6"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8170-9274-e523cdcd34e5" class=""><strong>Scope: The Box Example</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e0-81ef-f0eb31c95e3b" class="">Think of this:</p></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8113-825d-d1300b2f31e8" class="numbered-list" start="1"><li><strong>Global Scope</strong> (biggest box):<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8100-9833-e97bfcf39277" class="bulleted-list"><li style="list-style-type:disc">Variables here are available everywhere.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81e2-a3a3-c52eefbada99" class="numbered-list" start="2"><li><strong>Function Scope</strong> (smaller box inside global):<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8185-8ccb-f0ee55eaed59" class="bulleted-list"><li style="list-style-type:disc">Variables here are only available inside the function.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8199-a2ac-e0262039be03" class="numbered-list" start="3"><li><strong>Block Scope</strong> (even smaller box inside a function):<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8122-ae25-f715951ed42f" class="bulleted-list"><li style="list-style-type:disc">Variables declared with <code>let</code> or <code>const</code> inside <code>{}</code> are only available inside that block.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8108-a9cf-c87ac41970a8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c9-87a1-c8ab9e852a58" class=""><strong>Scope Chain</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-82f5-fd2ea7c0c971" class="">When a variable is used, JavaScript looks for it in the current box (scope). If it doesn’t find it, it looks into the outer box. This is called the <strong>scope chain</strong>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8144-b1a2-d9b6ecb9ba30" class=""><strong>Example</strong>:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810e-bc2b-e07b90d8cc80" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function outerFunction() {
+    let outerVariable = &quot;Outer&quot;;
+
+    function innerFunction() {
+        console.log(outerVariable); // Looks in outerFunction&#x27;s box
+    }
+
+    innerFunction();
+}
+
+outerFunction();
+// Output: &quot;Outer&quot;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e6-b6e9-d0c11ace5af0"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8120-9b65-f613415cca68" class=""><strong>Why Can’t Outer Scopes See Inside Inner Scopes?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8133-aade-f4e7357bc76e" class="">Just like a smaller box is closed inside a bigger one, the bigger box cannot see what’s inside the smaller box.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f6-8288-cccbce5a2c81" class=""><strong>Example</strong>:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e5-944a-f1e9032ad76f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function outerFunction() {
+    function innerFunction() {
+        let innerVariable = &quot;Inner&quot;;
+    }
+
+    console.log(innerVariable); // Error: innerVariable is not defined
+}
+
+outerFunction();
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8188-a252-c100281995dc" class="">Here, <code>innerVariable</code> is inside the <code>innerFunction</code> box, so <code>outerFunction</code> cannot see it.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811a-9484-f93fae0bc99b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ad-b49d-ffb9c52d901b" class=""><strong>Lexical Scoping in Real Life</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8162-82fc-dedf1b1a9be3" class="">Lexical scoping enables <strong>closures</strong>, which let a function remember the variables from where it was written.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-9848-c86ebad8116c" class=""><strong>Example</strong>:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ee-8cbd-e628a0e8f96a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function outerFunction() {
+    let counter = 0;
+
+    return function increment() {
+        counter++;
+        console.log(counter);
+    };
+}
+
+const add = outerFunction();
+add(); // 1
+add(); // 2
+add(); // 3
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-af22-e49e6e24a03e" class="">Here’s what happens:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8199-8358-ebfbb3027032" class="bulleted-list"><li style="list-style-type:disc"><code>outerFunction</code> creates a <code>counter</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8119-b64a-c968221193e3" class="bulleted-list"><li style="list-style-type:disc"><code>increment</code> remembers <code>counter</code> because it was written inside <code>outerFunction</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b4-a44e-d7c26b8896e3" class="bulleted-list"><li style="list-style-type:disc">Even after <code>outerFunction</code> finishes, <code>increment</code> can still access <code>counter</code>.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818c-bda3-f2e381baca88"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8139-ab0d-f6856fb12120" class=""><strong>Simple Takeaways</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8159-a09c-df287aacec8a" class="numbered-list" start="1"><li>A function can always see variables in the box (scope) where it was <strong>written</strong>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-816a-91b8-c70eba3a2c8e" class="numbered-list" start="2"><li>JavaScript looks for variables in the current box and keeps looking in outer boxes until it finds the variable or reaches the global box.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81cd-9137-c020477efbd0" class="numbered-list" start="3"><li>This is called <strong>lexical scoping</strong> because it depends on where things are written in the code.</li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a2-a6a2-d44d570c5eb0" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b3-8b5d-e4995bf8acb6" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8173-8798-f076dbc5c8fd" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8195-a237-c38f658533b1" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813e-8bdf-d4278793daf3" class=""><strong>What is a Closure in Simple Terms?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-8a4a-c6da36b1baef" class="">A <strong>closure</strong> happens when a function <strong>remembers</strong> the variables from its outer function <strong>even after the outer function has finished running</strong>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c3-ac54-e2bfdf402a06" class="">Think of it like this:</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8130-91fd-f8f0ec955daa" class="">A function is holding on to a <strong>&quot;backpack&quot;</strong> of variables that were in scope when it was created, so it can use them later, no matter where it’s called.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817e-8da3-eeeb139372f8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c1-a99a-eb20768ef1b0" class=""><strong>How Closures Work</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8111-a2c7-e1ddf244378c" class="numbered-list" start="1"><li>A function is <strong>nested</strong> inside another function.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81a7-a835-f02348fb6d29" class="numbered-list" start="2"><li>The inner function can <strong>access</strong> variables from its outer function.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81c8-bde7-d23a8276f9aa" class="numbered-list" start="3"><li>Even after the outer function is done, the inner function keeps access to those variables because it &quot;remembers&quot; its environment.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81cb-87e1-d54e6649a803"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b9-bd2b-e4bdc63408c2" class=""><strong>A Simple Example</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d7-9b48-cd0b37eaa066" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function outerFunction() {
+    let count = 0; // A variable in the outer function
+
+    function innerFunction() {
+        count++; // Inner function can access `count`
+        console.log(count);
+    }
+
+    return innerFunction; // Return the inner function
+}
+
+const increment = outerFunction(); // Call outerFunction, get `innerFunction`
+increment(); // 1
+increment(); // 2
+increment(); // 3
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8106-abed-dc50a34d430c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8100-ab3b-c98936fea203" class=""><strong>What’s Happening?</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81bb-8647-e4872e3c256c" class="numbered-list" start="1"><li>When <code>outerFunction</code> runs:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-813f-bd6b-c8bca9a6c516" class="bulleted-list"><li style="list-style-type:disc">It creates the <code>count</code> variable.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e3-b82d-f76193452a93" class="bulleted-list"><li style="list-style-type:disc">It defines <code>innerFunction</code> and returns it.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-810a-92aa-c4e093275c14" class="numbered-list" start="2"><li>When you call <code>increment()</code>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-812b-a01b-ff20c714bfe5" class="bulleted-list"><li style="list-style-type:disc"><code>innerFunction</code> is executed.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813d-bc3e-d29501b3b594" class="bulleted-list"><li style="list-style-type:disc">It <strong>remembers</strong> the <code>count</code> variable, even though <code>outerFunction</code> is finished.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8174-af6f-ea0a6d1478c1" class="">This happens because <strong>closures let a function remember its outer variables</strong>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8165-a507-fe01ed4789ce"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e9-88a0-e5cf50111f8d" class=""><strong>Why Closures Are Useful</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bf-a71e-c5283f58ac6b" class="">Closures are useful for many real-life coding scenarios, such as:</p></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81da-926c-fceccc195c4e" class="numbered-list" start="1"><li><strong>Remembering a Value (Encapsulation)</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-810c-9bce-f81ecd53673f" class="bulleted-list"><li style="list-style-type:disc">You can use closures to create private variables that can’t be accessed directly.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-bdcf-dc12a2297855" class=""><strong>Example:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b7-ba41-ebfc1335df51" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function createCounter() {
+    let count = 0;
+
+    return function increment() {
+        count++;
+        return count;
+    };
+}
+
+const counter = createCounter();
+console.log(counter()); // 1
+console.log(counter()); // 2
+console.log(counter()); // 3
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c9-83e7-f8df59c94e66" class="">Here, <code>count</code> is private. It’s only accessible to the <code>increment</code> function.</p></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e4-8925-e5730882187d"/></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8121-9ce7-cab16130ec60" class="numbered-list" start="1"><li><strong>Creating Functions with Specific Data</strong><div style="display:contents" dir="auto"><p id="2df155e4-633e-8168-a9d8-fdcb2ed1abfd" class=""><strong>Example:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810d-a463-d7dbae9ca041" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function createMultiplier(multiplier) {
+    return function multiply(number) {
+        return number * multiplier;
+    };
+}
+
+const double = createMultiplier(2);
+const triple = createMultiplier(3);
+
+console.log(double(5)); // 10
+console.log(triple(5)); // 15
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b4-a3c1-d62482f393e7" class=""><strong>What’s Happening?</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8116-bb46-e98fd5caa2bd" class="bulleted-list"><li style="list-style-type:disc"><code>double</code> remembers <code>multiplier = 2</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811d-8a2f-e5e0520ad9b0" class="bulleted-list"><li style="list-style-type:disc"><code>triple</code> remembers <code>multiplier = 3</code>.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d5-a715-f94d6289c4f5"/></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8102-91c9-c4cd087cd9ed" class="numbered-list" start="1"><li><strong>Event Listeners or Timers</strong><div style="display:contents" dir="auto"><p id="2df155e4-633e-816e-be0a-c3ea49267256" class="">Closures are often used in asynchronous code, like timers or event listeners.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bb-9b95-da3b223b7538" class=""><strong>Example:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8163-a33f-cbd400988682" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function delayedGreeting(name) {
+    setTimeout(function () {
+        console.log(`Hello, ${name}!`);
+    }, 2000);
+}
+
+delayedGreeting(&quot;Sohan&quot;); // After 2 seconds: &quot;Hello, Sohan!&quot;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e8-97b9-d4b62b92b903" class=""><strong>What’s Happening?</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d5-878d-ca7173d4951a" class="bulleted-list"><li style="list-style-type:disc">The function inside <code>setTimeout</code> remembers the <code>name</code> variable.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8119-b94d-d9bea51d0530"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8111-80da-db6240155411" class=""><strong>How Closures Use Memory</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-beb8-f828aedc6708" class="">Closures keep variables alive in memory as long as the inner function exists.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-a5f3-c8d889c7c87a" class="">That’s why closures can lead to <strong>memory usage</strong> if not used carefully.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8149-81b2-d09ae396f55a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8195-80ac-d950c18b1d30" class=""><strong>Key Takeaways</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-817e-a446-d7ea842c51c0" class="numbered-list" start="1"><li><strong>Closures = Function + Variables from Outer Scope</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81cd-8cbd-f3fe3f9e49a3" class="bulleted-list"><li style="list-style-type:disc">A function <strong>remembers</strong> variables from where it was created.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8108-98a6-d57df21d7b55" class="numbered-list" start="2"><li><strong>Closures Are Everywhere</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8162-8a8e-fad9547fd27c" class="bulleted-list"><li style="list-style-type:disc">Whenever you have a function inside another, a closure is created.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-814c-8dc8-f46c24cc37bb" class="numbered-list" start="3"><li><strong>Real-Life Uses</strong>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-818a-94ac-dd39573bc92d" class="bulleted-list"><li style="list-style-type:disc">Maintaining private variables.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ce-9783-dcb058e58dec" class="bulleted-list"><li style="list-style-type:disc">Customizing functions (like the multiplier example).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a5-8bfa-ef710610f997" class="bulleted-list"><li style="list-style-type:disc">Handling asynchronous code (like timers).</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d3-953c-cea7078d9305" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fa-a116-c811f54ff0bd" class=""><strong>Real-Life Use Cases of Closures</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e7-b9fb-cfdd9233366b" class="">Closures are everywhere in JavaScript! Here are some practical implementations to help you understand where and how closures are used in real-world scenarios:</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c2-9516-c204aa6b5b2b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f1-a330-f8d5f3072eac" class=""><strong>1. Data Privacy (Encapsulation)</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8188-b721-d352e84874b2" class="">Closures are often used to create private variables in JavaScript. This is especially useful when you want to hide certain data or logic from outside access.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8124-8fb4-d4eef02a0f86" class=""><strong>Example: Creating a Private Counter</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8188-acdc-c9b0efc8d94d" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function createCounter() {
+    let count = 0; // Private variable
+
+    return {
+        increment: function () {
+            count++;
+            return count;
+        },
+        decrement: function () {
+            count--;
+            return count;
+        },
+        getCount: function () {
+            return count;
+        },
+    };
+}
+
+const counter = createCounter();
+console.log(counter.increment()); // 1
+console.log(counter.increment()); // 2
+console.log(counter.decrement()); // 1
+console.log(counter.getCount());  // 1
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e4-8247-ec0a96e7b733" class=""><strong>Why Useful?</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d0-b708-fd35f30fa0e8" class="bulleted-list"><li style="list-style-type:disc"><code>count</code> is private and cannot be modified directly from outside the <code>createCounter</code> function.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818a-8c8a-c992737e8964"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814a-a4bb-f69a29fea105" class=""><strong>2. Function Factories</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e5-96e2-ed79039af9f8" class="">Closures can generate functions dynamically based on input parameters. This is useful for customizing behavior.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8155-8e94-f795fc36dab8" class=""><strong>Example: Multipliers</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d3-b48b-ffe953ccccc2" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function createMultiplier(multiplier) {
+    return function (number) {
+        return number * multiplier;
+    };
+}
+
+const double = createMultiplier(2);
+const triple = createMultiplier(3);
+
+console.log(double(4)); // 8
+console.log(triple(4)); // 12
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818b-b423-f0d1a55abe87" class=""><strong>Why Useful?</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8144-94cd-c645bcb5350e" class="bulleted-list"><li style="list-style-type:disc">You can create reusable functions without repeating code.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813a-b78d-c4bb04291f63"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8154-8348-df0f8277dccb" class=""><strong>3. Event Listeners</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8161-b89a-cbbda762c0c0" class="">Closures are used in event listeners to &quot;remember&quot; values from the outer scope.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816c-8a57-e53fb6b70bf7" class=""><strong>Example: Button Click Tracker</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810b-97af-ea86f65bb987" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function setupButton() {
+    let clickCount = 0;
+
+    document.getElementById(&quot;myButton&quot;).addEventListener(&quot;click&quot;, function () {
+        clickCount++;
+        console.log(`Button clicked ${clickCount} times`);
+    });
+}
+
+setupButton();
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-a2fd-d0f0501755e8" class=""><strong>Why Useful?</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fc-b52a-d048125d4e94" class="bulleted-list"><li style="list-style-type:disc">The <code>clickCount</code> variable persists across multiple button clicks because of the closure.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a4-8d20-f17b222a9c11"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8108-9188-d64449ed62b2" class=""><strong>4. Timer and Async Operations</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8163-9fd2-ef9c0751b2db" class="">Closures are crucial in asynchronous code like timers or callbacks to remember the state.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8130-8b46-eb0b88cca36a" class=""><strong>Example: Delayed Messages</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815d-83d9-cb13a7bfce6c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function delayedMessage(message, delay) {
+    setTimeout(function () {
+        console.log(message);
+    }, delay);
+}
+
+delayedMessage(&quot;Hello after 2 seconds&quot;, 2000); // Prints after 2 seconds
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-abcc-c94113f8e907" class=""><strong>Why Useful?</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812e-a34a-d61a190727d2" class="bulleted-list"><li style="list-style-type:disc">The function inside <code>setTimeout</code> remembers the <code>message</code> variable due to the closure.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8122-84cc-dd0e2db757a6"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bc-adb0-cbf71dfcf25d" class=""><strong>5. Maintaining State in Iterative Functions</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-bd36-fd682f994fb1" class="">Closures can help when creating functions inside loops to remember the correct value.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-b3df-db94ac48dd19" class=""><strong>Problem: Variable Reference in Loops</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ad-a722-ef134a743747" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function createButtons() {
+    for (let i = 1; i &lt;= 3; i++) {
+        document.getElementById(`button${i}`).addEventListener(&quot;click&quot;, function () {
+            console.log(`Button ${i} clicked`);
+        });
+    }
+}
+
+createButtons();
+// Clicking Button 1 logs: &quot;Button 1 clicked&quot;
+// Clicking Button 2 logs: &quot;Button 2 clicked&quot;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-bcde-c3c053b21529" class="">Here, the block-scoped <code>let</code> in the loop works due to closures.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8120-bc46-eba2b508137f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814d-a447-defd5aab9c5f" class=""><strong>6. Customizable Event Handlers</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8187-9cf2-df55bb609514" class="">Closures allow you to create event handlers with pre-configured data.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-8fb2-db7274979132" class=""><strong>Example: Logging Custom Data</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8110-ac1c-d14d080d6692" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function logOnClick(data) {
+    return function () {
+        console.log(`You clicked: ${data}`);
+    };
+}
+
+const button1 = document.getElementById(&quot;button1&quot;);
+button1.addEventListener(&quot;click&quot;, logOnClick(&quot;Button 1&quot;));
+
+const button2 = document.getElementById(&quot;button2&quot;);
+button2.addEventListener(&quot;click&quot;, logOnClick(&quot;Button 2&quot;));
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-aab9-e0332a61bacd" class=""><strong>Why Useful?</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8117-8a3c-dacfedc21a9f" class="bulleted-list"><li style="list-style-type:disc">You can &quot;pre-load&quot; specific data for each button click without creating global variables.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8171-84a0-c7295377d798"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8113-9dbe-e74d148d7831" class=""><strong>7. Memoization</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a4-b4d7-fae1746e0694" class="">Closures are commonly used to store results of expensive function calls and reuse them when the same inputs are provided.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8111-b65b-ec6bad817bdb" class=""><strong>Example: Fibonacci Memoization</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8169-b3d5-c871a9b87979" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function memoize(fn) {
+    const cache = {};
+
+    return function (num) {
+        if (cache[num] !== undefined) {
+            return cache[num];
+        }
+        const result = fn(num);
+        cache[num] = result;
+        return result;
+    };
+}
+
+function fibonacci(n) {
+    if (n &lt;= 1) return n;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+const memoizedFibonacci = memoize(fibonacci);
+console.log(memoizedFibonacci(40)); // Much faster than plain recursion
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8157-a1b5-dae77128ff5f" class=""><strong>Why Useful?</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8146-b90f-fbe8656f5dff" class="bulleted-list"><li style="list-style-type:disc">Reduces computation time by caching results.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8150-967b-d0e6762e5b4d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ee-b37b-d06509c2ea75" class=""><strong>8. Module Pattern</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f9-a47e-dce7225eae33" class="">Closures allow you to emulate modules, keeping variables private while exposing only necessary functions.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8156-8051-e68a7d0ce749" class=""><strong>Example: Module</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81db-95f1-ce48d172d825" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">const CounterModule = (function () {
+    let count = 0; // Private variable
+
+    return {
+        increment: function () {
+            count++;
+            return count;
+        },
+        reset: function () {
+            count = 0;
+        },
+    };
+})();
+
+console.log(CounterModule.increment()); // 1
+console.log(CounterModule.increment()); // 2
+CounterModule.reset();
+console.log(CounterModule.increment()); // 1
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-9907-fe21259589a3" class=""><strong>Why Useful?</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8163-b2d3-f43dc4cbf964" class="bulleted-list"><li style="list-style-type:disc">Organizes code and protects private data.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8197-9dae-fad7fe4108fc"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815e-98ab-c83d08ca33ad" class=""><strong>9. Dynamic UI Components</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816c-ab6f-fa1ac1a382ab" class="">Closures are helpful in creating components with isolated state for frameworks like React or vanilla JavaScript.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b4-9276-d83b52613125" class=""><strong>Example: Accordion</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8104-b173-db5e32b89952" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function createAccordion(section) {
+    let isOpen = false;
+
+    section.addEventListener(&quot;click&quot;, function () {
+        isOpen = !isOpen;
+        console.log(`Section is now ${isOpen ? &quot;open&quot; : &quot;closed&quot;}`);
+    });
+}
+
+const section1 = document.getElementById(&quot;section1&quot;);
+createAccordion(section1);
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8190-9341-ffa102f06728"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812e-abb8-cfbc77a49320" class=""><strong>10. Function Debouncing or Throttling</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8104-8d20-c3b961d5119a" class="">In performance optimization, closures help manage state across rapid function calls.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b1-9c1a-f1a2423b5222" class=""><strong>Example: Debouncing</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-814d-ae9c-d1b3acaf24ad" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function debounce(func, delay) {
+    let timeout;
+
+    return function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(func, delay);
+    };
+}
+
+const logMessage = debounce(() =&gt; console.log(&quot;Debounced!&quot;), 300);
+logMessage(); // Waits 300ms before executing
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8133-8d41-d26b3b364464" class=""><strong>Why Useful?</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b3-8cf8-eba22dbfdfb2" class="bulleted-list"><li style="list-style-type:disc">Prevents a function from running too frequently.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819f-a743-fd56c91daf88"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d6-81a8-c6156a38e54f" class=""><strong>Summary</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8138-805d-ce30da7c50c4" class="">Closures are incredibly versatile. They allow:</p></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8178-8a56-d3fc2dc08c8e" class="numbered-list" start="1"><li><strong>Data Privacy</strong>: Keeping variables safe from outside interference.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81fd-92c3-ea4a72f27022" class="numbered-list" start="2"><li><strong>State Management</strong>: Storing values for dynamic behavior.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8161-b5d1-d30d16b97a7e" class="numbered-list" start="3"><li><strong>Reusable Functions</strong>: Generating customized functions (e.g., multipliers).</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81ad-ad5e-cf4ea92a0485" class="numbered-list" start="4"><li><strong>Performance</strong>: Optimizing expensive computations with memoization.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8166-a7d2-ca95dd172d02" class="numbered-list" start="5"><li><strong>Dynamic Applications</strong>: Building interactive and event-driven programs.</li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8105-b6ef-e7f251e0979b" class="">In short, closures are a core concept that powers modern JavaScript applications.</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

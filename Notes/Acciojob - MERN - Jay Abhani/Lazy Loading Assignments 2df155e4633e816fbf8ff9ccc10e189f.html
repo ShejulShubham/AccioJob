@@ -1,0 +1,793 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Lazy Loading Assignments</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-816f-bf8f-f9ccc10e189f" class="page sans"><header><h1 class="page-title" dir="auto">Lazy Loading Assignments</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8188-af1a-e37760267347" class="">🧠 MCQs: Lazy Loading in React</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813c-abca-ee10976b0e75" class=""><strong>Q1. What does “lazy loading” primarily optimize in a React application?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-9477-da087022b6b6" class="">A. Memory usage</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-8d84-ea4e01c3f370" class="">B. Network requests and bundle size</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-b2aa-e85c43c31b90" class="">C. React re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-beb3-dadb5223fc59" class="">D. State updates</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ac-9054-d83533296812"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b0-81cb-d068cad534b4" class=""><strong>Q2. When does a lazy-loaded component’s code get downloaded by the browser?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d0-a9de-e13923871428" class="">A. When the app starts</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-b875-e3f85e701cfa" class="">B. During build time</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816d-a8cb-c93cfd25c6f9" class="">C. When the component is rendered for the first time</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8132-a113-dd46368771b9" class="">D. After all components load</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a8-9253-c845fb5c6b20"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8133-916c-e52078d3ab59" class=""><strong>Q3. Where does a lazy-loaded component’s code exist before it is rendered?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-a364-dec6d44167c5" class="">A. In browser memory</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-bd33-cd77b6f47f3c" class="">B. Inside <code>index.html</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-b4b2-c8e21cfd8ec0" class="">C. On the server as a separate JS file</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8197-8fe4-cbb92b4e2517" class="">D. Inside React state</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c6-b5b4-f4a39c307d24"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81db-9d00-f1aa04454bd9" class=""><strong>Q4. Which function is used to lazy load a component in React?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8140-84b0-d7886bbc6746" class="">A. <code>useMemo()</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8146-8491-cb05bd64c5da" class="">B. <code>useEffect()</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8195-aaed-f6052db4239e" class="">C. <code>React.lazy()</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8169-ad84-db5bf3722991" class="">D. <code>React.load()</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81cc-a35c-e75a8b7def0c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8174-9b3c-c0225e47e33b" class=""><strong>Q5. Why is </strong><code><strong>Suspense</strong></code><strong> required with </strong><code><strong>React.lazy</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818e-bd98-ff3b001bf318" class="">A. To prevent re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-923c-f013f91e2fca" class="">B. To handle routing</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8181-8e3b-c80f7b6e703e" class="">C. To show fallback UI while loading async code</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c1-a4dd-d0e5b31c9e8d" class="">D. To cache components</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8167-91d0-cf80c4e49af0"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-817c-af85-cf2188298a4d" class=""><strong>Q6. What happens if a lazy-loaded component is rendered without </strong><code><strong>Suspense</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-baaa-de46c6d68857" class="">A. It works normally</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-b0d9-ff9e2a8391cc" class="">B. React shows nothing</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c8-8cdd-fbc29dd59b32" class="">C. Runtime error occurs</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81de-9086-cb1a29c43fe1" class="">D. Component loads synchronously</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818d-b83d-ec757950d931"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81db-88ef-c3c3138c53fc" class=""><strong>Q7. In a Single Page Application (SPA), what does the server usually send initially?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8152-a2bb-d5a8f814ac0f" class="">A. Multiple HTML files</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d3-a667-e34ec44b5167" class="">B. Only JSON data</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810f-bbc4-daf6f5fd0403" class="">C. One <code>index.html</code> file</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8146-9895-e3b5c99e023a" class="">D. All route pages as HTML</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8166-b4f7-eea29806202f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8174-8924-ed5d91295acc" class=""><strong>Q8. Which statement best defines a “chunk” in lazy loading?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8148-a8e0-f005b8e6398e" class="">A. A React component</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-8522-cc0194523b5b" class="">B. A CSS file</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819c-a523-d06b91964f9b" class="">C. A separately bundled JavaScript file</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a1-aa6d-c68e23887560" class="">D. A browser cache</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816b-9bb2-fae92f80af71"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8196-bd15-f9fc25a7eb72" class=""><strong>Q9. Who is responsible for creating chunks in a React app?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-b509-e9f8b5b90bc8" class="">A. React</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e1-9b6d-fc6e508cd650" class="">B. Browser</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810e-927b-fe70e137f523" class="">C. JavaScript engine</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-8910-e2c422fc38e5" class="">D. Bundler (Vite/Webpack)</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b7-a54f-d067cb0fb9e1"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bf-baf4-cc18dd3a0c7c" class=""><strong>Q10. At what stage are chunks created?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8171-8ed2-c0a2322b0ec9" class="">A. Runtime</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c2-bd60-d43085a5bf5d" class="">B. Build time</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8123-9014-f32a0a487540" class="">C. Render time</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b8-b3c1-f02bc051f25a" class="">D. Commit phase</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815d-b8b2-d763f4ab48d0" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d5-85cc-d23b1dc954ca" class=""><strong>Q11. Which components are BEST candidates for lazy loading?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8111-8f09-f3a1a18eae2f" class="">A. Buttons and inputs</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dc-95d9-c5ec09703b00" class="">B. Navbar and footer</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b6-a0b3-e334ad939850" class="">C. Route-level pages</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8109-a1ca-e020af8ce6d1" class="">D. Small utility components</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816a-a47d-f11a6789e1c5"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8132-932c-dfb79b9fefc5" class=""><strong>Q12. What is the MOST common real-world use of lazy loading in React apps?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b0-adb7-edb9e9263137" class="">A. Lazy loading hooks</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dc-93c5-e11004de2004" class="">B. Lazy loading state</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815a-b805-f63897944f7b" class="">C. Lazy loading routes/pages</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b4-8549-f400571f8e75" class="">D. Lazy loading props</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c4-ba63-d3b8c955d21a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8157-b434-f31f407694a0" class=""><strong>Q13. What does “visit a route” mean in a React SPA?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-b44a-d6910868b982" class="">A. Browser reloads the page</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818a-88e8-df9371818733" class="">B. Server sends a new HTML file</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-bf3c-eeb6a3592e61" class="">C. React renders a different component based on URL</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8177-836e-cd1170ba8765" class="">D. Cache is cleared</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8136-a263-c3f505ece855"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8132-bec9-c1780756b6a6" class=""><strong>Q14. Where is the BEST place to wrap </strong><code><strong>Suspense</strong></code><strong> in a routing-based app?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-a9d8-d47be0d12bca" class="">A. Around every button</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811f-8120-dad44217f440" class="">B. Around individual JSX elements</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c8-9b62-ef4d406ebc5c" class="">C. Around <code>&lt;Routes&gt;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811a-9bdc-f08d27af73d2" class="">D. Inside <code>useEffect</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d8-9a8d-c14255590fae"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8109-b45d-faf11ff98ff5" class=""><strong>Q15. What happens when a user navigates to a lazy-loaded route for the first time?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-9ab5-ccd9e0941fca" class="">A. Entire app reloads</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d5-979c-d26c3866458a" class="">B. New HTML is fetched</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a7-9c53-dfbc842f22b3" class="">C. Corresponding JS chunk is requested</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-9055-c31ed3a1595d" class="">D. React skips rendering</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81cd-91ec-cd6b49cca112"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e4-b4ac-e36e8c0360ae" class=""><strong>Q16. Which of the following is a WRONG practice?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a3-ba42-db59becb0d98" class="">A. Lazy loading route components</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a3-b0a0-f5be9a1e33c9" class="">B. Lazy loading admin dashboards</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816b-a20a-f1e02cd543e0" class="">C. Lazy loading navbar</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818d-a6d4-d74c97577751" class="">D. Lazy loading heavy pages</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a8-a53e-d9b869631aca"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8190-8709-eb8ff7c15ae2" class=""><strong>Q17. Why does lazy loading improve initial load performance?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813a-90f6-fcfe374b8549" class="">A. Fewer React hooks are used</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b4-a5aa-ca745f283256" class="">B. Smaller JS is downloaded initially</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b8-8ac8-f072bc9e8c6e" class="">C. Faster state updates</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812f-81dd-e5980eb78ada" class="">D. Fewer components are rendered</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814f-9143-fc73653e0af7"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8175-8eee-d1743e81c13d" class=""><strong>Q18. In routing-based lazy loading, which rule is most correct?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a8-bbe6-fd31e46c8598" class="">A. One component = one chunk</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ba-ac40-c14963df97ba" class="">B. One hook = one chunk</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f4-bdfc-e5d270de041d" class="">C. One route = one chunk</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e4-9564-eb1e4f372884" class="">D. One state = one chunk</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f4-8196-f5d5cc23c8c1"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8163-b7ef-d0e3a17f1124" class=""><strong>Q19. Does lazy loading work in development mode?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8145-9da6-ef50ee92dc4e" class="">A. No</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812c-96bb-c3f9b8d870f4" class="">B. Only in production</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-892e-c7c983bacb06" class="">C. Yes, but benefits are clearer in production</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8143-a750-d3c5445cef35" class="">D. Only with React Router</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815b-9512-ea507237cc11"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e3-baf5-c6d312776029" class=""><strong>Q20. What is the main reason lazy loading makes more sense in production apps?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8164-943b-d8ae00801f34" class="">A. Development builds are slow</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8168-88f1-d6d233a52bc9" class="">B. Production apps are smaller</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cf-91c2-d4bef572ea2a" class="">C. Real users, slower networks, better performance</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813f-b507-ccc03fa3092e" class="">D. React forces it</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8197-8596-d63eab82ae54" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-a60e-c01f5df453de" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-b36c-fce25d7ede9e" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8140-9a8f-ee9071ff010e" class="">🧪 PRACTICE ASSIGNMENT 6</h1></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8160-860c-d9073f0d008d" class="">Multiple Lazy Pages + Default Route</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816c-910a-d8792c4df0c4" class="">🎯 Objective</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fc-a710-d93062a7db1c" class="">Practice <strong>multiple lazy routes</strong> with a default landing page.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813f-a766-d04f50875550"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a1-a8b9-d6b9f475cbad" class="">📝 Problem Statement</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-a6b8-f8bcb67807a4" class="">Create a React app with:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ee-bd56-d9d6f5719ecb" class="bulleted-list"><li style="list-style-type:disc"><code>/</code> → Landing page</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81da-9984-f154682a9a15" class="bulleted-list"><li style="list-style-type:disc"><code>/about</code> → About page</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818e-bdd7-f4fdfcd4f52d" class="bulleted-list"><li style="list-style-type:disc"><code>/contact</code> → Contact page</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d3-896b-d1bbb83da68a" class="">All pages must be <strong>lazy loaded</strong>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b6-bd09-df2dedfbe9ac"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8186-8425-c532539cacf9" class="">📋 Instructions</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8125-8d4b-c4858a3ab48e" class="numbered-list" start="1"><li>Create a <code>pages/</code> folder.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81a8-b48c-e88d38983767" class="numbered-list" start="2"><li>Lazy load all pages.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8155-bf11-c9a130cdfa56" class="numbered-list" start="3"><li>Wrap <code>&lt;Routes&gt;</code> with a single <code>Suspense</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8104-8c30-dfe63df91894" class="numbered-list" start="4"><li>Add navigation links.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81b0-869b-ebd74f0ba080" class="numbered-list" start="5"><li>Confirm each page logs when loaded.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815a-99ef-cca74f2c75c8"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81d6-a0d5-ea740e9b1bcf" class="">🚫 Constraints</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814d-a65d-fada006dc50e" class="">❌ Do NOT lazy load navigation</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-ba2b-e2606ccc5cb3" class="">❌ Do NOT create multiple Suspense wrappers</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817b-870c-dd3d5d689054"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81b1-abd6-d2060f1f13d4" class="">📁 Folder Structure</h2></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2df155e4-633e-8135-bcf8-cfafd33dfb23" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">src/
+ ├── pages/
+ │    ├── Landing.jsx
+ │    ├── About.jsx
+ │    └── Contact.jsx
+ ├── App.jsx
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8128-a682-ff0b243ea0ec"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8121-ad03-fc6b293b0302" class="">✅ COMPLETE SOLUTION</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8153-8369-f9356993d71d" class=""><code>pages/Landing.jsx</code></h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-81ce-b5b8-fe307384cdfa" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">export default function Landing() {
+  console.log(&quot;Landing loaded&quot;);
+  return &lt;h1&gt;Landing Page&lt;/h1&gt;;
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817b-948d-f585459c3367"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a2-8b8a-ffc6930ad56d" class=""><code>pages/About.jsx</code></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8126-b455-f54e8370bee1" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">export default function About() {
+  console.log(&quot;About loaded&quot;);
+  return &lt;h1&gt;About Page&lt;/h1&gt;;
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8143-bd9c-ef37ff3ef954"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fc-98f6-d7e8fc20f3ca" class=""><code>pages/Contact.jsx</code></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c2-a773-cf74111ca748" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">export default function Contact() {
+  console.log(&quot;Contact loaded&quot;);
+  return &lt;h1&gt;Contact Page&lt;/h1&gt;;
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8112-a9db-d356a519ab56"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-819c-aa62-c0289386576e" class=""><code>App.jsx</code></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818b-940d-c11e2ba6edae" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import React, { Suspense } from &quot;react&quot;;
+import { Routes, Route, Link } from &quot;react-router-dom&quot;;
+
+const Landing = React.lazy(() =&gt; import(&quot;./pages/Landing&quot;));
+const About = React.lazy(() =&gt; import(&quot;./pages/About&quot;));
+const Contact = React.lazy(() =&gt; import(&quot;./pages/Contact&quot;));
+
+function App() {
+  return (
+    &lt;&gt;
+      &lt;nav&gt;
+        &lt;Link to=&quot;/&quot;&gt;Home&lt;/Link&gt; |{&quot; &quot;}
+        &lt;Link to=&quot;/about&quot;&gt;About&lt;/Link&gt; |{&quot; &quot;}
+        &lt;Link to=&quot;/contact&quot;&gt;Contact&lt;/Link&gt;
+      &lt;/nav&gt;
+
+      &lt;Suspense fallback={&lt;h2&gt;Loading page...&lt;/h2&gt;}&gt;
+        &lt;Routes&gt;
+          &lt;Route path=&quot;/&quot; element={&lt;Landing /&gt;} /&gt;
+          &lt;Route path=&quot;/about&quot; element={&lt;About /&gt;} /&gt;
+          &lt;Route path=&quot;/contact&quot; element={&lt;Contact /&gt;} /&gt;
+        &lt;/Routes&gt;
+      &lt;/Suspense&gt;
+    &lt;/&gt;
+  );
+}
+
+export default App;
+</code></pre></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

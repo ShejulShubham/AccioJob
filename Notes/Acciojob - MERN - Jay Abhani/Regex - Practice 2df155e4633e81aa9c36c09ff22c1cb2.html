@@ -1,0 +1,876 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Regex - Practice</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-81aa-9c36-c09ff22c1cb2" class="page sans"><header><h1 class="page-title" dir="auto">Regex - Practice</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812d-a6af-ed084c596762" class=""><strong>1. What will be the output of the following code?</strong></h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-812b-8388-e11db83b3a58" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;hello world&quot;;
+let pattern = /hello/;
+console.log(pattern.test(text));
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8160-926b-e48e27d84587" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c6-87ed-c604b871214b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c0-b980-fad930a42eab" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8120-8b1c-f90f9a51c24a" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813e-ab3b-d2c7331bef3b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-afba-d4d73884d2ec" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d8-aef9-d28977cd0edc" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818d-9494-d8e2e9077123" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dc-9b74-c4138c623cd9" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816d-bddd-f778aa8b5960" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8157-9ff8-ea9ad61f3139" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8133-a99a-eedf0b6a48ef" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8133-b019-e923db213013" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-b36c-db6186c91530" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-83d3-e798d0eeafda" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c3-a688-e5be4494f4b3" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8139-99e6-e122e3d272f3" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8133-8f1a-d1b5a8b23b2d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-9501-cf456b3f4ff7" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-a58c-cbb60a18e48b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d3-9886-c95e35ab50e1" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812f-bd8c-d1a7982e05e9" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811d-ace7-e2135874ffd1" class="">✅ Output:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-811c-9115-c2fd04120875" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">true
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8148-9902-fd7162baaaa1" class="">💡 Explanation:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8120-b88e-ca8bdfb90b0d" class="">The <code>test()</code> method checks whether the pattern <code>/hello/</code> exists in the string <code>&quot;hello world&quot;</code>. Since it does, it returns <code>true</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8135-8764-c15c544d0e50"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8140-8b35-f34931ed1e68" class=""><strong>2. What is the purpose of the </strong><code><strong>g</strong></code><strong> flag in regular expressions?</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812a-b294-f9e7d704a245" class="">✅ Answer:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8142-a5c0-e374da9a9e16" class="">The <code>g</code> flag stands for <strong>global</strong>, and it is used to match <strong>all</strong> occurrences of the pattern in the string instead of stopping after the first match.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8154-883c-e4b3e0f799cf" class="">💡 Example:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d2-b952-f7dc4062d8a1" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;hello hello&quot;;
+let pattern = /hello/g;
+console.log(text.match(pattern));  // [&quot;hello&quot;, &quot;hello&quot;]
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8141-ab95-c1f7e505604d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f6-bbfc-dd7fed9f0c57" class=""><strong>3. Which method is used to replace text using regex?</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8155-9c53-c25e9dde1e8a" class="">✅ Answer:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8145-a33e-e3a40c06d7d7" class=""><code>replace()</code> method.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8135-a521-d26f356c71a1" class="">💡 Example:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81cb-9b62-d4c9917c738e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;hello world&quot;;
+console.log(text.replace(/hello/, &quot;hi&quot;));  // &quot;hi world&quot;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c2-9298-d17cec751046"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818a-8cf2-cda589ff011d" class=""><strong>4. What does the regex </strong><code><strong>/\d/</strong></code><strong> match?</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815e-9e97-ee7856f2392f" class="">✅ Answer:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811f-adf2-f60ef7954b08" class="">It matches <strong>any single digit</strong> from 0 to 9.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bf-860f-e530dab0994e" class="">💡 Example:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8194-8e32-db9c7b54fdda" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;abc123&quot;;
+console.log(/\d/.test(text));  // true
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8174-b109-d6a98b7a130d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a1-8e84-ea00462a1791" class=""><strong>5. What is the output of this code?</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8120-81ab-d8c37f332c2a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;apple,orange,grapes&quot;;
+console.log(text.split(/,/));
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8170-a8ff-ecda10d44f5a" class="">✅ Output:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-814d-bfa7-db03a07639fc" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">[&quot;apple&quot;, &quot;orange&quot;, &quot;grapes&quot;]
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8103-9a74-ea04c12515c2" class="">💡 Explanation:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bb-a1c7-e171d93107be" class="">The <code>split()</code> method splits the string using the regex pattern <code>/,/</code> which matches commas. So, the string is split at each comma into an array.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c7-8c5f-e85d3cfb2c44" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8197-894c-d0dc6b30ffc2" class="">✅ <strong>Problem 1: Check if string contains &quot;hello&quot;</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8157-8ecc-c31ddc4054ea" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a8-85bb-ed306bceb6b5" class="">Write a regex to check if the word <code>&quot;hello&quot;</code> is present in the given string.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c5-ab7a-caa41b853221" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;Say hello to everyone&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-853e-eb7a601daee7" class=""><strong>Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8149-9c38-c822e31a859f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let pattern = /hello/;
+console.log(pattern.test(text)); // true
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8124-8b7f-cb3580d81d61" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8106-81a9-c2d437c68bb3" class="">The <code>.test()</code> method returns <code>true</code> because <code>&quot;hello&quot;</code> exists in the string.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8118-8b7a-f5e1f61220c0"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e5-96de-fad461fac762" class="">✅ <strong>Problem 2: Replace all occurrences of &quot;cat&quot; with &quot;dog&quot;</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8162-aea1-f681697d8db6" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-8c36-d80f202aad6c" class="">Use regex to replace every <code>&quot;cat&quot;</code> in the string with <code>&quot;dog&quot;</code>.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8127-a809-f42c59027e22" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;cat is a cat&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813b-94c8-d3d16e4dbc13" class=""><strong>Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8131-8c6b-ff3c9ee232b6" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let updated = text.replace(/cat/g, &quot;dog&quot;);
+console.log(updated); // &quot;dog is a dog&quot;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818c-8165-fbf9b2350151" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8182-9f7b-faf9e639c494" class="">The <code>/cat/g</code> pattern replaces <strong>all</strong> <code>&quot;cat&quot;</code> words with <code>&quot;dog&quot;</code> because of the <code>g</code> (global) flag.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8195-af4a-fff89b5eabc9"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8144-8f4b-db63989fd831" class="">✅ <strong>Problem 3: Match any digit in a string</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-9a72-ceffdb1441c4" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8131-84a5-cd46444e8819" class="">Check if the string contains at least one digit using regex.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8138-a335-d8de4cefe366" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;user123&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-9697-fe25591cf2fb" class=""><strong>Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8124-bf51-d4394d318084" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let pattern = /\d/;
+console.log(pattern.test(text)); // true
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8148-8384-d32efeb8d70d" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c7-8e74-c111942dab7c" class=""><code>\d</code> matches any digit from 0–9. The string <code>&quot;user123&quot;</code> contains digits, so the result is <code>true</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8181-90c6-e896e7a79181"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ac-8a23-c4948391c31b" class="">✅ <strong>Problem 4: Match a word that starts with &quot;h&quot;</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8149-81c7-fabff3af5d2b" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b9-8bb9-c0affed090dc" class="">Check if the string starts with the word <code>&quot;hello&quot;</code> using <code>^</code> anchor.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8170-a9d1-d87f77893085" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;hello world&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8112-9749-df8783445ba9" class=""><strong>Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81a5-832f-d8b6953b450a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let pattern = /^hello/;
+console.log(pattern.test(text)); // true
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8115-87eb-f74c60410be9" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8132-9465-cb16e2534e8e" class=""><code>^hello</code> means the string <strong>must start</strong> with <code>&quot;hello&quot;</code> — which is true here.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8166-8d60-eae81c46458f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8157-815e-e6896bd505ac" class="">✅ <strong>Problem 5: Split a string into an array</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e7-bcc0-f4912d82c14c" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8120-a222-d1dac7ff18b4" class="">Use regex to split the string into words using comma as separator.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-816c-a6bd-c456a8fca59c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;red,green,blue&quot;;</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811a-9a2e-c824f74e387a" class=""><strong>Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8198-8fa4-c7abccccc4cd" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let result = text.split(/,/);
+console.log(result); // [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8183-84df-dffce4e68a6d" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818f-909b-efd65bbca2fa" class="">The <code>.split(/,/)</code> splits the string wherever it finds a comma, turning it into an array of words.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8144-902b-f35517adc753" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8145-8699-ef46ab69af66" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d3-bb72-c06a362ec512" class="">✅ <strong>Problem 6: Case-insensitive match for &quot;hello&quot;</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814b-b693-fbfe7c82a463" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-9ef8-e9502a09bde9" class="">Check if <code>&quot;HELLO&quot;</code> matches <code>&quot;hello&quot;</code> using a case-insensitive regex.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8165-9b90-f74c2437121f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;HELLO&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8108-b145-fb264f70d204" class=""><strong>Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-817b-910a-c5fb0aed34dd" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let pattern = /hello/i;
+console.log(pattern.test(text)); // true
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8190-9ec5-cc8212c4658b" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818e-ab12-d5712457851a" class="">The <code>i</code> flag makes the regex case-insensitive, so <code>&quot;HELLO&quot;</code> matches <code>&quot;hello&quot;</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c7-abee-e56881cbe8ca"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8185-9115-d171e8cbccad" class="">✅ <strong>Problem 7: Match if a string ends with &quot;world&quot;</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e6-96e4-ddf0c982b43b" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8118-8b70-d93e9a546cd8" class="">Use regex to check if the string ends with <code>&quot;world&quot;</code>.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ed-9d24-c5aa30de158e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;hello world&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8126-adcb-f80c06b6f0f3" class=""><strong>Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d8-a421-c266abaffe75" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let pattern = /world$/;
+console.log(pattern.test(text)); // true
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819c-a8cd-e04b12c8e23f" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8135-935b-d6e9a9511eaa" class="">The <code>$</code> anchor checks the <strong>end of the string</strong>. Here, the string ends with <code>&quot;world&quot;</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8115-9141-c0ae017cb26d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b1-b220-fd4213491d67" class="">✅ <strong>Problem 8: Find all occurrences of the letter &quot;a&quot;</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815e-9b38-db9dfeeb0535" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-9f35-e5a2bc83ee4c" class="">Extract all <code>&quot;a&quot;</code> characters from a string using regex.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8104-a939-d0108aca68ce" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;banana&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-883d-ceedf91a349a" class=""><strong>Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81cd-bf6f-e3ed09076d07" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let result = text.match(/a/g);
+console.log(result); // [&quot;a&quot;, &quot;a&quot;, &quot;a&quot;]
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8124-8912-c6ce4454ff86" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817f-a11c-cbe1b8e13ec6" class="">The <code>/a/g</code> pattern finds <strong>all matches</strong> of the letter <code>&quot;a&quot;</code> globally.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814c-b6b4-c609ed2b3308"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813b-aa11-edc8d171b734" class="">✅ <strong>Problem 9: Match any character between &quot;c&quot; and &quot;t&quot;</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8101-bf7a-fd3b46aac61f" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816a-956e-f4c131823dfa" class="">Use a character set to check if the middle letter is a vowel in <code>&quot;cut&quot;</code>.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8146-a869-dd2d1b4c9b68" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;cut&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8148-86ec-f9c53f8d7acb" class=""><strong>Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81bd-a154-d9bf3587d87f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let pattern = /c[aeiou]t/;
+console.log(pattern.test(text)); // true
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8105-b32a-e532a911d562" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-9468-ce5e566119ee" class=""><code>[aeiou]</code> matches any <strong>vowel</strong>. So, the pattern looks for words like <code>cat</code>, <code>cot</code>, <code>cut</code>, etc.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d2-9064-e74a4242803e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8127-be05-ee2f0f77c91e" class="">✅ <strong>Problem 10: Match any single character using dot</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a7-ba37-c46ee4bd6a8b" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810a-874b-d5b8c8299ea7" class="">Use the dot <code>.</code> character to match <code>&quot;c_t&quot;</code> where <code>_</code> can be any character.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d5-88d3-eb14111f69a3" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;cat&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-a9f0-f99546fc77f9" class=""><strong>Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810a-b338-ce422afa7c4a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let pattern = /c.t/;
+console.log(pattern.test(text)); // true
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a8-89be-d8adae5d13a5" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-b9ad-d2935cd161c6" class="">The dot <code>.</code> matches <strong>any character except newline</strong>, so <code>&quot;cat&quot;</code> fits the pattern <code>c.t</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-9e08-d2400e440f72" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ab-9c15-efaca72af8ee" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81dc-b06f-c20198aaa48d" class="">✅ <strong>Problem 11: Check if string contains only digits</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8151-b077-d439c146b51a" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b8-b4e9-ed9207f2616b" class="">Write a regex to check if the entire string contains only digits (0–9).</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8126-b003-e5d536630925" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;12345&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81aa-9f17-c2b7367c2953" class=""><strong>Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d4-b6d3-e231193b969c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let pattern = /^\d+$/;
+console.log(pattern.test(text)); // true
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8100-bcf4-d0ad91e8785f" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81df-b5d8-f1c9d32493e3" class="bulleted-list"><li style="list-style-type:disc"><code>^</code> ensures the pattern starts at the beginning</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8175-954b-cc8fee7a0d09" class="bulleted-list"><li style="list-style-type:disc"><code>\d+</code> matches one or more digits</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8103-8594-eb38327354ad" class="bulleted-list"><li style="list-style-type:disc"><code>$</code> ensures the pattern ends after the digits<div style="display:contents" dir="auto"><p id="2df155e4-633e-81b4-a1fc-fa71875a6ddb" class="">Hence, the entire string must be digits.</p></div></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d8-b32a-c13d6680841c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8151-98cf-df7ad19ad6a8" class="">✅ <strong>Problem 12: Check if a word has exactly 3 a’s</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811f-884b-edeb34ca6c8f" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-ad82-e037c1bbd975" class="">Match the word <code>&quot;aaa&quot;</code> using a quantifier for exactly 3 a&#x27;s.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8124-828a-c59713f3a2e3" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;aaa&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819c-b610-ec9b455dbdab" class=""><strong>Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8167-b3eb-f27050c8aa3d" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let pattern = /a{3}/;
+console.log(pattern.test(text)); // true
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813f-9029-fcd1482498d8" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8168-9999-e700f254a133" class=""><code>a{3}</code> matches exactly 3 occurrences of <code>&quot;a&quot;</code> in a row.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8159-ae5c-f8943b2ebf7a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fa-b7bb-d808bb928886" class="">✅ <strong>Problem 13: Use </strong><code><strong>exec()</strong></code><strong> to find multiple &quot;h&quot; characters</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8147-8626-d2246c74eece" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-919b-fef74fa52fc3" class="">Use <code>.exec()</code> repeatedly to find all <code>&quot;h&quot;</code> characters in a string.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81a5-b102-dac04ab4a7b8" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;hhaha&quot;;
+let pattern = /h/g;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817e-9c03-e3b97aac4239" class=""><strong>Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8163-8f4e-c43e65516afa" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">console.log(pattern.exec(text)); // [ &#x27;h&#x27;, index: 0, ... ]
+console.log(pattern.exec(text)); // [ &#x27;h&#x27;, index: 1, ... ]
+console.log(pattern.exec(text)); // [ &#x27;h&#x27;, index: 3, ... ]
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c8-84a6-d319d40d8a96" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8186-b32f-f776e51cd287" class=""><code>.exec()</code> remembers where it left off with the <code>g</code> flag, and returns one match at a time.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fd-b473-f101a98381fd"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8187-b271-c53bba81f2ca" class="">✅ <strong>Problem 14: Match word boundary for &quot;the&quot;</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a1-b117-f14a132c7065" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b0-9d96-de889d3f422c" class="">Match <code>&quot;the&quot;</code> as a whole word using <code>\b</code>.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8125-828d-ce3bbe09256c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;the end&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a4-a0fa-c3a3a5785371" class=""><strong>Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81cd-bcf4-ebd319c8bc5d" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let pattern = /\bthe\b/;
+console.log(pattern.test(text)); // true
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e5-829c-c908e6b9998a" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8138-89b1-e3586815d066" class=""><code>\b</code> ensures the pattern matches <code>&quot;the&quot;</code> as a <strong>complete word</strong>, not as part of another word.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8124-a983-d4179e98ae2c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fc-b19c-c36783750b7b" class="">✅ <strong>Problem 15: Match lowercase letters a–z</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-8b7b-d74120109dd1" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f5-92eb-f94b8e2246dc" class="">Check if the string contains any lowercase letter.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e1-9a8b-c0d7c745957d" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;A1b2&quot;;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b1-b4a7-dd0828fa5c50" class=""><strong>Solution:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f8-8a00-d285f5be3f1c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let pattern = /[a-z]/;
+console.log(pattern.test(text)); // true
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8125-97da-fe96004029ca" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810c-8f85-caef73783091" class=""><code>[a-z]</code> matches any single lowercase letter. Since <code>&quot;b&quot;</code> is in the string, it returns <code>true</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8115-9e07-cde4f30b4e6b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816e-9b8f-f1458ef50932" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8100-8563-d8f79a1d00b9" class="">✅ <strong>Problem 1: Basic Email Validation</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dd-be13-d4ca2666ec49" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818d-942f-c0cc2c857631" class="">Write a regex to validate a simple email that follows the format:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81fe-90f6-c1c1f24dcb0f" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">username@domain.com</code></pre></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8178-af87-dfa266a9ea4a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function isValidEmail(email) {
+  let pattern = /^\w+@\w+\.\w+$/;
+  return pattern.test(email);
+}
+
+console.log(isValidEmail(&quot;john@example.com&quot;)); // true
+console.log(isValidEmail(&quot;john@.com&quot;));        // false
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f4-8549-c3997f760aea" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b8-9f74-dbfdf9222008" class="bulleted-list"><li style="list-style-type:disc"><code>^</code> → start of string</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819e-84d0-e0d08b722814" class="bulleted-list"><li style="list-style-type:disc"><code>\w+</code> → one or more word characters (username)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811c-b3e1-d2fa05642247" class="bulleted-list"><li style="list-style-type:disc"><code>@</code> → literal at symbol</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a1-9429-dc82b1515149" class="bulleted-list"><li style="list-style-type:disc"><code>\w+</code> → one or more word characters (domain)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8132-9c08-ea3bcc4c864e" class="bulleted-list"><li style="list-style-type:disc"><code>\.</code> → dot</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8107-b6cc-f0907c38eee2" class="bulleted-list"><li style="list-style-type:disc"><code>\w+</code> → one or more word characters (TLD like com/net/org)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8119-aa36-d67631a6a91f" class="bulleted-list"><li style="list-style-type:disc"><code>$</code> → end of string</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8112-8852-f65c7748f9cf"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ad-b205-c2d12c0c3406" class="">✅ <strong>Problem 2: Basic Phone Number Validation</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a2-8f8d-ec8874787a8c" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815d-ade7-f5e7ffc7b878" class="">Check if a string is a <strong>10-digit mobile number</strong> (India-style) containing only digits.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818f-8aa5-e9c531e85a42" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function isValidPhone(phone) {
+  let pattern = /^\d{10}$/;
+  return pattern.test(phone);
+}
+
+console.log(isValidPhone(&quot;9876543210&quot;)); // true
+console.log(isValidPhone(&quot;12345&quot;));      // false
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d0-b2f9-c87fbf8ccb4c" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c1-857f-f7d62e02c504" class="bulleted-list"><li style="list-style-type:disc"><code>^\d{10}$</code> → string should be <strong>exactly 10 digits</strong> (0–9)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8160-bb46-ec862ef870ce" class="bulleted-list"><li style="list-style-type:disc"><code>^</code> and <code>$</code> make sure no extra characters are allowed</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8147-b8d0-f891602391ff"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8123-ab91-c2fcffc14054" class="">✅ <strong>Problem 3: Basic Password Validation</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812e-9f72-cbfd8588fef2" class=""><strong>Task:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8115-90e0-c6ec8f4812d3" class="">Check if a password is <strong>at least 6 characters long</strong> and contains <strong>at least one digit</strong>.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-811b-93de-d3398c93ad85" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function isValidPassword(pwd) {
+  let pattern = /^(?=.*\d).{6,}$/;
+  return pattern.test(pwd);
+}
+
+console.log(isValidPassword(&quot;abc123&quot;));   // true
+console.log(isValidPassword(&quot;abcdef&quot;));   // false (no digit)</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c7-a334-e757228e4983" class=""><strong>Explanation:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8110-8e5a-e731a4798777" class="bulleted-list"><li style="list-style-type:disc"><code>(?=.*\d)</code> → positive lookahead to ensure <strong>at least one digit</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8158-a3c2-cc5e85b5d69c" class="bulleted-list"><li style="list-style-type:disc"><code>.{6,}</code> → string should be at least <strong>6 characters long</strong></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-895f-c84bdf48d214" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81da-aa32-c565fa8b8126" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8176-8b39-fa99a5802d1a" class=""><strong>Problem 21 – Count the Vowels in a String</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-8fb6-c45c610c337c" class=""><strong>Task</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8179-84ec-f90824a6ea7c" class="">Write one line of code that counts how many vowels (<code>a e i o u</code>, upper- or lowercase) appear in <code>text</code>.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8175-8adb-ce2fb6e50e49" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let text = &quot;Regular Expressions Are Fun!&quot;;
+let vowels = (text.match(/[aeiou]/gi) || []).length;
+console.log(vowels);           // 10
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e8-b4e2-d5fba798fb67" class=""><strong>Explanation</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8138-b612-ee4b31f9e4c1" class="bulleted-list"><li style="list-style-type:disc"><code>/[aeiou]/i</code> → vowel, case-insensitive</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811f-9ca9-c884831e437e" class="bulleted-list"><li style="list-style-type:disc"><code>/.../g</code> → global flag finds <strong>all</strong> matches</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81bb-b4bc-ff2d56fea477" class="bulleted-list"><li style="list-style-type:disc"><code>match()</code> returns an array of matches (or <code>null</code>), so <code>|| []</code> guarantees we can call <code>.length</code>.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b4-b3f2-c1406d9374b9"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a9-9e1f-d384fac51d35" class=""><strong>Problem 22 – Detect a 24-Hour Time Stamp</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8111-81b1-d6712e9a4e5d" class=""><strong>Task</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8147-b910-f14277af09a0" class="">Create <code>isTime</code> that returns <code>true</code> only for times like <code>09:30</code>, <code>23:59</code>, <code>00:00</code>.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ec-9f54-d4d0fc8936e5" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function isTime(str) {
+  return /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(str);
+}
+
+console.log(isTime(&quot;18:45&quot;));  // true
+console.log(isTime(&quot;25:00&quot;));  // false
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818e-a63f-ca79331bd219" class=""><strong>Explanation</strong></p></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-812f-9415-d55823111a0f" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8137-96ca-ed203bb1dc8d"><th id="@L&lt;_" class="simple-table-header-color simple-table-header">Fragment</th><th id="nn&lt;M" class="simple-table-header-color simple-table-header">Matches</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8166-9426-ebb279ebf4af"><td id="@L&lt;_" class=""><code>^</code> <code>...</code> <code>$</code></td><td id="nn&lt;M" class="">anchors → whole string must match</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81a0-9b51-fb6eaff4d793"><td id="@L&lt;_" class=""><code>[01]\d</code></td><td id="nn&lt;M" class="">00-19 (first digit 0 or 1)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81c6-9f29-f41fbcda3b02"><td id="@L&lt;_" class=""><code>2[0-3]</code></td><td id="nn&lt;M" class="">20-23</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8113-af2d-fb26c0b1257a"><td id="@L&lt;_" class="">`(?: …</td><td id="nn&lt;M" class="">… )`</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8116-8966-e10241b2a0d7"><td id="@L&lt;_" class=""><code>:</code></td><td id="nn&lt;M" class="">literal colon</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8119-9330-f8382cd55fc2"><td id="@L&lt;_" class=""><code>[0-5]\d</code></td><td id="nn&lt;M" class="">00-59 minutes</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8181-a089-e38f9f3e70b0"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8166-9869-fd8fb7a27dc6" class=""><strong>Problem 23 – Replace Multiple Spaces with a Single Space</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8155-9b76-dae5942f50a7" class=""><strong>Task</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c0-a49c-ebd50a354eb6" class="">Given a messy sentence, collapse runs of two or more spaces into <strong>one</strong> space.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812b-85fa-dac09ca6dcf6" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let messy = &quot;This   sentence    has   extra  spaces.&quot;;
+let neat  = messy.replace(/ {2,}/g, &quot; &quot;);
+console.log(neat);             // &quot;This sentence has extra spaces.&quot;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8141-ac65-c498a6224533" class=""><strong>Explanation</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81dd-8dfd-f2bc3d724ea4" class="bulleted-list"><li style="list-style-type:disc"><code>{2,}</code> → a space <code>&#x27; &#x27;</code> repeated <strong>2 or more</strong> times</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f8-8b6b-ecef5fab5e06" class="bulleted-list"><li style="list-style-type:disc"><code>g</code> flag replaces <strong>all</strong> occurrences, not just the first.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81dd-bc7c-d539736ca8c4"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d9-a280-ee4b33dd890d" class=""><strong>Problem 24 – Check if a String Starts with a Capital Letter</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81da-943c-f069de8a4eed" class=""><strong>Task</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818c-bfd3-df5376984125" class="">Return <code>true</code> when the first character of <code>str</code> is an uppercase English letter.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ba-a6f3-ebec50dae0f0" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function startsWithCapital(str) {
+  return /^[A-Z]/.test(str);
+}
+
+console.log(startsWithCapital(&quot;JavaScript&quot;)); // true
+console.log(startsWithCapital(&quot;python&quot;));     // false
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-a358-d8c87576513a" class=""><strong>Explanation</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8108-8ff5-df144827c3e2" class="bulleted-list"><li style="list-style-type:disc"><code>^</code> anchor ensures we look at position 0.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818f-864a-c20d6f803e77" class="bulleted-list"><li style="list-style-type:disc"><code>[A-Z]</code> matches any capital A–Z.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818d-af61-f6b08d446b30" class="bulleted-list"><li style="list-style-type:disc">If <code>test()</code> finds a match, it returns <code>true</code>.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811e-8ab7-f88f8ec0a8e6"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f4-8df0-ff53bc4a76f8" class=""><strong>Problem 25 – Extract File Extension</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8193-b880-d4b383441ee1" class=""><strong>Task</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f5-b377-e67cc9395bbf" class="">Write one line that returns only the extension (text after the final dot) from a filename.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f5-95a7-dec9fa094b57" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">let filename = &quot;archive.backup.tar.gz&quot;;
+let ext = filename.match(/\.([^.]+)$/)[1];
+console.log(ext);              // &quot;gz&quot;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fa-8162-d0260de46198" class=""><strong>Explanation</strong></p></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-81de-83a8-fd747ca5d4f3" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8133-9f64-d928538abb00"><th id="&gt;rLm" class="simple-table-header-color simple-table-header">Fragment</th><th id="R_EP" class="simple-table-header-color simple-table-header">Meaning</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81cc-b404-da6b4c7c381a"><td id="&gt;rLm" class=""><code>\.</code></td><td id="R_EP" class="">literal dot (escaped)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8178-8d29-dc4d291ef28b"><td id="&gt;rLm" class=""><code>([^.]+)</code></td><td id="R_EP" class="">capture <strong>1+ characters that are not dots</strong> → extension</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8161-8ac0-d1ac13abdee6"><td id="&gt;rLm" class=""><code>$</code></td><td id="R_EP" class="">anchor → must be at end of string</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81ef-9d2c-c423b810257f"><td id="&gt;rLm" class=""><code>[1]</code></td><td id="R_EP" class="">we take the first (and only) captured group</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8159-990f-e0bde843c695" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,1306 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Quick Notes Board</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-8110-85ae-f11cd47a862d" class="page sans"><header><h1 class="page-title" dir="auto">Quick Notes Board</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-815d-a748-d6ea62cca29b" class="">Mini Project: Quick Notes Board (DOM Edition)</h1></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d9-97f0-c1893030d105" class=""><strong>Goal:</strong> Add, edit, delete, and filter simple notes using <strong>vanilla DOM</strong> only.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ec-82c7-c8fa012c2833" class=""><strong>Students will practice:</strong> <code>getElementById</code>, <code>querySelector</code>, events (<code>submit</code>, <code>click</code>, <code>input</code>), <code>createElement</code>, <code>appendChild</code>, <code>remove</code>, <code>textContent</code>, basic state, and re-rendering.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8110-b425-f4139400cb0d"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81e8-9923-dfe80d419a5f" class="">Starter Files</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bc-8f34-f4828e156b79" class=""><code>index.html</code></h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2df155e4-633e-8101-a87b-ce81736dcc34" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;Quick Notes Board — Starter&lt;/title&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;!-- Keep CSS basic --&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main class=&quot;wrap&quot;&gt;
+    &lt;h1&gt;Quick Notes Board&lt;/h1&gt;
+
+    &lt;!-- Form --&gt;
+    &lt;section class=&quot;panel&quot;&gt;
+      &lt;form id=&quot;note-form&quot;&gt;
+        &lt;div class=&quot;row&quot;&gt;
+          &lt;label for=&quot;title&quot;&gt;Title&lt;/label&gt;
+          &lt;input id=&quot;title&quot; name=&quot;title&quot; type=&quot;text&quot; placeholder=&quot;e.g., Groceries&quot;&gt;
+          &lt;div id=&quot;title-error&quot; class=&quot;error&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;row&quot;&gt;
+          &lt;label for=&quot;text&quot;&gt;Text&lt;/label&gt;
+          &lt;textarea id=&quot;text&quot; name=&quot;text&quot; rows=&quot;3&quot; placeholder=&quot;e.g., Buy milk, bread...&quot;&gt;&lt;/textarea&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;actions&quot;&gt;
+          &lt;button type=&quot;submit&quot; id=&quot;submit-btn&quot;&gt;Add Note&lt;/button&gt;
+          &lt;button type=&quot;button&quot; id=&quot;cancel-edit&quot; class=&quot;hidden&quot;&gt;Cancel Edit&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Track edit mode --&gt;
+        &lt;input type=&quot;hidden&quot; id=&quot;editing-id&quot; value=&quot;&quot;&gt;
+      &lt;/form&gt;
+    &lt;/section&gt;
+
+    &lt;!-- Filter --&gt;
+    &lt;section class=&quot;panel&quot;&gt;
+      &lt;label for=&quot;filter&quot;&gt;Filter notes (by title or text):&lt;/label&gt;
+      &lt;input id=&quot;filter&quot; type=&quot;search&quot; placeholder=&quot;Type to filter...&quot;&gt;
+    &lt;/section&gt;
+
+    &lt;!-- Notes list --&gt;
+    &lt;section id=&quot;notes&quot; aria-live=&quot;polite&quot; class=&quot;board&quot;&gt;
+      &lt;p class=&quot;muted&quot;&gt;No notes yet. Add one above.&lt;/p&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;script src=&quot;script.js&quot; defer&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8161-8e61-cb260b94db10"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e8-9ab7-f849421ff590" class=""><code>styles.css</code></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c2-bd53-fcadd0d8167d" class="code code-wrap"><code class="language-css" style="white-space:pre-wrap;word-break:break-all">/* Basic styles only */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 16px;
+  background: #f5f5f5;
+  color: #222;
+}
+
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 22px;
+  margin: 0 0 12px 0;
+}
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.row { margin-bottom: 10px; }
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+input[type=&quot;text&quot;],
+input[type=&quot;search&quot;],
+textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.actions { display: flex; gap: 8px; }
+
+button {
+  padding: 8px 12px;
+  border: 1px solid #bbb;
+  background: #eee;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button#submit-btn {
+  background: #0077cc;
+  color: #fff;
+  border-color: #0077cc;
+}
+
+.hidden { display: none; }
+
+.error {
+  color: #b00020;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.muted { color: #666; font-size: 14px; }
+
+/* Notes board */
+.board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+}
+
+/* Card */
+.note {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.note h3 {
+  margin: 0 0 6px 0;
+  font-size: 16px;
+}
+
+.note p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+}
+
+.note .note-actions { display: flex; gap: 6px; }
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8105-9de9-eb751a2c1595"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ad-adde-fcff21c3245a" class=""><code>script.js</code></h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-81cc-b1fb-f58cef7608b0" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// Quick Notes Board — DOM-focused Starter
+// No solutions provided. Complete ONLY the TODOs.
+
+// ------------------------
+// State
+// ------------------------
+var notes = []; // Each note: { id: string, title: string, text: string }
+var filterText = &quot;&quot;;
+
+// ------------------------
+// DOM References
+// ------------------------
+var notesEl = document.getElementById(&quot;notes&quot;);
+var formEl = document.getElementById(&quot;note-form&quot;);
+var titleInput = document.getElementById(&quot;title&quot;);
+var textInput = document.getElementById(&quot;text&quot;);
+var submitBtn = document.getElementById(&quot;submit-btn&quot;);
+var cancelEditBtn = document.getElementById(&quot;cancel-edit&quot;);
+var editingIdInput = document.getElementById(&quot;editing-id&quot;);
+var titleErrorEl = document.getElementById(&quot;title-error&quot;);
+var filterInput = document.getElementById(&quot;filter&quot;);
+
+// ------------------------
+// Init
+// ------------------------
+function init() {
+  // TODO(1): Render notes from the current state (notes array).
+  renderNotes();
+
+  // Events
+  formEl.addEventListener(&quot;submit&quot;, onSubmit);
+  cancelEditBtn.addEventListener(&quot;click&quot;, onCancelEdit);
+  filterInput.addEventListener(&quot;input&quot;, onFilterChange);
+
+  // TODO(2): Add event delegation on the notes container for Edit/Delete buttons.
+  // Example: notesEl.addEventListener(&quot;click&quot;, onNotesClick);
+}
+init();
+
+// ------------------------
+// Rendering
+// ------------------------
+function renderNotes() {
+  // TODO(3): Clear notesEl content before re-rendering.
+
+  // TODO(4): Compute filtered list from notes array using filterText.
+
+  // TODO(5): If no visible notes, show a &lt;p class=&quot;muted&quot;&gt; message and return.
+
+  // TODO(6): For each visible note, build the DOM structure using createElement:
+  // - &lt;article class=&quot;note&quot; data-id=&quot;...&quot;&gt;
+  //   - &lt;h3&gt;Title here&lt;/h3&gt;
+  //   - &lt;p&gt;Text here&lt;/p&gt;
+  //   - &lt;div class=&quot;note-actions&quot;&gt;
+  //       &lt;button class=&quot;edit-btn&quot;&gt;Edit&lt;/button&gt;
+  //       &lt;button class=&quot;delete-btn&quot;&gt;Delete&lt;/button&gt;
+  //     &lt;/div&gt;
+  // Append each built card to notesEl.
+}
+
+// ------------------------
+// Events
+// ------------------------
+function onSubmit(e) {
+  e.preventDefault();
+  clearError();
+
+  var title = titleInput.value.trim();
+  var text = textInput.value.trim();
+  var editingId = editingIdInput.value;
+
+  // TODO(7): Validate that title is not empty.
+  // - If empty, set titleErrorEl.textContent with a message and return.
+
+  if (editingId) {
+    // EDIT MODE
+    // TODO(8): Find the note by id and update its title and text.
+    // TODO(9): Reset the form back to &quot;Add Note&quot; mode (editingIdInput, buttons, labels).
+  } else {
+    // ADD MODE
+    // TODO(10): Create a new note object with a unique id (e.g., Date.now().toString()).
+    // TODO(11): Push the new note into the notes array.
+  }
+
+  // TODO(12): Re-render notes and reset the form fields.
+}
+
+function onCancelEdit() {
+  // TODO(13): Clear edit state and reset form to &quot;Add Note&quot; mode.
+  // - editingIdInput.value = &quot;&quot;
+  // - submitBtn text back to &quot;Add Note&quot;
+  // - hide cancelEditBtn
+  // - clear any error
+}
+
+function onFilterChange(e) {
+  // TODO(14): Update filterText from the input value and re-render notes.
+}
+
+// TODO(15): Implement delegated click handling for Edit/Delete actions on the notes board.
+function onNotesClick(e) {
+  // - Determine if the click was on .edit-btn or .delete-btn
+  // - Find the closest .note element and read its data-id
+  // - For Edit:
+  //   - Find the note by id
+  //   - Fill form inputs with the note values
+  //   - Set editingIdInput.value = id
+  //   - Change submit button text to &quot;Save Changes&quot;
+  //   - Show cancelEditBtn
+  // - For Delete:
+  //   - Remove the note from the array by id
+  //   - Re-render notes
+}
+
+// ------------------------
+// Helpers
+// ------------------------
+function clearError() {
+  // TODO(16): Clear any validation messages (e.g., titleErrorEl.textContent = &quot;&quot;)
+}
+
+// ------------------------
+// Student Checklist
+// ------------------------
+// [ ] (1) Initial render from state
+// [ ] (2) Event delegation for Edit/Delete on #notes
+// [ ] (3) Clear container before rendering
+// [ ] (4) Filter notes by text (title or body)
+// [ ] (5) Empty-state message when no notes
+// [ ] (6) Build cards using createElement/appendChild
+// [ ] (7) Validate title (required)
+// [ ] (8) Edit existing note (update by id)
+// [ ] (9) Reset form from edit → add mode
+// [ ] (10) Create new note object with unique id
+// [ ] (11) Add new note to array
+// [ ] (12) Re-render + reset form after submit
+// [ ] (13) Cancel edit (restore form)
+// [ ] (14) Re-render on filter input
+// [ ] (15) Implement onNotesClick for edit/delete
+// [ ] (16) Clear validation messages properly
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-9324-cca2c66c4a4d" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81a1-ab8c-e06c2ed9baa8" class="">Quick Notes Board — Hints (Step-by-Step)</h1></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8152-83f7-e148a6ed939a" class="">0) Mental model (before you code)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8144-882e-e4d15a73ed44" class="bulleted-list"><li style="list-style-type:disc">Treat the <strong>array </strong><code><strong>notes</strong></code> as the single source of truth (each note = <code>{id, title, text}</code>).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f2-9630-e77d309952e8" class="bulleted-list"><li style="list-style-type:disc">The screen should always reflect what’s in that array.<div style="display:contents" dir="auto"><p id="2df155e4-633e-8162-bbda-eb0b3c9dde50" class="">👉 Any time the data changes (add/edit/delete/filter), <strong>re-render</strong> the list from the array.</p></div></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817c-9a15-e4b1a0075468"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81f0-af8f-ed7f7c841c4f" class="">1) DOM basics to set up</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8173-b7f2-fe1cb132905c" class="bulleted-list"><li style="list-style-type:disc">Cache all important elements <strong>once</strong> at the top:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8179-b695-c94e08eda5f5" class="bulleted-list"><li style="list-style-type:circle">Form, inputs (<code>title</code>, <code>text</code>), submit button, cancel button</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8117-8845-e32ce7bc9072" class="bulleted-list"><li style="list-style-type:circle">Hidden input for <code>editingId</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b0-906c-f80f8467dff3" class="bulleted-list"><li style="list-style-type:circle">Notes container (<code>#notes</code>)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812e-83d4-e5222474c815" class="bulleted-list"><li style="list-style-type:circle">Filter input and error message node</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819f-bc14-f66f7caadb3a" class="bulleted-list"><li style="list-style-type:disc">Add event listeners:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8104-aed5-de8fcca480c7" class="bulleted-list"><li style="list-style-type:circle"><code>form.submit</code> → add or save changes</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81be-be4d-ec0f92978d7f" class="bulleted-list"><li style="list-style-type:circle"><code>cancel-edit.click</code> → exit edit mode</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8172-beb0-c06c92b780d3" class="bulleted-list"><li style="list-style-type:circle"><code>filter.input</code> → update search text and re-render</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8121-a0ac-c94ab27b0d7c" class="bulleted-list"><li style="list-style-type:circle"><strong>Delegation</strong> on <code>#notes</code> for clicks on <strong>Edit/Delete</strong> (one listener, not one per card)</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814d-b61c-dade01a51872"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8184-aa0d-db430a44444c" class="">2) State you’ll keep</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8115-bc45-e8090aef8613" class="bulleted-list"><li style="list-style-type:disc"><code>notes</code> (array of note objects)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8176-8d9c-fcb60296fc3d" class="bulleted-list"><li style="list-style-type:disc"><code>filterText</code> (string, default <code>&quot;&quot;</code>)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819c-85c3-dce73629f69a" class="bulleted-list"><li style="list-style-type:disc">You <strong>don’t</strong> need complex state; the hidden input <code>editingId</code> can tell you whether you’re in <strong>add mode</strong> (empty value) or <strong>edit mode</strong> (has an id).</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81cf-a2e9-f8ae286246b8"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8100-bd69-f9f2d0c6f895" class="">3) Rendering flow (core engine)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815f-93d1-ce1ae36d1ed4" class="bulleted-list"><li style="list-style-type:disc">Always start a render by <strong>clearing the container</strong> (<code>notesEl.innerHTML = &quot;&quot;</code>).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8198-8fed-e453d662ad30" class="bulleted-list"><li style="list-style-type:disc">Create a <code>visible</code> list:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f7-8b82-fda34fe06420" class="bulleted-list"><li style="list-style-type:circle">Convert <code>filterText</code> to lowercase.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8172-be5c-c6218dbaf0d5" class="bulleted-list"><li style="list-style-type:circle">Include a note if its <code>title</code> or <code>text</code> contains the query.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8196-b2c7-cbe795fa4b78" class="bulleted-list"><li style="list-style-type:disc">If <code>visible</code> is empty, show a small “No notes to show.” message and <strong>return</strong> early.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81df-9d28-ee45f1cfa767" class="bulleted-list"><li style="list-style-type:disc">For each note in <code>visible</code>, <strong>build elements with </strong><code><strong>createElement</strong></code>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c6-8843-d8c2e84de039" class="bulleted-list"><li style="list-style-type:circle"><code>&lt;article class=&quot;note&quot; data-id=&quot;...&quot;&gt;</code><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-97de-ff3e535da349" class="">→ <code>&lt;h3&gt;</code> title</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bd-a21c-fa0ea943aea9" class="">→ <code>&lt;p&gt;</code> text</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8183-bae1-c7436f90ceda" class="">→ <code>&lt;div class=&quot;note-actions&quot;&gt;</code> with two <code>&lt;button&gt;</code>s: Edit, Delete</p></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fd-a531-f411c5cbdbf8" class="bulleted-list"><li style="list-style-type:disc">Append each card to the container.</li></ul></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-8108-83a0-fbb7115b6000" class="">Hint: Keep the render function pure (no side effects other than DOM creation). It should only read from notes and filterText, and then draw.</blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ae-9b98-f573bb15872b"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-816e-9b6e-d7feff563b54" class="">4) Add vs Edit (one form, two modes)</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-9e8c-e4f009e55283" class=""><strong>Detect mode</strong> on submit:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e3-8c9c-fdf746c69c23" class="bulleted-list"><li style="list-style-type:disc">If hidden <code>editingId</code> is empty → <strong>Add mode</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814c-bf1d-dadf50d5b35e" class="bulleted-list"><li style="list-style-type:disc">If it has a value → <strong>Edit mode</strong></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8193-970e-d8fb7d6ae5be" class=""><strong>Add mode (high level):</strong></p></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-818b-9b87-ce18aee0dcab" class="numbered-list" start="1"><li>Trim and validate the title. If empty → show error and <strong>stop</strong>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81fb-9e9d-f5ddcc5b868c" class="numbered-list" start="2"><li>Make a new note object (unique id via <code>Date.now().toString()</code> is fine).</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81a5-b9c1-ecbbb318f1bc" class="numbered-list" start="3"><li>Push it into <code>notes</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81a8-acfa-d7b33ec4fb82" class="numbered-list" start="4"><li>Re-render, reset the form, and ensure you’re back to “Add Note” UI.</li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-9b7d-c7286d3304d7" class=""><strong>Edit mode (high level):</strong></p></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81a5-aff2-ec3d14e18bcd" class="numbered-list" start="1"><li>Trim and validate the title. If empty → show error and <strong>stop</strong>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81a6-809a-d56db53e4e30" class="numbered-list" start="2"><li>Find the note in the array with that id.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-818c-b78e-d5b664aabec5" class="numbered-list" start="3"><li>Update its <code>title</code> and <code>text</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-817f-bd35-eeddc18a8e52" class="numbered-list" start="4"><li>Re-render.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-810a-b694-cd903290489f" class="numbered-list" start="5"><li>Clear <code>editingId</code>, change submit button text back to “Add Note”, hide <strong>Cancel Edit</strong>, reset the form.</li></ol></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-81cb-b6e6-f95723204b93" class="">Hint: Keep all edits inside the array first; the UI will update on the next render.</blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e2-886c-f9a520e5b835"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81be-bcf9-c418974321e2" class="">5) Entering Edit mode (when Edit button is clicked)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819c-8bfa-dad09ce08e8d" class="bulleted-list"><li style="list-style-type:disc">Use event delegation on <code>#notes</code>:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8159-ad89-e5c10b29543a" class="bulleted-list"><li style="list-style-type:circle">Find if the click target has class <code>edit-btn</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819c-aa9b-c6a456eb8956" class="bulleted-list"><li style="list-style-type:circle">Get the closest <code>.note</code> and read its <code>data-id</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a3-b462-c9616a57391c" class="bulleted-list"><li style="list-style-type:circle">Find that note in <code>notes</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8192-9b3c-d57b54fa4612" class="bulleted-list"><li style="list-style-type:circle"><strong>Pre-fill</strong> the form fields with that note’s data.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818d-9e75-e0afb77984c9" class="bulleted-list"><li style="list-style-type:circle">Put the id into the hidden <code>editingId</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8121-989e-cfe44e7cce74" class="bulleted-list"><li style="list-style-type:circle">Change submit button text to <strong>“Save Changes”</strong>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814c-aa09-c9ed2f0503f9" class="bulleted-list"><li style="list-style-type:circle">Show the <strong>Cancel Edit</strong> button.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fb-81bf-d3794e7ba927" class="bulleted-list"><li style="list-style-type:circle">(Optional) focus the title input so students can type immediately.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8142-9542-d6306daf3285"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-810e-9a90-ee53c4c57bfe" class="">6) Deleting a note (when Delete button is clicked)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8133-aa84-de1024050c50" class="bulleted-list"><li style="list-style-type:disc">Still under the same delegated click handler:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8160-a373-c3d5cb7b6b7c" class="bulleted-list"><li style="list-style-type:circle">If target has class <code>delete-btn</code>, grab the <code>data-id</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8120-9ead-e877131e54bb" class="bulleted-list"><li style="list-style-type:circle">Remove that item from the <code>notes</code> array (find index → splice).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c9-a546-cdf940a6ba15" class="bulleted-list"><li style="list-style-type:circle">If you were editing this same note, call the <strong>cancel edit</strong> flow first so the form resets properly.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b5-a1c4-c2cdef44987e" class="bulleted-list"><li style="list-style-type:circle">Re-render.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-8172-a97c-fe25255d0c69" class="">Hint: Removing from the array is what truly deletes the note. The DOM will reflect the new array on re-render.</blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811a-99dd-fdfe096cb8c4"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8186-ae0d-d4f9e727b8da" class="">7) Filter logic (why other notes don’t “disappear” for real)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8177-a6b9-d47035430dcb" class="bulleted-list"><li style="list-style-type:disc">Filtering should <strong>not</strong> modify the main <code>notes</code> array.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8177-ab51-f9355953acd9" class="bulleted-list"><li style="list-style-type:disc">It only creates a temporary <code>visible</code> array used for displaying.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816c-8c27-c658e870c088" class="bulleted-list"><li style="list-style-type:disc">When filter is cleared, the next render just shows everything again.</li></ul></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-8117-b660-e109bb632823" class="">Hint: If it feels like items “disappear”, that’s good—they’re just not in the visible set. Your data is safe.</blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8152-967e-c1b2f2a7933a"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81e6-9cc3-cedbcaeb7225" class="">8) Validation (keep it minimal)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812c-a149-f06bba1a5c0f" class="bulleted-list"><li style="list-style-type:disc">Only the <strong>title</strong> is required.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816e-b33d-c47bd72d61a4" class="bulleted-list"><li style="list-style-type:disc">On invalid title:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8143-80c7-e36c77eb207f" class="bulleted-list"><li style="list-style-type:circle">Put a small message (<code>&quot;Title is required.&quot;</code>) into the error node.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810a-bce3-d36ac127f76b" class="bulleted-list"><li style="list-style-type:circle"><strong>Return</strong> early (don’t add or save).</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8116-94fc-fe2f9173504c" class="bulleted-list"><li style="list-style-type:disc">On successful submit:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fa-9a42-e40cbbbc0590" class="bulleted-list"><li style="list-style-type:circle">Clear the error node.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-81ed-aff4-ec51c0698a0a" class="">Hint: Always trim() inputs before checking emptiness.</blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81eb-977f-ca1ce491a337"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81f8-b946-da5c1712903d" class="">9) Empty state &amp; polish</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fb-9b0f-e08173f12dd6" class="bulleted-list"><li style="list-style-type:disc">If no notes match the filter or the list is empty, show a small muted paragraph.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811f-a2b3-de30120fec51" class="bulleted-list"><li style="list-style-type:disc">Keep button texts accurate to the mode:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-812e-9744-c5fdb412644b" class="bulleted-list"><li style="list-style-type:circle">Add mode → <strong>“Add Note”</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d9-9805-e57d3cc5f021" class="bulleted-list"><li style="list-style-type:circle">Edit mode → <strong>“Save Changes”</strong></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8103-a9ea-f8bbd8dd19fa" class="bulleted-list"><li style="list-style-type:disc">The <strong>Cancel Edit</strong> button should only be visible in edit mode.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8152-ae3d-d294129434a1"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8192-9a64-e13d3efb1003" class="">10) Event Delegation (the pattern)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a1-a859-d692a7f0784e" class="bulleted-list"><li style="list-style-type:disc">Attach <strong>one</strong> click listener to <code>#notes</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813a-952e-c020149182eb" class="bulleted-list"><li style="list-style-type:disc">Use <code>event.target.classList.contains(&quot;edit-btn&quot;)</code> (or <code>delete-btn</code>) to detect which action.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fd-9f79-f662103de6da" class="bulleted-list"><li style="list-style-type:disc">Use <code>closest(&quot;.note&quot;)</code> to get the parent card and its <code>data-id</code>.</li></ul></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-8111-b43e-ed9e0e9012b0" class="">Hint: This avoids attaching many listeners to each card. New cards work automatically.</blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8113-96e6-ed160b311f84"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81be-be48-e3097aa9390e" class="">11) Testing checklist (quick manual tests)</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8142-bafb-dbaf38c696da" class="numbered-list" start="1"><li><strong>Add</strong> two different notes → both appear.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8134-80a1-f3407334d1ee" class="numbered-list" start="2"><li><strong>Filter</strong> by a word present in only one note → only that note shows.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-810c-b6be-c660b13119fe" class="numbered-list" start="3"><li><strong>Clear filter</strong> → both notes show again.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-810c-b398-fe3bac46cf93" class="numbered-list" start="4"><li>Click <strong>Edit</strong> on the first note → form pre-fills; change values; <strong>Save Changes</strong> → card updates.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8197-9fbb-f974678ea632" class="numbered-list" start="5"><li>Click <strong>Cancel Edit</strong> midway → form clears and returns to Add mode.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81df-b09a-e2fb2b8cad02" class="numbered-list" start="6"><li><strong>Delete</strong> a note → it disappears; other notes remain.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8191-8f69-fe63a8066f43" class="numbered-list" start="7"><li>Try to <strong>submit empty title</strong> → error shows; nothing adds/updates.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f7-8a2a-dc4bb7f1e46b"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8170-b457-ca2ad4230143" class="">12) Common bugs &amp; quick fixes</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810e-87be-f8895eb16766" class="bulleted-list"><li style="list-style-type:disc"><strong>Nothing shows after filtering</strong>: check lowercase conversion and <code>includes()</code>/<code>indexOf()</code> logic.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a0-a88c-f6833190c368" class="bulleted-list"><li style="list-style-type:disc"><strong>Edit doesn’t update</strong>: ensure you’re finding the note by the <strong>same id</strong> you set in <code>editingId</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812a-97b0-e73e77f46a35" class="bulleted-list"><li style="list-style-type:disc"><strong>Stuck in edit mode</strong>: remember to clear <code>editingId</code>, change button text, and hide Cancel.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8165-a84c-e90b134d9298" class="bulleted-list"><li style="list-style-type:disc"><strong>Delete doesn’t work</strong>: confirm you’re reading <code>data-id</code> from the clicked card (not from the wrong element).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8141-b73c-fea3d542c9dd" class="bulleted-list"><li style="list-style-type:disc"><strong>Render duplicates</strong>: always clear <code>#notes</code> before drawing.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810f-a5ad-ea7a4dc34e6a" class="bulleted-list"><li style="list-style-type:disc"><strong>Validation ignored</strong>: return early after setting the error message.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8187-9509-c42ca98d65bf"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81b8-a559-cbf858fc693b" class="">13) Light UX hints (still basic)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d0-97ee-e8fae1ef18c0" class="bulleted-list"><li style="list-style-type:disc">Focus the title input when entering edit mode (helps speed).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813b-806f-df896c4a80c8" class="bulleted-list"><li style="list-style-type:disc">Keep messages short and visible near the field.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b0-8b96-cf760aef4d6c" class="bulleted-list"><li style="list-style-type:disc">Keep the layout simple—don’t overthink styles; this is a DOM task.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81af-996a-e3b7e7327c35"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8135-ae66-d3a374665150" class="">Mini pseudo-flow you can keep on a sticky note</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810c-9c09-d9cd862b57f5" class="bulleted-list"><li style="list-style-type:disc">On load → <code>render()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8162-94c1-c0cc457f17d9" class="bulleted-list"><li style="list-style-type:disc">Submit:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8159-a24b-d34cfd24a145" class="bulleted-list"><li style="list-style-type:circle">if <code>editingId</code> → update note → reset to add mode → <code>render()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8171-a836-fa7c430cb09a" class="bulleted-list"><li style="list-style-type:circle">else → add new note → <code>render()</code> → reset form</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819d-9ee1-d8cd30a280c0" class="bulleted-list"><li style="list-style-type:disc">Click in board:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-813b-9abd-c0ddd7e6ada8" class="bulleted-list"><li style="list-style-type:circle">Edit → prefill + switch to edit mode</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8151-b549-f69c04a2a3b6" class="bulleted-list"><li style="list-style-type:circle">Delete → remove from array → <code>render()</code></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8114-a760-e6838efa2b03" class="bulleted-list"><li style="list-style-type:disc">Filter input:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8161-8bb5-e94a9da26be1" class="bulleted-list"><li style="list-style-type:circle">update <code>filterText</code> → <code>render()</code></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8138-aaae-c17d8380fa9c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-8956-ca6ae5182493" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815e-aa3f-cbe7a9709a7c" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8141-87d8-d5f9ca284681" class="">Solution</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810e-8acf-f2454e8bae7e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">
+// ------------------------
+// State
+// ------------------------
+var notes = []; // Each note: { id: string, title: string, text: string }
+var filterText = &quot;&quot;;
+
+// ------------------------
+// DOM References
+// ------------------------
+var notesEl = document.getElementById(&quot;notes&quot;);
+var formEl = document.getElementById(&quot;note-form&quot;);
+var titleInput = document.getElementById(&quot;title&quot;);
+var textInput = document.getElementById(&quot;text&quot;);
+var submitBtn = document.getElementById(&quot;submit-btn&quot;);
+var cancelEditBtn = document.getElementById(&quot;cancel-edit&quot;);
+var editingIdInput = document.getElementById(&quot;editing-id&quot;);
+var titleErrorEl = document.getElementById(&quot;title-error&quot;);
+var filterInput = document.getElementById(&quot;filter&quot;);
+
+// ------------------------
+// Init
+// ------------------------
+function init() {
+  // TODO(1): Render notes from the current state (notes array).
+  renderNotes();
+
+  // Events
+  formEl.addEventListener(&quot;submit&quot;, onSubmit);
+  cancelEditBtn.addEventListener(&quot;click&quot;, onCancelEdit);
+  filterInput.addEventListener(&quot;input&quot;, onFilterChange);
+
+  // TODO(2): Add event delegation on the notes container for Edit/Delete buttons.
+  // Example: notesEl.addEventListener(&quot;click&quot;, onNotesClick);
+  notesEl.addEventListener(&quot;click&quot;, onNotesClick);
+}
+init();
+
+// ------------------------
+// Rendering
+// ------------------------
+function renderNotes() {
+  // TODO(3): Clear notesEl content before re-rendering.
+  notesEl.innerHTML = &quot;&quot;;
+
+  // TODO(4): Compute filtered list from notes array using filterText.
+  var q = (filterText || &quot;&quot;).toLowerCase();
+  var visible = notes.filter(function (n) {
+    var t = (n.title || &quot;&quot;).toLowerCase();
+    var x = (n.text || &quot;&quot;).toLowerCase();
+    return t.indexOf(q) !== -1 || x.indexOf(q) !== -1;
+  });
+
+  // TODO(5): If no visible notes, show a &lt;p class=&quot;muted&quot;&gt; message and return.
+  if (visible.length === 0) {
+    var emptyP = document.createElement(&quot;p&quot;);
+    emptyP.className = &quot;muted&quot;;
+    emptyP.textContent = &quot;No notes to show.&quot;;
+    notesEl.appendChild(emptyP);
+    return;
+  }
+
+  // TODO(6): For each visible note, build the DOM structure using createElement:
+  // - &lt;article class=&quot;note&quot; data-id=&quot;...&quot;&gt;
+  //   - &lt;h3&gt;Title here&lt;/h3&gt;
+  //   - &lt;p&gt;Text here&lt;/p&gt;
+  //   - &lt;div class=&quot;note-actions&quot;&gt;
+  //       &lt;button class=&quot;edit-btn&quot;&gt;Edit&lt;/button&gt;
+  //       &lt;button class=&quot;delete-btn&quot;&gt;Delete&lt;/button&gt;
+  //     &lt;/div&gt;
+  // Append each built card to notesEl.
+  for (var i = 0; i &lt; visible.length; i++) {
+    var n = visible[i];
+
+    var card = document.createElement(&quot;article&quot;);
+    card.className = &quot;note&quot;;
+    card.setAttribute(&quot;data-id&quot;, n.id);
+
+    var h3 = document.createElement(&quot;h3&quot;);
+    h3.textContent = n.title;
+
+    var p = document.createElement(&quot;p&quot;);
+    p.textContent = n.text;
+
+    var actions = document.createElement(&quot;div&quot;);
+    actions.className = &quot;note-actions&quot;;
+
+    var editBtn = document.createElement(&quot;button&quot;);
+    editBtn.className = &quot;edit-btn&quot;;
+    editBtn.type = &quot;button&quot;;
+    editBtn.textContent = &quot;Edit&quot;;
+
+    var delBtn = document.createElement(&quot;button&quot;);
+    delBtn.className = &quot;delete-btn&quot;;
+    delBtn.type = &quot;button&quot;;
+    delBtn.textContent = &quot;Delete&quot;;
+
+    actions.appendChild(editBtn);
+    actions.appendChild(delBtn);
+
+    card.appendChild(h3);
+    card.appendChild(p);
+    card.appendChild(actions);
+
+    notesEl.appendChild(card);
+  }
+}
+
+// ------------------------
+// Events
+// ------------------------
+function onSubmit(e) {
+  e.preventDefault();
+  clearError();
+
+  var title = titleInput.value.trim();
+  var text = textInput.value.trim();
+  var editingId = editingIdInput.value;
+
+  // TODO(7): Validate that title is not empty.
+  // - If empty, set titleErrorEl.textContent with a message and return.
+  if (title === &quot;&quot;) {
+    titleErrorEl.textContent = &quot;Title is required.&quot;;
+    return;
+  }
+
+  if (editingId) {
+    // EDIT MODE
+    // TODO(8): Find the note by id and update its title and text.
+    var found = null;
+    for (var i = 0; i &lt; notes.length; i++) {
+      if (notes[i].id === editingId) {
+        found = notes[i];
+        break;
+      }
+    }
+    if (found) {
+      found.title = title;
+      found.text = text;
+    }
+
+    // TODO(9): Reset the form back to &quot;Add Note&quot; mode (editingIdInput, buttons, labels).
+    editingIdInput.value = &quot;&quot;;
+    submitBtn.textContent = &quot;Add Note&quot;;
+    cancelEditBtn.classList.add(&quot;hidden&quot;);
+  } else {
+    // ADD MODE
+    // TODO(10): Create a new note object with a unique id (e.g., Date.now().toString()).
+    var newNote = {
+      id: Date.now().toString(),
+      title: title,
+      text: text
+    };
+    // TODO(11): Push the new note into the notes array.
+    notes.push(newNote);
+  }
+
+  // TODO(12): Re-render notes and reset the form fields.
+  renderNotes();
+  formEl.reset();
+}
+
+function onCancelEdit() {
+  // TODO(13): Clear edit state and reset form to &quot;Add Note&quot; mode.
+  // - editingIdInput.value = &quot;&quot;
+  // - submitBtn text back to &quot;Add Note&quot;
+  // - hide cancelEditBtn
+  // - clear any error
+  formEl.reset();
+  editingIdInput.value = &quot;&quot;;
+  submitBtn.textContent = &quot;Add Note&quot;;
+  cancelEditBtn.classList.add(&quot;hidden&quot;);
+  clearError();
+}
+
+function onFilterChange(e) {
+  // TODO(14): Update filterText from the input value and re-render notes.
+  filterText = e.target.value || &quot;&quot;;
+  renderNotes();
+}
+
+// TODO(15): Implement delegated click handling for Edit/Delete actions on the notes board.
+function onNotesClick(e) {
+  // - Determine if the click was on .edit-btn or .delete-btn
+  // - Find the closest .note element and read its data-id
+  // - For Edit:
+  //   - Find the note by id
+  //   - Fill form inputs with the note values
+  //   - Set editingIdInput.value = id
+  //   - Change submit button text to &quot;Save Changes&quot;
+  //   - Show cancelEditBtn
+  // - For Delete:
+  //   - Remove the note from the array by id
+  //   - Re-render notes
+  var target = e.target;
+  var isEdit = target.classList.contains(&quot;edit-btn&quot;);
+  var isDelete = target.classList.contains(&quot;delete-btn&quot;);
+  if (!isEdit &amp;&amp; !isDelete) return;
+
+  var card = target.closest(&quot;.note&quot;);
+  if (!card) return;
+
+  var id = card.getAttribute(&quot;data-id&quot;);
+
+  if (isEdit) {
+    var note = null;
+    for (var i = 0; i &lt; notes.length; i++) {
+      if (notes[i].id === id) {
+        note = notes[i];
+        break;
+      }
+    }
+    if (!note) return;
+
+    titleInput.value = note.title;
+    textInput.value = note.text;
+    editingIdInput.value = id;
+    submitBtn.textContent = &quot;Save Changes&quot;;
+    cancelEditBtn.classList.remove(&quot;hidden&quot;);
+    titleInput.focus();
+  }
+
+  if (isDelete) {
+    // Remove note by id
+    var idx = -1;
+    for (var j = 0; j &lt; notes.length; j++) {
+      if (notes[j].id === id) {
+        idx = j;
+        break;
+      }
+    }
+    if (idx !== -1) {
+      notes.splice(idx, 1);
+      // If we were editing this note, exit edit mode
+      if (editingIdInput.value === id) {
+        onCancelEdit();
+      }
+      renderNotes();
+    }
+  }
+}
+
+// ------------------------
+// Helpers
+// ------------------------
+function clearError() {
+  // TODO(16): Clear any validation messages (e.g., titleErrorEl.textContent = &quot;&quot;)
+  titleErrorEl.textContent = &quot;&quot;;
+}
+
+// ------------------------
+// Student Checklist
+// ------------------------
+// [ ] (1) Initial render from state
+// [ ] (2) Event delegation for Edit/Delete on #notes
+// [ ] (3) Clear container before rendering
+// [ ] (4) Filter notes by text (title or body)
+// [ ] (5) Empty-state message when no notes
+// [ ] (6) Build cards using createElement/appendChild
+// [ ] (7) Validate title (required)
+// [ ] (8) Edit existing note (update by id)
+// [ ] (9) Reset form from edit → add mode
+// [ ] (10) Create new note object with unique id
+// [ ] (11) Add new note to array
+// [ ] (12) Re-render + reset form after submit
+// [ ] (13) Cancel edit (restore form)
+// [ ] (14) Re-render on filter input
+// [ ] (15) Implement onNotesClick for edit/delete
+// [ ] (16) Clear validation messages properly
+</code></pre></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

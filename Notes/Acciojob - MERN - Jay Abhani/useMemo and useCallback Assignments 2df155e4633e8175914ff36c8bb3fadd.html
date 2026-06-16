@@ -1,0 +1,1409 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>useMemo and useCallback Assignments</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-8175-914f-f36c8bb3fadd" class="page sans"><header><h1 class="page-title" dir="auto">useMemo and useCallback Assignments</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8100-a736-f1a46cac9378" class="">🧠 MCQs: React Re-rendering &amp; <code>useMemo</code> </h2></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8145-813b-c6a9a99058f3"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8141-aa66-d4008631c334" class=""><strong>1. What does “re-render” mean in React?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8136-a050-c35c23d0b9cf" class="">A. Browser page refresh</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8162-bf0b-da7cc367ba75" class="">B. Component JSX only updates</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817e-ba17-d147ae38123a" class="">C. Component function runs again</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8132-942b-ddd3ab58e75d" class="">D. Virtual DOM is cleared</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c0-a44f-f31288b04edd"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81da-af06-d03f33c175e2" class=""><strong>2. Which of the following causes a component to re-render?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-8f5a-d4e981e824ff" class="">A. State change</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8108-ba9c-e91f632fc60e" class="">B. Props change</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a0-93c4-fcfe7d29c6fb" class="">C. Parent re-render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81da-b532-c2bea8c64ecb" class="">D. All of the above</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814e-8de5-d9ac42b13edb"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8173-9aab-ef0436896835" class=""><strong>3. Does a React re-render refresh the browser page?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8100-b7a8-cdd28b3476ee" class="">A. Yes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8185-9c00-dcddf0f3c5b7" class="">B. Sometimes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e8-a98a-cfcf524675ae" class="">C. Only for class components</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8174-8b2d-fc91534390c3" class="">D. No</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8156-adb5-fe7765fc4193"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814b-9476-e19b7d94027d" class=""><strong>4. What happens to variables inside a component on re-render?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b1-8da9-e8f33da2a305" class="">A. They stay the same</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8148-a90f-d3a4544720cc" class="">B. They are cached</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8120-b0dd-d21ebb3b3fed" class="">C. They are recreated</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812e-be9b-d976cfd7aaa2" class="">D. They are ignored</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8195-809d-fa2297cd8c46"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f3-bfe1-cefc47eb8cc3" class=""><strong>5. Which type of value is compared by reference in JavaScript?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d1-aaa5-d6e111bb9a46" class="">A. Number</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b1-83cd-eaecd0b80a1e" class="">B. String</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811a-a388-d6949f2ca0f0" class="">C. Boolean</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a2-8b3b-eb654ded9ad9" class="">D. Object</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fa-b5e2-eb2f2d4c6303"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e6-8c6f-d83ec9aca68e" class=""><strong>6. What is the result of </strong><code><strong>{}</strong></code><strong> === </strong><code><strong>{}</strong></code><strong> ?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811b-a49e-e2f2a0e07a5c" class="">A. true</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ba-afdc-c574f0511c0e" class="">B. false</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8176-9186-f91737c3eb85" class="">C. undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-aab7-d31a2cf1fc6d" class="">D. Error</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f9-b6d3-e9286de77e56"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810b-8440-c01295a6ad0a" class=""><strong>7. Why do functions cause unnecessary re-renders?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ce-b0ac-dc1da5a7a34c" class="">A. They are slow</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818f-8864-cfd77225042d" class="">B. They return undefined</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8109-b3aa-ff7514752d39" class="">C. They are recreated on every render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e8-9b17-f3d992adbb51" class="">D. They change state automatically</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81da-842c-d24ed7794662"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8161-bc52-fa1c23cfdded" class=""><strong>8. By default, when a parent re-renders, what happens to the child?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-9226-cf0547cc70be" class="">A. Child never re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f0-a377-d4f5df83990b" class="">B. Child re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d5-9ef8-ca87a9b44f3e" class="">C. Child re-renders only if props change</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a6-ac83-dadeecc3d90d" class="">D. Child renders only once</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ef-a16c-da4794e95578"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811f-b2c7-fdf4507a7737" class=""><strong>9. What does </strong><code><strong>useMemo</strong></code><strong> do?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-9954-ec6b2e1b2e47" class="">A. Stops component re-render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d8-8a6e-fdf8fa33e758" class="">B. Memoizes a function</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8189-9b07-ebbd21a964e6" class="">C. Memoizes a computed value</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8185-9fed-c90282c00d6a" class="">D. Updates state</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812d-8488-ff9c9d6fa178"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8137-8b40-e97ee1a594c6" class=""><strong>10. </strong><code><strong>useMemo</strong></code><strong> is mainly used to avoid:</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815d-b2c2-cc23c59c0866" class="">A. State updates</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-a7f8-fa030279499d" class="">B. DOM updates</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-a4ba-dfa2daeac697" class="">C. Unnecessary recalculations</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8125-a7ee-d3906149ac23" class="">D. API calls</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816c-af02-e3b9b9e2b78a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8114-bbbc-d37a7c6260bf" class=""><strong>11. When does </strong><code><strong>useMemo</strong></code><strong> recompute its value?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817e-bc5c-ee7c3edf6d3e" class="">A. On every render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-9c8e-c6dc1508ad8e" class="">B. When dependencies change</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c3-9d4b-c24b8443f2a7" class="">C. Only on mount</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8101-8309-f8973058a703" class="">D. Never</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e2-94c0-f7145365c03a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81dc-9a8f-f12764035831" class=""><strong>12. What happens if dependency array is empty </strong><code><strong>[]</strong></code><strong> in </strong><code><strong>useMemo</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ab-9f88-d83bcfc4ba0c" class="">A. Value recalculates every time</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8118-ab7b-f94cf0fb1d85" class="">B. Value never calculates</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c0-b1a8-fb17abd5e66d" class="">C. Value calculates once</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81af-a701-e7252f36c99d" class="">D. App crashes</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8100-8dd3-e203663ebdee"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8189-9dee-db290eba180e" class=""><strong>13. Which of the following is a bad use of </strong><code><strong>useMemo</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-9367-d65e86926bae" class="">A. Expensive loop</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8148-bd24-d15a22454b8b" class="">B. Filtering large array</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-afde-feb66f54dbd1" class="">C. <code>useMemo(() =&gt; a + b)</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8163-9b13-c83512186b56" class="">D. Derived data</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d9-8842-df8cfa9da62e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ed-bf73-c7dfc843dba9" class=""><strong>14. Does </strong><code><strong>useMemo</strong></code><strong> prevent component re-render?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8188-b16c-ceee229d3415" class="">A. Yes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8178-93ef-da214b14bc9f" class="">B. No</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-81c8-f903a524973e" class="">C. Sometimes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814c-8791-eb9785d02658" class="">D. Only in production</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a2-9711-f74dab24dd4d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fe-99fb-ea19299d696b" class=""><strong>15. Why is </strong><code><strong>useMemo</strong></code><strong> useful with large lists?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818d-8d4d-c0d050003ee1" class="">A. Prevents API calls</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c4-8ec8-cf88a0286ee2" class="">B. Prevents list rendering</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c2-a5ba-c763dc5ee636" class="">C. Prevents unnecessary filtering</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8189-ac80-dc027e437860" class="">D. Improves CSS performance</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817a-96d6-fca98ccddf44"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8163-844c-c9b5f0f87c02" class=""><strong>16. Which values should usually be included in </strong><code><strong>useMemo</strong></code><strong> dependencies?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a5-8258-c8cb645dac81" class="">A. All variables in component</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8160-af0d-ff0cf1bb9fa2" class="">B. Only state variables</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815c-8c15-d328ee3a703e" class="">C. Values used inside calculation</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813e-8e25-ecc5a154e6d4" class="">D. No values</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ab-80bf-f2d904eb82dc"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-819a-bfc0-f14faf4dab16" class=""><strong>17. What problem does reference equality mainly cause?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8199-b34e-d89d643398d4" class="">A. Syntax errors</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8196-8443-e32ee5499004" class="">B. Infinite loops</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819e-9ecb-e4829e8478a3" class="">C. Unnecessary re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8176-9098-f01aacea7a70" class="">D. Memory leaks</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819c-b6bb-de3ca42239a0"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8121-96c1-db3e6c5f3f0c" class=""><strong>18. Which data type benefits MOST from </strong><code><strong>useMemo</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818a-a8ed-d2f5ddd5bb38" class="">A. Number</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8183-8105-d431f3d3e80a" class="">B. Boolean</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811d-8ff5-cffe3da25a11" class="">C. Object</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b0-b391-e4a13f7f2d3f" class="">D. String</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d8-b4a1-de391c72b0a4"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ae-b2e1-f6ef890b6d4a" class=""><strong>19. When should you NOT use </strong><code><strong>useMemo</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81aa-bed1-c9e8ecf3a890" class="">A. When calculation is expensive</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8194-8bb6-e7ac76b7ea43" class="">B. When app feels slow</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d3-a37c-cba1c1eb8948" class="">C. When code becomes less readable</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8157-bc0a-cc2f500fc040" class="">D. When filtering large arrays</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b2-b58b-d9a9566b17cf"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c9-9beb-f8ffde6800f7" class=""><strong>20. What is the main goal of </strong><code><strong>useMemo</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810c-a757-fa7673bb6487" class="">A. Reduce memory usage</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810a-a757-c1f5ceb2d031" class="">B. Improve code readability</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8175-94d0-f9c173e45fc7" class="">C. Avoid unnecessary computation</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8195-ab60-f78eebd2855e" class="">D. Avoid state updates</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8126-97f0-d69fe6b8dba4" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-a09e-fe9430f7fa49" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8160-b6f6-f95f1cc4d079" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8138-ad1c-c27c3ac37bd6" class="">🧠 React Re-rendering &amp; <code>useMemo</code> – Medium Level MCQs</h2></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8175-b3cb-e2fff750ee83"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-817a-93be-f402562007eb" class=""><strong>1. A component re-renders, but the UI output remains exactly the same. Why does this happen?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8107-95d2-e1521018d70d" class="">A. React skips DOM updates</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819f-81bf-f220e7eb7715" class="">B. JSX is cached automatically</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8104-9305-e844fc0b97e1" class="">C. Component function still re-executes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8105-8816-e3a2eaca1eba" class="">D. Browser ignores changes</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817c-8a11-d2e6e87f6bfe"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8180-9a8d-e2f546d8b76c" class=""><strong>2. Which statement best describes React’s rendering behavior?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-9554-e0b177c9f643" class="">A. React re-renders only changed JSX lines</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81de-a37e-ed2008cacebb" class="">B. React re-renders only state variables</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bd-9802-d732a4345787" class="">C. React re-runs the full component function</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8165-a60b-c80ac29740c5" class="">D. React refreshes the browser page</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8119-b9cf-f9484536f74a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bc-af84-f8375d522ca2" class=""><strong>3. Why does an object literal </strong><code><strong>{}</strong></code><strong> cause problems with memoization?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8141-907d-c46bbe3800a4" class="">A. Objects are slow to create</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8152-b9cc-d9722ffca472" class="">B. Objects are mutable</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8147-89de-fd7c4b312d9c" class="">C. Objects are compared by reference</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813b-806b-c7e75ab7f8ba" class="">D. Objects block garbage collection</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8188-8cd6-ead50de436a6"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8106-a6ba-dd6019da308c" class=""><strong>4. What exactly does React compare when checking props in </strong><code><strong>React.memo</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8159-ae09-feb47c1c5b85" class="">A. Deep equality of objects</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8112-9815-c49b477e9ca7" class="">B. JSON string values</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8139-bcb3-ced03c337b58" class="">C. Reference equality (<code>===</code>)</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-9b61-ef2377da3970" class="">D. Component output</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8163-9abb-ef2eb9532d80"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8157-9f72-dffba62fb7ef" class=""><strong>5. Which scenario will cause a child component to re-render even when wrapped in </strong><code><strong>React.memo</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815e-82f4-cfef6e091f31" class="">A. Parent state changes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8183-8c70-f23e01a114e8" class="">B. Child state changes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-a75e-facefce61627" class="">C. Passing a new object as prop</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8167-9c15-ec4094cbcceb" class="">D. JSX remains the same</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d0-9bbb-dd3db81a896b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8160-8391-c4e22a8a86f4" class=""><strong>6. Why is </strong><code><strong>useMemo</strong></code><strong> NOT a solution to prevent re-renders?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-ba6a-d951b2e07c67" class="">A. It is deprecated</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b3-9682-e63b1ee83e50" class="">B. It runs after render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f6-b13f-fb358d710ef9" class="">C. It only memoizes values</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819e-8a89-ca4b094c962b" class="">D. It only works in production</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816b-b067-d2fead7403ee"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8115-9850-e90edb611107" class=""><strong>7. What is the primary cost of using </strong><code><strong>useMemo</strong></code><strong> excessively?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c9-a414-d91f894d06e0" class="">A. Network overhead</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-827c-f0c9de769d5d" class="">B. Memory and dependency checks</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c7-a651-fcd28bda242d" class="">C. DOM repaint</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8105-864c-d085ebff760d" class="">D. Virtual DOM rebuild</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81cc-a57e-d55cb7995e3b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ed-8411-c354c586bced" class=""><strong>8. Which dependency array will cause </strong><code><strong>useMemo</strong></code><strong> to recompute on every render?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8114-a6ad-d23f0f2971e9" class="">A. <code>[count]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e5-943c-df4d68b9d53f" class="">B. <code>[]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817a-b2cf-c3a1d93792c9" class="">C. No dependency array</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8159-b802-f0974c0f857b" class="">D. <code>[props]</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813a-abb1-e7764f1071eb"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-817f-8e9b-e6610bf252d4" class=""><strong>9. What happens if a required dependency is missing from </strong><code><strong>useMemo</strong></code><strong>’s dependency array?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-87b2-c68a8f9d2955" class="">A. React throws an error</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-a2d0-d37bf5e314da" class="">B. App crashes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d3-af1c-e18bf4cad56b" class="">C. Stale or incorrect values</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8183-9407-d5d152a50f1e" class="">D. Value recalculates anyway</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819e-a70f-e744ba354984"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f5-87b9-d6e4ef3f1ee6" class=""><strong>10. Which of the following is a correct use case for </strong><code><strong>useMemo</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8120-ba2f-d30d9880e9bf" class="">A. Memoizing event handlers</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e7-9424-edcdbeff76f0" class="">B. Memoizing API calls</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8140-a5aa-d2e39879a68a" class="">C. Memoizing derived data</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a6-b894-f238032018de" class="">D. Memoizing JSX</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d8-9f3c-d3969366a505"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c1-bac8-d569ec961344" class=""><strong>11. Why does filtering a large array benefit from </strong><code><strong>useMemo</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818a-bd9d-e363c88b0502" class="">A. Filtering mutates data</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8143-879f-c2a4e387a470" class="">B. Filtering causes re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8197-8b36-f88bcd0f9b3e" class="">C. Filtering is computationally expensive</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813c-94c9-ca027199476f" class="">D. Filtering blocks state updates</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8162-8ddb-e28e60414685"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b0-8448-cd9905c8e540" class=""><strong>12. Which change will NOT trigger </strong><code><strong>useMemo</strong></code><strong> recalculation?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-9efc-f33777371edf" class="">A. Dependency value change</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8146-9cdd-d4a54ee4f830" class="">B. Parent re-render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8182-93ff-ddc2d097dcf6" class="">C. State unrelated to dependencies</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8188-8d96-c84e5cae4705" class="">D. Dependency reference change</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8149-b298-d34482747c2a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a3-b913-cfa68f4c2131" class=""><strong>13. In which case does </strong><code><strong>useMemo</strong></code><strong> provide NO real benefit?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813d-aefe-d7910e0cf592" class="">A. Large dataset processing</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-b16b-f27031df92e6" class="">B. Derived totals</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c8-9445-d567f37079fe" class="">C. Simple arithmetic operations</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8174-8fa5-e06e47efa822" class="">D. Expensive filtering</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8194-a5c1-cc5e047ef0c9"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815f-a114-c5de5500710c" class=""><strong>14. Why is reference equality critical for React performance optimization?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818b-8b1c-cd2d08be7a50" class="">A. React tracks memory addresses</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b9-8100-ebd2826c21a8" class="">B. React compares values deeply</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818c-843a-fa02fe387ea8" class="">C. React uses shallow comparison</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818b-8661-db7140edbc8e" class="">D. React caches all props</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817b-bd67-d04f23947576"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b4-a652-cafabb952c6b" class=""><strong>15. What is recreated on every render by default inside a component?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813d-8d87-e20b0ac6d631" class="">A. State variables</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8145-93ae-f0b03898b221" class="">B. Props</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812c-b0aa-ded490253c8a" class="">C. Functions and objects</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8173-b665-d06b0ddd783f" class="">D. JSX elements</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819a-a97f-e9e216cbbad2"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815b-81a2-db6bc193820c" class=""><strong>16. Which statement about </strong><code><strong>useMemo</strong></code><strong> is TRUE?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817f-b02b-e5f0d1827b37" class="">A. It prevents child re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8198-9530-ce89fb473f40" class="">B. It memoizes JSX</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d4-a86e-c88150487f76" class="">C. It caches computed values</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8126-b22d-d80b3ce951f7" class="">D. It replaces <code>useEffect</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a0-b39e-f5a660168ef3"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8131-bc43-d42f0bd29034" class=""><strong>17. Why does toggling unrelated state still cause expensive logic to run?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-ba22-ef0597460c0b" class="">A. React ignores dependency arrays</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f7-81c4-fd0577066ebf" class="">B. Component function re-executes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813a-813f-fc59b454178f" class="">C. React re-renders DOM fully</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-8a51-ccc55163ecf4" class="">D. State is global</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81bd-a9b6-cb0fc951ec20"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f6-b562-ffe15276ca40" class=""><strong>18. What problem does </strong><code><strong>useMemo</strong></code><strong> primarily solve?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-9d7f-d086b09d7822" class="">A. State synchronization</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8163-8bde-c2b938a736b5" class="">B. DOM repainting</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8145-a805-f1d71024ba38" class="">C. Unnecessary recomputation</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815e-a605-cb13fa9fbd1a" class="">D. API request duplication</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8193-aab8-f214baab300c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811e-a0c2-f3c0794f2542" class=""><strong>19. When should performance optimization with </strong><code><strong>useMemo</strong></code><strong> be avoided?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814e-9cf9-e67b0a9efa3f" class="">A. When component is reused</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ed-9baa-d707f3f537f2" class="">B. When app is slow</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-85d6-e30d639a8d70" class="">C. When readability suffers</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-8932-f61953956aed" class="">D. When list is large</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ad-9169-d497ef9ae89b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8175-a6e3-fb707c98b1fb" class=""><strong>20. Which statement best summarizes </strong><code><strong>useMemo</strong></code><strong> usage?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8155-9fb4-e6122c4d5451" class="">A. Use everywhere for safety</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d4-b484-c68145a9df49" class="">B. Use only with React.memo</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8191-bd26-c036dbd77396" class="">C. Use for expensive derived values</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-a869-f561fe0fb997" class="">D. Use instead of state</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8125-9fa2-f3f17b5a12e9" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8174-a75b-d4c8155393a4" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8177-b517-e0e5f50e135a" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a0-8cb9-f69892583e7b" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8149-8274-e4bddf6c8957" class="">🧪 ASSIGNMENT 1: Expensive Username Validation</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8165-aa5a-d2aaf222daaa" class="">🎯 Learning Objective</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a6-a75e-c7858baa39da" class="bulleted-list"><li style="list-style-type:disc">Understand <strong>re-rendering</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8196-9758-ce858941bfc7" class="bulleted-list"><li style="list-style-type:disc">Identify <strong>unnecessary recalculation</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8127-b541-e16ecc49fcf1" class="bulleted-list"><li style="list-style-type:disc">Apply <code><strong>useMemo</strong></code><strong> correctly</strong></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e7-9d45-fff59006e5ea"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81f2-8e23-ea2236b00337" class="">📘 Problem Statement</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-b4a5-cdbb660af9f2" class="">You are building a <strong>signup preview tool</strong>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-9ea7-d39ad0cb8a5f" class="">Whenever a user types a username, the app checks whether the username is <strong>valid</strong> using an <strong>expensive validation logic</strong>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814c-b26a-e4a469ac6343" class="">However, toggling UI-related state (like showing help text) should <strong>NOT re-run validation</strong>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815d-b9ec-d49026f5cb89"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-810e-b215-ce31a1273eba" class="">📋 Requirements</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81b4-9efe-f755a36d2c92" class="numbered-list" start="1"><li>Create an input field for username.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81f8-a15e-e90468c4169e" class="numbered-list" start="2"><li>Add a button <strong>“Toggle Help Text”</strong>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-818c-b837-f5d6e6e8f824" class="numbered-list" start="3"><li>Validation logic should:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-813c-97a1-cdc474edb59d" class="bulleted-list"><li style="list-style-type:disc">Simulate heavy computation using a loop.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8109-97e0-eb4de10e7925" class="bulleted-list"><li style="list-style-type:disc">Return <code>&quot;Valid Username&quot;</code> or <code>&quot;Invalid Username&quot;</code>.</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8179-be01-e5313a7287e5" class="numbered-list" start="4"><li>Optimize the validation so it:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8185-822e-cf470292a7e7" class="bulleted-list"><li style="list-style-type:disc">Runs <strong>only when username changes</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8103-a216-d0f302e16773" class="bulleted-list"><li style="list-style-type:disc">Does <strong>NOT run when help text toggles</strong></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d3-b5a9-c982227aef5c"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8171-b3dd-e196e0be36bf" class="">🧠 Hint</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a9-8cd5-c835ecc552e8" class="bulleted-list"><li style="list-style-type:disc">Validation result is <strong>derived data</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d3-ae48-eddb360ddb2a" class="bulleted-list"><li style="list-style-type:disc">Use <code>useMemo</code></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81cd-93c1-fdb8cbc8cca1"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8135-af70-c2d79b05bd41" class="">✅ Full Solution</h2></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-8117-814a-deb864333563" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useMemo, useState } from &quot;react&quot;;
+
+function expensiveValidation(username) {
+  console.log(&quot;Running expensive validation...&quot;);
+  let isValid = true;
+
+  for (let i = 0; i &lt; 500000000; i++) {}
+
+  if (username.length &lt; 5) {
+    isValid = false;
+  }
+
+  return isValid ? &quot;Valid Username&quot; : &quot;Invalid Username&quot;;
+}
+
+function App() {
+  const [username, setUsername] = useState(&quot;&quot;);
+  const [showHelp, setShowHelp] = useState(false);
+
+  const validationResult = useMemo(() =&gt; {
+    return expensiveValidation(username);
+  }, [username]);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Signup&lt;/h2&gt;
+
+      &lt;input
+        placeholder=&quot;Enter username&quot;
+        value={username}
+        onChange={(e) =&gt; setUsername(e.target.value)}
+      /&gt;
+
+      &lt;p&gt;{validationResult}&lt;/p&gt;
+
+      &lt;button onClick={() =&gt; setShowHelp(!showHelp)}&gt;
+        Toggle Help
+      &lt;/button&gt;
+
+      {showHelp &amp;&amp; &lt;p&gt;Username must be at least 5 characters.&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8199-a373-d7e37d804c4b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8148-88f0-fc7531b2e97e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ba-ad2a-f0ee21e8a86c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-a954-d2fa737a4b65" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8150-900b-e64be380371e" class="">🐞 DEBUG ASSIGNMENT 1: Expensive Report Generation Runs Too Often</h1></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8110-bd9a-f90243495447" class="">❌ Buggy Code</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8175-9be1-fc98bdee2070" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function generateReport(data) {
+	  console.log(&quot;Generating report...&quot;);
+	  let total = 0;
+	  for (let i = 0; i &lt; 400000000; i++) {}
+		data.forEach(d =&gt; total += d);
+	  return total;
+}
+
+function App() {
+  const [showInfo, setShowInfo] = React.useState(false);
+  const sales = [120, 340, 560, 220];
+
+  const reportTotal = generateReport(sales);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Total Sales: {reportTotal}&lt;/h2&gt;
+
+      &lt;button onClick={() =&gt; setShowInfo(!showInfo)}&gt;
+        Toggle Info
+      &lt;/button&gt;
+
+      {showInfo &amp;&amp; &lt;p&gt;Quarterly sales summary&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8136-924c-ea9460144c2f" class="">✅ Correct Solution</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815a-bb79-fe2e84e20204" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useMemo, useState } from &quot;react&quot;;
+
+function generateReport(data) {
+  console.log(&quot;Generating report...&quot;);
+  let total = 0;
+  for (let i = 0; i &lt; 400000000; i++) {}
+  data.forEach(d =&gt; total += d);
+  return total;
+}
+
+function App() {
+  const [showInfo, setShowInfo] = useState(false);
+  const sales = [120, 340, 560, 220];
+
+  const reportTotal = useMemo(() =&gt; {
+    return generateReport(sales);
+  }, [sales]);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Total Sales: {reportTotal}&lt;/h2&gt;
+
+      &lt;button onClick={() =&gt; setShowInfo(!showInfo)}&gt;
+        Toggle Info
+      &lt;/button&gt;
+
+      {showInfo &amp;&amp; &lt;p&gt;Quarterly sales summary&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a0-8f8d-c53d80346660" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-afca-f60befab9425" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8179-b3cb-e830fd0c3ecd" class="">🧪 ASSIGNMENT 2: Student Grade Analyzer</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d3-a3cf-d296b070ba1e" class="">🎯 Learning Objective</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c8-bd40-d5355c1b5630" class="bulleted-list"><li style="list-style-type:disc">Understand <strong>derived data</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81de-9400-fcd5bb06b8c8" class="bulleted-list"><li style="list-style-type:disc">Use <code>useMemo</code> with arrays</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814b-8650-f1b56dda696b" class="bulleted-list"><li style="list-style-type:disc">Avoid unnecessary recalculation on re-render</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8193-8f41-df7712132d8c"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81b1-b5d8-ca87c33b9b37" class="">📘 Problem Statement</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8179-8726-f282c38944b7" class="">You are building a <strong>student performance analyzer</strong>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8100-892f-dca362f13df9" class="">Given a list of student marks, calculate the <strong>average score</strong>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8173-8466-f81d1a7b779a" class="">The user can also toggle a <strong>“Show Details”</strong> section which should <strong>NOT recalculate the average</strong>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8131-8b3e-ce4b42e91162"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ec-a2e7-cb9d3357aa50" class="">📋 Requirements</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81f1-afb8-ff85eeb48dc9" class="numbered-list" start="1"><li>Hardcode a list of student marks.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8199-bcaa-e94c0d0c2e82" class="numbered-list" start="2"><li>Calculate the <strong>average score</strong>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8153-a5f7-f032c7fd1076" class="numbered-list" start="3"><li>Add a button to toggle student details.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81f9-8ce6-cd78d06407a9" class="numbered-list" start="4"><li>Ensure average calculation:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8179-a0e0-d40d3cfc53c5" class="bulleted-list"><li style="list-style-type:disc">Runs only once</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8147-b83a-d5ee6956cadf" class="bulleted-list"><li style="list-style-type:disc">Runs again ONLY if marks change</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e3-bf9e-f973c25be2c7"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8122-8209-cd80a6950354" class="">🧠 Hint</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8195-ad94-d3586fa514f8" class="bulleted-list"><li style="list-style-type:disc">Average score is <strong>derived data</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8143-ad77-fec3718c91cb" class="bulleted-list"><li style="list-style-type:disc">Use <code>useMemo</code></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819a-8d41-d4cf4f0464e2"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ff-818f-e6750a25c803" class="">✅ Full Solution</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812d-b950-e6c31a6a2c7e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useMemo, useState } from &quot;react&quot;;
+
+const marks = [78, 85, 90, 66, 72, 88];
+
+function App() {
+  const [showDetails, setShowDetails] = useState(false);
+
+  const averageScore = useMemo(() =&gt; {
+    console.log(&quot;Calculating average...&quot;);
+    return (
+      marks.reduce((sum, score) =&gt; sum + score, 0) / marks.length
+    );
+  }, []);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Student Performance&lt;/h2&gt;
+      &lt;h3&gt;Average Score: {averageScore.toFixed(2)}&lt;/h3&gt;
+
+      &lt;button onClick={() =&gt; setShowDetails(!showDetails)}&gt;
+        Toggle Details
+      &lt;/button&gt;
+
+      {showDetails &amp;&amp; (
+        &lt;ul&gt;
+          {marks.map((m, i) =&gt; (
+            &lt;li key={i}&gt;Student {i + 1}: {m}&lt;/li&gt;
+          ))}
+        &lt;/ul&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813f-96c5-fc1d31742cd9" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8116-b152-ffb433add3b3" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8138-bc60-f61175357d33" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8169-9484-d2073df26ed9" class="">🧪 ASSIGNMENT 3: Product Search Preview</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812b-a616-fec898809252" class="">🎯 Learning Objective</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a3-9d0c-dbb261313409" class="bulleted-list"><li style="list-style-type:disc">Identify <strong>unnecessary filtering</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8105-8e33-f08bbe19830b" class="bulleted-list"><li style="list-style-type:disc">Optimize list processing using <code>useMemo</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81bb-943e-d294a8006e99" class="bulleted-list"><li style="list-style-type:disc">Understand dependency arrays</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8120-bd6d-c38ef9a43f4a"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81db-b73d-f1f230351921" class="">📘 Problem Statement</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817c-9807-cd020c08d596" class="">You are building a <strong>product search preview</strong> for an admin panel.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-8044-fc48d11091e9" class="">The user can:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8176-8a95-d6a472035759" class="bulleted-list"><li style="list-style-type:disc">Search products by name</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b5-b47b-c8e878aad7ae" class="bulleted-list"><li style="list-style-type:disc">Toggle a UI flag like <strong>“Show only preview mode”</strong></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c4-ba56-d62f9a50f430" class="">Filtering should:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a6-9ee1-dd2a70433ded" class="bulleted-list"><li style="list-style-type:disc">Run <strong>only when search text changes</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8188-8db6-e5f3221edcf6" class="bulleted-list"><li style="list-style-type:disc">NOT run when preview mode toggles</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ad-9dc3-e91577c0485d"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ca-a3bb-f4dd23e4311e" class="">📋 Requirements</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-811e-9953-ee278d74132d" class="numbered-list" start="1"><li>Use a product list with at least 8 items.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-810a-9669-e5543e193cb2" class="numbered-list" start="2"><li>Add a search input.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8175-986e-fdefef947c44" class="numbered-list" start="3"><li>Add a toggle button.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81aa-851e-c99d4a9bde3a" class="numbered-list" start="4"><li>Optimize filtering logic.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8173-90fb-f0ed6ebb19db"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8136-801c-fc4450feff5f" class="">🧠 Hint</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8139-aadb-ec67a7c257a4" class="bulleted-list"><li style="list-style-type:disc">Filtering is <strong>expensive</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819e-bdda-e13040415caf" class="bulleted-list"><li style="list-style-type:disc">Use <code>useMemo</code> with correct dependencies</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e5-8024-de01e4e4ff7e"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8132-acb4-c798a3da3591" class="">✅ Full Solution</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c9-8748-dae10dc4f3bc" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useMemo, useState } from &quot;react&quot;;
+
+const products = [
+  &quot;Laptop Pro&quot;,
+  &quot;Smart Watch&quot;,
+  &quot;Wireless Earbuds&quot;,
+  &quot;Mechanical Keyboard&quot;,
+  &quot;Gaming Mouse&quot;,
+  &quot;4K Monitor&quot;,
+  &quot;USB Hub&quot;,
+  &quot;Webcam HD&quot;
+];
+
+function App() {
+  const [search, setSearch] = useState(&quot;&quot;);
+  const [previewMode, setPreviewMode] = useState(false);
+
+  const filteredProducts = useMemo(() =&gt; {
+    console.log(&quot;Filtering products...&quot;);
+    return products.filter((product) =&gt;
+      product.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [search]);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Product Search&lt;/h2&gt;
+
+      &lt;input
+        placeholder=&quot;Search product&quot;
+        value={search}
+        onChange={(e) =&gt; setSearch(e.target.value)}
+      /&gt;
+
+      &lt;button onClick={() =&gt; setPreviewMode(!previewMode)}&gt;
+        Toggle Preview Mode
+      &lt;/button&gt;
+
+      &lt;ul&gt;
+        {filteredProducts.map((p, i) =&gt; (
+          &lt;li key={i}&gt;{p}&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+
+      {previewMode &amp;&amp; &lt;p&gt;Preview mode enabled&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c1-8f47-ebba35bc3173" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81a9-ae41-eab4856472c6" class="">🧪 ASSIGNMENT 4: Log Analyzer (Expensive Parsing)</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815d-b0af-def51b926a1a" class="">🎯 Learning Objective</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8170-bf66-e95ee394056c" class="bulleted-list"><li style="list-style-type:disc">Understand <strong>re-render = function re-execution</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f7-96a5-ef490fc09b65" class="bulleted-list"><li style="list-style-type:disc">Use <code>useMemo</code> for <strong>expensive derived computation</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816e-918c-efaab0fbeb3f" class="bulleted-list"><li style="list-style-type:disc">Correct <strong>dependency selection</strong></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ae-834f-e711276234e2"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8160-bd17-eb01dcbbde03" class="">📘 Problem Statement</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8115-90b3-f6a6bb223694" class="">You’re building a <strong>log analyzer</strong> for a monitoring tool.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-9c22-ed67a6b0ff0d" class="">Given a long log string, compute:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8147-8ae4-e0c77fdea4e0" class="bulleted-list"><li style="list-style-type:disc">Total number of <strong>ERROR</strong> entries</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8150-9793-f0c5187775f9" class="bulleted-list"><li style="list-style-type:disc">Total number of <strong>WARN</strong> entries</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818f-83b9-cdf3d0b4f1a3" class="">There’s also a <strong>UI toggle</strong> to show/hide tips that should <strong>NOT re-run parsing</strong>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8163-86ae-e09553ccdfec"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-812a-8c44-f00807e5c9bf" class="">📋 Requirements</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8179-84d0-e4e5f4492244" class="numbered-list" start="1"><li>Store a large log text (string).</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8146-8e46-fe84db8da1f6" class="numbered-list" start="2"><li>Parse the log to count <code>ERROR</code> and <code>WARN</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81e9-b851-e38980ad679c" class="numbered-list" start="3"><li>Add a <strong>Toggle Tips</strong> button.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81de-9939-c90b95cabfa3" class="numbered-list" start="4"><li>Ensure parsing runs <strong>only when log text changes</strong>.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c5-9997-dc292f4ecb18"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-812a-bf5f-c2e10ce32067" class="">🧠 Hint</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8143-9d46-e832331c524b" class="bulleted-list"><li style="list-style-type:disc">Parsing is expensive</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8173-8b48-cfddbcb81720" class="bulleted-list"><li style="list-style-type:disc">Result is <strong>derived data</strong></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8117-8f86-f159481177e6"/></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-a456-c2cddb44e79d" class="">const LOG_TEXT = `<br/>INFO App started<br/>WARN Disk usage high<br/>INFO User logged in<br/>ERROR Database connection failed<br/>INFO Retrying connection<br/>WARN Memory usage high<br/>ERROR Timeout while fetching data<br/>INFO Operation successful<br/>`;</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81e7-8197-daf0bc55e1ed" class="">✅ Full Solution</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8142-a075-f1f41449d0f1" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useMemo, useState } from &quot;react&quot;;
+
+const LOG_TEXT = `
+INFO App started
+WARN Disk usage high
+INFO User logged in
+ERROR Database connection failed
+INFO Retrying connection
+WARN Memory usage high
+ERROR Timeout while fetching data
+INFO Operation successful
+`;
+
+function parseLogs(text) {
+  console.log(&quot;Parsing logs...&quot;);
+  let errorCount = 0;
+  let warnCount = 0;
+
+  for (let i = 0; i &lt; 300000000; i++) {} // simulate heavy work
+
+  const lines = text.split(&quot;\n&quot;);
+  lines.forEach(line =&gt; {
+    if (line.includes(&quot;ERROR&quot;)) errorCount++;
+    if (line.includes(&quot;WARN&quot;)) warnCount++;
+  });
+
+  return { errorCount, warnCount };
+}
+
+function App() {
+  const [showTips, setShowTips] = useState(false);
+
+  const summary = useMemo(() =&gt; {
+    return parseLogs(LOG_TEXT);
+  }, []);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Log Summary&lt;/h2&gt;
+      &lt;p&gt;Errors: {summary.errorCount}&lt;/p&gt;
+      &lt;p&gt;Warnings: {summary.warnCount}&lt;/p&gt;
+
+      &lt;button onClick={() =&gt; setShowTips(!showTips)}&gt;
+        Toggle Tips
+      &lt;/button&gt;
+
+      {showTips &amp;&amp; &lt;p&gt;Tip: Investigate ERROR logs first.&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815c-a839-d2b4edc14fcb" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-ad64-fa1eb21ce1c7" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8171-82f7-f24749486dc7" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819e-b0dc-ee6906ad0c41" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8112-8e90-ec0211a6b32f" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-813d-be03-ff2457728a60" class="">🧠 MCQs: React <code>useCallback</code>, <code>React.memo</code> &amp; Real-World Usage</h2></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e3-9517-ff7e45f74870"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8187-afa1-d836397fa4da" class=""><strong>1. What does </strong><code><strong>useCallback</strong></code><strong> primarily do?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-ad2f-e8a21f0cc9c2" class="">A. Memoizes a value</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8183-ab53-d7cd8987c560" class="">B. Prevents re-render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8194-8ce7-e5a8f72d8cc3" class="">C. Memoizes a function reference</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-9243-d1e47b40c029" class="">D. Updates state</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81bd-b3e6-f62eb9dd4ec2"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818e-be89-c914a603bb1f" class=""><strong>2. When is </strong><code><strong>useCallback</strong></code><strong> MOST useful?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d8-932d-cdb576d4e26f" class="">A. When doing calculations</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-b0b1-fb6ffdb42317" class="">B. When updating state</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8129-8672-ce179720e024" class="">C. When passing a function to a memoized child</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812e-8b12-fcbd9a771118" class="">D. When fetching data</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d6-b386-c8f2d50d8e05"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-817d-b213-e9b58be8bb51" class=""><strong>3. Does </strong><code><strong>useCallback</strong></code><strong> stop the parent component from re-rendering?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-aa23-ceef491ba65c" class="">A. Yes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-bb88-c20720ea60b9" class="">B. No</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810c-984d-c5c5b8c77499" class="">C. Sometimes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8192-b760-d0ddea662ea9" class="">D. Only in production</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818b-a85c-d876c8980399"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c2-9e4c-d27386b9b82b" class=""><strong>4. What does </strong><code><strong>React.memo</strong></code><strong> do?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8105-8cf7-dfd79b0e4721" class="">A. Memoizes functions</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d2-83a5-fa981595944b" class="">B. Memoizes values</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-b5db-df7126594cc7" class="">C. Prevents unnecessary child re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ab-874c-f01742722436" class="">D. Prevents state updates</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813d-a758-d15761c31108"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813b-8ce1-f427ae30ff28" class=""><strong>5. What type of comparison does </strong><code><strong>React.memo</strong></code><strong> use by default?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8114-8636-c35fb200de37" class="">A. Deep comparison</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814d-ae9e-d18155b237f4" class="">B. JSON comparison</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-a6f4-c1d6d82f3846" class="">C. Shallow comparison (<code>===</code>)</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8132-ad10-d1b97292167e" class="">D. String comparison</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8196-9da4-fcdc270e4205"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816b-a9c1-ee22e7763c58" class=""><strong>6. Which prop type can BREAK </strong><code><strong>React.memo</strong></code><strong> easily?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f6-a4d3-c51699e5b327" class="">A. Number</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f6-a68e-e735b4567f5f" class="">B. String</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818d-992d-c445778af84a" class="">C. Boolean</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-94fb-ee8fb3a11750" class="">D. Function</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8105-b248-e86c2eacfe1c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e2-a329-ce15322e97b0" class=""><strong>7. Why does a memoized child re-render when a function prop is passed?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-8b8e-e4011cf83737" class="">A. Functions are slow</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f2-b76c-e613c608180b" class="">B. React ignores memo</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f5-8c08-cc2fea31cce0" class="">C. Function reference changes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-9a52-f5e8220b36f4" class="">D. JSX changes</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e5-aa60-e0ac0b8a79dd"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816a-a909-da07d3085730" class=""><strong>8. How do we FIX function props breaking </strong><code><strong>React.memo</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814e-ae30-dc03ec145dae" class="">A. useEffect</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-88de-f33540a9c31e" class="">B. useMemo</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815c-811e-d6ad502e6e7b" class="">C. useCallback</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8130-8bb7-e0859bcbc901" class="">D. useRef</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f2-a8a8-df5e06971318"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d8-b636-ed18cc8d30ee" class=""><strong>9. Which hook is best for stabilizing OBJECT props for </strong><code><strong>React.memo</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8124-a44b-f1950488e936" class="">A. useState</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b0-9116-c645aa725f10" class="">B. useRef</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812f-87c8-e52254914648" class="">C. useMemo</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a0-995d-e639032589f9" class="">D. useEffect</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f7-aaa4-e1aaec3c144f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818a-8e89-db69dc01a07e" class=""><strong>10. Does </strong><code><strong>useMemo</strong></code><strong> require a child component to be useful?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c9-ab9c-fa580ceab0d5" class="">A. Yes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8118-a666-fe5e49ca585a" class="">B. No</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8164-af49-ec6492fbaf2e" class="">C. Only with React.memo</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-ad61-d7b2515b9a03" class="">D. Only for lists</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8172-80b9-de8a3954767c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81df-87ce-df77070db821" class=""><strong>11. What happens if </strong><code><strong>useCallback</strong></code><strong> is used without </strong><code><strong>React.memo</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b1-82b5-dd6fbad219dc" class="">A. App crashes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a2-8ee7-cca28d7cf39a" class="">B. No effect</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816e-adaf-d2149d2384d4" class="">C. Infinite re-render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-9e8d-e5bbcc35f824" class="">D. Performance improves</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ae-8110-f070f3443832"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8117-9f0c-cca1db17c15f" class=""><strong>12. Which is a REAL-WORLD use case for </strong><code><strong>useCallback</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813b-9c3b-cef54e4ebb93" class="">A. Filtering lists</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-9c32-d0ddac4edbcd" class="">B. Calculating totals</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-92be-f11d47334f82" class="">C. Passing event handlers to memoized child</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a1-9bcf-c35cb51d469f" class="">D. Fetching API data</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8131-b90b-d51c269b7676"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b3-91c3-f5c65ab78cd4" class=""><strong>13. Which hook is commonly overused by beginners?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-a8c3-d4db0a5303d4" class="">A. useState</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-8aad-d9d4ba2033e8" class="">B. useEffect</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8100-bc9c-fd05bf6a663e" class="">C. useMemo</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-b478-c644321207a5" class="">D. useContext</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f7-80fc-dbb783415b1c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811f-9e2d-c1f696407ef7" class=""><strong>14. Which statement is TRUE?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-ab01-e5978a9e5dff" class="">A. useCallback memoizes values</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8198-9133-f21a9342df5a" class="">B. useMemo memoizes functions</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ba-ba83-ca349cfab9b3" class="">C. useCallback memoizes function references</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8195-9128-cc528c716f27" class="">D. useMemo stops re-render</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819f-b753-ff997c6d2ced"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813f-99d8-fe7b39d2c9af" class=""><strong>15. What is the main goal of </strong><code><strong>useCallback + React.memo</strong></code><strong> together?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8141-b554-edf0e6d00cba" class="">A. Prevent state update</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814a-8985-d5eaf7b1573f" class="">B. Avoid unnecessary child re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d0-889c-e54bd283099e" class="">C. Improve API speed</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815a-97aa-c2ad9dbbac92" class="">D. Avoid DOM updates</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819c-bafb-f6f565ab7dc0"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ae-b6fb-d3625c9948bb" class=""><strong>16. In which case should you AVOID </strong><code><strong>useCallback</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816b-b13e-fef90e6b3af5" class="">A. Function passed to memo child</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-8700-eb6775d9d880" class="">B. Expensive child render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-9abd-ed076dcdd72c" class="">C. No child component involved</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811d-9ad9-d67500239faf" class="">D. Large component tree</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8170-b0f1-fe8ec53ed015"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8180-8534-e029d8a58755" class=""><strong>17. Which hook helps avoid unnecessary recalculation in real apps?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818b-9ec1-d3d8ec6d5768" class="">A. useCallback</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f8-92a4-db19840c7c9b" class="">B. useRef</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8199-85a9-dad7fe13f0ef" class="">C. useMemo</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-acd7-c61800993c4c" class="">D. useContext</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8144-9fcf-e31c5f7ba21a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812a-952c-e47f9f20059f" class=""><strong>18. What happens if dependencies of </strong><code><strong>useCallback</strong></code><strong> change?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ff-a813-c742ded89510" class="">A. Function stays same</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f8-bacf-f01c233d29cd" class="">B. Function is removed</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b6-98d3-e174741a97ae" class="">C. New function is created</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8188-9cd8-ee4a4b2560df" class="">D. Component unmounts</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ef-aa07-e9ba0b1c8692"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b7-a556-c182858f170f" class=""><strong>19. Which is a correct mental rule?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d3-9642-f871bc29c6f4" class="">A. useCallback for values</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819b-b565-e1a4311d869a" class="">B. useMemo for functions</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ea-be32-c7e722f5fd50" class="">C. useMemo for values, useCallback for functions</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-aa23-dacbc4a1c845" class="">D. Both are same</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c7-89e7-ea7ddf9ef603"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8145-af68-e31d585cacd1" class=""><strong>20. Which statement best summarizes Part 5–8 concepts?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e9-998b-fe9d5d30ca74" class="">A. Always use memo hooks</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ac-b692-dd846785280c" class="">B. Memo hooks stop re-render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-a50a-e13a4e860085" class="">C. Memo hooks help only when references matter</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-8f58-e37b6dddf636" class="">D. Memo hooks replace state</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817f-9c61-e0706f7e3545" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8165-8772-ce63fd645770" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a7-841d-dddb65727a85" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819a-9968-fa7eae06e518" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-814d-83ef-fcfcb2b44f01" class="">🧠 Medium-Level MCQs: React <code>useCallback</code>, <code>React.memo</code>, Real-World Patterns</h2></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fa-a155-cbb533113e2f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bf-8a9a-d7eb0ca61458" class=""><strong>1. A child component is wrapped with </strong><code><strong>React.memo</strong></code><strong>, but it still re-renders when the parent state changes. What is the MOST likely reason?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e4-8392-dacd058d0be1" class="">A. React.memo is deprecated</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8119-b964-f03298835f20" class="">B. Parent state always forces child render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8192-b5d4-e163e62b9add" class="">C. A prop reference is changing</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-9035-ea6d3bdad37c" class="">D. JSX structure changed</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a5-a426-fc0ba370c5da"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ab-9c05-d2e3afd353ea" class=""><strong>2. Why does passing an inline function as a prop break </strong><code><strong>React.memo</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ed-b97a-f5f017d61ead" class="">A. Functions are slow</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-bf2c-c5fe40b20643" class="">B. React cannot compare functions</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-abc8-c136ad5ada41" class="">C. A new function reference is created on each render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c9-8c84-c4fc267d7e68" class="">D. JSX treats functions differently</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8102-949b-f77f163ac356"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8151-b590-d5652b238773" class=""><strong>3. In which scenario does </strong><code><strong>useCallback</strong></code><strong> provide NO benefit?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8171-9901-d174aed60531" class="">A. Function passed to memoized child</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8172-8c92-c814a7d126a0" class="">B. Function defined inside parent only</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f8-994a-cc08f2c948a0" class="">C. Function dependency rarely changes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f5-b3f2-cd4f59411523" class="">D. Heavy child component</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813c-8dfb-fb8b26182d72"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ec-bba2-e8d801981400" class=""><strong>4. What problem does </strong><code><strong>useCallback</strong></code><strong> specifically solve?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8112-83d8-ddf955ef4687" class="">A. Expensive calculations</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818a-8b11-dcc2db04a7c4" class="">B. DOM repainting</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812f-817e-c7e3595974ce" class="">C. Unnecessary function recreation</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d4-a83d-f3c855c83ea5" class="">D. State synchronization</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812e-9d78-dc0f1cefd805"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8100-a47f-d7d5dc4b141f" class=""><strong>5. What happens when dependencies of </strong><code><strong>useCallback</strong></code><strong> change?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a5-bd15-ef2960585ae1" class="">A. Function is reused</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8156-81bf-f579833f4e19" class="">B. Function reference is recreated</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8187-8381-f23b1f59de94" class="">C. Component unmounts</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c2-a108-d6e86f3b8928" class="">D. Child stops rendering</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81bf-947e-fa9f42858d3a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812b-895e-d3824da3343e" class=""><strong>6. Why does </strong><code><strong>useCallback</strong></code><strong> usually go together with </strong><code><strong>React.memo</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813a-bece-fe6e21c2da10" class="">A. React requires it</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-a2f2-d58e591ed09c" class="">B. useCallback stops parent re-render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81df-8657-e2b3053f0da0" class="">C. React.memo needs stable props</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-ad80-c73643969899" class="">D. useCallback improves JSX rendering</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81cd-be66-e401d8935dff"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816d-8cc7-c4f8209b46b6" class=""><strong>7. Which hook should be used to stabilize an object prop passed to a memoized child?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ad-aab1-f8ed99a3e2e8" class="">A. useState</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-879c-d436ab1bfe9c" class="">B. useRef</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-ab1f-f2b6dfa49d80" class="">C. useCallback</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8199-89ca-c9429c116543" class="">D. useMemo</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e7-ac32-db8681b68b12"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b5-bb7b-e8ba121666eb" class=""><strong>8. A memoized child receives a prop </strong><code><strong>{ data: { a: 1 } }</strong></code><strong>. Child re-renders every time. Why?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a3-a4a9-d69074304930" class="">A. React.memo is shallow</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818b-9aad-cccb0afd9fe5" class="">B. Object is mutable</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819e-bada-d2c8eb88f497" class="">C. Object reference changes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a4-8da7-fa5df65efb19" class="">D. Props cannot be memoized</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817e-91bb-dbce1e7247f4"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b9-a198-cc5b9982f81f" class=""><strong>9. What is the main role of </strong><code><strong>React.memo</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a0-8e34-df8f0ffdc195" class="">A. Memoize values</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e1-8f2b-f58510cb4bdb" class="">B. Memoize functions</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8142-8ba8-f809bd8c84ae" class="">C. Skip unnecessary child re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ff-9083-d0c91429c154" class="">D. Prevent state updates</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815b-b904-f6b3bb55ec87"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8163-8db7-d30e16f7751d" class=""><strong>10. Which statement is TRUE about </strong><code><strong>useCallback</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810c-bfa9-cf5f74129513" class="">A. It memoizes values</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8185-87f9-e6841eb865ee" class="">B. It prevents re-render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8111-bbfa-ff932e03fcf8" class="">C. It memoizes function references</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-8bc5-d4133fd11663" class="">D. It replaces useMemo</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d2-8a07-c1f36e597c99"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81df-83f3-e025e499075c" class=""><strong>11. When does </strong><code><strong>useMemo</strong></code><strong> help in child-related optimization?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b4-b7d6-f7fde7980b0d" class="">A. When memoizing functions</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8188-86df-cd9d980aaad9" class="">B. When stabilizing object/array props</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-a419-cd4f81603c68" class="">C. When skipping parent render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-8b41-c4910229695f" class="">D. When avoiding state updates</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8136-b279-fc3c36ac54fa"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816d-8bca-db31507c4bb4" class=""><strong>12. Which of the following is a BAD real-world use of </strong><code><strong>useCallback</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e6-a1b1-e1d6c74b4aa2" class="">A. Passing handler to memoized button</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814c-b444-eef7c5a85af5" class="">B. Passing handler to non-memoized child</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818a-b3bd-e3369a13db74" class="">C. Passing handler to expensive child</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815a-9f8a-d25068cbb6c1" class="">D. Passing handler to pure component</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c1-9b21-ce92f5f3853f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8181-aa21-c3b15ec84aef" class=""><strong>13. Why should </strong><code><strong>useCallback</strong></code><strong> NOT be used everywhere?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cc-a41d-da9394f160ff" class="">A. It breaks JSX</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bd-a3dd-e7bcb3a6ddef" class="">B. It increases memory usage and complexity</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8171-af00-d75ffef48e80" class="">C. It causes re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-b1a2-f14628e48e0d" class="">D. It is deprecated</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811b-babd-f8532d32e0c5"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-817e-84b5-ee561a56cb78" class=""><strong>14. Which hook combination is MOST effective to stop unnecessary child renders?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819f-a2c0-cf0652ae5d01" class="">A. useMemo + useRef</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812d-904c-c16bca78d058" class="">B. useCallback only</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8122-80f6-e34766a064cd" class="">C. React.memo only</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f0-b525-f0c618547f73" class="">D. React.memo + stable references</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811a-8f11-f5df0b85a930"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815f-a47d-c4b07b3490e8" class=""><strong>15. What does “stable reference” mean in React optimization?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8188-9e9c-df645337313b" class="">A. Same value</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a5-8539-ec2a1e127812" class="">B. Same variable name</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813c-b59b-c3065f33c3a0" class="">C. Same memory reference (<code>===</code>)</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b4-8569-cfd4b27220a7" class="">D. Same JSX output</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819a-b778-d4fc975fb87b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8182-afc3-d6398c1c80b9" class=""><strong>16. A memoized child still re-renders even after using </strong><code><strong>useCallback</strong></code><strong>. What could be another reason?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814d-b1d2-e64797d1f38e" class="">A. Parent state changes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81da-a2f1-e337ee2d2943" class="">B. Child state changes</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ea-98c0-c31421ffb579" class="">C. Another prop reference is changing</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a1-8aeb-c6e39b90fdb9" class="">D. React.memo ignores functions</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8101-b167-ef29ce6f2c99"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8193-8aa1-c8d7c9926305" class=""><strong>17. Which hook is best for caching a filtered list used in rendering?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-8fef-dd57a0b44ecf" class="">A. useCallback</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8163-834d-c539111b4e07" class="">B. useRef</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8165-8095-d468a81b234c" class="">C. useMemo</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810d-8f6f-e442c2ccc2ee" class="">D. useEffect</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ef-b825-c61c9a5d1522"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81be-9471-df653a699aa8" class=""><strong>18. Which mental rule is MOST accurate?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81aa-ac33-f855b726050c" class="">A. useCallback for values</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-b1e1-d380a082a213" class="">B. useMemo for functions</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ac-8977-d73a3aae6ae1" class="">C. useMemo for values, useCallback for functions</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8180-a2bb-d9cabbfd1168" class="">D. Both are interchangeable</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a8-8739-e3ad6fe99ef8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810e-bed7-d62e66f2a713" class=""><strong>19. What is the biggest real-world mistake developers make with memo hooks?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8136-bbda-d11df0f6c4b9" class="">A. Forgetting imports</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c0-a69a-cd0c15702c2b" class="">B. Using them without measuring performance</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816c-807e-ce263e927928" class="">C. Using them with React.memo</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811c-b5e9-f52996b56d63" class="">D. Using them in child components</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8137-a710-dac40184909c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813a-bdea-ccc94b23578e" class=""><strong>20. Which statement best summarizes Parts 5–8?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8138-8c9e-f0c42261c0b9" class="">A. Memo hooks stop re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ac-9efe-d7ff57d1c727" class="">B. Memo hooks are always needed</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ac-8575-e0124287c6d4" class="">C. Memo hooks are about reference stability</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f9-ab0a-fd5f79e01422" class="">D. Memo hooks replace state</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8119-b1cc-fcff1c0c3d74" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8108-9e00-fe28eb817f03" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8172-8018-dffe23344cd8" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-815e-952c-c50e317284a7" class="">🧪 ASSIGNMENT 5: File Size Statistics</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d5-9570-d926613c3d1f" class="">🎯 Learning Objective</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816a-8281-c3a78d78e935" class="bulleted-list"><li style="list-style-type:disc">Practice <strong>array-derived calculations</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8114-9010-f971236125d2" class="bulleted-list"><li style="list-style-type:disc">Avoid recomputation on unrelated re-renders</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814c-8b4d-c36ea39abff9" class="bulleted-list"><li style="list-style-type:disc">Use <code>useMemo</code> correctly</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8107-a132-ecfd3051df49"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8168-bd8d-d73fe226f664" class="">📘 Problem Statement</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-a577-c3eb3c6d33bd" class="">You’re building a <strong>file manager dashboard</strong>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c5-a2cf-fbe1faccd8f3" class="">Given a list of file sizes (in MB), compute:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f0-ba6d-ce64e99f6daa" class="bulleted-list"><li style="list-style-type:disc">Total size</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8150-b1cd-e6abe8eac339" class="bulleted-list"><li style="list-style-type:disc">Largest file size</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8194-b2b9-eb77a738e9ad" class="">There’s also a toggle to show <strong>file guidelines</strong>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810a-9db1-da78b3685f48"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8158-878b-fa9a20b794a1" class="">📋 Requirements</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81b8-a311-f32c73c39394" class="numbered-list" start="1"><li>Use an array of file sizes.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-819c-9577-cd340ba4d1c5" class="numbered-list" start="2"><li>Calculate total size and max size.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8152-8e5b-ed9308590f69" class="numbered-list" start="3"><li>Toggle UI instructions.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8188-89ec-df9b86e1ddce" class="numbered-list" start="4"><li>Ensure calculations don’t re-run on toggle.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8170-97b0-cb53abcac3ff"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-814f-806e-f366159e6807" class="">🧠 Hint</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ac-b74c-f44bd62ce146" class="bulleted-list"><li style="list-style-type:disc"><code>reduce</code> and <code>Math.max</code> are derived data</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fb-bfb9-d62e7d48a980"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-817f-954e-e78c46b8cc20" class="">✅ Full Solution</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812b-9d33-dfae57fab697" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useMemo, useState } from &quot;react&quot;;
+
+const sizes = [50, 100, 200, 45, 300, 70, 168, 259];
+
+const [showGuidelines, setShowGuidelines] = useState(false);
+
+
+function App() {
+
+  const stats = useMemo(() =&gt; {
+    console.log(&quot;Calculating stats...&quot;);
+    const total = sizes.reduce((acc, size) =&gt; {
+      return acc + size;
+    }, 0);
+    const largest = Math.max(...sizes);
+    return {total, largest};
+  }, []);
+  
+   
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;File Size Statistics&lt;/h1&gt;
+      &lt;h3&gt;Total size: {stats.total}&lt;/h3&gt;
+      &lt;h3&gt;Largest file size: {stats.largest}&lt;/h3&gt;
+
+      &lt;button onClick={() =&gt; setShowGuidelines(!showGuidelines)}&gt;
+        Toggle Guidelines
+      &lt;/button&gt;
+
+      {showGuidelines &amp;&amp; (
+        &lt;p&gt;Recommended file size is upto 500 MB&lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  )
+}
+
+export default App
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818e-bbac-d4f735f49dc9" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-814a-944b-db0a0eb85ba5" class="">🧪 ASSIGNMENT 6: Message Categorizer</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8165-8b21-db64c38a2de8" class="">🎯 Learning Objective</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819d-a3d1-db9473124903" class="bulleted-list"><li style="list-style-type:disc">Understand <strong>reference-based recalculation</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c3-bbef-ca2bb05716ff" class="bulleted-list"><li style="list-style-type:disc">Optimize string processing</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8186-9834-d05df33e3c44" class="bulleted-list"><li style="list-style-type:disc">Correctly manage dependencies</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811d-b01b-f1ae98294970"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81d4-aac9-ff892060b81d" class="">📘 Problem Statement</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-b7eb-d76d21906736" class="">You’re building a <strong>message categorization tool</strong>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e4-871a-c9f1cad83397" class="">Given a list of messages, categorize them into:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811a-aae7-d88516cd1b0a" class="bulleted-list"><li style="list-style-type:disc"><code>Questions</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8131-9b04-e074dbd94914" class="bulleted-list"><li style="list-style-type:disc"><code>Announcements</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8119-be57-ed9d9b6b0610" class="bulleted-list"><li style="list-style-type:disc"><code>General</code></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d1-932e-e5cb981fcda4" class="">There’s also a <strong>Toggle Compact View</strong> option that should <strong>NOT re-run categorization</strong>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8165-b11a-e95a450a701a"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8184-9224-eb3b4123715f" class="">📋 Requirements</h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81bd-bb65-c2aaef692737" class="numbered-list" start="1"><li>Use a list of messages.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-810e-bae4-e5f5c530e268" class="numbered-list" start="2"><li>Categorize messages based on:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ac-b90f-d9a8225b4879" class="bulleted-list"><li style="list-style-type:disc"><code>?</code> → Question</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8153-9911-dc6ca90ec94e" class="bulleted-list"><li style="list-style-type:disc">starts with <code>ANN:</code> → Announcement</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8175-bdd9-fa3a16c4cc10" class="bulleted-list"><li style="list-style-type:disc">else → General</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81e8-bb60-fa9812296437" class="numbered-list" start="3"><li>Optimize categorization using <code>useMemo</code>.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8113-9397-cab6a2e5dcd2"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a2-8999-c607116071e5" class="">🧠 Hint</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8177-89d6-cacf6100c22e" class="bulleted-list"><li style="list-style-type:disc">Categorization is derived data</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ef-a103-dcd47ce98206"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ee-9a96-f4acbbb508ae" class="">✅ Full Solution</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810f-a564-f08631baa76e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useMemo, useState } from &quot;react&quot;;
+
+const messages = [
+  &quot;ANN: System maintenance tonight&quot;,
+  &quot;How do I reset my password?&quot;,
+  &quot;Welcome to the platform&quot;,
+  &quot;ANN: New feature released&quot;,
+  &quot;Is support available on weekends?&quot;
+];
+
+function categorizeMessages(list) {
+  console.log(&quot;Categorizing messages...&quot;);
+  let questions = [];
+  let announcements = [];
+  let general = [];
+
+  for (let i = 0; i &lt; 200000000; i++) {} // simulate heavy work
+
+  list.forEach(msg =&gt; {
+    if (msg.startsWith(&quot;ANN:&quot;)) announcements.push(msg);
+    else if (msg.includes(&quot;?&quot;)) questions.push(msg);
+    else general.push(msg);
+  });
+
+  return { questions, announcements, general };
+}
+
+function App() {
+  const [compact, setCompact] = useState(false);
+
+  const categorized = useMemo(() =&gt; {
+    return categorizeMessages(messages);
+  }, []);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Message Categories&lt;/h2&gt;
+
+      &lt;button onClick={() =&gt; setCompact(!compact)}&gt;
+        Toggle Compact View
+      &lt;/button&gt;
+
+      &lt;h3&gt;Announcements&lt;/h3&gt;
+      {categorized.announcements.map((m, i) =&gt; &lt;p key={i}&gt;{m}&lt;/p&gt;)}
+
+      &lt;h3&gt;Questions&lt;/h3&gt;
+      {categorized.questions.map((m, i) =&gt; &lt;p key={i}&gt;{m}&lt;/p&gt;)}
+
+      {!compact &amp;&amp; (
+        &lt;&gt;
+          &lt;h3&gt;General&lt;/h3&gt;
+          {categorized.general.map((m, i) =&gt; &lt;p key={i}&gt;{m}&lt;/p&gt;)}
+        &lt;/&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8165-8a18-dbb003c421f1" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815d-b72f-f319ca5938d3" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d3-a3a3-df06e581ac71" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814a-bd62-e659a0d17330" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8177-9cf1-c4af576dd810" class="">🐞 DEBUG ASSIGNMENT 2: React.memo Not Working as Expected</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810c-828f-dac0ffa8039c" class="">🎯 Concept</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81df-ba87-d1ca3373d3cd" class="">Reference equality + object recreation</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81dc-bb77-f6894ade8403"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8166-9e96-edc8e1d4b446" class="">❌ Buggy Code</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8114-a35e-df2a699bedef" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">const Profile = React.memo(({ user }) =&gt; {
+  console.log(&quot;Profile rendered&quot;);
+  return &lt;h3&gt;{user.name}&lt;/h3&gt;;
+});
+
+function App() {
+  const [online, setOnline] = React.useState(true);
+
+  const user = { name: &quot;Riya&quot; };
+
+  return (
+    &lt;&gt;
+      &lt;button onClick={() =&gt; setOnline(!online)}&gt;
+        Toggle Status
+      &lt;/button&gt;
+      &lt;Profile user={user} /&gt;
+    &lt;/&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810d-b43d-d33ca0c01e40"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81f7-9d71-d231fa7af165" class="">📋 What to Debug</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d5-afd5-d66e5c0efd6c" class="bulleted-list"><li style="list-style-type:disc"><code>Profile</code> re-renders every time</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8190-8d0d-f4cf3227c1e5" class="bulleted-list"><li style="list-style-type:disc">React.memo appears useless</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819c-b141-dc2a429b101f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-a443-d0f8e582cbcc" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8105-a7cb-c945a169add2" class="">✅ Correct Solution</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-814d-b724-f9cc18384557" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useMemo, useState } from &quot;react&quot;;
+
+const Profile = React.memo(({ user }) =&gt; {
+  console.log(&quot;Profile rendered&quot;);
+  return &lt;h3&gt;{user.name}&lt;/h3&gt;;
+});
+
+function App() {
+  const [online, setOnline] = useState(true);
+
+  const user = useMemo(() =&gt; {
+    return { name: &quot;Riya&quot; };
+  }, []);
+
+  return (
+    &lt;&gt;
+      &lt;button onClick={() =&gt; setOnline(!online)}&gt;
+        Toggle Status
+      &lt;/button&gt;
+      &lt;Profile user={user} /&gt;
+    &lt;/&gt;
+  );
+}
+
+export default App;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8193-b372-d4eb9aecbdb7" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8164-8599-e62a84c794e9" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-819d-9a33-e7ddaaf76df2" class="">🐞 DEBUG ASSIGNMENT 3: Wrong <code>useMemo</code> Dependency Causes Stale Data</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81dd-a0f8-d52bab7a9295" class="">🎯 Concept</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816d-aa53-f09a986e461d" class="">Incorrect dependency array</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8130-9506-fef6de9efd0e"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8116-8894-cf80f661dcd9" class="">❌ Buggy Code</h2></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81bb-801e-d9cf61f06563" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">function calculateDiscount(price) {
+  console.log(&quot;Calculating discount...&quot;);
+  return price * 0.9;
+}
+
+function App() {
+  const [price, setPrice] = React.useState(100);
+
+  const discountedPrice = React.useMemo(() =&gt; {
+    return calculateDiscount(price);
+  }, []);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Discounted Price: {discountedPrice}&lt;/h2&gt;
+
+      &lt;button onClick={() =&gt; setPrice(price + 50)}&gt;
+        Increase Price
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81da-a7b1-c58f84b6218f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8185-9b01-fb2cd05ece74" class="">useCallback</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811b-a2f2-dcf8de70e305" class="">child based optimization (function) - React.memo()</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8136-829b-f591db5dfd87" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8114-a9dd-e629786973f9" class="">useMemo</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8172-b3be-da9dbdab3684" class="">heavy calculation</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8152-ab2b-eb6063897806" class="">child based optimization (array, object) - React.memo()</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8145-aa03-f4499f97a3bb" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f5-aed9-c4ddd358b687" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8106-ac2e-c0a91cc071fb" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c7-8c92-ca6a4228d954" class="">🧪 ASSIGNMENT 1: Memoized Toolbar with Action Buttons</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811b-bbcf-cf7b501bf277" class="">🎯 Learning Objective</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8190-9705-fd6f3bac5c7d" class="bulleted-list"><li style="list-style-type:disc">Understand <strong>why </strong><code><strong>useCallback</strong></code><strong> is needed</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818b-be54-e5b9451335e8" class="bulleted-list"><li style="list-style-type:disc">See how <code>React.memo</code> + function props work together</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811a-b0e1-fe0446e232d8" class="bulleted-list"><li style="list-style-type:disc">Identify unnecessary child re-renders</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b2-ace4-efe0063ec85e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8124-b6b1-d70029ab8276" class="">📘 Problem Statement</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8105-a59b-d07efe592b28" class="">You are building a <strong>toolbar</strong> with action buttons like <em>Save</em>, <em>Export</em>, and <em>Print</em>.</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810a-8372-f9d092545129" class="bulleted-list"><li style="list-style-type:disc">The toolbar is a <strong>child component</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810b-aefa-d08e8fe63b33" class="bulleted-list"><li style="list-style-type:disc">Parent has some unrelated UI state</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8174-9092-d2e334e755af" class="bulleted-list"><li style="list-style-type:disc">Clicking unrelated buttons should <strong>NOT re-render the toolbar</strong></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8180-a466-e619526890f5"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8149-82a5-e4ae6c6cfb46" class="">📋 Instructions</h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81be-a8a8-de621198f4ce" class="numbered-list" start="1"><li>Create a <code>Toolbar</code> child component.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8173-b1d2-cbe7bb1b9b90" class="numbered-list" start="2"><li>Wrap <code>Toolbar</code> with <code>React.memo</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-819d-a14d-f396d56ddf08" class="numbered-list" start="3"><li>Pass three action handlers (<code>onSave</code>, <code>onExport</code>, <code>onPrint</code>) from parent.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8175-90e3-dc4764d84d50" class="numbered-list" start="4"><li>Add a button in parent to toggle some UI state.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-815b-a44b-d900074df82e" class="numbered-list" start="5"><li>Fix unnecessary toolbar re-renders.</li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8184-95e5-f4e5a49ff468" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8138-a085-c8c44747625c" class="">✅ Full Solution</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-817b-844d-db7fb323aa3f" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import React, { useCallback, useState } from &quot;react&quot;;
+
+const Toolbar = React.memo(function Toolbar({ onSave, onExport, onPrint }) {
+  console.log(&quot;Toolbar rendered&quot;);
+  return (
+    &lt;div&gt;
+      &lt;button onClick={onSave}&gt;Save&lt;/button&gt;
+      &lt;button onClick={onExport}&gt;Export&lt;/button&gt;
+      &lt;button onClick={onPrint}&gt;Print&lt;/button&gt;
+    &lt;/div&gt;
+  );
+});
+
+export default function App() {
+  const [showInfo, setShowInfo] = useState(false);
+
+  const handleSave = useCallback(() =&gt; {
+    console.log(&quot;Saved&quot;);
+  }, []);
+
+  const handleExport = useCallback(() =&gt; {
+    console.log(&quot;Exported&quot;);
+  }, []);
+
+  const handlePrint = useCallback(() =&gt; {
+    console.log(&quot;Printed&quot;);
+  }, []);
+
+  return (
+    &lt;div&gt;
+      &lt;Toolbar
+        onSave={handleSave}
+        onExport={handleExport}
+        onPrint={handlePrint}
+      /&gt;
+
+      &lt;button onClick={() =&gt; setShowInfo(!showInfo)}&gt;
+        Toggle Info
+      &lt;/button&gt;
+
+      {showInfo &amp;&amp; &lt;p&gt;Some extra UI info&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-bf1c-cbb8133d52b2" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b3-bee3-e19aef941416" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-811a-97e7-e12a4157e7b1" class="">🧪 ASSIGNMENT 2: Memoized User Card with Object Props</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ef-9adb-c9665f762c0b" class="">🎯 Learning Objective</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8141-887b-d09067c14775" class="bulleted-list"><li style="list-style-type:disc">Understand <strong>object reference problem</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814e-b06b-ee4c4ea45045" class="bulleted-list"><li style="list-style-type:disc">Use <code>useMemo</code> to stabilize props</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810b-bbca-c5394beec7d0" class="bulleted-list"><li style="list-style-type:disc">Make <code>React.memo</code> effective</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810b-b81b-f3ce4a772597"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8148-ab37-c27f3cc59522" class="">📘 Problem Statement</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8126-8e5d-fd696dfa4a62" class="">You are rendering a <strong>UserCard</strong> component.</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818b-8daa-e7493c1440d2" class="bulleted-list"><li style="list-style-type:disc">User data is passed as an object</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8138-affb-d706247f74b7" class="bulleted-list"><li style="list-style-type:disc">Parent toggles unrelated UI state</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8136-be5c-e1463535a6cd" class="bulleted-list"><li style="list-style-type:disc">UserCard should <strong>not re-render unnecessarily</strong></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8162-be17-e573a9103dc9"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818d-8dd4-ce3b13b0394e" class="">📋 Instructions</h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-810b-b0d5-c0218b0968c1" class="numbered-list" start="1"><li>Create a <code>UserCard</code> child component.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8106-abd2-da8bb7f5030f" class="numbered-list" start="2"><li>Wrap it with <code>React.memo</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8162-abf0-c28572b2c508" class="numbered-list" start="3"><li>Pass user data as an object prop.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8112-9e64-ff95e70832fd" class="numbered-list" start="4"><li>Ensure child does not re-render on unrelated state change.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814f-adb8-ec9ea6df0845"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c5-ae4e-fc8629d27f13" class="">✅ Full Solution</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8132-80b7-c0f073321880" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import React, { useMemo, useState } from &quot;react&quot;;
+
+const UserCard = React.memo(function UserCard({ user }) {
+  console.log(&quot;UserCard rendered&quot;);
+  return (
+    &lt;div&gt;
+      &lt;h3&gt;{user.name}&lt;/h3&gt;
+      &lt;p&gt;{user.role}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+});
+
+export default function App() {
+  const [showHelp, setShowHelp] = useState(false);
+
+  const user = useMemo(() =&gt; {
+    return { name: &quot;Aarav&quot;, role: &quot;Instructor&quot; };
+  }, []);
+
+  return (
+    &lt;div&gt;
+      &lt;UserCard user={user} /&gt;
+
+      &lt;button onClick={() =&gt; setShowHelp(!showHelp)}&gt;
+        Toggle Help
+      &lt;/button&gt;
+
+      {showHelp &amp;&amp; &lt;p&gt;This is a user profile section.&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8198-8820-e67578de3f10" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8177-b644-fbf49f0ab7a1" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-810f-8bfe-cb6cb3189d1d" class="">🧪 ASSIGNMENT 3: Combined Case (useMemo + useCallback + React.memo)</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8165-9fb9-e3d7a435dcf7" class="">🎯 Learning Objective</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81cc-8e1f-da95aafe5ede" class="bulleted-list"><li style="list-style-type:disc">Combine all concepts correctly</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b1-813c-f751842715e0" class="bulleted-list"><li style="list-style-type:disc">Distinguish <strong>value vs function memoization</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8122-8ff9-f5ae1cc4bf3a" class="bulleted-list"><li style="list-style-type:disc">Avoid over-optimization</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812c-9580-d17abaa69d9c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8145-b904-f2a6d97a2e40" class="">📘 Problem Statement</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819c-8554-f90dc8c40b0a" class="">You are building a <strong>report panel</strong>.</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812e-b79f-ec664c2da5d5" class="bulleted-list"><li style="list-style-type:disc">Parent computes a derived summary</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816f-abee-ec1a7ef4239c" class="bulleted-list"><li style="list-style-type:disc">Child receives:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a9-bb43-ce3ce8caba74" class="bulleted-list"><li style="list-style-type:circle">summary data (object)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815e-8fde-e2695e5b5536" class="bulleted-list"><li style="list-style-type:circle">refresh handler (function)</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8102-9523-fe27e626b88c" class="bulleted-list"><li style="list-style-type:disc">Parent also has unrelated UI state</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8179-b239-ee89dfdafa4d" class="">The child should <strong>re-render only when its actual data changes</strong>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8153-8757-cda5e37a36e2"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815a-bdc3-cba12e8070ad" class="">📋 Instructions</h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81d4-9c47-fc7b32fd7313" class="numbered-list" start="1"><li>Create a <code>ReportPanel</code> child.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8180-bdb3-cc09a7836824" class="numbered-list" start="2"><li>Wrap it with <code>React.memo</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-810a-befe-f954a48a452e" class="numbered-list" start="3"><li>Use <code>useMemo</code> for summary data.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-817d-bd2a-cd8e18cd8e38" class="numbered-list" start="4"><li>Use <code>useCallback</code> for refresh handler.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81ba-a7eb-e79b5e8602d1" class="numbered-list" start="5"><li>Add unrelated UI toggle in parent.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8158-b633-f9e1a8d24e31"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8169-a77f-f739197f4e0e" class="">✅ Full Solution</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8190-9a1a-d9b5fa31f475" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import React, { useCallback, useMemo, useState } from &quot;react&quot;;
+
+const ReportPanel = React.memo(function ReportPanel({ summary, onRefresh }) {
+  console.log(&quot;ReportPanel rendered&quot;);
+  return (
+    &lt;div&gt;
+      &lt;h3&gt;Total Users: {summary.users}&lt;/h3&gt;
+      &lt;h3&gt;Total Sessions: {summary.sessions}&lt;/h3&gt;
+      &lt;button onClick={onRefresh}&gt;Refresh&lt;/button&gt;
+    &lt;/div&gt;
+  );
+});
+
+export default function App() {
+  const [showInfo, setShowInfo] = useState(false);
+
+  const summary = useMemo(() =&gt; {
+    return { users: 120, sessions: 450 };
+  }, []);
+
+  const handleRefresh = useCallback(() =&gt; {
+    console.log(&quot;Refreshing report&quot;);
+  }, []);
+
+  return (
+    &lt;div&gt;
+      &lt;ReportPanel summary={summary} onRefresh={handleRefresh} /&gt;
+
+      &lt;button onClick={() =&gt; setShowInfo(!showInfo)}&gt;
+        Toggle Info
+      &lt;/button&gt;
+
+      {showInfo &amp;&amp; &lt;p&gt;Dashboard helper text&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8166-bd42-fa8e5e989070" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8122-87a3-fd412873f02d" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-817d-95a0-db19ff3895d1" class="">🐞 DEBUG ASSIGNMENT 1</h1></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-817c-8425-ed0ca6c1e085" class="">React.memo not working with function props</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813d-8188-f53ecf6d05ec" class="">❌ Buggy Code</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81dd-a9f4-f65a1008d28e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">const ActionPanel = React.memo(function ActionPanel({ onSubmit }) {
+  console.log(&quot;ActionPanel rendered&quot;);
+  return &lt;button onClick={onSubmit}&gt;Submit&lt;/button&gt;;
+});
+
+function App() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleSubmit = () =&gt; {
+    console.log(&quot;Submitted&quot;);
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;ActionPanel onSubmit={handleSubmit} /&gt;
+
+      &lt;button onClick={() =&gt; setOpen(!open)}&gt;
+        Toggle UI
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-b277-c0617fe8123d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8129-a856-f38462e24fbb" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8129-94d4-d696ad972b0b" class="">🐞 DEBUG ASSIGNMENT 2</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8176-bdf1-d58cbd1f4e9c" class="">❌ Buggy Code</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f4-aef8-efcbef11dd10" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">const ProfileCard = React.memo(function ProfileCard({ profile }) {
+  console.log(&quot;ProfileCard rendered&quot;);
+  return &lt;h3&gt;{profile.name}&lt;/h3&gt;;
+});
+
+function App() {
+  const [showHelp, setShowHelp] = React.useState(false);
+
+  const profile = { name: &quot;Neha&quot; };
+
+  return (
+    &lt;div&gt;
+      &lt;ProfileCard profile={profile} /&gt;
+
+      &lt;button onClick={() =&gt; setShowHelp(!showHelp)}&gt;
+        Toggle Help
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-b635-d54bf3495b7d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816b-93aa-cf48793fb6d4" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8144-a546-fcf46c476e38" class="">🐞 DEBUG ASSIGNMENT 3</h1></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81d1-8c2f-cc2e48a570f8" class="">useCallback used but still child re-renders</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81cc-9fbc-cee29061d1a0" class="">❌ Buggy Code</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c4-a381-d18e80c6ceb4" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">const Controls = React.memo(function Controls({ onPlay, onPause }) {
+  console.log(&quot;Controls rendered&quot;);
+  return (
+    &lt;&gt;
+      &lt;button onClick={onPlay}&gt;Play&lt;/button&gt;
+      &lt;button onClick={onPause}&gt;Pause&lt;/button&gt;
+    &lt;/&gt;
+  );
+});
+
+function App() {
+  const [dark, setDark] = React.useState(false);
+
+  const onPlay = React.useCallback(() =&gt; {
+    console.log(&quot;Play&quot;);
+  }, []);
+
+  const onPause = () =&gt; {
+    console.log(&quot;Pause&quot;);
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;Controls onPlay={onPlay} onPause={onPause} /&gt;
+
+      &lt;button onClick={() =&gt; setDark(!dark)}&gt;
+        Toggle Theme
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81eb-bc6a-f9693b15c613" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b4-ae9b-f0739d1b2200" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-814c-9ceb-e34f684322cf" class="">🐞 DEBUG ASSIGNMENT 4</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8131-a6fc-e395643d5fba" class="">❌ Buggy Code</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b2-9506-c23c821135ab" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">import { useMemo, useState } from &quot;react&quot;;
+
+function App() {
+  const [show, setShow] = useState(false);
+
+  const data = [10, 20, 30, 40];
+
+  const total = useMemo(() =&gt; {
+    console.log(&quot;Calculating total&quot;);
+    return data.reduce((a, b) =&gt; a + b, 0);
+  }, [data]);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Total: {total}&lt;/h2&gt;
+
+      &lt;button onClick={() =&gt; setShow(!show)}&gt;
+        Toggle
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</code></pre></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

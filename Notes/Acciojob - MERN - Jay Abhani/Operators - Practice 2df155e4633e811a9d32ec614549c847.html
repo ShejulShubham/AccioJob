@@ -1,0 +1,836 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Operators - Practice</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-811a-9d32-ec614549c847" class="page sans"><header><h1 class="page-title" dir="auto">Operators - Practice</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-819f-828f-d4cc1106628c" class="">🔹 Question 1</h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2df155e4-633e-81b4-849f-f1361f5a8258" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let a = 10;
+let b = 5;
+let c = 10;
+console.log(a === c);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ef-b3a5-dfd0f4898b21" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8161-80ac-efe72f620840" class="">🔍 Explanation: <code>a</code> and <code>c</code> are both <code>10</code> and of same type (<code>number</code>).</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818c-a539-e726e0373dcf"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816f-b311-fd5648f1f681" class="">🔹 Question 2</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8106-82a7-ec35f72bd2ac" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let x = 7;
+x += 3;
+console.log(x == 10);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a4-b821-ec2d2c13e6cf" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-ac91-f2f7b9f8e67b" class="">🔍 Explanation: <code>x += 3</code> → <code>x = 10</code>. Then compared with <code>== 10</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813a-ac55-d8f57c1e4f4e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b2-bff1-d6cce879ca77" class="">🔹 Question 3</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81be-97c5-d62445374f88" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let a = 20;
+let result = (a &gt; 15 &amp;&amp; a &lt; 30);
+console.log(result);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ad-9fbc-c86b66d5473a" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f6-b9f8-ccf6298ee210" class="">🔍 Explanation: Both conditions are <code>true</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ec-9567-cadeb73fc0ff"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8135-83cb-f904e7fd7954" class="">🔹 Question 4</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8148-afa2-fdf6ba5ba8f5" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let score = 45;
+score -= 5;
+console.log(score &gt;= 50);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811f-938d-d9f587dd58ba" class="">✅ <strong>Solution</strong>: <code>false</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8179-b74d-e9ecc6efd35f" class="">🔍 Explanation: <code>score</code> becomes <code>40</code>, which is not <code>&gt;= 50</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8125-8c0f-e9d0ab497693"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e0-a017-c4d2fcc98af4" class="">🔹 Question 5</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8120-8281-c98b97808b43" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let isActive = false;
+console.log(!isActive);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8169-bfaf-e2d56a566d35" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8110-bc63-fabd44304286" class="">🔍 Explanation: Logical NOT <code>!false</code> = <code>true</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b4-b617-dd1bfe9f1729"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815c-952c-e3da4d15be04" class="">🔹 Question 6</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812d-9171-f4bca1aede8a" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let x = 5;
+let y = 8;
+let output = (x == 5 || y == 10);
+console.log(output);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8165-84d5-ed801e56a906" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dc-874c-ddc8bb99d12d" class="">🔍 Explanation: One condition is true (<code>x == 5</code>), so <code>||</code> gives <code>true</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a9-a947-d77c48550fe7"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f3-a520-ec00b0837f18" class="">🔹 Question 7</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8100-af22-dfbcc6358c23" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let x = 3;
+x *= 2;
+let result = (x !== 6);
+console.log(result);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-b389-c8c92abc25ed" class="">✅ <strong>Solution</strong>: <code>false</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-b6de-fdc31cf6f385" class="">🔍 Explanation: <code>x = 6</code>, so <code>x !== 6</code> is <code>false</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8105-86fb-f7b7b3ff87c8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8125-b4e1-c0746613eaec" class="">🔹 Question 8</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f7-9134-d7db701776f7" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let a = 12;
+let b = 4;
+let result = (a &lt; 10 || b &gt; 2);
+console.log(result);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e5-b150-f8d502aa2fef" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a8-a4ce-cadb1c46677e" class="">🔍 Explanation: Second condition <code>b &gt; 2</code> is true.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81dc-b811-cbefa0b79e36"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815b-8f9f-e4881dbc547e" class="">🔹 Question 9</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c0-a5fe-f787f63b9cd3" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let marks = 33;
+marks += 2;
+console.log(marks &lt; 35 &amp;&amp; marks &gt; 30);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-8c74-c031c753e42c" class="">✅ <strong>Solution</strong>: false</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-8287-da9a25a7477b" class="">🔍 Explanation: <code>marks = 35</code>, so <code>(marks &lt; 35)</code> is <code>false</code>. Whole condition = <code>false</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8180-9577-dd7bdaf6387b" class="">⚠️ Correction: ❌ So <strong>actual output = false</strong></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8148-a3c8-d970efd59bcf"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8197-8960-cd458adf46ac" class="">🔹 Question 10</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81eb-8cf9-eefed29a6f95" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let val = 15;
+val -= 5;
+console.log(val == 10 &amp;&amp; val !== &quot;10&quot;);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8161-b05a-cb9ec39cfb93" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ab-b0c3-c3ea4973fc9e" class="">🔍 Explanation: <code>val == 10</code> is true and type <code>&quot;10&quot;</code> is string, so <code>!==</code> is also true.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8152-a528-dd0baa019028" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8146-a3ec-c4bfbfae85ae" class="">🔹 Question 11</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8143-bf1d-c4c57234fd88" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let num = 50;
+num -= 20;
+console.log(num === 30);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ad-b341-e95f047b4127" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8198-9d52-fbb2a1bb84dc" class="">🔍 Explanation: <code>num = 30</code>, so strict equality <code>=== 30</code> is <code>true</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8170-af5e-f81c45902c0c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813f-9ebd-c4bf6c314c0c" class="">🔹 Question 12</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-816f-89c8-e3bdbfdcd6d5" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let x = 8;
+x += 2;
+console.log(x &gt; 5 &amp;&amp; x &lt; 11);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8106-b1a6-fb07c823914e" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817e-9959-fec384a86179" class="">🔍 Explanation: <code>x = 10</code>, both conditions are true.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8128-8aae-ef79dd15eb22"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8193-aceb-e9ebddde3708" class="">🔹 Question 13</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d2-953a-d00ffd4f371b" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let status = &quot;active&quot;;
+console.log(status !== &quot;inactive&quot;);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c8-84c6-e978a286f2c3" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8145-834d-f068802f19fe" class="">🔍 Explanation: <code>&quot;active&quot;</code> is not equal to <code>&quot;inactive&quot;</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8166-b02c-d6b7ef03b0c2"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81aa-9a0a-d4b5c399f371" class="">🔹 Question 14</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8112-b0b3-df62c573c51f" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let price = 100;
+price *= 0.5;
+console.log(price &lt; 80 || price == 50);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-81da-c0df28ec4f13" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814a-bae2-cab6030560f3" class="">🔍 Explanation: <code>price = 50</code>, second condition true.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-814f-82fd-f038a7d11d09"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8137-8cb7-deab219b1be9" class="">🔹 Question 15</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ca-a1f8-ed22148e9c3d" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let a = 5;
+let b = 10;
+console.log(a &gt; b &amp;&amp; b &gt; 0);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8147-b04f-f9c8e362fbba" class="">✅ <strong>Solution</strong>: <code>false</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8147-814e-cf5b21c95cc4" class="">🔍 Explanation: First condition is false.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e3-9c1d-e4e5e53811e9"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812c-9a0d-f1fec5da0b0d" class="">🔹 Question 16</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b4-9df0-ece639156bfa" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let isLoggedIn = true;
+console.log(!isLoggedIn);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f6-b5dd-c53c2156e9d0" class="">✅ <strong>Solution</strong>: <code>false</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8131-a67f-fefcc6764cd8" class="">🔍 Explanation: <code>!true</code> = <code>false</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8187-9029-f56fd6057804"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8107-87ec-ca743b60ee15" class="">🔹 Question 17</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8180-85be-c4bfe55b961f" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let x = 3;
+x += 7;
+console.log(x == 10 &amp;&amp; x !== &quot;10&quot;);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-aac6-d359f1802c94" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8135-b7db-ec393426c1bb" class="">🔍 Explanation: <code>x == 10</code> (value match), <code>&quot;10&quot;</code> is a string so <code>!==</code> is true.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ed-ad80-e20c52907dca"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810d-afac-c527c12c676b" class="">🔹 Question 18</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-814f-8493-d770148f0534" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let marks = 80;
+console.log(marks &gt;= 50 &amp;&amp; marks &lt;= 100);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d8-8c76-f6ee6c6adaae" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-aa46-fd0fab6cd52d" class="">🔍 Explanation: <code>80</code> is in valid range.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81cc-bf1d-c6c36c26b1de"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-819e-b233-c1641ce377f6" class="">🔹 Question 19</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8172-8532-e5ced5b4b418" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let temp = 0;
+console.log(temp == 0 || temp &gt; 100);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d5-ad1f-fd820f09f72a" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f2-b787-ceded661f329" class="">🔍 Explanation: First condition <code>temp == 0</code> is true.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818e-8eee-c892f6fcb180"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81af-8f32-c089c5b17721" class="">🔹 Question 20</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815f-9849-f1591da5563a" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let score = 90;
+score -= 30;
+console.log(score === 60);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8165-9dc8-ef695a8c1a36" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8107-a507-e987aa2eac11" class="">🔍 Explanation: <code>score = 60</code>, and strictly equal to 60.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-9d5f-c9f6b12b8869" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813d-b993-d6fa59eb1f0e" class="">🔹 Question 21</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-817d-a662-f6089e8fc8df" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let a = 6;
+let b = 2;
+a /= b;
+console.log(a == 3);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8196-81aa-ddcc72c7fd6e" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8143-8c85-c84eb4992292" class="">🔍 Explanation: <code>a = 6 / 2 = 3</code>, so <code>a == 3</code> is true.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a3-aa88-d9855e5d950d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8126-a53e-fb80f90639f6" class="">🔹 Question 22</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8167-9cc7-d69b4ab127d2" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let age = 25;
+console.log(age &lt; 18 || age &gt;= 21);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8113-a567-eb4912ecffab" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818b-95dd-f3762d855856" class="">🔍 Explanation: Second condition is true.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8149-a23f-ea2101cebf21"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8128-95f4-ca223e1e2482" class="">🔹 Question 23</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f7-9972-f5fb5db1520a" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let points = 0;
+points += 10;
+console.log(points != 5);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8162-84c4-e4fcb3b7ff59" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8114-9e54-cc68835e1a71" class="">🔍 Explanation: <code>points = 10</code>, and <code>10 != 5</code> is true.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8159-865b-fdf0c25dd5be"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814c-a9c5-d367672ef23a" class="">🔹 Question 24</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-813b-b38d-db1329262d13" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let a = 10;
+let b = &quot;10&quot;;
+console.log(a == b &amp;&amp; a === b);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8130-bfa5-dfc3af41b378" class="">✅ <strong>Solution</strong>: <code>false</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c8-a7cf-e3b4b580f916" class="">🔍 Explanation: <code>==</code> is true (loose equality), <code>===</code> is false (strict).</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8170-bf6d-f7d0a17e8ba8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e0-8bbd-fe084c775c4c" class="">🔹 Question 25</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81a0-8bbf-f9b6364274a1" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let p = 4;
+let q = 8;
+console.log(p * 2 == q &amp;&amp; q - p == 4);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d8-ade7-e5537f1c0531" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8159-a974-fc076c5564be" class="">🔍 Explanation: <code>4*2 == 8</code> and <code>8 - 4 == 4</code>.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f3-875e-cbf69ff24d3e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8148-9168-fe1fbf0a2d2f" class="">🔹 Question 26</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818e-9a92-d7445c83b774" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let isMember = false;
+let age = 17;
+console.log(!isMember || age &lt; 18);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f7-90a3-db2256c8f8e7" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8104-8120-f8b876449018" class="">🔍 Explanation: Both conditions are true → OR returns true.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8136-9909-c0069618af0d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816a-ba04-c963848903ee" class="">🔹 Question 27</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ed-8edc-f82daa8fba07" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let discount = 20;
+discount -= 5;
+console.log(discount === 15);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8159-acd8-f1a66c267ad3" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a2-83cc-d3f61c398d79" class="">🔍 Explanation: <code>discount = 15</code>, so equality is true.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ce-af89-c39b8f366459"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815b-8696-ccfcf58759df" class="">🔹 Question 28</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8110-b460-e408b88fbfd6" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let x = 10;
+let y = 20;
+let z = 30;
+console.log(x &lt; y &amp;&amp; y &lt; z);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-ac69-ec6de9f3a46e" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f5-baad-e2233a9ee970" class="">🔍 Explanation: All comparisons are true.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8193-b6c1-d6e16c9ea9b2"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8110-970f-d63bc6345505" class="">🔹 Question 29</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8173-ae76-f2fbe89f4a78" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let n = 9;
+n += 1;
+console.log(n !== 10);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d2-8050-c7048d800dc6" class="">✅ <strong>Solution</strong>: <code>false</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8157-9ff1-d15ce52dac7e" class="">🔍 Explanation: <code>n = 10</code>, so <code>n !== 10</code> is false.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e4-badb-d949e73be84f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a9-ab3a-f2dc22cb424d" class="">🔹 Question 30</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c9-8cf7-c462a028e36d" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">let a = 100;
+a /= 10;
+console.log(a &gt; 5 &amp;&amp; a &lt; 15);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8141-a7fa-d112e2192738" class="">✅ <strong>Solution</strong>: <code>true</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8132-a269-e4c60a5b6fc8" class="">🔍 Explanation: <code>a = 10</code>, and <code>10 &gt; 5 &amp;&amp; 10 &lt; 15</code> is true.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8132-8d76-c688851d3af9" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

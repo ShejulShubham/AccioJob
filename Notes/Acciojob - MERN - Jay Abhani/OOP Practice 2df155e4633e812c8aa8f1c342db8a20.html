@@ -1,0 +1,954 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>OOP Practice</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-812c-8aa8-f1c342db8a20" class="page sans"><header><h1 class="page-title" dir="auto">OOP Practice</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-811c-b111-c0ad5eb0bd76" class="">🧩 OOP in JavaScript — Assignment Set</h1></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81be-96d4-f12bf16f22e6" class="">Part A — Encapsulation</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813e-bf04-e2aeec81208a" class="">A1) Wallet (Encapsulation Basics)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ed-9193-defe7a13d069" class=""><strong>Goal:</strong> Manage cash safely with private balance.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8181-b332-dfbee9210324" class=""><strong>Must use:</strong> private field <code>#amount</code>, public methods only.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-9b1c-e8ae0e3235e3" class=""><strong>Features:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8119-b18e-cad4a259fbda" class="bulleted-list"><li style="list-style-type:disc"><code>addCash(value)</code> (positive only)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8180-a5f3-f67fe5c2ca4a" class="bulleted-list"><li style="list-style-type:disc"><code>spend(value)</code> (must not go negative)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812f-9317-f5a103f42031" class="bulleted-list"><li style="list-style-type:disc"><code>balance()</code> → returns current amount<div style="display:contents" dir="auto"><p id="2df155e4-633e-815a-86e2-d3a02b6df5ed" class=""><strong>Acceptance Criteria:</strong></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814e-a278-cd6f5029ccba" class="bulleted-list"><li style="list-style-type:disc">Direct access to <code>#amount</code> not allowed (keep a commented line to show it errors).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8158-98a5-ca3ccfeec814" class="bulleted-list"><li style="list-style-type:disc">Invalid inputs must not change state.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8190-958a-ca5bf39df997" class=""><strong>Starter:</strong></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-8146-a458-d4c734453cfc" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// A1: Wallet (Encapsulation)
+class Wallet {
+  // TODO: #amount = 0
+
+  // TODO: addCash(value)
+
+  // TODO: spend(value)
+
+  // TODO: balance()
+}
+
+// TODO: demo code (create, add, spend, print balance)
+// NOTE: Do not access private field directly.
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d4-b81c-eb31b3d017c5"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8133-a2bb-db45a0bc6650" class="">A2) Thermostat (Encapsulation + Validation)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816a-80ca-e0204fae0cff" class=""><strong>Goal:</strong> Control room temperature with safe range.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811d-b9f3-c46d63f75ae2" class=""><strong>Must use:</strong> private field <code>#temp</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a8-b222-fa664b888242" class=""><strong>Features:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816f-917f-f619f089c2fe" class="bulleted-list"><li style="list-style-type:disc">Default temp 24</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8192-a436-f6bc85289b0f" class="bulleted-list"><li style="list-style-type:disc"><code>increase()</code>, <code>decrease()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8114-81dd-d66cb448810c" class="bulleted-list"><li style="list-style-type:disc"><code>setTemp(v)</code> only if <code>16 ≤ v ≤ 30</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8125-a07e-ef1a7d30781c" class="bulleted-list"><li style="list-style-type:disc"><code>current()</code><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d4-b07b-f61f3cf96319" class=""><strong>Acceptance Criteria:</strong></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8118-8a51-cf9659c93a57" class="bulleted-list"><li style="list-style-type:disc">Out-of-range changes are rejected (log a message).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8191-bf7a-d0fbde728789" class="bulleted-list"><li style="list-style-type:disc">Only public methods change temperature.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818e-8662-ea0694771aa9" class=""><strong>Starter:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c9-acec-ceef5f221000" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// A2: Thermostat
+class Thermostat {
+  // TODO: #temp = 24
+
+  // TODO: increase()
+
+  // TODO: decrease()
+
+  // TODO: setTemp(v) // only 16..30
+
+  // TODO: current()
+}
+
+// TODO: demo: change temp, invalid set, log current
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ad-bbd5-caf8da7013e5"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c4-b641-eabe7caae2cf" class="">A3) LibraryCard (Encapsulation + Counters)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818f-bb1c-fe484b69fc48" class=""><strong>Goal:</strong> Track borrowed books count safely.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8184-b0a1-c2b822a77c86" class=""><strong>Must use:</strong> private field <code>#borrowed</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811c-b32a-c7ac84959cae" class=""><strong>Features:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8186-aa93-ec4050e1bf45" class="bulleted-list"><li style="list-style-type:disc"><code>borrow()</code> increases count up to a limit (e.g., 5)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8172-8e6f-d548deef598c" class="bulleted-list"><li style="list-style-type:disc"><code>returnOne()</code> decreases count (not below 0)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8144-9c4c-e11174ae8759" class="bulleted-list"><li style="list-style-type:disc"><code>count()</code><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-901f-f202a2a36ace" class=""><strong>Acceptance Criteria:</strong></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811f-b299-d3c31fb16e7d" class="bulleted-list"><li style="list-style-type:disc">Cannot exceed limit; cannot go negative.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bf-ba34-f45ada85ee69" class=""><strong>Starter:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8177-b432-cd71d3686d84" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// A3: LibraryCard
+class LibraryCard {
+  // TODO: #borrowed = 0
+  // TODO: #limit = 5
+
+  // TODO: borrow()
+
+  // TODO: returnOne()
+
+  // TODO: count()
+}
+
+// TODO: demo: borrow till limit, return, try invalid operations
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f1-a82d-f962f7819923"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8155-84f8-d20032e8a798" class="">Part B — Inheritance</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8107-8f54-d234ec1f36bc" class="">B1) Device → Phone / Laptop (Method Override)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818b-bef6-e911176d8fb5" class=""><strong>Goal:</strong> Practice <code>extends</code> and overriding instance methods.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8101-a4fe-e830a948efad" class=""><strong>Classes:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813d-b485-e0612895132c" class="bulleted-list"><li style="list-style-type:disc"><code>Device(name)</code> → <code>info()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812e-8a27-d97829e80910" class="bulleted-list"><li style="list-style-type:disc"><code>Phone(name, os)</code> → override <code>info()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d5-a6ca-cb2d769f4971" class="bulleted-list"><li style="list-style-type:disc"><code>Laptop(name, ram)</code> → override <code>info()</code><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fa-b38d-c01cf13c00ae" class=""><strong>Acceptance Criteria:</strong></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81dc-a951-eed5d93aa6b2" class="bulleted-list"><li style="list-style-type:disc"><code>super</code> used only in constructor where needed.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81da-a8b5-ca359027efd9" class="bulleted-list"><li style="list-style-type:disc">Output clearly identifies type and details.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-8740-ff2522e27755" class=""><strong>Starter:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-819f-baec-cfe219d94049" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// B1: Device → Phone/Laptop
+class Device {
+  // TODO: constructor(name)
+  // TODO: info()
+}
+
+class Phone extends Device {
+  // TODO: constructor(name, os)
+  // TODO: info() // override
+}
+
+class Laptop extends Device {
+  // TODO: constructor(name, ram)
+  // TODO: info() // override
+}
+
+// TODO: demo with multiple instances
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8186-bc21-f9e6b8e6daa6"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8169-a2f8-d38ba83f3488" class="">B2) Employee → Manager / Intern (<code>super</code> + new fields)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8127-b44b-da6611be73d9" class=""><strong>Goal:</strong> Extend with additional properties and reuse base behavior.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ff-9727-fe38bbf492d8" class=""><strong>Classes:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fc-89b2-fff8fcf828c2" class="bulleted-list"><li style="list-style-type:disc"><code>Employee(name)</code> → <code>intro()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81dc-a0dc-e9c7cc7404f4" class="bulleted-list"><li style="list-style-type:disc"><code>Manager(name, dept)</code> → override <code>intro()</code> and show dept (call <code>super.intro()</code>)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8172-92c0-d7e06aa76760" class="bulleted-list"><li style="list-style-type:disc"><code>Intern(name, durationMonths)</code> → override <code>intro()</code><div style="display:contents" dir="auto"><p id="2df155e4-633e-8150-8b92-e44026f86e4d" class=""><strong>Acceptance Criteria:</strong></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817d-8166-f00f54eeab42" class="bulleted-list"><li style="list-style-type:disc">Overridden <code>intro()</code> must call <code>super.intro()</code> first in <code>Manager</code>.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8124-bbb2-d5eb1cde569d" class=""><strong>Starter:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c5-8336-e787db758354" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// B2: Employee → Manager/Intern
+class Employee {
+  // TODO: constructor(name)
+  // TODO: intro()
+}
+
+class Manager extends Employee {
+  // TODO: constructor(name, dept)
+  // TODO: intro() // call super.intro() then log dept
+}
+
+class Intern extends Employee {
+  // TODO: constructor(name, durationMonths)
+  // TODO: intro() // customized message
+}
+
+// TODO: demo all three
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8161-b423-ce3c608d0600"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812a-8582-f0be3fca0e36" class="">B3) Content → Article / Video (Shared + Specific)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-a76a-f857dfaa1dfa" class=""><strong>Goal:</strong> Show base + child-specific fields.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c6-9c87-fa5c5fd599a1" class=""><strong>Classes:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8119-8129-dfdd0737cef4" class="bulleted-list"><li style="list-style-type:disc"><code>Content(title)</code> → <code>details()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81bc-8c21-d625ce986181" class="bulleted-list"><li style="list-style-type:disc"><code>Article(title, wordCount)</code> → override <code>details()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a1-ab23-ed36a6553bfc" class="bulleted-list"><li style="list-style-type:disc"><code>Video(title, durationSec)</code> → override <code>details()</code><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ed-be3f-d61ed63c07bf" class=""><strong>Acceptance Criteria:</strong></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816e-a59a-ce49d18ccb3d" class="bulleted-list"><li style="list-style-type:disc">Each subclass prints its specific metric clearly.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8123-a970-e2558b4d94b9" class=""><strong>Starter:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-817f-b93b-faf83b01e680" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// B3: Content → Article/Video
+class Content {
+  // TODO: constructor(title)
+  // TODO: details()
+}
+
+class Article extends Content {
+  // TODO: constructor(title, wordCount)
+  // TODO: details() // override
+}
+
+class Video extends Content {
+  // TODO: constructor(title, durationSec)
+  // TODO: details() // override
+}
+
+// TODO: demo list of mixed contents
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8121-a5d3-ec867489e7e3"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-818b-ab26-cb209c559ce4" class="">Part C — Polymorphism</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e1-9ab0-d0fc31b494f7" class="">C1) Notifier Family (Same method, many forms)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8169-9649-ff77d1da8b22" class=""><strong>Goal:</strong> Same method name, different outputs.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8119-b399-eea822ac63da" class=""><strong>Classes:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817e-99ee-eec039d9a3d6" class="bulleted-list"><li style="list-style-type:disc"><code>Notifier</code> → <code>notify(msg)</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8121-bc61-f651bb875b6d" class="bulleted-list"><li style="list-style-type:disc"><code>EmailNotifier</code> → override</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ad-99f2-cd3f9467a6ba" class="bulleted-list"><li style="list-style-type:disc"><code>SMSNotifier</code> → override<div style="display:contents" dir="auto"><p id="2df155e4-633e-81c8-a6ff-efa1a6fc9e99" class=""><strong>Acceptance Criteria:</strong></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ca-9f77-ca5c8b1f0913" class="bulleted-list"><li style="list-style-type:disc">Iterate mixed array, call <code>notify</code> once each.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8139-8aa3-eab805317de8" class=""><strong>Starter:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ad-80a0-daded959b036" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// C1: Notifier Polymorphism
+class Notifier {
+  // TODO: notify(msg)
+}
+class EmailNotifier extends Notifier {
+  // TODO: notify(msg) // override
+}
+class SMSNotifier extends Notifier {
+  // TODO: notify(msg) // override
+}
+
+// TODO: demo: array of notifiers, call notify in a loop
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8172-805b-da725032c68d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81da-a7fa-ed5f2825d02f" class="">C2) Transport Fare (Different strategies)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8187-b843-e1bc5285171b" class=""><strong>Goal:</strong> Different fare logic per subclass.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8167-9752-f2dc35bf5d3c" class=""><strong>Classes:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c7-9f09-f826d6c194c2" class="bulleted-list"><li style="list-style-type:disc"><code>Transport</code> → <code>fare(km)</code> (base default)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81dc-bb0e-f66c930ac8b5" class="bulleted-list"><li style="list-style-type:disc"><code>Bus</code> → per-km fare</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e5-b8f2-eb8b4c33cd3a" class="bulleted-list"><li style="list-style-type:disc"><code>Taxi</code> → base fare + per-km</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8136-a9a2-f42ce2dbbfd5" class="bulleted-list"><li style="list-style-type:disc"><code>Metro</code> → slab-based fare (e.g., ≤5km: ₹10, ≤15km: ₹25, else ₹40)<div style="display:contents" dir="auto"><p id="2df155e4-633e-810e-9833-c2f079224cbc" class=""><strong>Acceptance Criteria:</strong></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b9-8876-e0b6f78d348e" class="bulleted-list"><li style="list-style-type:disc">Loop through rides with varying km and print fares via single <code>fare</code> call.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8152-9b6b-e3ccd417accc" class=""><strong>Starter:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815f-887b-d6024fdadf3a" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// C2: Transport Fare
+class Transport {
+  // TODO: fare(km) // default
+}
+class Bus extends Transport {
+  // TODO: fare(km) // per km
+}
+class Taxi extends Transport {
+  // TODO: fare(km) // base + per km
+}
+class Metro extends Transport {
+  // TODO: fare(km) // slab rules
+}
+
+// TODO: demo: mixed transports + km array → loop → log fare
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a3-93a3-fa77e914b688"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8103-9c75-f33c6d5285b1" class="">C3) Shape Areas (Override <code>area()</code>)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-8876-cfcdf227aeb0" class=""><strong>Goal:</strong> Return numeric areas polymorphically.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fa-a543-cdf8928c398c" class=""><strong>Classes:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813e-b3a7-e4c84fdf82ef" class="bulleted-list"><li style="list-style-type:disc"><code>Shape</code> → <code>area()</code> default 0</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812e-a236-fd2aebd6530d" class="bulleted-list"><li style="list-style-type:disc"><code>Circle(r)</code> → override</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ca-a4d8-e9c1d2831d57" class="bulleted-list"><li style="list-style-type:disc"><code>Rectangle(w, h)</code> → override</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c2-96d4-eb6cf7c65fc0" class="bulleted-list"><li style="list-style-type:disc"><code>Triangle(b, h)</code> → override (<code>0.5 * b * h</code>)<div style="display:contents" dir="auto"><p id="2df155e4-633e-81b8-bf06-ce6b833fd8f4" class=""><strong>Acceptance Criteria:</strong></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812b-bf6f-f24f246a7731" class="bulleted-list"><li style="list-style-type:disc">Sum total area of a mixed array in one loop.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bc-8e23-c21fc364c729" class=""><strong>Starter:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815c-ae27-c9749cf0315e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// C3: Shape Areas
+class Shape {
+  // TODO: area()
+}
+class Circle extends Shape {
+  // TODO: constructor(r)
+  // TODO: area()
+}
+class Rectangle extends Shape {
+  // TODO: constructor(w, h)
+  // TODO: area()
+}
+class Triangle extends Shape {
+  // TODO: constructor(b, h)
+  // TODO: area()
+}
+
+// TODO: demo: array of shapes → compute total area
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8188-875d-ff6b06848a2e"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-817b-8df5-ebc4e7c6ffce" class="">Part D — Abstraction</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f3-a1d5-cb70b87cee4c" class="">D1) WashingMachine (Hide steps with private methods)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a9-9d55-ea8d2c3556b1" class=""><strong>Goal:</strong> Expose a simple <code>start()</code> that orchestrates hidden steps.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8125-95ec-cc428f20ab37" class=""><strong>Must use:</strong> private methods <code>#fillWater</code>, <code>#wash</code>, <code>#rinse</code>, <code>#spin</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a3-bf18-f6aed499b15a" class=""><strong>Acceptance Criteria:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812b-88c2-cb8dfc3bcc1e" class="bulleted-list"><li style="list-style-type:disc">Calling any private step directly should be impossible (keep commented line to indicate).</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b6-927e-e5e32109478f" class=""><strong>Starter:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d5-8fd8-f8813f158582" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// D1: WashingMachine (Abstraction)
+class WashingMachine {
+  // TODO: start() → call private steps in order
+
+  // TODO: #fillWater()
+
+  // TODO: #wash()
+
+  // TODO: #rinse()
+
+  // TODO: #spin()
+}
+
+// TODO: demo: call start(); keep commented line calling a private method
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8191-8337-eb1f32ad51c8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8192-bc04-cf08e2b7a865" class="">D2) FileCompressor (Abstraction with private pipeline)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8119-a7e4-e9449bf1d238" class=""><strong>Goal:</strong> <code>compress(fileName)</code> exposes high-level action only.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8122-9f17-d380bc425acd" class=""><strong>Must use:</strong> <code>#readFile</code>, <code>#pack</code>, <code>#writeArchive</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8136-8892-c6fc07678105" class=""><strong>Acceptance Criteria:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813f-a5db-f77e92c6ea57" class="bulleted-list"><li style="list-style-type:disc">Log messages indicate each internal step.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8111-bcf4-dc351fd60d1a" class=""><strong>Starter:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e1-89bd-ccf1b91fd715" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// D2: FileCompressor
+class FileCompressor {
+  // TODO: compress(fileName) → orchestrate private steps
+
+  // TODO: #readFile()
+
+  // TODO: #pack()
+
+  // TODO: #writeArchive()
+}
+
+// TODO: demo: compress(&quot;report.pdf&quot;)
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b7-ad72-cd6b256aa4c9"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c5-b4c6-c2cd16ddca5d" class="">D3) DoorLock (Private State + Public API)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812d-a53c-e8eb7cdc7181" class=""><strong>Goal:</strong> Hide PIN &amp; expose <code>setPin</code>/<code>unlock</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811f-a80d-c463bf38d920" class=""><strong>Must use:</strong> private field <code>#pin</code>.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81be-ae25-f089624fe914" class=""><strong>Features:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e0-b765-c46d4e37b5d8" class="bulleted-list"><li style="list-style-type:disc"><code>setPin(pin)</code> → only 4 characters (string)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811f-844d-d6f3a612d2ab" class="bulleted-list"><li style="list-style-type:disc"><code>unlock(tryPin)</code> → logs success/failure<div style="display:contents" dir="auto"><p id="2df155e4-633e-8147-978f-f6134ad09bf5" class=""><strong>Acceptance Criteria:</strong></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817c-9921-c14e1b3a005a" class="bulleted-list"><li style="list-style-type:disc">Cannot read/change <code>#pin</code> directly.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8156-930c-e447ea8e69da" class=""><strong>Starter:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c1-9352-c7b2f9ac974c" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// D3: DoorLock
+class DoorLock {
+  // TODO: #pin = &quot;&quot;
+
+  // TODO: setPin(pin) // require 4 chars (string)
+
+  // TODO: unlock(tryPin) // compare with #pin
+}
+
+// TODO: demo: set pin, try wrong &amp; correct pin; avoid direct access
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8108-80d5-e2aa1722887f"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8143-bc65-f9c632adc1bc" class="">Part E — Mixed Pillars (Mini-Projects)</h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e7-aed1-dae12d211ef2" class="">E1) Storage Family (Inheritance + Polymorphism)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8112-8b5b-edfd057eeefc" class=""><strong>Goal:</strong> Same <code>save(data)</code> API with different behaviors.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813f-94c3-f494310783fa" class=""><strong>Classes:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810c-95b9-fc17209d4b14" class="bulleted-list"><li style="list-style-type:disc"><code>Storage</code> → <code>save(data)</code> (base)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81be-b96e-fbb0309d9c8a" class="bulleted-list"><li style="list-style-type:disc"><code>MemoryStorage</code> → stores into internal array</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81aa-909e-c4e15603f25e" class="bulleted-list"><li style="list-style-type:disc"><code>FileStorage</code> → logs “saved to file: …”<div style="display:contents" dir="auto"><p id="2df155e4-633e-81c0-9d9b-c666fa48d484" class=""><strong>Acceptance Criteria:</strong></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8175-b3f3-d13fb1230825" class="bulleted-list"><li style="list-style-type:disc">Iterate a mixed array; call <code>save</code> uniformly.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-8b02-cc19535cd103" class=""><strong>Starter:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-816d-ab15-cb1dfce30a42" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// E1: Storage Family
+class Storage {
+  // TODO: save(data)
+}
+class MemoryStorage extends Storage {
+  // TODO: constructor() // internal array
+  // TODO: save(data)
+}
+class FileStorage extends Storage {
+  // TODO: save(data)
+}
+
+// TODO: demo: mixed storages saving &quot;hello&quot;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81af-8e81-e7c2e58cee6e"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d6-90ce-f6c726ba4b66" class="">E2) Media Playlist (Polymorphism + Inheritance)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f9-9d9b-ea0011c53fb7" class=""><strong>Goal:</strong> Uniform <code>play()</code> on different media types.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8107-849f-e6eac7d273c1" class=""><strong>Classes:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813c-a10e-c891429f593d" class="bulleted-list"><li style="list-style-type:disc"><code>Media(title)</code> → <code>play()</code> default</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e7-9b04-cff8c83a2187" class="bulleted-list"><li style="list-style-type:disc"><code>Song(title)</code> → override</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a0-b1af-f486732e8d8d" class="bulleted-list"><li style="list-style-type:disc"><code>Video(title)</code> → override<div style="display:contents" dir="auto"><p id="2df155e4-633e-8182-bb8d-fe44ee463b9e" class=""><strong>Acceptance Criteria:</strong></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c2-9792-dca38a3e3b34" class="bulleted-list"><li style="list-style-type:disc">Single loop calls <code>play()</code> on all items.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-aa5b-cc05b3399684" class=""><strong>Starter:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810d-9ef2-d5691ff45064" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// E2: Media Playlist
+class Media {
+  // TODO: constructor(title)
+  // TODO: play()
+}
+class Song extends Media {
+  // TODO: constructor(title)
+  // TODO: play()
+}
+class Video extends Media {
+  // TODO: constructor(title)
+  // TODO: play()
+}
+
+// TODO: demo: playlist array → loop → play()
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8149-b4c1-e6b2e81751bb"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-819c-a620-dd3d0bd9f97f" class="">E3) UserAuth (Encapsulation + Abstraction)</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8146-92ca-ced0f1aa85dd" class=""><strong>Goal:</strong> Hide password storage; expose safe API.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814f-9b9e-fc4074acf3c3" class=""><strong>Must use:</strong> private field <code>#passwordHash</code> (or any private representation).</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8140-ad50-ff9be316fedd" class=""><strong>Features:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8159-aeba-fc233b5adf3f" class="bulleted-list"><li style="list-style-type:disc"><code>setPassword(plain)</code> → store hidden representation (simple reversible method is fine)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f0-a55a-c7a464a66185" class="bulleted-list"><li style="list-style-type:disc"><code>checkPassword(plain)</code> → true/false<div style="display:contents" dir="auto"><p id="2df155e4-633e-8114-a01b-cad1b542283a" class=""><strong>Acceptance Criteria:</strong></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ff-ad49-eb6521fd0717" class="bulleted-list"><li style="list-style-type:disc">No direct access to internal secret storage.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-aab9-d90216b3997f" class=""><strong>Starter:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8123-af6f-cbca1191efdc" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">// E3: UserAuth
+class UserAuth {
+  // TODO: #passwordHash = &quot;&quot;
+
+  // TODO: setPassword(plain) // convert to hidden form
+
+  // TODO: checkPassword(plain) // compare hidden forms
+}
+
+// TODO: demo: set, check right/wrong; keep commented line showing private access is blocked
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8155-b047-dc2738c9ae8b"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8164-8a39-c03936494745" class="">Rubric (For All Assignments)</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818f-83e9-cea8750bdfd1" class="bulleted-list"><li style="list-style-type:disc"><strong>Correct Use of Pillars:</strong> Uses only the required concepts for that task.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a4-a39c-c5d07a3e00df" class="bulleted-list"><li style="list-style-type:disc"><strong>Encapsulation:</strong> Private fields/methods are not accessed directly.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e1-98a8-da701967bf6e" class="bulleted-list"><li style="list-style-type:disc"><strong>Inheritance:</strong> Proper use of <code>extends</code>; <code>super</code> in subclass constructors where needed.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c6-b824-c93c1d688d9f" class="bulleted-list"><li style="list-style-type:disc"><strong>Polymorphism:</strong> One common method name; different behaviors in subclasses; iterated through a common interface.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8147-9807-c0fa42cf444d" class="bulleted-list"><li style="list-style-type:disc"><strong>Abstraction:</strong> Complex steps hidden behind a simple public method.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8188-bd00-ff12c45d1688" class="bulleted-list"><li style="list-style-type:disc"><strong>Validation &amp; Messages:</strong> Reasonable logs for invalid inputs or blocked operations.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8125-9db9-f772ff9fba90" class="bulleted-list"><li style="list-style-type:disc"><strong>Clean Demo:</strong> Minimal console demo showing correct behavior (no solutions filled in core logic beyond TODOs).</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-9b53-f377a70017f5" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

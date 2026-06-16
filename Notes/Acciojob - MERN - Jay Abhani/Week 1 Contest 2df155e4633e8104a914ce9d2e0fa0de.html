@@ -1,0 +1,890 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Week 1 Contest</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-8104-a914-ce9d2e0fa0de" class="page sans"><header><h1 class="page-title" dir="auto">Week 1 Contest</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8109-8ce8-d41ef503f45f" class=""><strong>Problem: Convert Days to Years, Months, and Days</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d7-afeb-d7283f46fcf6" class=""><strong>Problem Statement</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-96d8-e2ab18ce441c" class=""><strong>Write a program that takes a number of days as input and converts it into years, months, and remaining days. Assume:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8164-81d8-c3e1322f328f" class=""><strong>1 year = 365 days1 month = 30 days</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817c-bd04-fe69e6e74a5a" class="bulleted-list"><li style="list-style-type:disc">1 year = 365 days</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8150-bd74-ded68cd21c5e" class="bulleted-list"><li style="list-style-type:disc">1 month = 30 days</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f8-9a39-e33846c7db8a" class=""><strong>Input</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-8c4f-d1ecee9b0003" class=""><strong>A single integer </strong><code><strong>d</strong></code><strong> (1 ≤ d ≤ 10000) representing the number of days.</strong></p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8115-a29a-f7bcfe66708e" class=""><strong>Output</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810a-bfbf-e8305aa40738" class=""><strong>Print the result in the format:</strong></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2df155e4-633e-8198-a36e-f8a714e7c70c" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">X years, Y months, Z days
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f3-ac70-dd75107f8a22" class=""><strong>Examples</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-8631-cdef68f094ba" class=""><strong>Example 1: Input:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ee-8711-c5f6dc0daa28" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">400
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8108-bb53-ef87e8d01c8b" class=""><strong>Output:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ca-b7dc-d282f19cbdd6" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">1 years, 1 months, 5 days
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816e-a698-f7ae0c518598" class=""><strong>Example 2: Input:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81cd-ae2d-c326270fa30f" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">800
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-9835-c732c3d61561" class=""><strong>Output:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8145-9ff1-da2c8901b334" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">2 years, 2 months, 10 days</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8199-8abc-f9f56fff5786" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8123-9f95-fabe04844e26" class="">
+</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8122-995f-dc96546a2b43" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const readline = require(&#x27;readline&#x27;).createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+readline.question(&#x27;&#x27;, input =&gt; {
+  const d = Number(input);
+
+  const years = Math.floor(d / 365);
+  const remainingDaysAfterYears = d % 365;
+
+  const months = Math.floor(remainingDaysAfterYears / 30);
+  const days = remainingDaysAfterYears % 30;
+
+  console.log(`${years} years, ${months} months, ${days} days`);
+
+  readline.close();
+});
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81bf-960a-ec1d802c12d7"/></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8110-98dc-d36dc9a579b1" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-9955-df5b0125d8ef" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-8026-f2c4e1169d16" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ec-8754-d6bae131bea3" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bf-83be-c6047365606b" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81d8-b2d9-fdd4b4db4523" class=""><strong>Valid Date</strong></h1></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bb-8650-e3258a2cb13e" class=""><strong>Determine whether a given calendar date is valid or invalid.</strong></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c6-85b1-e51b526a64be"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c1-a464-e94b04d7cf26" class=""><strong>Rules</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b9-874d-df7d9562fcec" class=""><strong>Month must be between </strong><code><strong>1</strong></code><strong> and </strong><code><strong>12</strong></code><strong>.Day must fit the month and year:<br/>    ◦ 31-day months: January, March, May, July, August, October, December </strong><code><strong>(1, 3, 5, 7, 8, 10, 12)</strong></code><strong><br/>    ◦ 30-day months: April, June, September, November </strong><code><strong>(4, 6, 9, 11)</strong></code><strong><br/>    ◦ February </strong><code><strong>(2)</strong></code><strong><br/>        ▪ 29 days in a leap year<br/>        ▪ 28 days otherwiseLeap year criteria<br/>    ◦ Divisible by 4 and not divisible by 100, unless also divisible by 400</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81dc-8635-ee3bc85ec4bf" class="bulleted-list"><li style="list-style-type:disc"><strong>Month</strong> must be between <code>1</code> and <code>12</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8166-a72e-de44c8d2c0be" class="bulleted-list"><li style="list-style-type:disc"><strong>Day</strong> must fit the month and year:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f1-8bc2-e7c97dd90946" class="bulleted-list"><li style="list-style-type:circle">◦<div style="display:contents" dir="auto"><p id="2df155e4-633e-81ba-94f8-d8380a88539f" class=""><strong>31-day months: January, March, May, July, August, October, December </strong><code><strong>(1, 3, 5, 7, 8, 10, 12)</strong></code></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8162-976f-e58e9bf2c346" class="bulleted-list"><li style="list-style-type:circle">◦<div style="display:contents" dir="auto"><p id="2df155e4-633e-810f-9b3a-df67ca3fe5a7" class=""><strong>30-day months: April, June, September, November </strong><code><strong>(4, 6, 9, 11)</strong></code></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819a-b169-c02e7d3d70e5" class="bulleted-list"><li style="list-style-type:circle">◦<div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-857c-f6854889dc13" class=""><strong>February </strong><code><strong>(2)</strong></code></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8118-9146-ea168f136773" class="bulleted-list"><li style="list-style-type:square">▪ 29 days in a <strong>leap year</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813a-a788-ff6fac2da3b8" class="bulleted-list"><li style="list-style-type:square">▪ 28 days otherwise</li></ul></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f2-aa11-f5671a0694ad" class="bulleted-list"><li style="list-style-type:disc"><strong>31-day months</strong>: January, March, May, July, August, October, December <code>(1, 3, 5, 7, 8, 10, 12)</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8100-ae1b-e990e3cb1ef7" class="bulleted-list"><li style="list-style-type:disc"><strong>30-day months</strong>: April, June, September, November <code>(4, 6, 9, 11)</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b7-89bc-d927f3daea56" class="bulleted-list"><li style="list-style-type:disc"><strong>February</strong> <code>(2)</code><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811e-ba13-d9812cee7b14" class="bulleted-list"><li style="list-style-type:circle"></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8138-9323-c2abfc217fba" class="bulleted-list"><li style="list-style-type:circle"></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816e-96e2-e2d0a42b4873" class="bulleted-list"><li style="list-style-type:disc"></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8138-8da7-f58d428922e2" class="bulleted-list"><li style="list-style-type:disc"></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8191-b4ba-f4f7cdc8a002" class="bulleted-list"><li style="list-style-type:disc"><strong>Leap year</strong> criteria<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8150-a9e5-ed7e1dd54a46" class="bulleted-list"><li style="list-style-type:circle">◦ Divisible by <strong>4</strong> <strong>and</strong> not divisible by <strong>100</strong>, unless also divisible by <strong>400</strong></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8126-890d-d3351ce40eaf" class="bulleted-list"><li style="list-style-type:disc"></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8172-b842-de417f7b7e7b"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ee-a481-daa52173ef9f" class=""><strong>Input</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818f-afaf-c55694c249d6" class=""><strong>Three integers (each on its own line):</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-813d-8fe4-da91e754d523" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">day
+month
+year
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819b-9231-f9be2306161c"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8115-84bd-ee43c1d1cc5b" class=""><strong>Output</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811a-830a-ce78a160c02f" class=""><strong>Print exactly one of:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8171-88e0-e54f6200f851" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">Valid
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ed-b90d-e195dd0f36f7" class=""><strong>or</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-816a-9353-ff8ca4df095a" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">Invalid
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8182-abdc-dcac59d74f1f"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-812f-9eba-dc40c9df5e3d" class=""><strong>Constraints</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8146-a0c6-d758fb0d13b6" class=""><code><strong>1 ≤ day ≤ 311 ≤ month ≤ 121 ≤ year ≤ 10^5</strong></code></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c1-9ecf-c6c4eb8e3d17" class="bulleted-list"><li style="list-style-type:disc"><code>1 ≤ day ≤ 31</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810a-8919-c334d19d1076" class="bulleted-list"><li style="list-style-type:disc"><code>1 ≤ month ≤ 12</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d2-9316-e917c3060da1" class="bulleted-list"><li style="list-style-type:disc"><code>1 ≤ year ≤ 10^5</code></li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e0-bfeb-eef298c279e9"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c8-bb21-c6581a0a4d7f" class=""><strong>Examples</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814d-8e7e-f9c3f8a90c39" class=""><strong>Example 1</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8184-9599-d695a311fc7a" class=""><strong>Input</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8182-b941-ef743a4f8e94" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">29
+2
+2024
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8182-96e7-fb8516897cb1" class=""><strong>Output</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812e-9c06-c450a29590bf" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">Valid
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81be-b154-f0bf2b279c35" class=""><strong>Example 2</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814d-859c-daca1f123986" class=""><strong>Input</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-812d-bdc8-ea810c61b389" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">31
+4
+2023
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8174-9f40-c96817181980" class=""><strong>Output</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810c-90d3-d59a9420642b" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">Invalid</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-b330-d8471976b6f7" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ae-9528-eaf700181322" class="">✅ Solution:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8138-819b-f40c8468ac13" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const readline = require(&#x27;readline&#x27;).createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+let inputs = [];
+
+readline.question(&#x27;&#x27;, d =&gt; {
+  inputs.push(Number(d.trim()));
+  readline.question(&#x27;&#x27;, m =&gt; {
+    inputs.push(Number(m.trim()));
+    readline.question(&#x27;&#x27;, y =&gt; {
+      inputs.push(Number(y.trim()));
+      readline.close();
+
+      const day = inputs[0];
+      const month = inputs[1];
+      const year = inputs[2];
+
+      // ✅ Basic checks
+      if (month &lt; 1 || month &gt; 12 || day &lt; 1 || day &gt; 31 || year &lt; 1 || year &gt; 100000) {
+        console.log(&quot;Invalid&quot;);
+        return;
+      }
+
+      // ✅ Leap year check
+      let isLeap = false;
+      if ((year % 4 === 0 &amp;&amp; year % 100 !== 0) || year % 400 === 0) {
+        isLeap = true;
+      }
+
+      // ✅ Max days per month
+      let maxDays;
+      if (month === 2) {
+        maxDays = isLeap ? 29 : 28;
+      } else if (
+        month === 4 || month === 6 ||
+        month === 9 || month === 11
+      ) {
+        maxDays = 30;
+      } else {
+        maxDays = 31;
+      }
+
+      // ✅ Final check
+      if (day &lt;= maxDays) {
+        console.log(&quot;Valid&quot;);
+      } else {
+        console.log(&quot;Invalid&quot;);
+      }
+    });
+  });
+});
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e8-83b2-e47027e5ac81" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a6-94ba-f61be030c6f5" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-af2b-f6f6248e2a23" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813d-9ae8-d1a247a54444" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81a3-9cda-cab466b5caf1" class="">Problem - 3</h1></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8120-9c71-e485eae22ccc" class=""><strong>E-commerce company &quot;ShopEasy&quot; has an online shopping platform that allows users to purchase products from various categories. The company uses JavaScript to implement business logic on the client-side. One of the features of the platform is to offer discounts to customers based on their purchase history. The discounts are calculated using a complex expression involving multiple conditions and operators.</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8176-b4c1-eaaae1a2c264" class=""><strong>You are tasked with debugging an issue in the discount calculation logic, where the expression </strong><code><strong>const result = 5 + 10 * 2 &gt; 28 &amp;&amp; (true || false)</strong></code><strong> is not producing the expected output. Your goal is to evaluate this expression and explain step-by-step how you would arrive at the final result.</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8123-a661-dad424c4dbc0" class=""><strong>Assume that you have access to a JavaScript console where you can write code and execute it. You need to provide a clear explanation of how you would approach this problem, including any intermediate calculations or evaluations.</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8111-8936-c624e3981123" class=""><strong>Please provide your approach to solve this problem.</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-82b1-ce03c4d6c989" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81e9-8261-dd6aaa7adb43" class="">Solution</h2></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-81be-9c8e-ce9929cf88f3" class="">the expression const result = 5 + 10 * 2 &gt; 28 &amp;&amp; (true || false) is not producing the correct result</blockquote></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ad-b2f8-d3cedda7a28a" class="">Let’s understand what the <strong>business logic</strong> likely <strong>intended</strong>, then <strong>rewrite the expression</strong> so it behaves correctly.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fc-87ee-e049a87289a7"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810f-b19b-e051674acc2d" class="">🧠 Current Behavior:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c9-9360-f349eaa48142" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const result = 5 + 10 * 2 &gt; 28 &amp;&amp; (true || false);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817f-963a-fa7becde9273" class="">Evaluates to:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8158-925e-ceb74251be98" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">5 + 10 * 2 = 25
+25 &gt; 28 = false
+false &amp;&amp; (true || false) = false
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8170-b106-e2aa266069b5"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8190-ae49-e4ccb3bd425b" class="">💡 Likely Intention of Business Logic</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815c-b778-e81f4b904b5c" class="">If it’s a <strong>discount logic</strong>, the developer probably meant:</p></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-81ae-a286-f2946a97cf54" class="">&quot;If (5 + 10) * 2 &gt; 28, and (true OR false), then grant discount&quot;</blockquote></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e9-82bc-e30cb00bfc38" class="">But due to <strong>operator precedence</strong>, it’s not grouped correctly.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fc-8ebf-d7748ac6f2f5"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8170-a367-f7bc18e79277" class="">✅ Correct Expression with Parentheses:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810c-a76a-eb33161099e3" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const result = (5 + 10) * 2 &gt; 28 &amp;&amp; (true || false);
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b1-b15f-d63a7a55fe52" class="">🔍 Evaluation:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8184-849c-dbef288eb4f3" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">(5 + 10) * 2 = 15 * 2 = 30
+30 &gt; 28 = true
+(true || false) = true
+true &amp;&amp; true = ✅ true
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8105-ba79-cfdf267d774d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ce-bb24-d786d6278ca0" class="">✅ Final Answer:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-816e-a856-eec4abc3b2fd" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const result = (5 + 10) * 2 &gt; 28 &amp;&amp; (true || false);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8101-be9c-ff51177ec28f" class="">✔️ This will now produce <code>true</code>, which is likely the intended outcome.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8161-b308-d1d93af5606d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a6-8f65-d1b61367c4d4" class="">🧪 Summary:</h3></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-819f-8df7-d5e8eb36b237" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8171-abaf-e5ba96b3b162"><td id=":Xms" class="">Original Expression</td><td id="mY@;" class="">Result</td><td id="_?n~" class="">Problem</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-814f-a93b-fc1b2a467a4f"><td id=":Xms" class="">`5 + 10 * 2 &gt; 28 &amp;&amp; (true</td><td id="mY@;" class=""></td><td id="_?n~" class="">false)`</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8192-a8c1-e5b39b1fe3ce"><td id=":Xms" class="">`(5 + 10) * 2 &gt; 28 &amp;&amp; (true</td><td id="mY@;" class=""></td><td id="_?n~" class="">false)`</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819c-8263-ccc4e6a2362b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8162-b11a-f61272540381" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8190-9e1c-edcf8e49006c" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8130-91ff-f1c9f4e581eb" class="">Problem - 4</h1></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c1-a4e0-c186ab03c10a" class=""><strong>A social media company, &quot;ConnectMe&quot;, wants to develop a feature to recommend the most popular post of the day based on the number of likes, comments, and shares. The feature should be able to take three distinct numbers as input, representing the number of likes, comments, and shares respectively, and return the greatest of the three numbers. The company wants to implement this feature using both ternary operators and switch-case statements in JavaScript.</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812e-a5df-e0c369a5e409" class=""><strong>Write a JavaScript code snippet that takes three distinct numbers as input and returns the greatest of the three numbers using both ternary operators and switch-case statements.</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8108-966b-e69670e077da" class=""><strong>Assume that the input numbers are stored in variables </strong><code><strong>likes</strong></code><strong>, </strong><code><strong>comments</strong></code><strong>, and </strong><code><strong>shares</strong></code><strong>.</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8165-a47d-ec4e6f6dabe2" class=""><strong>You can use the following markdown for writing your code:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8169-a0db-c73747621e01" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">// your code here</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811a-beb8-e35987f54712" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8193-a5a8-d7da8c98ef32" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8146-b474-f52caf77bb01" class="">✅ <strong>Using Ternary Operator:</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f3-89f1-e65cce451c21" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">// Input values
+const likes = 120;
+const comments = 350;
+const shares = 200;
+
+// Using nested ternary to find the greatest
+const greatest = (likes &gt; comments)
+  ? (likes &gt; shares ? likes : shares)
+  : (comments &gt; shares ? comments : shares);
+
+console.log(&quot;Greatest using ternary:&quot;, greatest);
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8190-a2f4-e241aebc0350"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810a-8a13-de62ec72d456" class="">✅ <strong>Using Switch-Case Statement:</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8177-97a0-dc4f04e0edae" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">// Input values
+const likes = 120;
+const comments = 350;
+const shares = 200;
+
+// First, find max value using Math.max (to simplify switch)
+const max = Math.max(likes, comments, shares);
+
+switch (max) {
+  case likes:
+    console.log(&quot;Greatest using switch: Likes =&quot;, likes);
+    break;
+  case comments:
+    console.log(&quot;Greatest using switch: Comments =&quot;, comments);
+    break;
+  case shares:
+    console.log(&quot;Greatest using switch: Shares =&quot;, shares);
+    break;
+  default:
+    console.log(&quot;Something went wrong.&quot;);
+}
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81cc-b8b6-fcbb644c3950"/></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

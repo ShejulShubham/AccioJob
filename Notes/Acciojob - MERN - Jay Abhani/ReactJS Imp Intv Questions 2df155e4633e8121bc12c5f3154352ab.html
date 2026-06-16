@@ -1,0 +1,744 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ReactJS Imp Intv Questions</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-8121-bc12-c5f3154352ab" class="page sans"><header><h1 class="page-title" dir="auto">ReactJS Imp Intv Questions</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8164-978f-e9b5688a0b9f" class="">🧠 <strong>1. React Fundamentals</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8118-a9cf-cf1cc5401150" class="numbered-list" start="1"><li>What is React.js and why is it used?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8115-b7aa-caee240f5871" class="numbered-list" start="2"><li>What are the main features of React?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8105-a5ed-f1275abb45a1" class="numbered-list" start="3"><li>What is the difference between a library and a framework?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8107-8d0d-ff3f672f223c" class="numbered-list" start="4"><li>What is the Virtual DOM and how does it work?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81d3-ae2a-d9dccf1da994" class="numbered-list" start="5"><li>Explain the concept of JSX.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8171-b6c7-db10a7f461af" class="numbered-list" start="6"><li>Why do we need a root element in React?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8139-afc4-d86eb30529a7" class="numbered-list" start="7"><li>What are React components?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81cc-baa5-db84631179eb" class="numbered-list" start="8"><li>Differentiate between class components and functional components.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81bb-be40-d51397191f34" class="numbered-list" start="9"><li>What is the significance of keys in React?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-817a-87ed-f2bbd92f373d" class="numbered-list numbered-list-digits-2" start="10"><li>How does React handle rendering performance?</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811b-8e79-c1a1f4634fe2"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d4-9239-e720cceb35be" class="">⚙️ <strong>2. Components &amp; Props</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81e9-985c-d07d6be9f21c" class="numbered-list" start="1"><li>What are props in React?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-818d-aaa0-ffa879fc11a6" class="numbered-list" start="2"><li>How do you pass data from parent to child components?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8138-bc55-e91cd5c01d44" class="numbered-list" start="3"><li>Can data be passed from child to parent in React? If yes, how?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81c9-bd2b-ffc9be41da48" class="numbered-list" start="4"><li>What are default props and how are they used?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8167-a639-da9bb129f859" class="numbered-list" start="5"><li>What is prop drilling? How can it be avoided?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8110-9b61-fb6a8c8f06f6" class="numbered-list" start="6"><li>How do you validate props in React?</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8189-9edb-ce959917e139"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8153-aec3-d7743e21a57c" class="">🔁 <strong>3. State &amp; Lifecycle</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81d8-9066-d5ae7b135e3d" class="numbered-list" start="1"><li>What is state in React?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81bd-aafe-f1fe344ce21f" class="numbered-list" start="2"><li>How is state different from props?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8125-ba51-ed4cfd0a336c" class="numbered-list" start="3"><li>How do you update state in a class component?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8192-9177-ef297865aaaa" class="numbered-list" start="4"><li>What are lifecycle methods in React class components?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-812d-bc95-cc419cd9207e" class="numbered-list" start="5"><li>What are <code>componentDidMount()</code> and <code>componentWillUnmount()</code> used for?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8129-b2cb-db532b61922d" class="numbered-list" start="6"><li>How do you handle side effects in functional components?</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817b-9ab4-e27a21ddb44c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-817d-af6e-ccabc07b45f5" class="">⚡ <strong>4. Hooks (Functional Components)</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8119-b7ff-caea1cc2069e" class="numbered-list" start="1"><li>What are React Hooks? Why were they introduced?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81a7-9775-d6dd21b7e9d4" class="numbered-list" start="2"><li>What does the <code>useState</code> hook do?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8160-b2f8-f6616abc352c" class="numbered-list" start="3"><li>What is <code>useEffect</code> used for?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81f6-90ff-e1a87fa471ae" class="numbered-list" start="4"><li>What is the difference between <code>useEffect</code> and lifecycle methods?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81fa-86c8-e0890e52886d" class="numbered-list" start="5"><li>What are rules of hooks?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81f7-a3f2-ca8fec67c49c" class="numbered-list" start="6"><li>What is <code>useRef</code> used for?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-819e-bca2-c77837816610" class="numbered-list" start="7"><li>Explain the purpose of <code>useContext</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-815f-aec2-e572d2612084" class="numbered-list" start="8"><li>What is <code>useReducer</code>? When should you use it?</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fa-8463-fcace4fa05b5"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8157-893c-d5c82680344f" class="">🌐 <strong>5. Event Handling &amp; Forms</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8198-a971-ff5f8b54789e" class="numbered-list" start="1"><li>How do you handle events in React?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-813d-aee2-e2c6bc363c4e" class="numbered-list" start="2"><li>What are synthetic events?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81a6-a9f7-d2ac775afe0f" class="numbered-list" start="3"><li>How do you handle form inputs in React?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8135-92f9-f4c2d024139c" class="numbered-list" start="4"><li>What is a controlled component?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8137-96d0-eb11543208ca" class="numbered-list" start="5"><li>What is an uncontrolled component?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81c8-b45c-f0d3adb00adc" class="numbered-list" start="6"><li>How do you prevent default form submission in React?</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8185-8924-f29535dffaaf"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d0-98fe-ea35c7b12b1a" class="">🧩 <strong>6. Conditional Rendering &amp; Lists</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-819c-9ef8-dc0381a8d465" class="numbered-list" start="1"><li>How can you conditionally render components?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81ec-825d-e1ec14be7b85" class="numbered-list" start="2"><li>How do you render a list of elements in React?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81d8-8777-d919b7788314" class="numbered-list" start="3"><li>Why should every list item have a unique key?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8137-aa62-fb2289bc99a9" class="numbered-list" start="4"><li>What are fragments in React?</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819b-b7a2-ff0c4d8f48db"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d6-b043-fc30f5c2c74e" class="">🔄 <strong>7. Routing &amp; Navigation</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81f3-8b67-d72c93b88232" class="numbered-list" start="1"><li>What is React Router?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81b8-9337-c9134197bba0" class="numbered-list" start="2"><li>How do you set up routes in a React app?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81fa-8cde-fd9c40aa4775" class="numbered-list" start="3"><li>What is the difference between <code>&lt;Link&gt;</code> and <code>&lt;NavLink&gt;</code>?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8104-ab80-c0399756b394" class="numbered-list" start="4"><li>How do you navigate programmatically in React Router?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81e4-9c32-f690b6a77fc8" class="numbered-list" start="5"><li>What is a dynamic route?</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f7-a395-fcbc69f9df44"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fc-8ac7-f48598b1a75b" class="">🧱 <strong>8. State Management</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8125-bdb7-f54b306ce569" class="numbered-list" start="1"><li>What are the different ways to manage state in React?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8118-87fe-e9541b6329f2" class="numbered-list" start="2"><li>What is Context API?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-815d-ba2e-e82277959e48" class="numbered-list" start="3"><li>When should you use Redux instead of Context API?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-811c-95f4-c5df6b15670c" class="numbered-list" start="4"><li>What are reducers in Redux?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81b3-ae62-d5a1e7efdeb7" class="numbered-list" start="5"><li>What is the role of actions and dispatch in Redux?</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81da-a1c4-fd5eb59bd61a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8144-93f3-dedab3acb06d" class="">⚡ <strong>9. Performance Optimization</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81b3-b0c8-d735b6442d5f" class="numbered-list" start="1"><li>What causes re-renders in React?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81f9-9243-e90d9a1b942a" class="numbered-list" start="2"><li>How can you optimize rendering performance?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81ad-a531-da8f64e6024a" class="numbered-list" start="3"><li>What is React.memo()?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81c1-9fdb-f066807baa51" class="numbered-list" start="4"><li>What does <code>useMemo</code> and <code>useCallback</code> do?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-813c-ad79-f1918572f8da" class="numbered-list" start="5"><li>How do you lazy-load components?</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b4-aa60-e416f6ef421b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813a-89f2-c6d01badd27e" class="">🧰 <strong>10. Miscellaneous / Practical</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-813f-bc2d-fc2ea711ec9c" class="numbered-list" start="1"><li>What is create-react-app?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8156-a2af-f903e9eb9803" class="numbered-list" start="2"><li>How do you import and export components?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8144-827c-f642a66177e5" class="numbered-list" start="3"><li>What is the difference between default and named exports?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81a4-8d0e-c1410684fb78" class="numbered-list" start="4"><li>How do you deploy a React app?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8131-86c7-cf23eb15af22" class="numbered-list" start="5"><li>What are some common errors beginners face in React?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81ae-ba78-ec33df7da4f4" class="numbered-list" start="6"><li>What are higher-order components (HOC)?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8147-acf6-d4f8427bc4f9" class="numbered-list" start="7"><li>What are portals in React?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8132-8a48-c429c012e89b" class="numbered-list" start="8"><li>What is the difference between React and React Native?</li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819b-a25a-ce68bfa2ff46" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

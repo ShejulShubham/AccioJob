@@ -1,0 +1,971 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Fetch API &amp; Real APIs Assignments</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-81a8-a8fe-e145dc8553d8" class="page sans"><header><h1 class="page-title" dir="auto">Fetch API &amp; Real APIs Assignments</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f1-9a93-ef1028864b46" class="">🧪 Assignment 1: Basic GET and Render to UI</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8144-9eb3-e2d342dc2dd9" class="">1. Problem</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8130-af39-c61d6c759b11" class="">Fetch a list of posts from</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8188-a6a3-ed01414cb78e" class=""><code>https://jsonplaceholder.typicode.com/posts</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815e-9806-d115cee118e6" class="">and display the first 5 posts on the page as a list with title and body.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fa-9d0e-d7f9d8ddb3eb" class="">2. Requirements</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ab-85df-f7abc6d806ab" class="bulleted-list"><li style="list-style-type:disc">Show <code>&quot;Loading...&quot;</code> while data is being fetched.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b9-a5b6-d7d4f5db8f3f" class="bulleted-list"><li style="list-style-type:disc">If fetch fails (offline / network), show: <code>&quot;Failed to load posts.&quot;</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8109-a060-f4f4065ed050" class="bulleted-list"><li style="list-style-type:disc">Don’t just <code>console.log</code>, actually update the DOM.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f3-8ab8-f20b9ba5119f" class="">3. Solution</h3></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2df155e4-633e-814d-87bd-c281ff1fd50e" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;div id=&quot;status&quot;&gt;&lt;/div&gt;
+&lt;ul id=&quot;posts&quot;&gt;&lt;/ul&gt;
+
+&lt;script&gt;
+const statusBox = document.getElementById(&quot;status&quot;);
+const postsList = document.getElementById(&quot;posts&quot;);
+
+statusBox.textContent = &quot;Loading...&quot;;
+
+fetch(&quot;https://jsonplaceholder.typicode.com/posts&quot;)
+  .then(response =&gt; {
+    // Handle server error (404, 500, etc.)
+    if (!response.ok) {
+      throw new Error(&quot;Server error: &quot; + response.status);
+    }
+    return response.json();
+  })
+  .then(data =&gt; {
+    statusBox.textContent = &quot;&quot;; // clear loading state
+
+    const firstFive = data.slice(0, 5);
+
+    // If array is empty
+    if (firstFive.length === 0) {
+      statusBox.textContent = &quot;No posts found.&quot;;
+      return;
+    }
+
+    firstFive.forEach(post =&gt; {
+      const li = document.createElement(&quot;li&quot;);
+      li.innerHTML = `&lt;strong&gt;${post.title}&lt;/strong&gt;&lt;br&gt;${post.body}`;
+      postsList.appendChild(li);
+    });
+  })
+  .catch(error =&gt; {
+    console.error(error);
+    statusBox.textContent = &quot;Failed to load posts.&quot;;
+  });
+&lt;/script&gt;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818b-921a-e6c00ce728d4" class="">What you practiced:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ea-884d-d6b6bd3a8ea5" class="bulleted-list"><li style="list-style-type:disc"><code>fetch()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ef-a0ad-d3fc43f60a7c" class="bulleted-list"><li style="list-style-type:disc"><code>response.ok</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a6-9187-f0a759129caa" class="bulleted-list"><li style="list-style-type:disc"><code>.json()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b8-ae24-f4677cd658bb" class="bulleted-list"><li style="list-style-type:disc">loading + error UI</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cc-945c-c49328f5c088" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8155-8131-c2524a73b45d" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c6-aa1c-d2dd33544bed" class="">🧪 Assignment 2: Fetch User Profile by Input (GitHub API)</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81df-8c21-dbf24fe6f0d8" class="">1. Problem</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810e-851e-f49cbcbdc6fd" class="">Build a mini “GitHub User Search”:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c7-b780-dfed8152dacb" class="bulleted-list"><li style="list-style-type:disc">Input: GitHub username</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8110-9d59-d3ba883433ee" class="bulleted-list"><li style="list-style-type:disc">Button: “Search”</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814b-871f-fb145f0a73d0" class="bulleted-list"><li style="list-style-type:disc">Show their avatar, name, followers count, and public repos.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8190-8cb4-f381b03e835e" class="">Use this endpoint:</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-b665-ecd03c3a4694" class=""><code>https://api.github.com/users/USERNAME</code></p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e3-aa32-ec137e2e96ed" class="">2. Requirements</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8134-acc2-c008d052d7c7" class="bulleted-list"><li style="list-style-type:disc">If user not found (404), show “User not found.”</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8140-8ba9-f7a9e8614e51" class="bulleted-list"><li style="list-style-type:disc">During API call, show “Fetching user...”</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8166-81f5-e4a4fb100ed6" class="bulleted-list"><li style="list-style-type:disc">On network error, show “Network issue. Try again.”</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8156-b5a6-ed24d8e22b7d" class="">3. Solution</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81ab-a303-fe905672a941" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all"></code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-b8b2-de7beac0034e" class="">What you practiced:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f9-b22e-c8b013269959" class="bulleted-list"><li style="list-style-type:disc">Dynamic endpoint <code>.../users/${user}</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f1-84b0-e5391a9ded3a" class="bulleted-list"><li style="list-style-type:disc">404 handling</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8161-9cf6-f9cf961caeb5" class="bulleted-list"><li style="list-style-type:disc">Different UI messages for different failure reasons</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8174-9727-fe50cf976140" class="bulleted-list"><li style="list-style-type:disc">Real public API</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819d-8778-c02d6a02a0c3"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8104-a081-c20d8604113d" class="">🧪 Assignment 3: Create (POST) a New Post</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ef-983e-f310b1d76750" class="">1. Problem</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8108-aa48-d4263786b6a2" class="">Create a simple form:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8110-a268-c0cad0016ad2" class="bulleted-list"><li style="list-style-type:disc">Title (text input)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814f-a0b2-ff925d82b8ba" class="bulleted-list"><li style="list-style-type:disc">Body (textarea)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8153-a650-d7f33e4011a6" class="bulleted-list"><li style="list-style-type:disc">Submit button</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-a8f1-f3625f7cf211" class="">When user submits, send a <strong>POST request</strong> to</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8173-897b-de8b65aa2a6e" class=""><code>https://jsonplaceholder.typicode.com/posts</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816b-b7c2-dbb267cec84e" class="">You should send <code>{ title, body, userId: 1 }</code> as JSON.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813f-a69a-c78755e0f68a" class="">Then show the response from the server on the page.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810a-9795-dd4c19688ce1" class="">2. Requirements</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812e-93f4-c13eeb01dffc" class="bulleted-list"><li style="list-style-type:disc">Use <code>method: &quot;POST&quot;</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b2-9c9d-ce8adf7f06f8" class="bulleted-list"><li style="list-style-type:disc">Send headers: <code>Content-Type: &quot;application/json&quot;</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8163-8abf-f698c32d03e7" class="bulleted-list"><li style="list-style-type:disc">Use <code>JSON.stringify(...)</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8181-a726-e04bd563323a" class="bulleted-list"><li style="list-style-type:disc">If server responds with success, show: <code>&quot;Post created with id: &lt;id&gt;&quot;</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b5-9f88-fda47b7cebec" class="bulleted-list"><li style="list-style-type:disc">If server responds with error status, show: <code>&quot;Server error: &lt;status&gt;&quot;</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8128-b043-cb01dd3e153d" class="bulleted-list"><li style="list-style-type:disc">If network fails, show: <code>&quot;Network error&quot;</code>.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8173-9d46-f071f69651e8" class="">3. Solution</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8185-ac65-f014ed1f727b" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;h2&gt;Create Post&lt;/h2&gt;
+&lt;input id=&quot;postTitle&quot; placeholder=&quot;Title&quot;&gt;&lt;br&gt;&lt;br&gt;
+&lt;textarea id=&quot;postBody&quot; placeholder=&quot;Body&quot;&gt;&lt;/textarea&gt;&lt;br&gt;&lt;br&gt;
+&lt;button id=&quot;createBtn&quot;&gt;Create Post&lt;/button&gt;
+
+&lt;div id=&quot;postStatus&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    const btnCreate = document.getElementById(&quot;createBtn&quot;);
+    const statusBox = document.getElementById(&quot;postStatus&quot;);
+
+    btnCreate.addEventListener(&quot;click&quot;, () =&gt; {
+        const titleVal = document.getElementById(&quot;postTitle&quot;).value.trim();
+        const bodyVal = document.getElementById(&quot;postBody&quot;).value.trim();
+
+        if (!titleVal || !bodyVal) {
+            statusBox.textContent = &quot;Please fill all fields.&quot;;
+            return;
+        }
+
+        statusBox.textContent = &quot;Sending post...&quot;;
+
+        fetch(&quot;https://jsonplaceholder.typicode.com/posts&quot;, {
+            method: &quot;POST&quot;,
+            headers: {
+                &quot;Content-Type&quot;: &quot;application/json&quot; // telling server we send JSON
+            },
+            body: JSON.stringify({
+                title: titleVal,
+                body: bodyVal,
+                userId: 1
+            })
+        })
+            .then(res =&gt; {
+                if (!res.ok) {
+                    throw new Error(&quot;Server error: &quot; + res.status);
+                }
+                return res.json();
+            })
+            .then(data =&gt; {
+                statusBox.textContent = `Post created with id: ${data.id}`;
+            })
+            .catch(err =&gt; {
+                console.error(err);
+                if (err.message.startsWith(&quot;Server error&quot;)) {
+                    statusBox.textContent = err.message;
+                } else {
+                    statusBox.textContent = &quot;Network error&quot;;
+                }
+            });
+    });
+&lt;/script&gt;</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8199-b66b-ccc9fbc147e6" class="">What you practiced:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8190-bdf0-ed4370727118" class="bulleted-list"><li style="list-style-type:disc">Sending data to server → POST</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819b-adc8-c2a8b52377ac" class="bulleted-list"><li style="list-style-type:disc">Request headers</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811e-a82c-ef83e6c6cef2" class="bulleted-list"><li style="list-style-type:disc">Request body</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81eb-a985-f40c74bad117" class="bulleted-list"><li style="list-style-type:disc">Handling success and failures differently</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810d-82d0-e43ff8568e0d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-9cb4-dc0183e09df9" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818d-ac6a-f0877c232e51" class="">🧪 Assignment 4: Update (PUT) an Existing Post</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c0-8211-d7a14fa4799c" class="">1. Problem</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f0-8bb8-d11613647b54" class="">You will &quot;edit&quot; a post with id <code>1</code> on JSONPlaceholder.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8125-97ae-c1b694100ba0" class="">Create inputs:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819d-9c80-e93e8e4900f0" class="bulleted-list"><li style="list-style-type:disc">New title</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b8-9856-efbf8636b4cb" class="bulleted-list"><li style="list-style-type:disc">New body</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8160-ae9a-f187bf2fa021" class="bulleted-list"><li style="list-style-type:disc">A button: “Update Post 1”</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8149-ac8b-eee6f86cc11d" class="">When clicked:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8108-9af8-e2fb41a3820f" class="bulleted-list"><li style="list-style-type:disc">Send a <strong>PUT</strong> request to<div style="display:contents" dir="auto"><p id="2df155e4-633e-81ec-956b-cea7e4e09d89" class=""><code>https://jsonplaceholder.typicode.com/posts/1</code></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e9-b2bc-ca3e92bafcf5" class="bulleted-list"><li style="list-style-type:disc">Body should be a full updated object:<div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="2df155e4-633e-8171-b08f-d0cf438abb97" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">{
+  id: 1,
+  title: &quot;NEW_TITLE&quot;,
+  body: &quot;NEW_BODY&quot;,
+  userId: 1
+}
+</code></pre></div></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a3-8e0c-c81a5b11c108" class="">Show the updated result in the UI.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818b-afa3-d79d568c2202" class="">2. Requirements</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815f-9e35-fb912c0faab5" class="bulleted-list"><li style="list-style-type:disc">Use <code>method: &quot;PUT&quot;</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8127-bcf9-fe2701a6a0e4" class="bulleted-list"><li style="list-style-type:disc">Include headers, <code>Content-Type: &quot;application/json&quot;</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8197-ab30-f9ee7041fc74" class="bulleted-list"><li style="list-style-type:disc">Handle server error codes and network errors like before.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c5-9f8c-e221cba388bf" class="">3. Solution</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e9-83e7-c1349273c3e6" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;h2&gt;Edit Post #1&lt;/h2&gt;
+&lt;input id=&quot;editTitle&quot; placeholder=&quot;New title&quot;&gt;&lt;br&gt;&lt;br&gt;
+&lt;textarea id=&quot;editBody&quot; placeholder=&quot;New body&quot;&gt;&lt;/textarea&gt;&lt;br&gt;&lt;br&gt;
+&lt;button id=&quot;updateBtn&quot;&gt;Update Post 1&lt;/button&gt;
+
+&lt;div id=&quot;updateStatus&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    const updateBtn = document.getElementById(&quot;updateBtn&quot;);
+    const updateStatus = document.getElementById(&quot;updateStatus&quot;);
+
+    updateBtn.addEventListener(&quot;click&quot;, () =&gt; {
+        const newTitle = document.getElementById(&quot;editTitle&quot;).value.trim();
+        const newBody = document.getElementById(&quot;editBody&quot;).value.trim();
+
+        if (!newTitle || !newBody) {
+            updateStatus.textContent = &quot;Please fill both fields.&quot;;
+            return;
+        }
+
+        updateStatus.textContent = &quot;Updating post...&quot;;
+
+        fetch(&quot;https://jsonplaceholder.typicode.com/posts/1&quot;, {
+            method: &quot;PUT&quot;,
+            headers: {
+                &quot;Content-Type&quot;: &quot;application/json&quot;
+            },
+            body: JSON.stringify({
+                id: 1,
+                title: newTitle,
+                body: newBody,
+                userId: 1
+            })
+        })
+            .then(res =&gt; {
+                if (!res.ok) {
+                    throw new Error(&quot;Server error: &quot; + res.status);
+                }
+                return res.json();
+            })
+            .then(data =&gt; {
+                updateStatus.textContent =
+                    `Updated!\nTitle: ${data.title}\nBody: ${data.body}`;
+            })
+            .catch(err =&gt; {
+                console.error(err);
+                if (err.message.startsWith(&quot;Server error&quot;)) {
+                    updateStatus.textContent = err.message;
+                } else {
+                    updateStatus.textContent = &quot;Network error.&quot;;
+                }
+            });
+    });
+&lt;/script&gt;</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e1-9eca-f4b5ce432d81" class="">What you practiced:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8129-86f2-ffa68163be3e" class="bulleted-list"><li style="list-style-type:disc">PUT request</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812e-8e24-c33d17865fdf" class="bulleted-list"><li style="list-style-type:disc">Full object update pattern (id, title, body, userId)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8116-9bb2-e20f47b63535" class="bulleted-list"><li style="list-style-type:disc">Reusing same error handling structure</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-aeb1-fe834791b7e6" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8100-a9a8-fa0095cd3a72" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-8838-d6d736e912a3" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8103-9b0a-ca5f4f62ecd0" class="">🧪 Assignment 5: Delete (DELETE) a Post</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-818f-82c8-cb57e21bea0e" class="">1. Problem</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f6-a778-d94332d12575" class="">Add a button: “Delete Post 1”.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fa-aa38-fb6480d8b355" class="">When clicked:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819c-92ae-d79c5c538f35" class="bulleted-list"><li style="list-style-type:disc">Send a DELETE request to<div style="display:contents" dir="auto"><p id="2df155e4-633e-8105-905a-ecb57cee7c0a" class=""><code>https://jsonplaceholder.typicode.com/posts/1</code></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b8-8aba-d5b7455f9121" class="bulleted-list"><li style="list-style-type:disc">If <code>response.ok</code> is true, show <code>&quot;Post deleted ✅&quot;</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e6-bb70-ec516d203638" class="bulleted-list"><li style="list-style-type:disc">Otherwise show <code>&quot;Delete failed (status: X)&quot;</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8106-8b3d-d93cb4677182" class="bulleted-list"><li style="list-style-type:disc">If network error, show <code>&quot;Network issue.&quot;</code>.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815f-9abb-f2da2c7e619c" class="">2. Requirements</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8129-a6a7-dedc5157f8b1" class="bulleted-list"><li style="list-style-type:disc">Use <code>method: &quot;DELETE&quot;</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ce-abb6-d051b4aba2b0" class="bulleted-list"><li style="list-style-type:disc">No body is required.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8198-a11f-f7c3b5d1dc03" class="bulleted-list"><li style="list-style-type:disc">Show result in the UI, not only console.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8101-9672-e5497c4e3bdc" class="">3. Solution</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-815d-8065-da7022a637a6" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;button id=&quot;delBtn&quot;&gt;Delete post 1&lt;/button&gt;
+    &lt;div id=&quot;statusDiv&quot;&gt;&lt;/div&gt;
+
+    &lt;script&gt;
+        let delBtn = document.getElementById(&quot;delBtn&quot;);
+        let statusDiv = document.getElementById(&quot;statusDiv&quot;);
+
+        delBtn.addEventListener(&quot;click&quot;, () =&gt; {
+            status.textContent = &quot;Deleting a post...&quot;;
+
+            fetch(&quot;https://jsonplaceholder.typicode.com/posts/1&quot;, {
+                method: &quot;DELETE&quot;
+            })
+                .then((res) =&gt; {
+                    console.log(res.ok);
+                    if (!res.ok) {
+                        statusDiv.textContent = &quot;Post deleted ✅&quot;;
+                    } else {
+                        // throw new Error(&quot;error occured&quot;)
+                        statusDiv.textContent = &quot;Delete failed (status: X)&quot;
+                    }
+                })
+                .catch((err) =&gt; {
+                    statusDiv.textContent = &quot;Network issue.&quot;
+                })
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8159-8d92-fe426c47e8ea" class="">What you practiced:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8149-9fe4-d950457f5bba" class="bulleted-list"><li style="list-style-type:disc">DELETE request</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8166-9262-fd48ff09f17e" class="bulleted-list"><li style="list-style-type:disc"><code>res.ok</code> check again</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ef-9210-c09232720ac0" class="bulleted-list"><li style="list-style-type:disc">Separating server failure vs network failure</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c2-90a3-daae2e5fd060" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-8ac7-ea99d265f677" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c6-b76a-c60c2109e4b9" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812d-8dd0-f86f66fe92fe" class="">🧪 Assignment 6: Show Loading State (Spinner / Message) Until Data Arrives</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81de-8677-fb8e47b5900f" class="">1. Problem</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-bc14-e49d174225b9" class="">You’re building a “Random Quote” widget using this API:</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810f-9004-f882a3286d84" class=""><code>https://api.quotable.io/random</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8185-baf0-ed1b2a2dff75" class="">Show:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b7-ade6-c62c97c973d3" class="bulleted-list"><li style="list-style-type:disc"><code>&quot;Loading quote...&quot;</code> while <code>fetch()</code> is in progress</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811d-a490-ea2854886c09" class="bulleted-list"><li style="list-style-type:disc">When data is received, show the quote and author</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8197-abbb-ecdd1a030023" class="bulleted-list"><li style="list-style-type:disc">If there’s any error (server or network), show <code>&quot;Could not load quote.&quot;</code></li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8134-b8ca-cbb97d387763" class="">2. Requirements</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8136-bf5a-c82d80416365" class="bulleted-list"><li style="list-style-type:disc">Use DOM updates (no console-only solutions)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c5-8640-f356650df1c4" class="bulleted-list"><li style="list-style-type:disc">Use <code>response.ok</code> check</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8195-b328-fae5878a3c16" class="">3. Solution</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8195-9342-d8e7814fc0ba" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;quoteDiv&quot;&gt;&lt;/div&gt;
+
+    &lt;script&gt;
+        let quoteDiv = document.getElementById(&quot;quoteDiv&quot;);
+
+        fetch(&quot;https://api.quotable.io/random&quot;)
+        .then((res) =&gt; {
+            if(!res.ok) {
+                throw new Error(&quot;server error&quot;);
+            }
+            return res.json();
+        })
+        .then((data) =&gt; {
+            quoteDiv.innerHTML = `&lt;p&gt;${data.content}&lt;/p&gt;&lt;br&gt;-&lt;strong&gt;${data.author}&lt;/strong&gt;`;
+        })
+        .catch((err) =&gt; {
+            quoteDiv.textContent = &quot;Could not load quote.&quot;;
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8118-a591-eeb18c146bc7" class="">What you practiced:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819e-b078-c60147d0ddc0" class="bulleted-list"><li style="list-style-type:disc">Loading state before data</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fe-917b-e676c6880641" class="bulleted-list"><li style="list-style-type:disc">Clearing loading after success</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c6-a9b7-c56d340e9ec1" class="bulleted-list"><li style="list-style-type:disc">Fallback message on error</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819a-8e95-ccdea30ba4a2" class="">This is exactly what you do in dashboards / widgets / cards.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818e-97e1-d15c56dc656f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8111-8978-ce1770d09bab" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ec-a265-cedf3979b5dc" class="">🧪 Assignment 7: &quot;No Results Found&quot; State</h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ac-b7c3-cec84c36814b" class="">1. Problem</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8144-8e61-eeea15662f63" class="">Build a mini search that filters posts locally after fetching.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8140-8ee5-c70467f1cec7" class="">Steps:</p></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-811a-92a7-eba3c9b95e1a" class="numbered-list" start="1"><li>Fetch posts from<div style="display:contents" dir="auto"><p id="2df155e4-633e-815d-9939-cc8c594ad8f5" class=""><code>https://jsonplaceholder.typicode.com/posts</code></p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8136-8d1a-fa50961472f8" class="numbered-list" start="2"><li>User types a keyword in an <code>&lt;input&gt;</code>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8183-881a-c78aed39eb0f" class="numbered-list" start="3"><li>Show only posts whose title includes that keyword.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8177-9f62-f24d7d0aa7de" class="numbered-list" start="4"><li>If no posts match, show <code>&quot;No matching results.&quot;</code></li></ol></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816e-aa03-dbc58b52427f" class="">2. Requirements</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817c-9ec6-f9b537337a5a" class="bulleted-list"><li style="list-style-type:disc">Show <code>&quot;Type something to search...&quot;</code> when input is empty</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810e-897f-c9af42088163" class="bulleted-list"><li style="list-style-type:disc">Case-insensitive match (so &quot;Test&quot; matches &quot;test&quot;)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81aa-84fa-d324c1186334" class="bulleted-list"><li style="list-style-type:disc">Only work in the front-end (no new fetch per keypress)</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8170-a87a-eacb157facc2" class="">3. Solution</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-817f-ab1d-eb58b35212e6" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all"></code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bf-8f89-feb452b03d72" class="">What you practiced:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816d-91ee-fb214bd5b1d2" class="bulleted-list"><li style="list-style-type:disc">Searching/filtering already-fetched data</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8115-8122-c230836a9997" class="bulleted-list"><li style="list-style-type:disc">Showing “no match” UI</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b0-8c92-f32e1f757284" class="bulleted-list"><li style="list-style-type:disc">UX hints (“Type something…”)</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e7-979f-ff015fac10ef" class="">This is real-world for search bars, dropdown filters, etc.</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

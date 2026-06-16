@@ -1,0 +1,744 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ReactJS Contest (After Context API)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-8157-991b-e6afbb9b5f71" class="page sans"><header><h1 class="page-title" dir="auto">ReactJS Contest (After Context API)</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cc-b993-ce5d1e31e122" class="">useRef (1)</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a1-80a5-eabefdcfbd2a" class="">useCallback and useMemo (2)</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-88a3-e08ac4b0b81c" class="">project (1)</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a9-be95-f8a1c1d638fa" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-8ee5-de4ba13ef921" class="">6 sessions - backend (CRUD)</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-a4f7-cf21c302ddfa" class="">redux - 3 sessions</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81df-abed-c300c5a28456" class="">3 weeks - frontend mock </p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81e2-90fe-f962f2e5bda1" class="">ReactJS Contest</h1></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818e-934b-d8f2f531290c" class=""><strong>Sections:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818e-82fc-f05ef60a024c" class="bulleted-list"><li style="list-style-type:disc">Section A – MCQs</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8186-869e-cba284efecd5" class="bulleted-list"><li style="list-style-type:disc">Section B – Concept / Short Answer</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810e-b609-d995ec8a9ecf" class="bulleted-list"><li style="list-style-type:disc">Section C – Coding</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b2-878c-c25271dc6648" class="bulleted-list"><li style="list-style-type:disc">Section D – Debugging / Code Reading</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8156-b25f-e8de7d4243f6"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8171-a4a4-ce1f45acbc0f" class="">Overview &amp; Suggested Timing</h2></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fc-bc4c-fd293c07ed4f" class="bulleted-list"><li style="list-style-type:disc"><strong>Section A – MCQs (10 questions)</strong> – 10 minutes</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817b-8d1e-c1c58d879488" class="bulleted-list"><li style="list-style-type:disc"><strong>Section B – Concept / Short Answer (6 questions)</strong> – 15–20 minutes</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-812c-aca7-deb991ab861c" class="bulleted-list"><li style="list-style-type:disc"><strong>Section C – Coding (3 questions)</strong> – 60 minutes</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8161-8f53-c29149f4fdeb" class="bulleted-list"><li style="list-style-type:disc"><strong>Section D – Debugging / Code Reading (3 questions)</strong> – 20–25 minutes</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8143-a8b8-e77ebf1682af"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-817d-8f7a-d697a826e121" class="">Section A – MCQs (10 questions)</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817e-a9ae-e63e5e6ed7d3" class=""><strong>Q1.</strong> In React, which option best describes a component?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81eb-92f6-ccd8a9e8f567" class="">a) A function or class that returns JSX and can be reused</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-8129-e4c0e1823512" class="">b) A JavaScript object that stores only state</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8135-ba0a-f7f753dd6dc4" class="">c) A CSS file used for styling UI</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8102-8580-f97f4ceb8162" class="">d) A JSON structure sent from the server</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818b-9c62-ce33b7cd6f39" class=""><strong>Q2.</strong> What is the main reason to use keys when rendering lists in React?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8130-928c-c79546e4216e" class="">a) To style list items</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8189-ba46-cf35fc29e266" class="">b) To tell React which items changed, added, or removed during reconciliation</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811d-bcab-c3abe76e17f4" class="">c) To prevent re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814f-8bf7-d5ac68a9d651" class="">d) To improve bundle size</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b0-8b3f-f02c31d8d001" class=""><strong>Q3.</strong> What happens if you call <code>useState</code> inside an <code>if</code> statement?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8161-b7ed-f14b68a6604a" class="">a) It works as long as the condition is true</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8174-9a58-f6f3cd0856a6" class="">b) It throws a runtime error immediately</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8166-a38b-f4739a62596e" class="">c) It breaks the Rules of Hooks and can cause unpredictable bugs</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cc-8bd7-e3ff5f2c1fa2" class="">d) It improves performance of that component</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8177-a3c4-cfff65491bee" class=""><strong>Q4.</strong> Which dependency array makes a <code>useEffect</code> run only on the first render?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819c-abfb-e94bbb18801d" class="">a) No dependency array</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8141-8892-cd82093d1538" class="">b) <code>[count]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8186-b772-c967fe27cc04" class="">c) <code>[]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ef-91de-f569929e94a3" class="">d) <code>[props, state]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c9-9105-c47f4b211a69" class=""><strong>Q5.</strong> Which is NOT a valid side effect for <code>useEffect</code>?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-af9f-f973f61263ae" class="">a) Fetching data from an API</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813e-8db6-ff9c59a5fe32" class="">b) Setting up a subscription</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8195-9257-f30313aaad89" class="">c) Directly mutating the DOM frequently instead of using React</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818e-999d-d7844108752c" class="">d) Updating document title</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8159-88bf-dd2f2712cc53" class=""><strong>Q6.</strong> Which React Router v6 hook is used to navigate programmatically?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812b-a32b-eb14501fe881" class="">a) <code>Link</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-b953-fc6bec128f3c" class="">b) <code>Route</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8116-b2a3-f304e8dd8fa5" class="">c) <code>useNavigate</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8107-8deb-c31ba7937e0c" class="">d) <code>useHistory</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817f-85eb-f045de8afd1d" class=""><strong>Q7.</strong> Context API is mainly used to:</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8108-b382-fbe489ee76b0" class="">a) Replace all state with global variables</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8183-a8ab-c23a39f089f1" class="">b) Avoid prop drilling by sharing data across component trees</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c2-9e30-c484014673f7" class="">c) Manage routing between pages</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e7-9902-e7d7bf221e61" class="">d) Fetch data from APIs</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8197-8254-c0442e5da805" class=""><strong>Q8.</strong> When rendering a list of items from an API, what is the best choice for a key?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-bdc0-c31a38724827" class="">a) The array index</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fb-a05a-e23d2dd43eb7" class="">b) A random number generated each render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8155-a400-c85bbc6e2793" class="">c) A stable unique id from the data (like <code>item.id</code>)</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815c-9e7b-caf4fb11911a" class="">d) The item’s label converted to uppercase</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8197-bff2-ec18e20e029d" class=""><strong>Q9.</strong> What happens if you update React state in every render without conditions inside a <code>useEffect</code> that has no dependency array?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bd-ae17-e8c67d88d378" class="">a) The component never re-renders</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-b91b-f801067e2674" class="">b) The component enters an infinite render loop</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c1-b312-f360288d2d7a" class="">c) State will be updated only once</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8136-aa1f-ed24af18dad9" class="">d) React skips the update</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c1-87cd-de620d15e092" class=""><strong>Q10.</strong> What does <code>useContext</code> hook return?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8109-b01c-d04cac1c5d12" class="">a) A reducer and dispatch function</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-af43-d8776faceb37" class="">b) The Provider component of a context</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8169-a87b-f6fb3023a75e" class="">c) The current value of the given context</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d2-a4b9-f9363e6d955d" class="">d) A list of all contexts in the app</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8172-97e9-f2590c3fd7b3"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8169-9bc5-ff9044aa5f69" class="">Section B – Concept / Short Answer (6 questions)</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8160-8a79-fb00297e0ab8" class=""><strong>Q1.</strong> Explain “conditional rendering” in React with one real-world example (no code needed).</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-b9e1-cb483dcd3b1f" class=""><strong>Q2.</strong> Why is it recommended to avoid putting everything in a single “God component”? Mention at least two drawbacks.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8185-905c-c884be25d6cc" class=""><strong>Q3.</strong> Describe the difference between local component state and context-based state. When would you prefer each?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8138-8991-f97d59a3a925" class=""><strong>Q4.</strong> In data fetching with <code>useEffect</code>, why is it useful to have separate “loading” and “error” state variables?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8111-b4ac-deb1b29c12e1" class=""><strong>Q5.</strong> What problem does React Router solve in a single-page application?</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d1-902b-dcdb81586216" class=""><strong>Q6.</strong> Name two situations where Context API is a bad choice and an alternative state management approach might be better (concept-level, no library names required).</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8165-937f-c4dc1be80581"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c6-ae28-c207289ebb5f" class="">Section C – Coding Round (3 questions)</h2></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-814e-8402-fc7ee61d3b58" class="">Coding Q1 – Smart Recipe Filter</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8170-87fb-f2500d4cb47f" class=""><strong>Concepts:</strong> Components, props, list rendering, conditional rendering, <code>useState</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-ad44-eb0e9788cf25" class="">Build a <code>RecipeList</code> feature with the following behavior:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8136-a85b-d27f539b2e4f" class="bulleted-list"><li style="list-style-type:disc">You have a static list of recipe objects:<div style="display:contents" dir="auto"><p id="2df155e4-633e-814f-9693-ee8f0c5eb681" class=""><code>{ id, name, difficulty: &quot;easy&quot; | &quot;medium&quot; | &quot;hard&quot;, isVegetarian: boolean }</code></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8196-803a-cad0956cf8a4" class="bulleted-list"><li style="list-style-type:disc">The UI should include:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-819e-8a0a-e7b4a2b21e55" class="bulleted-list"><li style="list-style-type:circle">A text input to filter recipes by name (case-insensitive).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b5-b959-e1582a0475ce" class="bulleted-list"><li style="list-style-type:circle">Two toggles/checkboxes:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81dc-83a3-cce7820acaba" class="bulleted-list"><li style="list-style-type:square">“Only vegetarian”</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815d-a2a3-d86f5cd02401" class="bulleted-list"><li style="list-style-type:square">“Difficulty: hard only”</li></ul></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8179-8fb5-d069b8adea2a" class="bulleted-list"><li style="list-style-type:disc">Render the filtered list as cards.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8155-972f-c471d67d5eff" class="bulleted-list"><li style="list-style-type:disc">If no recipe matches, show: <strong>“No recipes found. Try relaxing the filters.”</strong></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8118-90b0-e5c23b9bb1e8" class=""><strong>Requirements:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8134-867f-d965f71a6236" class="bulleted-list"><li style="list-style-type:disc">Use at least two separate child components (e.g., <code>FilterControls</code> and <code>RecipeListView</code>).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81fa-b10e-e29c58e91cfe" class="bulleted-list"><li style="list-style-type:disc">Use <code>useState</code> to manage filters.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8160-a6ae-d4c3b685d9b8" class="bulleted-list"><li style="list-style-type:disc">Use conditional rendering for the empty state message.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f3-8a63-daefa29a0268"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81fd-947f-edb36be705e5" class="">Coding Q2 – Auto-Save Note with Status Indicator</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8117-ba04-d996b5e6d472" class=""><strong>Concepts:</strong> <code>useState</code>, <code>useEffect</code>, side effects, cleanup</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811b-927a-cefcd0098529" class="">Create a <code>NoteEditor</code> component that simulates auto-save:</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8191-b563-f16cd0e821cd" class=""><strong>Behavior:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8169-a03c-c6f29e2158c1" class="bulleted-list"><li style="list-style-type:disc">A multiline textarea for the note content.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f2-8749-d15d74850a2f" class="bulleted-list"><li style="list-style-type:disc">Whenever the user stops typing for 1.5 seconds, the note is “auto-saved”.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8198-8b10-d262cdd4bdee" class="bulleted-list"><li style="list-style-type:disc">Status text in a corner:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-8104-bb26-de0f36375842" class="bulleted-list"><li style="list-style-type:circle">“Typing…” while the user is actively typing.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8119-9bf6-ff347dbf90f5" class="bulleted-list"><li style="list-style-type:circle">“Saving…” while a fake save request is in progress.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b9-be9b-c3dbddc9e779" class="bulleted-list"><li style="list-style-type:circle">“All changes saved” after the fake request completes.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8169-8eca-d0a20df7e4ee" class=""><strong>Implementation hints:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8151-bfdc-ee96cc099f82" class="bulleted-list"><li style="list-style-type:disc">Simulate save with <code>setTimeout</code> inside <code>useEffect</code> (e.g., 1 second “network delay”).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813c-b8a6-c9916136d60d" class="bulleted-list"><li style="list-style-type:disc">Do not call a real API.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-bef7-fbe028955dc6" class=""><strong>Requirements:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819c-a4e9-c07cdfacd7fb" class="bulleted-list"><li style="list-style-type:disc">Use <code>useState</code> to track <code>content</code> and <code>status</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c6-a9bf-e98b413a1bd4" class="bulleted-list"><li style="list-style-type:disc">Use <code>useEffect</code> with a cleanup function to handle the debounce timer correctly.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ab-95a8-c22d262351bf" class="bulleted-list"><li style="list-style-type:disc">Avoid infinite re-render loops by choosing the dependency array carefully.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ca-a7b8-e24b9b047faa"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a5-9734-e3366bde6da5" class="">Coding Q3 – Mini Dashboard with Context + Routing</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8182-8aff-da0ad674869c" class=""><strong>Concepts:</strong> Context API, React Router, <code>useEffect</code>, data fetching</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8166-a2b2-fe0b1f5031be" class="">Build a mini dashboard with two pages using React Router and Context:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8196-87a2-ceef9fcc141b" class="bulleted-list"><li style="list-style-type:disc">Routes:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-814d-a544-c4882470e829" class="bulleted-list"><li style="list-style-type:circle"><code>/</code> – Overview page</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8122-864b-c297b31eaa94" class="bulleted-list"><li style="list-style-type:circle"><code>/settings</code> – Settings page</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8199-80c5-cb058ada6a56" class="bulleted-list"><li style="list-style-type:disc">Create <code>UserPreferencesContext</code> with:<div style="display:contents" dir="auto"><p id="2df155e4-633e-81d8-884d-e130bab111e1" class=""><code>{ theme: &quot;light&quot; | &quot;dark&quot;, username: string }</code></p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8172-845e-c1d4163303d7" class="bulleted-list"><li style="list-style-type:disc">Place the Context Provider at the root (wrapping the router).</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81da-a4ba-d1380df23b65" class=""><strong>Overview page (</strong><code><strong>/</strong></code><strong>):</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8163-a0e7-c6f3c9c63606" class="bulleted-list"><li style="list-style-type:disc">Show greeting using <code>username</code> from context.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c4-9609-f490b2ecc303" class="bulleted-list"><li style="list-style-type:disc">Show current <code>theme</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8183-bff3-ec68ed1c6197" class="bulleted-list"><li style="list-style-type:disc">Button: “Toggle Theme” – toggles between <code>&quot;light&quot;</code> and <code>&quot;dark&quot;</code> in context.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ea-8398-f9ebd58677b9" class="bulleted-list"><li style="list-style-type:disc">On mount, simulate data fetching with <code>useEffect</code> and <code>setTimeout</code> to load a list of notifications.<div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f9-8956-fa495bf075a7" class="bulleted-list"><li style="list-style-type:circle">While loading: show “Loading…”.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819d-bbac-c02b70e8eaaa" class="bulleted-list"><li style="list-style-type:circle">After loading: show the list or “No notifications.”</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f7-ad0d-c480f478e978" class=""><strong>Settings page (</strong><code><strong>/settings</strong></code><strong>):</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8164-a9e8-d5110aada643" class="bulleted-list"><li style="list-style-type:disc">Input to change <code>username</code> (updates context).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8112-9dc3-e579921cf2ff" class="bulleted-list"><li style="list-style-type:disc">Show preview text: <code>Preview as {username} · Theme: {theme}</code>.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e2-b7f5-f41b988b6b8c" class=""><strong>Requirements:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-817e-b184-dac8219ef993" class="bulleted-list"><li style="list-style-type:disc">Use React Router v6 style (e.g., <code>BrowserRouter</code>, <code>Routes</code>, <code>Route</code>, <code>Link</code> / <code>useNavigate</code>).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81d1-8d11-e2d77763b7e0" class="bulleted-list"><li style="list-style-type:disc">Use Context API with <code>useContext</code> to read and update preferences.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f2-8733-c481f17ae633" class="bulleted-list"><li style="list-style-type:disc">Use at least one <code>useEffect</code> for simulated data fetching.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812e-8f14-e5232d1f0fbd"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81d5-8661-edb1c0cd0182" class="">Section D – Debugging / Code Reading (3 questions)</h2></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ed-a151-d7f4e594c8d6" class="">Debug Q1 – Infinite loop with useEffect</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b1-a89c-f8ec111cfe75" class=""><code>jsxfunction Profile({ userId }) {<br/>  const [user, setUser] = useState(null);<br/><br/>  useEffect(() =&gt; {<br/>    async function loadUser() {<br/>      const res = await fetch(`/api/users/${userId}`);<br/>      const data = await res.json();<br/>      setUser(data);<br/>    }<br/>    loadUser();<br/>  }, [user]);<br/><br/>  return &lt;div&gt;{user ? user.name : &quot;Loading...&quot;}&lt;/div&gt;;<br/>}</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8140-9d07-de67dace3d7c" class=""><strong>Questions:</strong></p></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-816d-9be4-e8c2f7fb831a" class="numbered-list" start="1"><li>What is wrong in this code, and what bug will it cause?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81a9-82ea-f063311bbbcd" class="numbered-list" start="2"><li>How do you fix it while still re-fetching when <code>userId</code> changes?</li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8109-80b0-d2dfdd8b621f" class=""><em>(Hint for expected reasoning: </em><em><code>user</code></em><em> in the dependency array causes refetch after every state update.)</em></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813c-b151-c338dd56282f"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81df-88c7-d353dec8c308" class="">Debug Q2 – Broken list rendering keys</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813b-b9e8-c24d5629362d" class=""><code>jsxfunction TodoList({ items }) {<br/>  return (<br/>    &lt;ul&gt;<br/>      {items.map((item, index) =&gt; (<br/>        &lt;li key={Math.random()}&gt;<br/>          &lt;span&gt;{item.text}&lt;/span&gt;<br/>        &lt;/li&gt;<br/>      ))}<br/>    &lt;/ul&gt;<br/>  );<br/>}</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bf-95af-f934b3faaae9" class=""><strong>Questions:</strong></p></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8129-b5b7-c04f8c92c2de" class="numbered-list" start="1"><li>Why is using <code>Math.random()</code> as a key a bad idea here?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81ce-bd56-ca3cd43610b4" class="numbered-list" start="2"><li>Suggest a better key strategy if each item has a stable <code>id</code>.</li></ol></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812f-b723-c20a0af43a7f"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8120-8adc-f4c7441df64c" class="">Debug Q3 – Wrong Context usage</h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8155-a7c0-e8431d38adef" class=""><code>jsxconst ThemeContext = createContext(&quot;light&quot;);<br/><br/>function App() {<br/>  return (<br/>    &lt;div&gt;<br/>      &lt;Toolbar /&gt;<br/>      &lt;ThemeContext.Provider value=&quot;dark&quot;&gt;<br/>        &lt;Footer /&gt;<br/>      &lt;/ThemeContext.Provider&gt;<br/>    &lt;/div&gt;<br/>  );<br/>}<br/><br/>function Toolbar() {<br/>  const theme = useContext(ThemeContext);<br/>  return &lt;button className={theme}&gt;Click me&lt;/button&gt;;<br/>}</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812c-bb2d-e45424be3694" class=""><strong>Questions:</strong></p></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8117-bff6-ee553575655d" class="numbered-list" start="1"><li>What theme value will <code>Toolbar</code> receive and why?</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8109-a485-f631cad276bf" class="numbered-list" start="2"><li>How would you change the component tree so that <code>Toolbar</code> also uses the value <code>&quot;dark&quot;</code> from the Provider?</li></ol></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,758 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Routing Assignments</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-8109-bea7-cc9d67e3ac9e" class="page sans"><header><h1 class="page-title" dir="auto">Routing Assignments</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-815d-9ba4-e71662e3102d" class="">🟦 <strong>Assignment 1 — Basic React Router Setup (3 Pages)</strong></h1></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-814b-a496-e81d4cd4f9f8" class="">🧩 <strong>TASK</strong></h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81df-bfc6-f19680cbde40" class="numbered-list" start="1"><li>Create 3 pages:<div style="display:contents" dir="auto"><ul id="2df155e4-633e-815a-b76a-f3b9eda273f1" class="bulleted-list"><li style="list-style-type:disc"><strong>Home</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-813f-a32f-d356d3b00424" class="bulleted-list"><li style="list-style-type:disc"><strong>About</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8175-874a-ce7abcf5869d" class="bulleted-list"><li style="list-style-type:disc"><strong>Contact</strong></li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-813c-a787-f191a8c137db" class="numbered-list" start="2"><li>Setup React Router in your project.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-811a-aef5-c39430b43fcd" class="numbered-list" start="3"><li>Visiting each route URL should load the correct page.</li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8158-916d-fc16740e2c39" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8149-b79d-de30aa8e24bc" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8126-895f-d8d45e3b8783" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8139-87fe-ce184ccb78ee" class="">🟦 <strong>Assignment 2 — Add Navbar Using Links</strong></h1></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c6-b5df-df5249c9a560" class="">🧩 <strong>TASK</strong></h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81e7-ad58-c702da17679d" class="numbered-list" start="1"><li>Create a <strong>Navbar</strong> component.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8159-add3-f594e2985fed" class="numbered-list" start="2"><li>Add 3 links: Home, About, Contact</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8103-848c-ebd0b402484a" class="numbered-list" start="3"><li>Clicking the links should switch pages without page refresh.</li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811b-8395-d4df7e7cbfd4" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819c-a6f4-f91713e89c1e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ab-938f-c288c1b37c5f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d7-8e9a-dc60e6dc6d54" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818c-bca4-fb0f4d8a3aef" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812c-bd66-f21c9f6cf692" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8172-88e9-ea4f9792f4f8" class="">✅ <strong>Assignment 3 — Dynamic Routing (Movies List)</strong></h1></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81e5-b741-c7b97d43c86a" class="">🧩 <strong>TASK</strong></h2></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81d4-9444-ffdbb54485cb" class="numbered-list" start="1"><li>Create a <strong>Movies</strong> page showing a list of movie names.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8110-ab7b-da9ee1449c56" class="numbered-list" start="2"><li>Each movie should be a link like:<div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-8639-fc06095ae3cf" class=""><code>/movies/tt101</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810e-b92d-cb00ac9ea660" class=""><code>/movies/tt102</code></p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81ab-912a-c6f965cb36aa" class="numbered-list" start="3"><li>Create a <code>MovieDetails</code> page that reads the dynamic ID using <strong>useParams()</strong>.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-816c-8a7c-d56761cd00b8" class="numbered-list" start="4"><li>Display the movie name &amp; year from a dataset.</li></ol></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8161-ad96-f22897fd0e9a" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-8423-cb6d6ef0b5bb" class="">const movies = [<br/>  { id: &quot;tt101&quot;, title: &quot;Inception&quot;, year: 2010 },<br/>  { id: &quot;tt102&quot;, title: &quot;Avatar&quot;, year: 2009 },<br/>  { id: &quot;tt103&quot;, title: &quot;Interstellar&quot;, year: 2014 },<br/>];</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c2-b26c-e9e48aa0898b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813d-a289-d311ccb4d616" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b8-926a-fc9b159efe25" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811b-b4fa-dea8588e483a" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-82c9-e8f8ba3d9f97" class="">
+</p></div><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-81fa-8684-c31676eee414" class="">✅ <strong>20 MCQs: React Router</strong></h1></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81cc-b237-c3ee36190e6b"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81da-b2dc-d04aab820305" class=""><strong>1. Which package is required for React Router?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816f-9c4f-f46f1c4c369e" class="">A. react-navigation</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ac-b7cd-d834a9eb7c5b" class="">B. react-router-core</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811a-82a6-d425da746614" class="">C. react-router-dom</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b3-8caa-e6e8b0e3d63c" class="">D. router-react</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816a-8106-d89214580f39"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8121-98c6-cfa3389ae613" class=""><strong>2. Which component must wrap the entire App to enable routing?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ea-93db-cc9508653d15" class="">A. <code>&lt;RouterProvider&gt;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8175-ad2b-d19c4c5f8c37" class="">B. <code>&lt;AppRouter&gt;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819d-813d-dac117ef873d" class="">C. <code>&lt;BrowserRouter&gt;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8131-9578-d927348f5953" class="">D. <code>&lt;MainRouter&gt;</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819b-9bc5-e2c9b1731b44"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81e2-b422-d424b50da9b8" class=""><strong>3. Which component is used to define routes?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8145-bec4-e1e09e1d3b04" class="">A. <code>&lt;Path&gt;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812f-b5e1-fb7227fa66fd" class="">B. <code>&lt;RouteList&gt;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81af-b30e-cc9d7a109d20" class="">C. <code>&lt;Routing&gt;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e0-a218-f4a7b3cbdd95" class="">D. <code>&lt;Routes&gt;</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8155-81af-cf79e8de0a22"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a7-b191-e7cc9034fe53" class=""><strong>4. What does the </strong><code><strong>element</strong></code><strong> prop inside </strong><code><strong>&lt;Route&gt;</strong></code><strong> represent?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-969c-e2989f5fe3a6" class="">A. Styles</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8103-b6d7-d2727fb7e9b6" class="">B. Component to render</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8167-8b8c-c991337c00bb" class="">C. URL</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-811b-9e81-db6f12851542" class="">D. Page title</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816f-b290-fbac431e57be"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8163-a9e1-eda980e0391c" class=""><strong>5. Which of the following is correct syntax for a route?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-8ac9-faa126e1f4e0" class="">A. <code>&lt;Route element=&quot;/&quot; path={&lt;Home/&gt;} /&gt;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cf-8c54-eaa55fb99b49" class="">B. <code>&lt;Route url=&quot;/&quot; page={&lt;Home/&gt;} /&gt;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f8-ae92-ce288e692972" class="">C. <code>&lt;Route path=&quot;/&quot; element={&lt;Home /&gt;} /&gt;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-adca-d1727d00d925" class="">D. <code>&lt;Route route=&quot;/&quot; load={Home} /&gt;</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8176-b52d-d0bf35d7c4cf"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8137-a7ad-f1e840f2cc17" class=""><strong>6. What is the purpose of </strong><code><strong>&lt;Link&gt;</strong></code><strong>?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8191-9a61-dbbba71a9827" class="">A. Makes API requests</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8172-9d56-f3d8af344e37" class="">B. Navigates without page refresh</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819d-bb93-daeeb2de572f" class="">C. Creates a new page</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f7-b73b-d040db74f453" class="">D. Refreshes browser</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a2-a4da-f9959a6a9d30"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8184-87f2-eed0085659df" class=""><strong>7. What happens if you use </strong><code><strong>&lt;a href=&quot;/about&quot;&gt;</strong></code><strong> instead of </strong><code><strong>&lt;Link to=&quot;/about&quot;&gt;</strong></code><strong>?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b3-8f77-c687b5d31778" class="">A. Faster navigation</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8134-913c-d749bcb6566c" class="">B. No navigation happens</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cb-bf6f-d91a57111910" class="">C. Page refresh happens</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-bbe4-c1fad08c9e04" class="">D. App crashes</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8155-87e7-d444bf2439a6"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81f7-ab06-ff102f004067" class=""><strong>8. What is a dynamic route?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-852c-c3a8e211f97f" class="">A. A route that always redirects</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ce-bb4e-e69846c98c38" class="">B. A route with a changing value</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8177-8beb-e2c6d4b3c1f8" class="">C. A route inside a loop</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8168-982c-ca963a330a21" class="">D. A route defined twice</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8150-8ad8-fadeffb4f1ca"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c2-8848-ecbbecf8f47b" class=""><strong>9. Which route syntax represents a dynamic parameter?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81dd-b599-cff5908cea04" class="">A. <code>/product/id</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f0-ac31-dbb19e269dcb" class="">B. <code>/product/:id</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ac-884f-fb0381f73192" class="">C. <code>/product?{id}</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-8944-ec11d7bf9ea3" class="">D. <code>/product-${id}</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811d-bca1-ec991ce92002"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8107-a9dc-d81adbc1c9bd" class=""><strong>10. Which hook is used to read a dynamic route parameter?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81de-9f60-dd9e07d40a33" class="">A. useRoute()</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c3-9810-d6710d4a4453" class="">B. useParams()</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810b-a9e1-d1715229cb2e" class="">C. usePath()</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8155-95c0-ca30f4576c2d" class="">D. useURL()</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8115-b110-dacb8d23eecf"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ad-8dfb-cee3201900c6" class=""><strong>11. If the route is </strong><code><strong>/users/:userid</strong></code><strong>, how do you access the param?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8162-bc36-fad2a4e10456" class="">A. <code>useParams().id</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8148-93e9-f5cd525bb2fc" class="">B. <code>useParams()[0]</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818e-8446-df75b2e926e7" class="">C. <code>useParams().userid</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8136-8db1-ef5492385791" class="">D. <code>useParams().param</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8154-983a-d34fd527025d"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8104-888b-f16feb9b813a" class=""><strong>12. What does </strong><code><strong>useParams()</strong></code><strong> parameters always return?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819b-ab64-f96c8a542d38" class="">A. Boolean</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-a249-d60c3fc5067c" class="">B. Number</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8179-aba4-efc7652ae96d" class="">C. String values</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8198-a97f-d5ee8514d287" class="">D. JSX</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8112-83a3-c745ddf25849"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81dc-828d-f49940c625a2" class=""><strong>13. Which hook is used for programmatic navigation?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81db-890b-c560af41ad32" class="">A. useNavigate()</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8132-a622-c8f8c5dacefe" class="">B. useRouter()</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8132-ba59-e66eb40d5431" class="">C. useRouteChange()</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fd-92c0-ebb5d1dcf583" class="">D. useSwitch()</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819f-99e9-fdfd1c0ec5d3"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-815b-9477-d7acd2b89b25" class=""><strong>14. How do you navigate to </strong><code><strong>/dashboard</strong></code><strong> using useNavigate?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-97ac-c574e5a4644e" class="">A. <code>nav.push(&quot;/dashboard&quot;)</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814c-adbd-f1be3bbf6fc5" class="">B. <code>navigate.go(&quot;/dashboard&quot;)</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-8f32-ccf0ca9f086a" class="">C. <code>navigate(&quot;/dashboard&quot;)</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f7-9fdb-fa7f60b3c635" class="">D. <code>goto(&quot;/dashboard&quot;)</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81eb-9447-df79a67926d6"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81f8-b13f-f698e069293f" class=""><strong>15. What does </strong><code><strong>navigate(-1)</strong></code><strong> do?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818a-a84b-e93434d9c4be" class="">A. Goes forward</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8173-acf8-da829e3e5100" class="">B. Refreshes page</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b4-a9c7-e77fb95e4e2c" class="">C. Goes back one step</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815e-a3fa-fd1802370295" class="">D. Opens login page</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f2-9b72-cfa368f2c93e"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8164-bf42-eda822278545" class=""><strong>16. Which component is used to render 404 pages?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e6-92f6-f63414e781a3" class="">A. <code>&lt;NoPage /&gt;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814d-90d8-d52c0f28d571" class="">B. <code>&lt;Error&gt;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8191-9b03-d93214712e4b" class="">C. <code>&lt;Route path=&quot;404&quot;&gt;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8123-a1cd-ed2181de3cf9" class="">D. <code>&lt;Route path=&quot;*&quot; element={&lt;NotFound /&gt;} /&gt;</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8196-949f-d9e0b314cd0e"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8155-930e-d53aacea2446" class=""><strong>17. Which of the following is TRUE about </strong><code><strong>&lt;NavLink&gt;</strong></code><strong>?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819f-b14c-c489e4673f31" class="">A. It refreshes the page</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8112-bf39-d3859b0729da" class="">B. It auto-applies an active class</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c0-83e2-c0669841a6b8" class="">C. It cannot be styled</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e9-975a-def376df649d" class="">D. It is only used for dynamic routes</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b8-a35d-f92e5237c851"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8148-af30-dd059eaace15" class=""><strong>18. What is passed to the callback of the </strong><code><strong>style</strong></code><strong> prop in </strong><code><strong>&lt;NavLink&gt;</strong></code><strong>?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8168-9f27-fbf6ec2e9777" class="">A. <code>{isActive}</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8157-add4-f42c3c661be5" class="">B. <code>{active}</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8140-8b3f-dc681bcb30f4" class="">C. <code>{status}</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8100-ab3e-efc16dbfd758" class="">D. <code>{path}</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810f-a45c-cb6daf8208ff"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c2-984d-de29a6cb8bc7" class=""><strong>19. What is the common mistake when using useParams?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815c-850c-dc95bcf0cddc" class="">A. Forgetting to import React</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8128-879f-de01a340f257" class="">B. Forgetting to match parameter names</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-bfbe-cd5cfab6f5fe" class="">C. Using it inside CSS</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ea-bab4-f4acc8225f35" class="">D. Using it before installing Tailwind</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810d-a114-edee197369a0"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8109-b430-f50182fdd335" class=""><strong>20. What does this route match?</strong></h2></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8151-92a4-dc8d063eedd9" class=""><code>&lt;Route path=&quot;/post/:id&quot; element={&lt;Post /&gt;} /&gt;</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81cd-872c-ceb3b99cf6ea" class="">A. Only <code>/post</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ea-b9ba-c8d991ffede4" class="">B. <code>/post/id/anything</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b6-ac04-cb0e3c8923b0" class="">C. <code>/post/123</code></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-812a-bf3e-d18437b77c02" class="">D. Every route starting with /post</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

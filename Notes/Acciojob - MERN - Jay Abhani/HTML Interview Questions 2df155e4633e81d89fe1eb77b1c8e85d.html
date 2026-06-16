@@ -1,0 +1,776 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>HTML Interview Questions</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-81d8-9fe1-eb77b1c8e85d" class="page sans"><header><h1 class="page-title" dir="auto">HTML Interview Questions</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81e5-994c-c1bf6762f431" class="">✅ <strong>Basic HTML Interview Questions &amp; Answers</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81db-9239-fa92b7c4ef23" class="">1. <strong>What is HTML?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d6-90a4-f09cf8604b0e" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a8-b5ad-f27d1da9f412" class="">HTML (HyperText Markup Language) is the standard language used to create and structure content on the web. It uses tags to define elements like headings, paragraphs, links, images, etc.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8116-9802-c3196d09b8e2"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8187-a288-c7eee200c56a" class="">2. <strong>What are HTML tags?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8100-a1a9-e32de09cd4d5" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8178-af6d-d237db5a9c08" class="">HTML tags are the building blocks of HTML. They define how elements should be displayed in the browser. Most tags come in pairs like <code>&lt;p&gt;...&lt;/p&gt;</code> — an opening tag and a closing tag.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8174-89a2-f04d6094234b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f5-9f7b-fe4a361befff" class="">3. <strong>What is the difference between HTML and HTML5?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8184-9c23-ca684b43ee43" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8187-b9b8-d54bd4483d4c" class="bulleted-list"><li style="list-style-type:disc">HTML is the older version, while HTML5 is the latest standard.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819a-a397-d49c61aec504" class="bulleted-list"><li style="list-style-type:disc">HTML5 supports multimedia (audio/video) and new elements like <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;article&gt;</code>, etc.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810d-a790-cc4235cf0ab1" class="bulleted-list"><li style="list-style-type:disc">HTML5 has better support for mobile and responsive design.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815c-b04a-cec6caea3e7b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812c-b918-ce2e4baa562f" class="">4. <strong>What is the structure of a basic HTML document?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fa-8df6-cda8bc6be8ab" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2df155e4-633e-81e6-a848-c7381116a210" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello World&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812f-beb4-eb505937dc51"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8123-938f-c186ae749fe0" class="">5. <strong>What is the purpose of the </strong><code><strong>&lt;!DOCTYPE&gt;</strong></code><strong> declaration?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813c-94e9-cfdbe805a7be" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8121-a0c7-cb9756a4890e" class="">It tells the browser which version of HTML is being used so that it renders the page correctly.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8122-b4ce-ed38c4fc6ff1"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e6-abf4-da0551d711a3" class="">6. <strong>What are semantic HTML elements?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-813c-b05a-cae64b8f206c" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8181-8f57-fe55db293ce0" class="">Semantic elements clearly describe their meaning. Examples:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-810d-9351-fa06d84a1685" class="bulleted-list"><li style="list-style-type:disc"><code>&lt;header&gt;</code>: Header of a section/page</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c1-a704-d55e900a9dbf" class="bulleted-list"><li style="list-style-type:disc"><code>&lt;nav&gt;</code>: Navigation links</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8144-969f-e762e8f4c3dd" class="bulleted-list"><li style="list-style-type:disc"><code>&lt;article&gt;</code>: Independent content</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8106-a63c-d5d1a63c10bb" class="bulleted-list"><li style="list-style-type:disc"><code>&lt;footer&gt;</code>: Footer of a section/page</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8121-ac20-fc77a0810fe5"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810e-8954-d1f2f69997d6" class="">7. <strong>What is the difference between </strong><code><strong>&lt;div&gt;</strong></code><strong> and </strong><code><strong>&lt;span&gt;</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a4-b1ad-f662f9442eb6" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c0-9087-cbc8c060bea5" class="bulleted-list"><li style="list-style-type:disc"><code>&lt;div&gt;</code> is a block-level element (takes full width).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f3-95f4-dc1de15cdc25" class="bulleted-list"><li style="list-style-type:disc"><code>&lt;span&gt;</code> is an inline element (takes only as much width as needed).</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ac-863e-c23a3829620f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c7-acdc-df450d480ed1" class="">8. <strong>How do you insert an image in HTML?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e6-aca7-fd7d11455c69" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8103-a90f-cf4e7e8cdc94" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;img src=&quot;image.jpg&quot; alt=&quot;Description of image&quot; /&gt;
+</code></pre></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81cf-89c0-cd259c34953d" class="bulleted-list"><li style="list-style-type:disc"><code>src</code> specifies the image path.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8143-92f4-f9967443e9d8" class="bulleted-list"><li style="list-style-type:disc"><code>alt</code> provides alternate text if the image can&#x27;t be loaded.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8181-afde-eec25765c517"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8110-ae52-d4e69ab317cf" class="">9. <strong>How do you create a hyperlink in HTML?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e0-bacf-e7d5af54a949" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8123-b908-e5389d41454d" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;a href=&quot;https://example.com&quot;&gt;Visit Example&lt;/a&gt;
+</code></pre></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81bb-bf13-d850ad190dbf" class="bulleted-list"><li style="list-style-type:disc"><code>href</code> specifies the destination URL.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819f-903e-f16444804caf"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ae-b21f-decc93a00b69" class="">10. <strong>What is the use of the </strong><code><strong>&lt;meta&gt;</strong></code><strong> tag?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817d-bf64-f9645504f6ee" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8156-b993-dbd6971e9893" class="">It provides metadata about the HTML document like character encoding, author, viewport settings, etc.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819f-827e-d76214483e63" class="">Example:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-816a-98e7-c54e7da3a85a" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;meta charset=&quot;UTF-8&quot; /&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818f-a40c-cd86484b2be5"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c7-a16a-ddd7e7b94c4f" class="">🧩 <strong>Intermediate HTML Questions for Freshers</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815e-9b8c-f1f784be20d1" class="">11. <strong>What is the difference between </strong><code><strong>id</strong></code><strong> and </strong><code><strong>class</strong></code><strong>?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8131-af37-cfaaffb77200" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b1-a841-c8caef4347ee" class="bulleted-list"><li style="list-style-type:disc"><code>id</code>: Unique identifier (used once per page).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c9-95c6-ee2a5963311e" class="bulleted-list"><li style="list-style-type:disc"><code>class</code>: Can be used for multiple elements.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810e-b0c7-df9b1df9419b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813f-a54c-e250cf56c44f" class="">12. <strong>Can you nest one HTML element inside another?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8176-bdd6-d1a6a16eb909" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c1-a6a5-e05394bbb558" class="">Yes, nesting is common in HTML. Example:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-819a-9aaa-e7ac28b2ae5b" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;p&gt;This is a &lt;strong&gt;bold&lt;/strong&gt; word.&lt;/p&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-811d-b55b-cd3bbbf99474"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fc-b107-c7809c5552f0" class="">13. <strong>What is the purpose of the </strong><code><strong>&lt;form&gt;</strong></code><strong> tag?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8162-882c-f3020536a306" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818b-8454-fd2a76b565b5" class="">It is used to create a form for user input, which can be submitted to a server.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-818b-9ed0-e4e98fdbcc7d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8131-901e-d4641f480254" class="">14. <strong>What are self-closing tags?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ec-8024-f4b92bba77d7" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a3-a5be-e079c102d6f7" class="">Tags that don’t require a closing tag.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818a-8854-c609d35f1805" class="">Examples: <code>&lt;img /&gt;</code>, <code>&lt;br /&gt;</code>, <code>&lt;input /&gt;</code></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f9-869b-c98dd4e4822f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f1-8e30-dc8e36289c16" class="">15. <strong>How is HTML different from CSS and JavaScript?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b5-ba36-cd6650a07644" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-815f-9bce-f896b4e11c0e" class="bulleted-list"><li style="list-style-type:disc"><strong>HTML</strong>: Structure</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814a-96ad-df3ac87d7334" class="bulleted-list"><li style="list-style-type:disc"><strong>CSS</strong>: Style</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8151-8777-f7baf3d78401" class="bulleted-list"><li style="list-style-type:disc"><strong>JavaScript</strong>: Behavior/Interactivity</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8116-ac30-d3edbf6d691e"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c2-afc9-d365b529d1f4" class="">🧠 <strong>Practice-Based &amp; Practical Questions</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a3-bae8-f4fce7a213b9" class="">16. <strong>How do you make a list in HTML?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-816c-ad87-f943787cf616" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8141-b04f-c9228fe5b3fe" class="bulleted-list"><li style="list-style-type:disc"><strong>Ordered List (numbered)</strong>:</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81da-b015-dd78c2e8d3da" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;ol&gt;
+  &lt;li&gt;First&lt;/li&gt;
+  &lt;li&gt;Second&lt;/li&gt;
+&lt;/ol&gt;
+</code></pre></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81b6-8379-f0b131f6bb0d" class="bulleted-list"><li style="list-style-type:disc"><strong>Unordered List (bullets)</strong>:</li></ul></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818a-991a-e1b9690124e4" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;ul&gt;
+  &lt;li&gt;Item 1&lt;/li&gt;
+  &lt;li&gt;Item 2&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816e-a258-ef8c0f1dbc7f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8199-9492-f73861691d21" class="">17. <strong>How do you create a table in HTML?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818a-8b78-c34940919706" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81e4-bb3f-d116e929fb12" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Name&lt;/th&gt;
+    &lt;th&gt;Age&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Alice&lt;/td&gt;
+    &lt;td&gt;22&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e7-8d4f-cb0d20ae2b55"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8136-8337-da9125126299" class="">18. <strong>What is the </strong><code><strong>alt</strong></code><strong> attribute in the </strong><code><strong>&lt;img&gt;</strong></code><strong> tag used for?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f6-a4c4-de341367ed80" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e0-9bed-e0e8579986eb" class="">It provides descriptive text for screen readers and is shown if the image fails to load.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8148-88eb-f3167014bf62"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811f-afe7-debd71cda79b" class="">19. <strong>What is a block vs inline element?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e8-90cd-dc5c35bf8bf6" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81c7-8fe5-d449e1a55433" class="bulleted-list"><li style="list-style-type:disc"><strong>Block elements</strong>: Take full width. (e.g., <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>)</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8124-adf0-e4bcca73cba7" class="bulleted-list"><li style="list-style-type:disc"><strong>Inline elements</strong>: Fit within content. (e.g., <code>&lt;a&gt;</code>, <code>&lt;span&gt;</code>, <code>&lt;strong&gt;</code>)</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a5-ba45-ddc4d835cba6"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814f-ae10-fa2f3a0b82b5" class="">20. <strong>How to add comments in HTML?</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ad-8276-dbb457c78e5d" class=""><strong>Answer:</strong></p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8121-b9db-c9ea6e92423e" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!-- This is a comment --&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b8-83da-ef7582d9326a"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81f2-8b7a-c7294e5f4dd4" class="">📌 Bonus: Commonly Asked Quick Questions</h2></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-8110-bac0-ec93aa6837e9" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-812e-b83b-db07475459fa"><th id="{q[S" class="simple-table-header-color simple-table-header">Question</th><th id="qzT;" class="simple-table-header-color simple-table-header">Answer</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8147-ad92-d71eefd1f802"><td id="{q[S" class="">Are HTML tags case-sensitive?</td><td id="qzT;" class="">No, but lowercase is preferred (HTML5).</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8179-86d1-e07f94fd25b2"><td id="{q[S" class="">Can we use multiple <code>&lt;h1&gt;</code> tags?</td><td id="qzT;" class="">Yes, but use only one per section/page semantically.</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8119-ac86-fd2dbd4cec9f"><td id="{q[S" class="">What is the default alignment of text in HTML?</td><td id="qzT;" class="">Left-aligned.</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-814f-bdd0-c42886ea7287"><td id="{q[S" class="">How do you open a link in a new tab?</td><td id="qzT;" class="">Use <code>target=&quot;_blank&quot;</code> in <code>&lt;a&gt;</code> tag.</td></tr></div></tbody></table></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

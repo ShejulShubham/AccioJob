@@ -1,0 +1,916 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>DOM Basics Notes</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2df155e4-633e-81f6-a302-eab383f5d171" class="page sans"><header><h1 class="page-title" dir="auto">DOM Basics Notes</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h1 id="2df155e4-633e-8170-84fe-dd4db4856054" class="">Intro to DOM and Selectors</h1></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8165-8042-dab9396093cc" class=""><strong>Part 1: What is the DOM?</strong></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81bc-8a32-d4fb8d96e4a0" class=""><strong>Definition:</strong></h3></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-8186-915d-e4e7085c9db3" class="">The DOM (Document Object Model) is a tree-like structure that the browser creates from your HTML code, allowing JavaScript to interact with elements on the page.</blockquote></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813f-9616-dfd3ba774293" class=""><strong>Analogy:</strong></h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81a1-8e6a-ffb8ecf2f7df" class="bulleted-list"><li style="list-style-type:disc"><strong>Family Tree:</strong> HTML tags are like family members in a family tree. Each tag is a node, and they can have parents, children, and siblings.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819e-b79b-fab669dc2f7b" class="bulleted-list"><li style="list-style-type:disc"><strong>House Structure:</strong> HTML is like a house blueprint. Each element (room, window, door) can be accessed and modified.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8109-bb98-f6d46817f1b3" class=""><strong>Visual Demo:</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a1-980a-d03511aa8a8c" class="">Show a simple HTML file and its corresponding DOM tree diagram.</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2df155e4-633e-81f3-b8df-d3332b1578a7" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;!-- Sample HTML --&gt;
+&lt;div id=&quot;main&quot;&gt;
+  &lt;h1 class=&quot;title&quot;&gt;Welcome&lt;/h1&gt;
+  &lt;p&gt;This is a paragraph.&lt;/p&gt;
+  &lt;button&gt;Click me&lt;/button&gt;
+&lt;/div&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8198-add4-e9e1e35eb55c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8120-818d-f0bffed6ba55" class=""><strong>Part 2: How the Browser Creates the DOM</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81ee-860c-c09f197dc2d8" class="numbered-list" start="1"><li>HTML is loaded.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81ea-a199-d0aeed4c50d1" class="numbered-list" start="2"><li>The browser parses it top to bottom.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-8112-8299-d11819c42470" class="numbered-list" start="3"><li>Creates nodes (elements, text, comments).</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2df155e4-633e-81fb-8efd-fc2ff321c465" class="numbered-list" start="4"><li>Builds a tree-like model (DOM tree).</li></ol></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8165-9f8b-d3fe6a7bb96a" class=""><strong>Show Chrome DevTools (Elements tab)</strong> to help students see the live DOM structure.</h3></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81b7-8c2c-fa4a44554fb1"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b1-ab53-ec41f25cf79b" class=""><strong>Part 3: What Are Nodes and Elements</strong></h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-814d-9d83-f11ce99fb626" class="bulleted-list"><li style="list-style-type:disc"><strong>Node:</strong> Any item in the DOM tree (element, text, comment).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ae-820f-dff24c0e4911" class="bulleted-list"><li style="list-style-type:disc"><strong>Element Node:</strong> A tag like <code>&lt;div&gt;</code>, <code>&lt;h1&gt;</code>.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8189-a2a4-cfc046dc2468" class="bulleted-list"><li style="list-style-type:disc"><strong>Text Node:</strong> The actual text inside an element.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811f-b365-f2b023b2cf47" class="bulleted-list"><li style="list-style-type:disc"><strong>Visual Tip:</strong> Use a DOM inspector (DevTools) to show them.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-813f-81aa-dfde8e6dd3f2"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f3-aa3e-e39f8f1720ee" class=""><strong>Part 4: Selecting Elements in the DOM</strong></h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8188-bae7-e72ee294a86d" class="">Use the same HTML structure for all examples for consistency.</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-817a-ac3e-e72625687644" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;div id=&quot;main&quot;&gt;
+  &lt;h1 class=&quot;title&quot;&gt;Welcome&lt;/h1&gt;
+  &lt;p&gt;This is a paragraph.&lt;/p&gt;
+  &lt;button&gt;Click me&lt;/button&gt;
+&lt;/div&gt;
+</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811f-9318-d523b2279c72" class=""><strong>1. getElementById()</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81dd-b8b1-d74d9d2e8cd8" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const mainDiv = document.getElementById(&quot;main&quot;);
+console.log(mainDiv);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ff-b2b0-d519b7f0cf65" class=""><strong>Visual:</strong> Highlight the entire <code>&lt;div&gt;</code> block.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d6-9e45-d60d146cd32f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812b-8931-ee268e21e5d2" class=""><strong>2. getElementsByClassName()</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8181-9064-d2cda07f6e82" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const titles = document.getElementsByClassName(&quot;title&quot;);
+console.log(titles[0]);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-965a-cc68a4003bed" class=""><strong>Visual:</strong> Point out that it returns a collection (even if there&#x27;s only one element).</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816b-8936-dc14dda69139"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-819c-b13f-e34a2b85b686" class=""><strong>3. getElementsByTagName()</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-816a-bf80-fcb9b18e0edd" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const paragraphs = document.getElementsByTagName(&quot;p&quot;);
+console.log(paragraphs[0]);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8146-b702-cef35139017d" class=""><strong>Visual:</strong> Show how it selects all <code>&lt;p&gt;</code> elements.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8195-aecd-d6d0d6e1976c"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8114-ab97-e581fb0c0838" class=""><strong>4. querySelector()</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81f9-81a7-e0b7247f102b" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const title = document.querySelector(&quot;.title&quot;);
+console.log(title);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-9923-fd92ec0abe57" class=""><strong>Visual:</strong> Explain it&#x27;s a CSS-style selector and returns only the <strong>first</strong> match.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8111-9d94-db7e18a6c8a5"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d0-b92a-e7a1b8024ab3" class=""><strong>5. querySelectorAll()</strong></h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810b-b1d3-f579bd419e69" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const allTitles = document.querySelectorAll(&quot;.title&quot;);
+console.log(allTitles);</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815f-9ce8-dc432437c621" class=""><strong>Visual:</strong> Highlight that it returns a <strong>NodeList</strong> (you can loop through it).</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815c-8966-cc072a305661"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-813f-87b4-dc7c485ae72b" class=""><strong>Part 5: Key Differences Summary</strong></h3></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-81c6-9638-dfc2478dda4d" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8188-b059-c58f023e0d98"><td id="FDZq" class="">Selector</td><td id="KWkJ" class="">Returns</td><td id="xPFu" class="">Type</td><td id="Rj]L" class="">Single or Multiple</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8138-b37f-c8be616b64ac"><td id="FDZq" class="">getElementById</td><td id="KWkJ" class="">Element</td><td id="xPFu" class="">HTMLElement</td><td id="Rj]L" class="">Single</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81d9-9373-d2d91f922a75"><td id="FDZq" class="">getElementsByClassName</td><td id="KWkJ" class="">Collection</td><td id="xPFu" class="">HTMLCollection</td><td id="Rj]L" class="">Multiple</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-814b-bbc5-f05acabca75a"><td id="FDZq" class="">getElementsByTagName</td><td id="KWkJ" class="">Collection</td><td id="xPFu" class="">HTMLCollection</td><td id="Rj]L" class="">Multiple</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-811c-b619-e01d6122b89d"><td id="FDZq" class="">querySelector</td><td id="KWkJ" class="">Element</td><td id="xPFu" class="">HTMLElement</td><td id="Rj]L" class="">First Match</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-816d-a0c5-e77b84257dd2"><td id="FDZq" class="">querySelectorAll</td><td id="KWkJ" class="">NodeList</td><td id="xPFu" class="">NodeList</td><td id="Rj]L" class="">All Matches</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819f-acac-d223eb426d13" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-817a-8968-ca8cd4ca0bd7" class="">✅ <strong>List of All Node Types in the DOM</strong></h3></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-810e-b5b2-d1becdd2025b" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8108-88ca-fad599282b30"><td id="znkB" class="">Node Type</td><td id="Y=\O" class=""><code>nodeType</code> Value</td><td id="p&gt;MF" class="">Description</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-817e-a867-e26727422e65"><td id="znkB" class=""><strong>1. Element Node</strong></td><td id="Y=\O" class=""><code>1</code></td><td id="p&gt;MF" class="">Represents an HTML or XML element like <code>&lt;div&gt;</code>, <code>&lt;h1&gt;</code>, etc.</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8150-8fa5-dc1d1739eb59"><td id="znkB" class=""><strong>2. Attribute Node</strong></td><td id="Y=\O" class=""><code>2</code></td><td id="p&gt;MF" class="">Represents an attribute of an element like <code>id=&quot;main&quot;</code> <em>(rarely used directly today)</em></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81b2-88c8-c267d9c91d2c"><td id="znkB" class=""><strong>3. Text Node</strong></td><td id="Y=\O" class=""><code>3</code></td><td id="p&gt;MF" class="">Represents the text content inside an element or attribute</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8108-a458-d726eb77a783"><td id="znkB" class=""><strong>4. CDATA Section Node</strong></td><td id="Y=\O" class=""><code>4</code></td><td id="p&gt;MF" class="">Used in XML to include blocks of text with characters that would otherwise be treated as markup <em>(not used in HTML)</em></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81c9-b566-e488986bf811"><td id="znkB" class=""><strong>5. Entity Reference Node</strong></td><td id="Y=\O" class=""><code>5</code></td><td id="p&gt;MF" class="">Legacy node used in XML for entities like <code>&amp;nbsp;</code> <em>(obsolete)</em></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-818f-a3fe-ffbb84ae363c"><td id="znkB" class=""><strong>6. Entity Node</strong></td><td id="Y=\O" class=""><code>6</code></td><td id="p&gt;MF" class="">Legacy node representing entity declarations in DTDs <em>(rarely used now)</em></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81e0-890c-d1c5d73679e2"><td id="znkB" class=""><strong>7. Processing Instruction Node</strong></td><td id="Y=\O" class=""><code>7</code></td><td id="p&gt;MF" class="">Used to keep processing information for XML <em>(e.g., </em><em><code>&lt;?xml-stylesheet ... ?&gt;</code></em><em>)</em></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81fb-b106-f7315eb672ec"><td id="znkB" class=""><strong>8. Comment Node</strong></td><td id="Y=\O" class=""><code>8</code></td><td id="p&gt;MF" class="">Represents a comment like <code>&lt;!-- This is a comment --&gt;</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8172-88c4-c7c972c748b4"><td id="znkB" class=""><strong>9. Document Node</strong></td><td id="Y=\O" class=""><code>9</code></td><td id="p&gt;MF" class="">Represents the entire document — the entry point into the DOM (<code>document</code> object)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8138-aad3-ce44cdf2f9bf"><td id="znkB" class=""><strong>10. Document Type Node</strong></td><td id="Y=\O" class=""><code>10</code></td><td id="p&gt;MF" class="">Represents the <code>&lt;!DOCTYPE&gt;</code> declaration</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-810b-9deb-f1f94d7dbdb4"><td id="znkB" class=""><strong>11. Document Fragment Node</strong></td><td id="Y=\O" class=""><code>11</code></td><td id="p&gt;MF" class="">A lightweight, minimal document object used for performance when manipulating DOM trees in memory</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-819a-a5cd-dac74e3837df"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810b-8541-e2bfecdd5422" class="">🧠 Tip:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8141-a989-f446ae1c1155" class="">For beginner-friendly focus, you can mainly understand:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811f-9f41-f8b106242cbd" class="bulleted-list"><li style="list-style-type:disc"><code>1</code>: <strong>Element</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81e1-a56b-cd2653037624" class="bulleted-list"><li style="list-style-type:disc"><code>2</code>: <strong>Attribute</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-818c-b406-d4a433168425" class="bulleted-list"><li style="list-style-type:disc"><code>3</code>: <strong>Text</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8103-85c7-cd81367f9608" class="bulleted-list"><li style="list-style-type:disc"><code>8</code>: <strong>Comment</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f6-9db2-dc0c95905af5" class="bulleted-list"><li style="list-style-type:disc"><code>9</code>: <strong>Document</strong></li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810c-b2fa-c99a8f767a99" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ae-9a77-ced44257bce1" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-811a-8d91-c4936f1021b8" class="">👨‍🏫 <strong>Lesson: Creating and Modifying the DOM</strong></h2></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81cb-ba11-f5b03f57f5af"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d8-b03b-c258070815f8" class="">🔧 <strong>DOM Method 1: </strong><code><strong>createElement()</strong></code></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d5-b330-cee4f33b5d50" class="">✅ What it does:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8166-aa42-f1aec53f043a" class="">Creates a <strong>new HTML element node</strong> in memory — but it&#x27;s not visible on the page yet.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-819b-9375-d3d9a46e296c" class="">🧠 Analogy:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a7-9e13-e06b192b1022" class="">Like crafting a new LEGO block 🧱 but not placing it on the table (page) yet.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d4-b044-fd6ba98bfcf8" class="">📄 Example:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81a7-99eb-c9bd1732e408" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const newPara = document.createElement(&quot;p&quot;); // Creates &lt;p&gt;&lt;/p&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81a5-af98-c3bd7ffe9ca0"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-812b-90c4-c117c9d04845" class="">🔧 <strong>DOM Method 2: </strong><code><strong>appendChild()</strong></code></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81d9-964c-f6cef9d5d779" class="">✅ What it does:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8176-9bdd-cc6e7ab26209" class="">Adds the new element to an existing element on the page (DOM tree).</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b0-baa3-fba3fce2f3af" class="">🧠 Analogy:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ee-a21d-df80841ecfd0" class="">You&#x27;re taking the LEGO block 🧱 and <strong>attaching it to the house</strong> 🏠.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8145-89c4-d4021b0e7fb8" class="">📄 Example:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818d-8fd8-ca713642dbdd" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">newPara.textContent = &quot;This is a new paragraph.&quot;;
+document.body.appendChild(newPara);
+</code></pre></div><div style="display:contents" dir="auto"><blockquote id="2df155e4-633e-81df-850f-ce63846b993f" class="">Now the new paragraph is visible on the webpage under &lt;body&gt;!</blockquote></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-816b-8c84-fb15effb8d1d"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e8-a4f7-d7c13fdf4b73" class="">🔧 <strong>DOM Method 3: </strong><code><strong>removeChild()</strong></code></h3></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b6-b39e-cb06b110ba22" class="">✅ What it does:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ab-b911-f8c824041a79" class="">Removes a child element from its parent.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8112-a053-f316658ddfe3" class="">🧠 Analogy:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8133-b9d7-ede9f53bd429" class="">You&#x27;re <strong>detaching</strong> a LEGO block from the house 🏠 and putting it away.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8151-8d04-fae043d9b987" class="">📄 Example:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-819e-ad44-cce663fa8cb4" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const button = document.querySelector(&quot;button&quot;);
+document.body.removeChild(button);</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8153-ada7-fc7d33637189"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81fe-b6bd-d733020b67cb" class="">🧪👩‍💻 <strong>Interactive Classroom Activity</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e7-9f0d-cf8973f46d50" class="">🧱 HTML Setup:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8184-95b8-ee9efbc0ba36" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;div id=&quot;container&quot;&gt;
+  &lt;h2&gt;My DOM Playground&lt;/h2&gt;
+  &lt;button id=&quot;add&quot;&gt;Add Paragraph&lt;/button&gt;
+  &lt;button id=&quot;remove&quot;&gt;Remove Paragraph&lt;/button&gt;
+&lt;/div&gt;</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-815c-a898-fc588c766163"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fc-85bc-f335dc2da885" class="">📜 JavaScript:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-818a-92b1-f4ddaf162cb6" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const container = document.getElementById(&quot;container&quot;);
+const addBtn = document.getElementById(&quot;add&quot;);
+const removeBtn = document.getElementById(&quot;remove&quot;);
+let newPara = null;
+
+addBtn.addEventListener(&quot;click&quot;, () =&gt; {
+  newPara = document.createElement(&quot;p&quot;);
+  newPara.textContent = &quot;This is a new paragraph added!&quot;;
+  container.appendChild(newPara); // Adds it to DOM
+});
+
+removeBtn.addEventListener(&quot;click&quot;, () =&gt; {
+  if (newPara) {
+    container.removeChild(newPara); // Removes from DOM
+    newPara = null;
+  }
+});
+
+
+
+
+&lt;script&gt;
+  const container = document.getElementById(&quot;container&quot;);
+  const addBtn = document.getElementById(&quot;add&quot;);
+  const removeBtn = document.getElementById(&quot;remove&quot;);
+
+  const addedParas = []; // Array to store all added paragraphs
+
+  addBtn.addEventListener(&quot;click&quot;, () =&gt; {
+    const para = document.createElement(&quot;p&quot;);
+    para.textContent = &quot;Acciojob&quot;;
+    container.appendChild(para);
+    addedParas.push(para); // Store reference of added paragraph
+  });
+
+  removeBtn.addEventListener(&quot;click&quot;, () =&gt; {
+    const lastPara = addedParas.pop(); // Get last added paragraph
+    if (lastPara) {
+      container.removeChild(lastPara);
+    }
+  });
+&lt;/script&gt;
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8113-86d7-d61b3ab3f69b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810e-9b5d-f3bc9a179864" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-810c-a29e-f9c4b0fbbe02" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81dc-b677-eb13b6a8df27" class="">👨‍🏫 <strong>Lesson: Adding Text and HTML Content to the DOM</strong></h2></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81ad-8168-cf607ab2b587"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81c4-8b14-e1d6225bc700" class="">🧱 There are Two Common Ways:</h3></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-81c6-86eb-e5c67c9f0195" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-814f-ab55-c276c6b230c0"><td id="GjTf" class="">Method</td><td id="Li&gt;`" class="">What It Does</td><td id="?zXi" class="">Use Case</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8114-80e1-eae59f107c33"><td id="GjTf" class=""><code>textContent</code></td><td id="Li&gt;`" class="">Adds <strong>plain text</strong></td><td id="?zXi" class="">Use when adding user input or content with no HTML</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-817c-b526-cd9e653c0b79"><td id="GjTf" class=""><code>innerHTML</code></td><td id="Li&gt;`" class="">Adds <strong>HTML content</strong></td><td id="?zXi" class="">Use when you need formatting (e.g., bold, italic, spans)</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81d5-9def-f4a466435d98"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8137-965f-e69ae77102c5" class="">🔧 1. <code>textContent</code></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8181-ae1c-dd3349d4ef8b" class="">✅ What it does:</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8188-98b9-ea818a8a5eda" class="bulleted-list"><li style="list-style-type:disc">Sets or updates the <strong>plain text</strong> inside an element.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f8-bb7b-f4b8a8fba731" class="bulleted-list"><li style="list-style-type:disc">Treats everything as text — does <strong>not</strong> parse HTML tags.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-817b-89d0-c70291880d60" class="">🧠 Analogy:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8159-981b-fbedf7f0fc59" class="">🗣️ Speaking words directly — no formatting.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8127-828c-eabd6420f2c9" class="">📄 Example:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-819c-8ae2-ef15ecfe1763" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const heading = document.createElement(&quot;h2&quot;);
+heading.textContent = &quot;&lt;i&gt;Hello&lt;/i&gt; Students!&quot;; // Shows the raw tags
+document.body.appendChild(heading);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8188-8c9c-f6d6793379df" class="">🧾 Output:</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8147-86be-faa1ca43fcfe" class=""><code>&lt;i&gt;Hello&lt;/i&gt; Students!</code> <em>(Just plain text)</em></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8183-9ac1-ef402f201ec0"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-814d-8a3a-c7ba884f58a7" class="">🔧 2. <code>innerHTML</code></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81b1-9da5-edc99a89bd68" class="">✅ What it does:</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8145-acb8-db62b2eb15d0" class="bulleted-list"><li style="list-style-type:disc">Sets or updates the <strong>HTML structure</strong> inside an element.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f2-a2b2-c01aba9dacbd" class="bulleted-list"><li style="list-style-type:disc">Parses and renders tags.</li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fa-a0a2-e9b4a813b85c" class="">🧠 Analogy:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81c5-9a61-ccf6f2b8c526" class="">📝 Writing rich text with styles like bold or italics.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816a-b84b-f65025f007eb" class="">📄 Example:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8153-9c96-cefd4a01b5ec" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const subHeading = document.createElement(&quot;h3&quot;);
+subHeading.innerHTML = &quot;&lt;i&gt;Welcome&lt;/i&gt; to &lt;b&gt;JavaScript DOM&lt;/b&gt;&quot;;
+document.body.appendChild(subHeading);
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8153-9341-c3340d373e5c" class="">🧾 Output:</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8154-8832-f9bb0aa2b49e" class=""><em>Welcome</em> to <strong>JavaScript DOM</strong></p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8169-ab74-db285e9b3b8b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81ce-a29f-ef41dabdc91a" class="">❗ Important Differences:</h3></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-813e-9862-ddc7a74587ba" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8109-bc60-c8bef9e2be4a"><td id="zSJI" class="">Feature</td><td id="nUjI" class=""><code>textContent</code></td><td id="QmqX" class=""><code>innerHTML</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8122-a402-daa9bb69452d"><td id="zSJI" class="">Treats tags as text</td><td id="nUjI" class="">✅ Yes</td><td id="QmqX" class="">❌ No</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8113-b8c7-ef67409b5435"><td id="zSJI" class="">Parses HTML</td><td id="nUjI" class="">❌ No</td><td id="QmqX" class="">✅ Yes</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81ec-9252-f8a6be66ef1e"><td id="zSJI" class="">Safer for user input</td><td id="nUjI" class="">✅ Yes</td><td id="QmqX" class="">❌ No (can be unsafe if from users)</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810a-9af0-de15c61c1115"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81f3-b1de-dd1f1524e804" class="">🧪👨‍💻 <strong>Interactive Activity: Text vs HTML</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8143-9e55-eb5f7df96cfd" class="">🧱 HTML:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8120-9709-e94b43515960" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;button id=&quot;add-text&quot;&gt;Add Plain Text&lt;/button&gt;
+&lt;button id=&quot;add-html&quot;&gt;Add HTML Content&lt;/button&gt;
+&lt;div id=&quot;output&quot;&gt;&lt;/div&gt;</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fd-acc5-df7e89fc967a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816b-bbca-ff97714eabca" class="">📜 JavaScript:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81d8-ad7d-e9d98284f652" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const textBtn = document.getElementById(&quot;add-text&quot;);
+const htmlBtn = document.getElementById(&quot;add-html&quot;);
+const outputDiv = document.getElementById(&quot;output&quot;);
+
+textBtn.addEventListener(&quot;click&quot;, () =&gt; {
+  outputDiv.textContent = &quot;&lt;strong&gt;This is plain text&lt;/strong&gt;&quot;;
+});
+
+htmlBtn.addEventListener(&quot;click&quot;, () =&gt; {
+  outputDiv.innerHTML = &quot;&lt;strong&gt;This is HTML content&lt;/strong&gt;&quot;;
+});</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817d-9917-db3584c9b2d8"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-816c-9922-d6ca6ebac9de" class="">🧠 What Students Observe:</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8167-bbab-cbfc079447c2" class="bulleted-list"><li style="list-style-type:disc">First button prints HTML tags literally.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8175-8173-cf4fc41217e3" class="bulleted-list"><li style="list-style-type:disc">Second button renders bold text.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8174-aa0e-c9d01d4d7b89"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8142-bbac-cc816538f988" class="">✅ Final Tip:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81b7-9094-da03a0ae54af" class="">Use <code>textContent</code> when:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819a-8c5d-de87fca2fad6" class="bulleted-list"><li style="list-style-type:disc">You want <strong>just text</strong>, no formatting.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8125-a57a-c9f4a7c5be5a" class="bulleted-list"><li style="list-style-type:disc">You&#x27;re working with <strong>user-generated input</strong> (to avoid XSS attacks).</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81a7-a2ae-da6afa972188" class="">Use <code>innerHTML</code> when:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ed-813c-ea2029fce291" class="bulleted-list"><li style="list-style-type:disc">You want to <strong>insert HTML tags</strong> for styling or structure.</li></ul></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-815b-8d85-d231a8460c6d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81ab-91b7-d611b3e6ca71" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8174-ae84-da86cc7ea8e8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817b-bca0-cc913afeb883" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81c6-9eee-d7a428bc05d8" class="">👨‍🏫 <strong>Lesson: Editing Attributes in the DOM</strong></h2></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8186-be5a-c82e2ff2758b"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e4-b04d-fece7c948687" class="">✅ Why Attributes Matter:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81e3-bc12-f0d0b04a5d2a" class="">Attributes like <code>id</code>, <code>class</code>, <code>href</code>, <code>src</code>, and <code>type</code> help define element behavior and appearance. JavaScript can <strong>dynamically change</strong> these attributes using special DOM methods.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8129-b6dc-ea1ce4edd972"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-818c-b310-d4e2f9f05cf9" class="">🔧 DOM Method 1: <code>setAttribute()</code></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810f-a39b-c49daf2d1b4c" class="">✅ What it does:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81d4-9103-f944e9f0c59d" class="">Sets or updates the <strong>value of an attribute</strong> on an element.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-819a-a6c4-c6142d10db9d" class="">🧠 Analogy:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-817a-a828-d6231f5b00ff" class="">📌 Like <strong>sticking a label</strong> or changing the nameplate on an object.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fb-9aca-eb0246f689b2" class="">📄 Example:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c2-9954-c8aa35cc7865" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const btn = document.querySelector(&quot;button&quot;);
+btn.setAttribute(&quot;id&quot;, &quot;main-button&quot;); // Adds or updates the &#x27;id&#x27;</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81e0-add9-dce2171687c0"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ac-b99d-f91b61704306" class="">🔧 DOM Method 2: <code>getAttribute()</code></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8178-a5ca-ff95d0a02d59" class="">✅ What it does:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8194-826e-f007b517fbae" class="">Retrieves the <strong>current value</strong> of an attribute.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-811b-a248-f22fac6e62de" class="">🧠 Analogy:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81f3-b083-c5a3609d32ee" class="">👓 Like <strong>reading the label</strong> on an object.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8142-b27e-ca92e0e912cd" class="">📄 Example:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-810a-83b9-d8ef2eb51c6e" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const idValue = btn.getAttribute(&quot;id&quot;);
+console.log(idValue); // &quot;main-button&quot;</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8107-8768-f49d12bbb729"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81e9-8273-e1edc7313dca" class="">🔧 DOM Method 3: <code>removeAttribute()</code></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8144-b786-fa15da091f08" class="">✅ What it does:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8101-8020-f0cb086c891e" class="">Removes an existing attribute from an element.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8122-9546-ccabace282a0" class="">🧠 Analogy:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81df-9e7e-fdc1c23f26f2" class="">❌ Like <strong>peeling off a sticker</strong> or removing a nameplate.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81fe-b9a6-dc6abd36e9d9" class="">📄 Example:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81b2-ab28-e83d0acaac95" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">btn.removeAttribute(&quot;id&quot;); // Now the button has no &#x27;id&#x27;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8182-a906-e3ae3e7ddecb"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-8133-a3c7-c1152618bc77" class="">🧪👩‍💻 <strong>Interactive Activity: Play with Attributes</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8125-a1ea-c8f63629a352" class="">🧱 HTML Setup:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8189-97f6-eb97d296bca5" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;button id=&quot;actionBtn&quot; type=&quot;button&quot;&gt;Click Me&lt;/button&gt;
+&lt;div id=&quot;output&quot;&gt;&lt;/div&gt;
+
+//set attribute
+//get attribute
+//remove attribute</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81eb-b583-d80c702dad2a"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8161-8f5b-eb13d025042b" class="">📜 JavaScript:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-81c0-a474-e573453e9726" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const btn = document.getElementById(&quot;actionBtn&quot;);
+const output = document.getElementById(&quot;output&quot;);
+
+// 1. Set attribute
+btn.addEventListener(&quot;click&quot;, () =&gt; {
+  btn.setAttribute(&quot;class&quot;, &quot;btn-primary&quot;);
+  output.textContent = &quot;Attribute &#x27;class&#x27; set to &#x27;btn-primary&#x27;&quot;;
+});
+
+// 2. Get attribute
+btn.addEventListener(&quot;dblclick&quot;, () =&gt; {
+  const typeValue = btn.getAttribute(&quot;type&quot;);
+  output.textContent = `The &#x27;type&#x27; of button is: ${typeValue}`;
+});
+
+// 3. Remove attribute (on right click)
+btn.addEventListener(&quot;contextmenu&quot;, (e) =&gt; {
+  e.preventDefault();
+  btn.removeAttribute(&quot;class&quot;);
+  output.textContent = &quot;Attribute &#x27;class&#x27; removed&quot;;
+});
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fb-b4f8-e105ce59c42d"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81ba-9b58-e63fe7f3ac02" class="">🧠 What Students Learn:</h2></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-81e8-9910-e04621f191a1" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81d0-a7a2-c84935a7f7e8"><td id="TNKq" class="">Method</td><td id="[~`l" class="">Action</td><td id="d_Q\" class="">Real-Life Analogy</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-815b-befc-fe07113ebe92"><td id="TNKq" class=""><code>setAttribute()</code></td><td id="[~`l" class="">Adds or updates a label</td><td id="d_Q\" class="">Adding a name tag</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-818b-9571-dc4be7469718"><td id="TNKq" class=""><code>getAttribute()</code></td><td id="[~`l" class="">Reads the label</td><td id="d_Q\" class="">Checking a tag</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8133-87d6-c5ff8f526816"><td id="TNKq" class=""><code>removeAttribute()</code></td><td id="[~`l" class="">Removes the label</td><td id="d_Q\" class="">Peeling a sticker</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81fd-9878-fe5426805062"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-814a-9893-dce9e798e05d" class="">✅ Bonus Tip:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8173-8f53-ce4002c5d9c8" class="">You can also access some attributes directly:</p></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8117-9555-f2267d4032d7" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">btn.id = &quot;main-button&quot;; // Same as setAttribute
+console.log(btn.id);    // Same as getAttribute
+</code></pre></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81bd-bef5-d350eb74f320" class="">But using the methods is <strong>more flexible and universal</strong>, especially for custom attributes.</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8194-95f3-ffeb7dc020b9" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-8149-98f2-e6be5ba8f7d5" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81a9-b04a-ccf9f8cbb145" class="">👨‍🏫 <strong>Lesson: Working with Classes – </strong><code><strong>className</strong></code><strong> vs </strong><code><strong>classList</strong></code></h2></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812d-a848-f274667cee54"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-817e-a6b7-deb959def749" class="">📦 Why Classes Matter in DOM</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-819b-adb8-e986ae8dc808" class="bulleted-list"><li style="list-style-type:disc">Classes are used to <strong>style</strong> elements (via CSS).</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8165-aef2-f31100d6135a" class="bulleted-list"><li style="list-style-type:disc">JavaScript allows you to <strong>add, remove, check, or toggle</strong> classes dynamically.</li></ul></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-812d-931b-e0d301b19f8c"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-817b-88f8-efd14e76df19" class="">🔧 1. <code>className</code></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81e0-b912-c10538a9e3bb" class="">✅ What it does:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fc-9c0a-eede033aa36d" class="">Gets or sets the <strong>entire class string</strong> of an element.</p></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81de-8c6d-d33a2e844eb1" class="">🧠 Analogy:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-81fe-9159-c9630b3c58e7" class="">📋 Like writing a full list of tags on a label all at once.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8183-85c2-e95926bb3413"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8103-9165-d365d7488c21" class="">📄 Example:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8101-a1b1-ea6d58375797" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const box = document.getElementById(&quot;myBox&quot;);
+
+console.log(box.className); // Outputs: &quot;box blue shadow&quot;
+
+box.className = &quot;box red&quot;; // Replaces all classes with just &quot;box red&quot;</code></pre></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-815d-bfa4-f4d3709dfc75" class="">❗ Warning:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-814c-94e3-d468a1121c2d" class="">⚠️ Overwrites all existing classes. Not safe if you only want to change one class.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81f6-a47c-f0fa5a2c4653"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-810c-8f64-c1ce6c1daa8b" class="">🔧 2. <code>classList</code></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81a7-98f1-c0fd63bc6c99" class="">✅ What it does:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-819e-b95f-d7fabba61b5e" class="">Gives access to a <strong>collection of classes</strong> and provides helpful methods to manipulate them:</p></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81f5-98ef-e1bfa71e761f" class="bulleted-list"><li style="list-style-type:disc"><code>.add()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-81ce-813f-f1ba4764921f" class="bulleted-list"><li style="list-style-type:disc"><code>.remove()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811e-ad27-e9895be7d791" class="bulleted-list"><li style="list-style-type:disc"><code>.toggle()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8185-b00b-f76502f9a8c0" class="bulleted-list"><li style="list-style-type:disc"><code>.contains()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-811c-8e5f-e114d8fda0c3" class="bulleted-list"><li style="list-style-type:disc"><code>.replace()</code></li></ul></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8143-9a8f-f45e192dfa36" class="">🧠 Analogy:</h3></div><div style="display:contents" dir="auto"><p id="2df155e4-633e-818d-bb74-c221f89522a0" class="">🎮 Like using buttons to add/remove individual tags on an object.</p></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817f-a1ef-f274e6aadd8f"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8174-a481-c1177c4328dd" class="">📄 Example:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8106-adf9-f040e600172e" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const box = document.getElementById(&quot;myBox&quot;);
+
+box.classList.add(&quot;highlight&quot;);        // Adds a class
+box.classList.remove(&quot;blue&quot;);          // Removes a class
+box.classList.toggle(&quot;visible&quot;);       // Toggles a class on/off
+console.log(box.classList.contains(&quot;shadow&quot;)); // true or false
+box.classList.replace(&quot;red&quot;, &quot;green&quot;); // Replaces a class
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-810b-9e06-eacf41a71073"/></div><div style="display:contents" dir="auto"><h2 id="2df155e4-633e-81f0-b40c-c324085f0698" class="">🧪👨‍💻 <strong>Interactive Activity: Class Controller</strong></h2></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-810f-8ef3-da00b858b8ad" class="">🧱 HTML Setup:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8105-8522-dc9fb636f62c" class="code code-wrap"><code class="language-html" style="white-space:pre-wrap;word-break:break-all">&lt;div id=&quot;myBox&quot; class=&quot;box blue shadow&quot;&gt;I&#x27;m a box&lt;/div&gt;
+
+&lt;button id=&quot;add&quot;&gt;Add &quot;highlight&quot;&lt;/button&gt;
+&lt;button id=&quot;remove&quot;&gt;Remove &quot;blue&quot;&lt;/button&gt;
+&lt;button id=&quot;toggle&quot;&gt;Toggle &quot;rounded&quot;&lt;/button&gt;
+&lt;button id=&quot;check&quot;&gt;Check &quot;shadow&quot;&lt;/button&gt;
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-81c3-88c9-c59f6203c197"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f4-b022-d42e068b2760" class="">📜 JavaScript:</h3></div><div style="display:contents" dir="auto"><pre id="2df155e4-633e-8107-ab24-d72ba366bad3" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">const box = document.getElementById(&quot;myBox&quot;);
+const output = document.createElement(&quot;p&quot;);
+document.body.appendChild(output);
+
+document.getElementById(&quot;add&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+  box.classList.add(&quot;highlight&quot;);
+  output.textContent = &#x27;Class &quot;highlight&quot; added!&#x27;;
+});
+
+document.getElementById(&quot;remove&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+  box.classList.remove(&quot;blue&quot;);
+  output.textContent = &#x27;Class &quot;blue&quot; removed!&#x27;;
+});
+
+document.getElementById(&quot;toggle&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+  box.classList.toggle(&quot;rounded&quot;);
+  output.textContent = &#x27;Class &quot;rounded&quot; toggled!&#x27;;
+});
+
+document.getElementById(&quot;check&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+  const hasShadow = box.classList.contains(&quot;shadow&quot;);
+  output.textContent = hasShadow
+    ? &#x27;Yes! &quot;shadow&quot; class exists.&#x27;
+    : &#x27;&quot;shadow&quot; class is missing.&#x27;;
+});
+</code></pre></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-817a-a91b-c419d97da796"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-81f8-9b67-e241562b8829" class="">✅ Summary Table</h3></div><div style="display:contents" dir="ltr"><table id="2df155e4-633e-81a8-a01a-c4e75a49a259" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-815c-b961-ff2c1aec73ed"><td id="j{~l" class="">Feature</td><td id="ko&lt;m" class=""><code>className</code></td><td id="?]p?" class=""><code>classList</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8187-9c11-cbfae1eb6d50"><td id="j{~l" class="">Type</td><td id="ko&lt;m" class="">String</td><td id="?]p?" class="">DOMTokenList (array-like)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-81ee-b8fc-dfe40a6cd53f"><td id="j{~l" class="">Get all classes</td><td id="ko&lt;m" class="">✅ Yes</td><td id="?]p?" class="">✅ Yes</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8131-a5ee-db17e7365475"><td id="j{~l" class="">Set all classes</td><td id="ko&lt;m" class="">✅ Yes</td><td id="?]p?" class="">❌ (individual control)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8101-8629-e99f10bcc302"><td id="j{~l" class="">Add/remove/toggle</td><td id="ko&lt;m" class="">❌ No</td><td id="?]p?" class="">✅ Yes</td></tr></div><div style="display:contents" dir="ltr"><tr id="2df155e4-633e-8131-9f1f-fc1825af72e2"><td id="j{~l" class="">Safer for updates</td><td id="ko&lt;m" class="">❌ Risk of overwrite</td><td id="?]p?" class="">✅ Recommended</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2df155e4-633e-8112-895b-d0980902c8a4"/></div><div style="display:contents" dir="auto"><h3 id="2df155e4-633e-8165-b3a7-e8086fd62e86" class="">🧠 Final Tip:</h3></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-8131-ba45-d69ac350e411" class="bulleted-list"><li style="list-style-type:disc">Use <code>classList</code> when you want to manipulate individual classes dynamically.</li></ul></div><div style="display:contents" dir="auto"><ul id="2df155e4-633e-816b-a8f8-c3782a270e1a" class="bulleted-list"><li style="list-style-type:disc">Use <code>className</code> if you want to completely <strong>reset all classes</strong>.</li></ul></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
