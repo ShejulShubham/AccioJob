@@ -8,9 +8,15 @@
     li {
         font-size: 30px;
     }
+
+    .done {
+      text-decoration: line-through;
+    }
   </style>
 </head>
 <body>
+  <h1>Event Delegation</h1>
+  <p>Directly adding event listener to the parent element</p>
   <ul id="list">
     <li>Item 1</li>
     <li>Item 2</li>
@@ -22,6 +28,7 @@
 
     // Event delegation: Add listener to the parent <ul>
     list.addEventListener("click", (event) => {
+      event.target.classList.toggle("done");
       if (event.target.tagName === "LI") {
         console.log(`You clicked on ${event.target.textContent}`);
       }
