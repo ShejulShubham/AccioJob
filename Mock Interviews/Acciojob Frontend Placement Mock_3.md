@@ -2,7 +2,7 @@
 
 ## Coding questions
 1. special matrix
-2. diagonal matrix sum;
+2. diagonal matrix sum.
 3. show how to use promise method.
 4. fetch api and display on table/list using HTML,CSS and JS.
 
