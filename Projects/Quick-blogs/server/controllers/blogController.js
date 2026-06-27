@@ -35,7 +35,7 @@ export async function addBlog(request, response) {
 
     const image = optimizedImageURL;
 
-    await Blog.create({
+    const newBlog = await Blog.create({
       title,
       subTitle,
       description,
@@ -46,7 +46,11 @@ export async function addBlog(request, response) {
 
     response
       .status(201)
-      .json({ success: true, message: "Blog created successfully" });
+      .json({
+        success: true,
+        data: newBlog,
+        message: "Blog created successfully",
+      });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
@@ -57,13 +61,11 @@ export async function getAllBlogs(request, response) {
   try {
     const blogs = await Blog.find({ isPublished: true });
 
-    response
-      .status(200)
-      .json({
-        success: true,
-        data: blogs,
-        message: "list of blogs which are published",
-      });
+    response.status(200).json({
+      success: true,
+      data: blogs,
+      message: "list of blogs which are published",
+    });
   } catch (error) {
     console.log(error);
     response.status(500).json({ success: false, message: error.message });
@@ -82,8 +84,10 @@ export async function getBlogById(request, response) {
 
     const blog = await Blog.findById(id);
 
-    if(!blog){
-        return response.status(500).json({success: false, message: "blog not found!"});
+    if (!blog) {
+      return response
+        .status(500)
+        .json({ success: false, message: "blog not found!" });
     }
 
     response
@@ -95,12 +99,64 @@ export async function getBlogById(request, response) {
   }
 }
 
-// Need to do - id is provided in body
-export async function togglePublishById(request, response) {
+export async function toggleIsPublishById(request, response) {
+  try {
+    const { id } = request.body;
 
+    if (!id) {
+      return response
+        .status(400)
+        .json({ success: false, message: "id not provided!" });
+    }
+
+    const blog = await Blog.findById(id);
+
+    if (!blog) {
+      return response.status(400).json({ success: false, message: "blog not found!" });
+    }
+
+    blog.isPublished = !blog.isPublished;
+
+    const updatedBlog = await blog.save();
+
+    response.status(200).json({
+      success: true,
+      data: updatedBlog,
+      message: `blog publish status updated: ${updatedBlog.isPublished}`,
+    });
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ success: false, message: error.message });
+  }
 }
 
-// Need to do
 export async function deleteBlogById(request, response) {
+  try {
+    const { id } = request.params;
 
+    if (!id) {
+      return response
+        .status(400)
+        .json({ success: false, message: "id not provided!" });
+    }
+
+    const doesBlogExist = await Blog.findById(id);
+    
+    if (!doesBlogExist) {
+      return response.status(400).json({ success: false, message: "blog not found!" });
+    }
+
+    const deletedBlog = await Blog.findByIdAndDelete(id);
+
+    response
+      .status(200)
+      .json({
+        success: true,
+        data: deletedBlog,
+        message: `blog is deleted with id: ${deleteBlogById._id}`,
+      });
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ success: false, message: error.message });
+  }
 }
