@@ -3,7 +3,7 @@ import cors from "cors";
 import "dotenv/config";
 import connectDb from "./config/db.js";
 import blogRouter from "./routes/blogRoutes.js";
-
+import adminRouter from "./routes/adminRoutes.js";
 const app = express();
 await connectDb();
 
@@ -11,6 +11,7 @@ await connectDb();
 app.use(cors());
 app.use(express.json());
 app.use("/api/blog", blogRouter);
+app.use("/api/admin", adminRouter);
 
 const PORT = process.env.PORT || 5000;
 
