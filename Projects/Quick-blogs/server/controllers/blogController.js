@@ -1,6 +1,7 @@
 import fs from "fs";
 import imagekit from "../config/imageKit.js";
 import Blog from "../models/Blog.js";
+import Comment from "../models/Comment.js";
 
 export async function addBlog(request, response) {
   try {
@@ -44,13 +45,11 @@ export async function addBlog(request, response) {
       isPublished,
     });
 
-    response
-      .status(201)
-      .json({
-        success: true,
-        data: newBlog,
-        message: "Blog created successfully",
-      });
+    response.status(201).json({
+      success: true,
+      data: newBlog,
+      message: "Blog created successfully",
+    });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
@@ -112,7 +111,9 @@ export async function toggleIsPublishById(request, response) {
     const blog = await Blog.findById(id);
 
     if (!blog) {
-      return response.status(400).json({ success: false, message: "blog not found!" });
+      return response
+        .status(400)
+        .json({ success: false, message: "blog not found!" });
     }
 
     blog.isPublished = !blog.isPublished;
@@ -141,20 +142,67 @@ export async function deleteBlogById(request, response) {
     }
 
     const doesBlogExist = await Blog.findById(id);
-    
+
     if (!doesBlogExist) {
-      return response.status(400).json({ success: false, message: "blog not found!" });
+      return response
+        .status(400)
+        .json({ success: false, message: "blog not found!" });
     }
 
     const deletedBlog = await Blog.findByIdAndDelete(id);
+    const deletedComments = await Comment.deleteMany({blog: id});
+
+    response.status(200).json({
+      success: true,
+      data: {deletedBlog, deletedComments},
+      message: `blog is deleted with id: ${deleteBlogById._id}`,
+    });
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ success: false, message: error.message });
+  }
+}
+
+export async function addComment(request, response) {
+  try {
+    const { blog, name, content } = request.body;
+
+    if (!blog || !name || !content) {
+      response
+        .status(400)
+        .json({ success: false, message: "blog, name or content is missing" });
+    }
+
+    await Comment.create({ blog, name, content });
+
+    response
+      .status(201)
+      .json({ success: true, message: "comment added for review" });
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ success: false, message: error.message });
+  }
+}
+
+export async function getBlogComments(request, response) {
+  try {
+    const { blogId } = request.body;
+
+    console.log("BLOGID: ", blogId);
+
+    const comment = await Comment.find({ blog: blogId, isApproved: true }).sort({
+      createdAt: -1,
+    });
+
+    if (!comment) {
+      response
+        .status(400)
+        .json({ success: false, message: "comment not found!" });
+    }
 
     response
       .status(200)
-      .json({
-        success: true,
-        data: deletedBlog,
-        message: `blog is deleted with id: ${deleteBlogById._id}`,
-      });
+      .json({ success: true, data: comment, message: "comment found" });
   } catch (error) {
     console.log(error);
     response.status(500).json({ success: false, message: error.message });
