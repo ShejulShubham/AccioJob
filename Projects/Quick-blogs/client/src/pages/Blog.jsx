@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import Moment from "moment";
 import Loader from "../components/Loader";
+import { useAppContext } from "../context/appContext";
 
 export default function Blog() {
 
@@ -13,24 +14,28 @@ export default function Blog() {
     const [content, setContent] = useState("");
     const { id } = useParams();
 
+    const { blogs } = useAppContext();
+
     function handleSubmit(e) {
         e.preventDefault();
         console.log("form submit")
     }
 
-    async function fetchData() {
-        const data = blog_data.find(item => item._id == id);
+    function fetchData() {
+        const data = blogs.find(item => item._id == id);
         setData(data);
     }
 
-    async function fetchComments() {
+    function fetchComments() {
         setComments(comments_data);
     }
+
+    console.log("re-render");
 
     useEffect(() => {
         fetchData();
         fetchComments();
-    }, []);
+    }, [blogs]);
 
     return data ? (
         <>
