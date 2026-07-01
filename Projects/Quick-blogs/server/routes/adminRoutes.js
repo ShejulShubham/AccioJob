@@ -9,6 +9,6 @@ router.get("/comments", getAllBlogsAdmin);
 router.get("/blogs", getAllBlogsAdmin);
 router.get("/dashboard", auth, getDashboard);
 router.delete("/delete-comment", auth, deleteCommentById);
-router.delete("/approve-comment", auth, approveCommentById);
+router.post("/approve-comment", auth, approveCommentById);
 
 export default router;

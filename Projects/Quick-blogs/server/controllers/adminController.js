@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import Blog from "../models/Blog";
-import Comment from "../models/Comment";
+import Blog from "../models/Blog.js";
+import Comment from "../models/Comment.js";
 
 export async function adminLogin(request, response) {
   try {
@@ -21,12 +21,12 @@ export async function adminLogin(request, response) {
     }
 
     const token = jwt.sign({ email }, process.env.JWT_SECRET);
-    response.cookie("token", token, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      maxAge: 24 * 60 * 60 * 1000,
-    });
+    // response.cookie("token", token, {
+    //   httpOnly: true,
+    //   secure: false,
+    //   sameSite: "lax",
+    //   maxAge: 24 * 60 * 60 * 1000,
+    // });
 
     return response.status(200).json({ success: true, token });
   } catch (error) {
@@ -70,9 +70,9 @@ export async function getAllComments(request, response) {
 export async function getDashboard(request, response) {
   try {
     const recentBlogs = await Blog.find({}).sort({ createdAt: -1 }).limit(5);
-    const blogs = await Blogs.countDocuments();
-    const comments = await Comments.countDocuments();
-    const draft = await Blogs.countDocuments({ isPublished: false });
+    const blogs = await Blog.countDocuments();
+    const comments = await Comment.countDocuments();
+    const draft = await Blog.countDocuments({ isPublished: false });
     const dashboardData = {
       recentBlogs,
       blogs,
@@ -80,13 +80,11 @@ export async function getDashboard(request, response) {
       draft,
     };
 
-    response
-      .status(200)
-      .json({
-        success: true,
-        data: dashboardData,
-        message: "dashboard data fetched",
-      });
+    response.status(200).json({
+      success: true,
+      data: dashboardData,
+      message: "dashboard data fetched",
+    });
   } catch (error) {
     console.log(error);
     response
@@ -102,7 +100,7 @@ export async function deleteCommentById(request, response) {
 
     response
       .status(200)
-      .json({ success: true, data: deleteComment, message: "comment deleted" });
+      .json({ success: true, data: deletedComment, message: "comment deleted" });
   } catch (error) {
     console.log(error);
     response
@@ -112,17 +110,23 @@ export async function deleteCommentById(request, response) {
 }
 
 export async function approveCommentById(request, response) {
-    try {
+  try {
     const { id } = request.body;
-    const updatedComment = await Comment.findByIdAndUpdate(id, {isApproved: true});
+    const updatedComment = await Comment.findByIdAndUpdate(id, {
+      isApproved: true,
+    });
 
     response
       .status(200)
-      .json({ success: true, data: updatedComment, message: "comment deleted" });
+      .json({
+        success: true,
+        data: updatedComment,
+        message: "comment approved",
+      });
   } catch (error) {
     console.log(error);
     response
       .status(500)
-      .json({ success: false, message: "cannot delete comment" });
+      .json({ success: false, message: "cannot approve comment" });
   }
 }
