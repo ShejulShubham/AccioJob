@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Moment from "moment";
 import Loader from "../components/Loader";
 import { useAppContext } from "../context/appContext";
+import { toast } from "react-hot-toast";
 
 export default function Blog() {
 
@@ -14,20 +15,45 @@ export default function Blog() {
     const [content, setContent] = useState("");
     const { id } = useParams();
 
-    const { blogs } = useAppContext();
+    const { blogs, axios } = useAppContext();
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        console.log("form submit")
+    async function handleSubmit(e) {
+        if (e) e.preventDefault();
+
+        try {
+            const { data } = await axios.post('/api/blog/add-comment', {
+                blog: id, name, content
+            });
+
+            if (data.success) {
+                toast.success(data.message);
+                setName("");
+                setContent("");
+            } else {
+                toast.error(data.message);
+            }
+
+        } catch (error) {
+            toast.error(error.message);
+        }
     }
 
-    function fetchData() {
-        const data = blogs.find(item => item._id == id);
-        setData(data);
+    async function fetchData() {
+        try {
+            const { data } = await axios.get(`/api/blog/${id}`);
+            data.success ? setData(data.data) : toast.error(data.message);
+        } catch (error) {
+            toast.error(error.message);
+        }
     }
 
-    function fetchComments() {
-        setComments(comments_data);
+    async function fetchComments() {
+        try {
+            const { data } = await axios.post('/api/blog/comments', { blogId: id });
+            data.success ? setComments(data.data) : toast.error(data.message);
+        } catch (error) {
+            toast.error(error.message);
+        }
     }
 
     console.log("re-render");
@@ -58,7 +84,7 @@ export default function Blog() {
                 <div className="mt-14 mb-10 max-w-3xl mx-auto">
                     <p className="font-semibold">Comments ({comments.length})</p>
                     <div className="flex flex-col gap-4">
-                        {comments.map((item, index) => (
+                        {comments.length > 0 && comments.map((item, index) => (
                             <div key={index} className="relative bg-primary/2 border border-primary/5 max-w-xl p-4 rounded text-gray-600">
                                 <div className="flex items-center gap-2 mb-2">
                                     <img src={assets.user_icon} alt="" className="w-6" />

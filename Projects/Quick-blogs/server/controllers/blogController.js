@@ -155,7 +155,7 @@ export async function deleteBlogById(request, response) {
     response.status(200).json({
       success: true,
       data: {deletedBlog, deletedComments},
-      message: `blog is deleted with id: ${deleteBlogById._id}`,
+      message: `blog is deleted with title: ${doesBlogExist.title}`,
     });
   } catch (error) {
     console.log(error);
@@ -187,8 +187,6 @@ export async function addComment(request, response) {
 export async function getBlogComments(request, response) {
   try {
     const { blogId } = request.body;
-
-    console.log("BLOGID: ", blogId);
 
     const comment = await Comment.find({ blog: blogId, isApproved: true }).sort({
       createdAt: -1,

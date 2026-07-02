@@ -1,10 +1,48 @@
 import { assets } from "../../assets/assets"
+import { useAppContext } from "../../context/appContext";
+import { toast } from "react-hot-toast";
 
-export default function BlogTableItems({blog, fetchBlogs, index}){
+export default function BlogTableItems({ blog, fetchBlogs, index }) {
 
-    const {title, createdAt} = blog;
-    const deleteBlog = () => {}
-    const BlogDate = new Date(createdAt);
+  const { title, createdAt } = blog;
+  const { axios } = useAppContext();
+
+  const BlogDate = new Date(createdAt);
+
+  async function deleteBlog() {
+    const isConfirm = window.confirm("Are you sure you want to delete this blog?");
+    if (!isConfirm) return;
+
+    try {
+      const { data } = await axios.delete(`/api/blog/${blog._id}`);
+
+      if (data.success) {
+        toast.success(data.message);
+        await fetchBlogs();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+
+  async function togglePublish() {
+    try {
+      const { data } = await axios.patch('/api/blog/toggle-publish', {
+        id: blog._id
+      });
+
+      if (data.success) {
+        toast.success(data.message);
+        await fetchBlogs();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
 
   return (
     <tr className="border-y border-gray-300">
@@ -12,16 +50,16 @@ export default function BlogTableItems({blog, fetchBlogs, index}){
       <td className="px-2 py-4">{title}</td>
       <td className="px-2 py-4 max-sm:hidden">{BlogDate.toDateString()}</td>
       <td className="px-2 py-4 max-sm:hidden">
-        <p className={`${blog.isPublished ? 'text-green-600': 'text-orange-700'}`}>
-            {blog.isPublished ? 'Published': 'Unpublished'}
+        <p className={`${blog.isPublished ? 'text-green-600' : 'text-orange-700'}`}>
+          {blog.isPublished ? 'Published' : 'Unpublished'}
         </p>
       </td>
       <td className="px-2 py-4 flex text-xs gap-3">
-        <button className="border px-2 py-0.5 mt-1 rounded cursor-pointer">
-            {blog.isPublished ? 'Unpublish':'Publish'}
+        <button onClick={togglePublish} title="unpublish blog" className="border px-2 py-0.5 mt-1 rounded cursor-pointer">
+          {blog.isPublished ? 'Unpublish' : 'Publish'}
         </button>
-        <img src={assets.cross_icon} alt="" className="w-8 hover:scale-110 transition-all cursor-pointer" 
-            onClick={deleteBlog}
+        <img title="delete blog" src={assets.cross_icon} alt="" className="w-8 hover:scale-110 transition-all cursor-pointer"
+          onClick={deleteBlog}
         />
       </td>
     </tr>

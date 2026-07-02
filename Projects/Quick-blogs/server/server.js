@@ -22,6 +22,13 @@ app.get("/", (request, response) => {
   response.status(200).json({ message: "you have reached to right spot!" });
 });
 
+app.use((request, response)=>{
+  return response.status(404).json({
+    success: false,
+    message: `method: '${request.method}' with route '${request.path}' does not exist`
+  })
+})
+
 app.listen(PORT, () => {
   console.log(`Server running on: http://localhost:${PORT}`);
 });

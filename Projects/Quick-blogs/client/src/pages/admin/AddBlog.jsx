@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import { assets, blogCategories } from "../../assets/assets";
 import Quill from "quill";
+import { useAppContext } from "../../context/appContext";
+import { toast } from "react-hot-toast";
 
 
 
@@ -11,10 +13,41 @@ export default function AddBlog() {
     const [subTitle, setSubtitle] = useState("");
     const [category, setCategory] = useState("Startup");
     const [isPublished, setIsPublished] = useState(false);
+    const [isAdding, setIsAdding] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const { axios } = useAppContext();
 
     async function onSubmitHandler(e) {
-        e.preventDefault();
+        try {
+            if (e) e.preventDefault();
+            setIsAdding(true);
 
+            const blog = { title, subTitle, description: quillRef.current.root.innerHTML, category, isPublished }
+
+            const formData = new FormData();
+            formData.append('blog', JSON.stringify(blog));
+            formData.append('image', image);
+
+            const { data } = await axios.post('/api/blog/add', formData);
+
+            if (data.success) {
+                toast.success(data.message);
+                setImage(false);
+                setTitle("");
+                setSubtitle("");
+                setIsPublished(false);
+                quillRef.current.root.innerHTML = "";
+                setCategory("Startup")
+            } else {
+                toast.error(data.message);
+            }
+
+        } catch (error) {
+            toast.error(error.message);
+        } finally {
+            setIsAdding(false);
+        }
 
     }
 
@@ -58,10 +91,10 @@ export default function AddBlog() {
 
                     <div className="flex gap-2 mt-4" >
                         <p>Publish Now</p>
-                        <input type="checkbox" checked={isPublished} className="scale-125 cursor-pointer" onChange={(e)=>setIsPublished(e.target.checked)} />
+                        <input type="checkbox" checked={isPublished} className="scale-125 cursor-pointer" onChange={(e) => setIsPublished(e.target.checked)} />
                     </div>
 
-                    <button type="submit" className="mt-8 w-40 h-10 bg-primary text-white rounded cursor-pointer text-sm" >Add Blog</button>
+                    <button disabled={isAdding} type="submit" className="mt-8 w-40 h-10 bg-primary text-white rounded cursor-pointer text-sm" >{isAdding ? "Adding..." : "Add Blog"}</button>
                 </div>
 
             </form>

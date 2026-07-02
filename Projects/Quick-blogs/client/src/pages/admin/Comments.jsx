@@ -1,33 +1,44 @@
 import { useEffect, useState } from "react"
 import { comments_data } from "../../assets/assets"
 import CommentTableItems from "../../components/admin/CommentTableItem";
+import { toast } from "react-hot-toast";
+import { useAppContext } from "../../context/appContext";
 
-export default function Comments(){
+export default function Comments() {
   const [comments, setComments] = useState([]);
   const [filter, setFilter] = useState('Not Approved');
-  const fetchComments = async() => {
-    setComments(comments_data)
+
+
+  const { axios } = useAppContext();
+
+  async function fetchComments() {
+    try {
+      const { data } = await axios.get('/api/admin/comments');
+      data.success ? setComments(data.data) : toast.error(data.message);
+    } catch (error) {
+      toast.error(error.message);
+    }
   }
-  useEffect(()=>{
+  useEffect(() => {
     fetchComments();
-  },[])
+  }, [])
 
   return (
     <div className="flex-1 pt-5 px-5 sm:pt-12 sm:pl-16 bg-blue-50/50">
       <div className="flex justify-between items-center max-w-3xl">
         <h1>Comments</h1>
         <div className="flex gap-4">
-        
-          <button 
-            onClick={()=>setFilter('Approved')}
+
+          <button
+            onClick={() => setFilter('Approved')}
             className={`shadow-custom-sm border rounded-full px-4 py-1 cursor-pointer text-xs 
-              ${filter == 'Approved' ? 'text-primary': 'text-gray-700'}`}
+              ${filter == 'Approved' ? 'text-primary' : 'text-gray-700'}`}
           >Approved</button>
-        
-          <button 
-            onClick={()=>setFilter('Not Approved')}
+
+          <button
+            onClick={() => setFilter('Not Approved')}
             className={`shadow-custom-sm border rounded-full px-4 py-1 cursor-pointer text-xs 
-              ${filter == 'Not Approved' ? 'text-primary': 'text-gray-700'}`}
+              ${filter == 'Not Approved' ? 'text-primary' : 'text-gray-700'}`}
           >Not Approved</button>
 
         </div>
@@ -43,10 +54,10 @@ export default function Comments(){
             </tr>
           </thead>
           <tbody>
-            {comments.filter((comment)=>{
-              if(filter == "Approved") return comment.isApproved == true;
+            {comments.filter((comment) => {
+              if (filter == "Approved") return comment.isApproved == true;
               return comment.isApproved == false
-            }).map((comment, index)=><CommentTableItems key={comment._id} comment={comment} index={index+1} fetchComments={fetchComments} />)            
+            }).map((comment, index) => <CommentTableItems key={comment._id} comment={comment} index={index + 1} fetchComments={fetchComments} />)
             }
           </tbody>
         </table>

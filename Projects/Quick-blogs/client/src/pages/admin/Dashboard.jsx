@@ -1,18 +1,29 @@
 import { useEffect, useState } from "react"
 import { assets, dashboard_data } from "../../assets/assets";
 import BlogTableItems from "../../components/admin/BlogTableItems";
+import { toast } from "react-hot-toast";
+import { useAppContext } from "../../context/appContext";
 
 export default function Dashboard() {
     const [dashboardData, setDashboardData] = useState({
         blogs: 0,
         comments: 0,
-        drafts: 0,
+        draft: 0,
         recentBlogs: []
     });
 
-    const fetchDashboard = async () => {
-        setDashboardData(dashboard_data)
+    const { axios } = useAppContext();
+
+    async function fetchDashboard() {
+        try {
+            const { data } = await axios.get('/api/admin/dashboard');
+
+            data.success ? setDashboardData(data.data) : toast.error(data.message);
+        } catch (error) {
+            toast.error(error.message);
+        }
     }
+
     useEffect(() => {
         fetchDashboard();
     }, [])
@@ -43,7 +54,7 @@ export default function Dashboard() {
         hover:scale-105 transition-all">
                     <img src={assets.dashboard_icon_3} alt="" />
                     <div>
-                        <p className="text-xl font-semibold text-gray-600">{dashboardData.drafts}</p>
+                        <p className="text-xl font-semibold text-gray-600">{dashboardData.draft}</p>
                         <p className="text-gray-400 font-light">Drafts</p>
                     </div>
                 </div>
